@@ -46,6 +46,7 @@ import java.util.Date
 import scala.collection.JavaConversions._
 import java.text._
 import scala.util.Properties
+import scala.sys.process._
 // han sampler import end
 
 private[spark] class CoarseGrainedExecutorBackend(
@@ -265,7 +266,7 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
     val SAMPLING_PERIOD: Long = 500
     val JMAP_PERIOD: Long = 500
     val TIMESTAMP_PERIOD: Long = 1000
-    var dateFormat: DateFormat = new SimpleDateFormat("hh:mm:ss a")
+    var dateFormat: DateFormat = new SimpleDateFormat("hh:mm:ss")
 
     val dirname_executor = Properties.envOrElse("SPARK_HOME", "/home/ubuntu/spark-1.5.1") + "/logs/" + appId + "/" + executorId
     val dir_executor = new File(dirname_executor)
@@ -311,18 +312,19 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
           s += "\t" + time
         }
 
-        /*
+        
         if (i % JMAP_PERIOD == 0) {
           var time: String = dateFormat.format(new Date())
           val pname = ManagementFactory.getRuntimeMXBean().getName()
           val pid = pname.substring(0, pname.indexOf('@'))
-          val result = "jmap -histo " + pid
+          val command = "jmap -histo " + pid 
+          val result = command.!!
           val writer1 = new FileWriter(new File(dirname_histo + "/" + "sparkOutput_worker_" + appId + "_" + executorId + "_" + time + ".txt"), true)
           writer1.write(result)
           writer1.flush()
           writer1.close()
         }
-        */
+        
 
         i = i + SAMPLING_PERIOD
         writer.write(s + "\n")
