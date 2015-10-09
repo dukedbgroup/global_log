@@ -94,36 +94,36 @@ object DenseKMeans {
     val SAMPLING_PERIOD: Long = 500
     val TIMESTAMP_PERIOD: Long = 1000
 
-    var dateFormat: DateFormat = new SimpleDateFormat("hh:mm:ss a")
+    var dateFormat: DateFormat = new SimpleDateFormat("hh:mm:ss")
 
     val dirname_application = Properties.envOrElse("SPARK_HOME", "/home/ubuntu/spark-1.5.1") + "/logs/" + sc.applicationId
     val dir_application = new File(dirname_application)
     if (!dir_application.exists())
       dir_application.mkdirs()
-
-    //    val writer = new FileWriter(new File("/home/ubuntu/sparkOutput/sparkOutput_driver_" + System.nanoTime() + ".txt"), true)
-    val writer = new FileWriter(new File(dirname_application + "/sparkOutput_driver_" + sc.applicationId + ".txt"), true)
-    writer.write("Storage memory\n")
-
+   
     val ex = new ScheduledThreadPoolExecutor(1)
     val task = new Runnable {
       var i: Long = 0
       override def run {
-        var statusArray = sc.getExecutorStorageStatus.filter(s => s.blockManagerId.host.contains("slave1"))
-        if (statusArray.size >= 1) {
 
-          var value = statusArray(0).memUsed
-          //println(value)
-          var s = value.toString()
-          if (i % TIMESTAMP_PERIOD == 0) {
-            i = 0
-            var time: String = dateFormat.format(new Date())
-            s += "\t" + time
-          }
-          i = i + SAMPLING_PERIOD
-          writer.write(s + "\n")
-          writer.flush()
+        //        sc.getExecutorStorageStatus.filter(s => s.blockManagerId.host.contains("slave1"))
+        sc.getExecutorStorageStatus.foreach {
+          es =>
+            val filename: String = dirname_application + "/sparkOutput_driver_" + sc.applicationId + "_" + es.blockManagerId + ".txt"
+            val writer = new FileWriter(new File(filename), true)
+            var s = es.memUsed.toString()
+            //println(s)
+            if (i % TIMESTAMP_PERIOD == 0) {
+              i = 0
+              var time: String = dateFormat.format(new Date())
+              s += "\t" + time
+            }
+
+            writer.write(s + "\n")
+            writer.flush()
+            writer.close()
         }
+        i = i + SAMPLING_PERIOD
       }
     }
     val f = ex.scheduleAtFixedRate(task, 0, SAMPLING_PERIOD, TimeUnit.MILLISECONDS)
@@ -164,8 +164,6 @@ object DenseKMeans {
 
     // han sampler 2 begin
     f.cancel(true)
-    writer.flush()
-    writer.close()
     // hand sampler 2 end
   }
 }

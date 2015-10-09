@@ -264,7 +264,7 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
 
     // han sampler 1 begin
     val SAMPLING_PERIOD: Long = 500
-    val JMAP_PERIOD: Long = 500
+    val JMAP_PERIOD: Long = 5000
     val TIMESTAMP_PERIOD: Long = 1000
     var dateFormat: DateFormat = new SimpleDateFormat("hh:mm:ss")
 
