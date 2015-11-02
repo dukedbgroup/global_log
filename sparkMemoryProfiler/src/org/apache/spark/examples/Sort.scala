@@ -37,7 +37,7 @@ import java.text._
 import scala.util.Properties
 // han sampler import end
 
-object WordCount {
+object Sort {
 
   val SPACE = Pattern.compile(" ")
 
@@ -47,7 +47,7 @@ object WordCount {
       System.exit(1);
     }
 
-    val conf = new SparkConf().setAppName("WordCount")
+    val conf = new SparkConf().setAppName("Sort")
     val sc = new SparkContext(conf)
 
     // han sampler 1 begin
@@ -56,7 +56,7 @@ object WordCount {
 
     var dateFormat: DateFormat = new SimpleDateFormat("hh:mm:ss")
 
-    val dirname_application = Properties.envOrElse("SPARK_HOME", "/home/mayuresh/spark-1.5.1") + "/logs/" + sc.applicationId
+    val dirname_application = Properties.envOrElse("SPARK_HOME", "/home/biguser/spark-1.5.1") + "/logs/" + sc.applicationId
     val dir_application = new File(dirname_application)
     if (!dir_application.exists())
       dir_application.mkdirs()
@@ -90,14 +90,14 @@ object WordCount {
     // han sampler 1 end 
 
     val lines = sc.textFile(args(0), 1)
-
-    val words = lines.flatMap(l => SPACE.split(l))
-    val ones = words.map(w => (w,1))
-    val counts = ones.reduceByKey(_ + _)
+    //val parallel = sc.getConf.getInt("spark.default.parallelism", sc.defaultParallelism)/2
+    val data = lines.map((_, 1))
+    //val partitioner = new HashPartitioner(partitions = parallel)
+    val sorted = data.sortByKey().map(_._1)
 
     //val output = counts.collect()
     //output.foreach(t => println(t._1 + ": " + t._2))
-    counts.saveAsTextFile(args(1))
+    sorted.saveAsTextFile(args(1))
 
     sc.stop()
 
