@@ -58,12 +58,12 @@ public class FlattenTaskMetrics
 
           stmt = conn.createStatement();
           String sql = "CREATE TABLE IF NOT EXISTS " + TASK_TABLE + " (appId VARCHAR(255), " +
-             "stageId INTEGER, stageAttemptId INTEGER, taskId INTEGER, taskIndex INTEGER, " + 
-             "taskAttempt INTEGER, launchTime BIGINT, executorId VARCHAR(8), host VARCHAR(255), " + 
+             "stageId BIGINT, stageAttemptId BIGINT, taskId BIGINT, taskIndex BIGINT, " + 
+             "taskAttempt BIGINT, launchTime BIGINT, executorId VARCHAR(8), host VARCHAR(255), " + 
              "locality VARCHAR(255), speculative BOOLEAN, resultTime INTEGER, finishTime BIGINT, " + 
-             "failed BOOLEAN, deserializeTime INTEGER, runTime INTEGER, resultSize BIGINT, " + 
-             "GCTime INTEGER, serializeTime INTEGER, memorySpilled BIGINT, diskSpilled BIGINT, " + 
-             "bytesRead BIGINT, recordsRead INTEGER )";
+             "failed BOOLEAN, deserializeTime BIGINT, runTime BIGINT, resultSize BIGINT, " + 
+             "GCTime BIGINT, serializeTime BIGINT, memorySpilled BIGINT, diskSpilled BIGINT, " + 
+             "bytesRead BIGINT, recordsRead BIGINT )";
           stmt.executeUpdate(sql);
 
           String isql = "INSERT INTO " + TASK_TABLE + " values " +
@@ -77,28 +77,36 @@ public class FlattenTaskMetrics
             if(str.contains("SparkListenerTaskEnd")) {
               Map<String, Object> map = new JsonFlattener(str).flattenAsMap();
               istmt.setString(1, appID);
-              istmt.setInt(2, (Integer) map.get("Stage ID"));
-              istmt.setInt(3, (Integer) map.get("Stage Attempt ID"));
-              istmt.setInt(4, (Integer) map.get("Task Info.Task ID"));
-              istmt.setInt(5, (Integer) map.get("Task Info.Index"));
-              istmt.setInt(6, (Integer) map.get("Task Info.Attempt"));
+              istmt.setLong(2, (Long) map.get("Stage ID"));
+              istmt.setLong(3, (Long) map.get("Stage Attempt ID"));
+              istmt.setLong(4, (Long) map.get("Task Info.Task ID"));
+              istmt.setLong(5, (Long) map.get("Task Info.Index"));
+              istmt.setLong(6, (Long) map.get("Task Info.Attempt"));
               istmt.setLong(7, (Long) map.get("Task Info.Launch Time"));
               istmt.setString(8, (String) map.get("Task Info.Executor ID"));
               istmt.setString(9, (String) map.get("Task Info.Host"));
               istmt.setString(10, (String) map.get("Task Info.Locality"));
               istmt.setBoolean(11, (Boolean) map.get("Task Info.Speculative"));
-              istmt.setInt(12, (Integer) map.get("Task Info.Getting Result Time"));
+              istmt.setLong(12, (Long) map.get("Task Info.Getting Result Time"));
               istmt.setLong(13, (Long) map.get("Task Info.Finish Time"));
               istmt.setBoolean(14, (Boolean) map.get("Task Info.Failed"));
-              istmt.setInt(15, (Integer) map.get("Task Metrics.Executor Deserialize Time"));
-              istmt.setInt(16, (Integer) map.get("Task Metrics.Executor Run Time"));
+              istmt.setLong(15, (Long) map.get("Task Metrics.Executor Deserialize Time"));
+              istmt.setLong(16, (Long) map.get("Task Metrics.Executor Run Time"));
               istmt.setLong(17, (Long) map.get("Task Metrics.Result Size"));
-              istmt.setInt(18, (Integer) map.get("Task Metrics.JVM GC Time"));
-              istmt.setInt(19, (Integer) map.get("Task Metrics.Result Serialization Time"));
+              istmt.setLong(18, (Long) map.get("Task Metrics.JVM GC Time"));
+              istmt.setLong(19, (Long) map.get("Task Metrics.Result Serialization Time"));
               istmt.setLong(20, (Long) map.get("Task Metrics.Memory Bytes Spilled"));
               istmt.setLong(21, (Long) map.get("Task Metrics.Disk Bytes Spilled"));
-              istmt.setLong(22, (Long) map.get("Task Metrics.Input Metrics.Bytes Read"));
-              istmt.setInt(23, (Integer) map.get("Task Metrics.Input Metrics.Records Read"));
+              if(map.get("Task Metrics.Input Metrics.Bytes Read") != null) {
+                istmt.setLong(22, (Long) map.get("Task Metrics.Input Metrics.Bytes Read"));
+                istmt.setLong(23, (Long) map.get("Task Metrics.Input Metrics.Records Read"));
+              } else if(map.get("Task Metrics.Shuffle Read Metrics.Local Bytes Read") != null) {
+                istmt.setLong(22, (Long) map.get("Task Metrics.Shuffle Read Metrics.Local Bytes Read") + (Long) map.get("Task Metrics.Shuffle Read Metrics.Remote Bytes Read"));
+                istmt.setLong(23, (Long) map.get("Task Metrics.Shuffle Read Metrics.Total Records Read"));
+              } else {
+                istmt.setLong(22, 0L);
+                istmt.setLong(23, 0L);
+              }
               istmt.addBatch();
             }
           }
