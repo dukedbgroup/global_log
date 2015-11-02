@@ -56,7 +56,7 @@ object WordCount {
 
     var dateFormat: DateFormat = new SimpleDateFormat("hh:mm:ss")
 
-    val dirname_application = Properties.envOrElse("SPARK_HOME", "/opt/spark-1.5.1") + "/logs/" + sc.applicationId
+    val dirname_application = Properties.envOrElse("SPARK_HOME", "/home/mayuresh/spark-1.5.1") + "/logs/" + sc.applicationId
     val dir_application = new File(dirname_application)
     if (!dir_application.exists())
       dir_application.mkdirs()
@@ -95,8 +95,9 @@ object WordCount {
     val ones = words.map(w => (w,1))
     val counts = ones.reduceByKey(_ + _)
 
-    val output = counts.collect()
-    output.foreach(t => println(t._1 + ": " + t._2))
+    //val output = counts.collect()
+    //output.foreach(t => println(t._1 + ": " + t._2))
+    counts.saveAsTextFile(args(1))
 
     sc.stop()
 
