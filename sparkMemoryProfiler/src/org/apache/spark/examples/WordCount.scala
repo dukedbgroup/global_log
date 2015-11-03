@@ -51,7 +51,7 @@ object WordCount {
     val sc = new SparkContext(conf)
 
     // han sampler 1 begin
-    val SAMPLING_PERIOD: Long = 500
+    val SAMPLING_PERIOD: Long = 10
     val TIMESTAMP_PERIOD: Long = 1000
 
     var dateFormat: DateFormat = new SimpleDateFormat("hh:mm:ss")
@@ -70,7 +70,14 @@ object WordCount {
         sc.getExecutorStorageStatus.foreach {
           es =>
             val filename: String = dirname_application + "/sparkOutput_driver_"  + sc.applicationId + "_" + es.blockManagerId + ".txt"
-            val writer = new FileWriter(new File(filename), true)
+            val file = new File(filename)
+            val writer = new FileWriter(file, true)
+            if (!file.exists()) {
+              file.createNewFile()
+              writer.write(sc.applicationId + "_" + es.blockManagerId + "\n")
+              writer.flush()
+              //writer.close()
+            }
             var s = es.memUsed.toString()
             //println(s)
             if (i % TIMESTAMP_PERIOD == 0) {
@@ -104,6 +111,7 @@ object WordCount {
     // han sampler 2 begin
     f.cancel(true)
     // hand sampler 2 end
+    sys.exit(0)
   }
 }
 // scalastyle:on println

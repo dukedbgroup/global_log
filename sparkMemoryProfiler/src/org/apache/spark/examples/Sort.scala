@@ -51,12 +51,12 @@ object Sort {
     val sc = new SparkContext(conf)
 
     // han sampler 1 begin
-    val SAMPLING_PERIOD: Long = 500
+    val SAMPLING_PERIOD: Long = 10
     val TIMESTAMP_PERIOD: Long = 1000
 
     var dateFormat: DateFormat = new SimpleDateFormat("hh:mm:ss")
 
-    val dirname_application = Properties.envOrElse("SPARK_HOME", "/home/biguser/spark-1.5.1") + "/logs/" + sc.applicationId
+    val dirname_application = Properties.envOrElse("SPARK_HOME", "/home/mayuresh/spark-1.5.1") + "/logs/" + sc.applicationId
     val dir_application = new File(dirname_application)
     if (!dir_application.exists())
       dir_application.mkdirs()
@@ -70,7 +70,15 @@ object Sort {
         sc.getExecutorStorageStatus.foreach {
           es =>
             val filename: String = dirname_application + "/sparkOutput_driver_"  + sc.applicationId + "_" + es.blockManagerId + ".txt"
-            val writer = new FileWriter(new File(filename), true)
+            val file = new File(filename)
+            val writer = new FileWriter(file, true)
+            if (!file.exists()) {
+              file.createNewFile()
+              writer.write(sc.applicationId + "_" + es.blockManagerId + "\n")
+              writer.flush()
+              //writer.close()
+            }
+
             var s = es.memUsed.toString()
             //println(s)
             if (i % TIMESTAMP_PERIOD == 0) {
@@ -104,6 +112,7 @@ object Sort {
     // han sampler 2 begin
     f.cancel(true)
     // hand sampler 2 end
+    sys.exit(0)
   }
 }
 // scalastyle:on println
