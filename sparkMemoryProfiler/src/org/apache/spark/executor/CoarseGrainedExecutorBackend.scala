@@ -265,12 +265,10 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
     // han sampler 1 begin
     val SAMPLING_PERIOD: Long = 10
     val JMAP_PERIOD: Long = 5000
-    val CPU_PERIOD: Long = 1000
-
     val TIMESTAMP_PERIOD: Long = 1000
     var dateFormat: DateFormat = new SimpleDateFormat("hh:mm:ss")
 
-    val dirname_executor = Properties.envOrElse("SPARK_HOME", "/home/yuzhang/spark-1.5.1") + "/logs/" + appId + "/" + executorId
+    val dirname_executor = Properties.envOrElse("SPARK_HOME", "/home/mayuresh/spark-1.5.1") + "/logs/" + appId + "/" + executorId
     val dir_executor = new File(dirname_executor)
     if (!dir_executor.exists())
       dir_executor.mkdirs()
@@ -279,7 +277,7 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
     if (!dir_histo.exists())
       dir_histo.mkdirs()
 
-    //    val writer = new FileWriter(new File("/home/yuzhang/sparkOutput/sparkOutput_executor_" + System.nanoTime() + ".txt"), true)
+    //    val writer = new FileWriter(new File("/home/ubuntu/sparkOutput/sparkOutput_executor_" + System.nanoTime() + ".txt"), true)
     val writer = new FileWriter(new File(dirname_executor + "/" + "sparkOutput_worker_" + appId + "_" + executorId + ".txt"), true)
     writer.write(appId + "_" + executorId + "\n")
     writer.flush()
@@ -289,7 +287,6 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
     logInfo("Number of available processors for executor " + executorId + ": " + availableProcessors)
     var avgUsedCPU: Double = 0
     var numberOfCPUSamples: Long = 1
-
     var memBean: MemoryMXBean = ManagementFactory.getMemoryMXBean()
     var rtBean: RuntimeMXBean = ManagementFactory.getRuntimeMXBean()
     var mpBeans: List[MemoryPoolMXBean] = ManagementFactory.getMemoryPoolMXBeans()
@@ -310,6 +307,7 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
     var processCPUTime: Double = 0
 
     val ex = new ScheduledThreadPoolExecutor(1)
+    ex.setRemoveOnCancelPolicy(true)
     val task = new Runnable {
       var i: Long = 0
       override def run {
@@ -324,13 +322,13 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
         s += memBean.getHeapMemoryUsage().getMax()
         if (i % TIMESTAMP_PERIOD == 0) {
 
-          upTime = rtBean.getUptime() * 1000000
+          upTime = rtBean.getUptime() * 1000
           processCPUTime = osBean.getProcessCpuTime()
           var elapsedCPU: Double = processCPUTime - prevProcessCPUTime
           var elapsedTime: Double = upTime - prevUpTime
           var usedCPU: Double = -1.0
           if (elapsedTime > 0.0) {
-            usedCPU = elapsedCPU / (elapsedTime * availableProcessors)
+            usedCPU = math.min(99.0, elapsedCPU / (elapsedTime * availableProcessors))
             avgUsedCPU += usedCPU
             numberOfCPUSamples += 1
           }
@@ -344,17 +342,19 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
           s += "\t" + time
         }
 
+        
         if (i % JMAP_PERIOD == 0) {
           var time: String = dateFormat.format(new Date())
           val pname = ManagementFactory.getRuntimeMXBean().getName()
           val pid = pname.substring(0, pname.indexOf('@'))
-          val command = "jmap -histo " + pid
+          val command = "jmap -histo " + pid 
           val result = command.!!
           val writer1 = new FileWriter(new File(dirname_histo + "/" + "sparkOutput_worker_" + appId + "_" + executorId + "_" + time + ".txt"), true)
           writer1.write(result)
           writer1.flush()
           writer1.close()
         }
+        
 
         i = i + SAMPLING_PERIOD
         writer.write(s + "\n")
