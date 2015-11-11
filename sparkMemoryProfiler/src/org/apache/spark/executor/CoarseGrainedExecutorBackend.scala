@@ -322,7 +322,7 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
         s += memBean.getHeapMemoryUsage().getMax()
         if (i % TIMESTAMP_PERIOD == 0) {
 
-          upTime = rtBean.getUptime() * 1000
+          upTime = rtBean.getUptime() * 10000
           processCPUTime = osBean.getProcessCpuTime()
           var elapsedCPU: Double = processCPUTime - prevProcessCPUTime
           var elapsedTime: Double = upTime - prevUpTime
