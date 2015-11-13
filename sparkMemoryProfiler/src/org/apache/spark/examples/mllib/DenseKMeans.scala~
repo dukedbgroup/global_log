@@ -33,6 +33,11 @@ import java.util.Date
 import java.util.concurrent._
 import java.text._
 import scala.util.Properties
+import org.apache.spark.rdd.RDD
+import org.apache.spark.mllib.linalg.Vector
+import org.apache.hadoop.io.LongWritable
+import org.apache.mahout.math.VectorWritable
+
 // han sampler import end
 
 /**
@@ -58,10 +63,15 @@ object DenseKMeans {
 
     // han
     storageLevel: String = "NONE",
+    minNumPartitions: Int = -1,
 
     initializationMode: InitializationMode = Parallel) extends AbstractParams[Params]
 
   def main(args: Array[String]) {
+
+    // han
+    println("Application starts:\n" + System.nanoTime())
+
     val defaultParams = Params()
 
     val parser = new OptionParser[Params]("DenseKMeans") {
@@ -76,6 +86,9 @@ object DenseKMeans {
         .required()
         .text(s"storage level of RDD caching (NONE, MEMORY_ONLY, MEMORY_AND_DISK, DISK_ONLY), required")
         .action((x, c) => c.copy(storageLevel = x))
+      opt[Int]("minNumPartitions")
+        .text(s"minimal number of partitions of the input file")
+        .action((x, c) => c.copy(minNumPartitions = x))
 
       opt[Int]("numIterations")
         .text(s"number of iterations, default: ${defaultParams.numIterations}")
@@ -95,6 +108,10 @@ object DenseKMeans {
     }.getOrElse {
       sys.exit(1)
     }
+
+    // han
+    println("Application completes:\n" + System.nanoTime())
+
   }
 
   def run(params: Params) {
@@ -162,8 +179,25 @@ object DenseKMeans {
       case "MEMORY_AND_DISK" => StorageLevel.MEMORY_AND_DISK
       case "DISK_ONLY" => StorageLevel.DISK_ONLY
     }
-    val examples = sc.textFile(params.input).map { line =>
+
+    var examples: RDD[Vector] = null
+    /*
+    if (params.minNumPartitions < 0)
+      examples = sc.textFile(params.input).map { line =>
+        //      examples = sc.binaryFiles(params.input, 1).map { line =>
+        Vectors.dense(line.split(' ').map(_.toDouble))
+      }.persist(storageLevel)
+    else examples = sc.textFile(params.input, params.minNumPartitions).map { line =>
       Vectors.dense(line.split(' ').map(_.toDouble))
+    }.persist(storageLevel)
+    */
+
+    val data = sc.sequenceFile[LongWritable, VectorWritable](params.input)
+    examples = data.map {
+      case (k, v) =>
+        var vector: Array[Double] = new Array[Double](v.get().size)
+        for (i <- 0 until v.get().size) vector(i) = v.get().get(i)
+        Vectors.dense(vector)
     }.persist(storageLevel)
 
     val numExamples = examples.count()
