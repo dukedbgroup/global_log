@@ -296,7 +296,7 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
       b =>
         s += b.getName() + "\t";
     }
-    s += "Used heap\tCommitted heap\tMax heap\tUsed CPU"
+    s += "Used heap\tCommitted heap\tMax heap\tUsed nonheap\tCommitted nonheap\tMax nonheap\tUsed CPU"
     writer.write(s + "\n")
     writer.flush()
 
@@ -319,7 +319,11 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
         }
         s += memBean.getHeapMemoryUsage().getUsed() + "\t"
         s += memBean.getHeapMemoryUsage().getCommitted() + "\t"
-        s += memBean.getHeapMemoryUsage().getMax()
+        s += memBean.getHeapMemoryUsage().getMax() + "\t"
+        s += memBean.getNonHeapMemoryUsage().getUsed() + "\t"
+        s += memBean.getNonHeapMemoryUsage().getCommitted() + "\t"
+        s += memBean.getNonHeapMemoryUsage().getMax()
+
         if (i % TIMESTAMP_PERIOD == 0) {
 
           upTime = rtBean.getUptime() * 10000
