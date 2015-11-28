@@ -249,12 +249,16 @@ catch (Exception e)
 										+ Long.valueOf(tokens[3]));
 						UsedHeap.add(index, Long.valueOf(tokens[5]));
 						MaxHeap.add(index, Long.valueOf(tokens[7]));
-						if(tokens.length >= 10) {
+						if(tokens.length >= 11) {
 						UsedOffHeap.add(index, Long.valueOf(tokens[8]));
 						MaxOffHeap.add(index, Long.valueOf(tokens[10]));
 						if (tokens.length == 12)
 							UsedCPU.add(index,
 									Math.max(0.0, Double.valueOf(tokens[tokens.length - 1])));
+                                                if (tokens.length == 13)
+                                                        UsedCPU.add(index,
+                                                                        Math.max(0.0, Double.valueOf(tokens[tokens.length - 2])));
+
 						} else {
                                                 if (tokens.length >= 9)
                                                         UsedCPU.add(index,
