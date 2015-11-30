@@ -227,6 +227,8 @@ catch (Exception e)
 			XYSeries PSYoungGen = new XYSeries("PS Young Gen");
 			XYSeries UsedHeap = new XYSeries("Used Heap");
 			XYSeries MaxHeap = new XYSeries("Max Heap");
+			XYSeries UsedOffHeap = new XYSeries("Used OffHeap");
+			XYSeries MaxOffHeap = new XYSeries("Max OffHeap");
 			XYSeries UsedCPU = new XYSeries("Used CPU");
 
 			String line;
@@ -247,10 +249,22 @@ catch (Exception e)
 										+ Long.valueOf(tokens[3]));
 						UsedHeap.add(index, Long.valueOf(tokens[5]));
 						MaxHeap.add(index, Long.valueOf(tokens[7]));
-						if (tokens.length >= 9)
+						if(tokens.length >= 11) {
+						UsedOffHeap.add(index, Long.valueOf(tokens[8]));
+						MaxOffHeap.add(index, Long.valueOf(tokens[10]));
+						if (tokens.length == 12)
 							UsedCPU.add(index,
-									Double.valueOf(tokens[tokens.length - 2]));
+									Math.max(0.0, Double.valueOf(tokens[tokens.length - 1])));
+                                                if (tokens.length == 13)
+                                                        UsedCPU.add(index,
+                                                                        Math.max(0.0, Double.valueOf(tokens[tokens.length - 2])));
 
+						} else {
+                                                if (tokens.length >= 9)
+                                                        UsedCPU.add(index,
+                                                                        Math.max(0.0, Double.valueOf(tokens[tokens.length - 2])));
+
+						}
 						index++;
 					}
 				}
@@ -272,6 +286,12 @@ catch (Exception e)
 			sc = new XYSeriesCollection();
 			sc.addSeries(MaxHeap);
 			xyDatasets.add(sc);
+                        sc = new XYSeriesCollection();
+                        sc.addSeries(UsedOffHeap);
+                        xyDatasets.add(sc);
+                        sc = new XYSeriesCollection();
+                        sc.addSeries(MaxOffHeap);
+                        xyDatasets.add(sc);
 			sc = new XYSeriesCollection();
 			sc.addSeries(UsedCPU);
 			xyDatasets.add(sc);

@@ -90,13 +90,21 @@ public class FlattenTaskMetrics
               istmt.setLong(12, (Long) map.get("Task Info.Getting Result Time"));
               istmt.setLong(13, (Long) map.get("Task Info.Finish Time"));
               istmt.setBoolean(14, (Boolean) map.get("Task Info.Failed"));
-              istmt.setLong(15, (Long) map.get("Task Metrics.Executor Deserialize Time"));
-              istmt.setLong(16, (Long) map.get("Task Metrics.Executor Run Time"));
-              istmt.setLong(17, (Long) map.get("Task Metrics.Result Size"));
-              istmt.setLong(18, (Long) map.get("Task Metrics.JVM GC Time"));
-              istmt.setLong(19, (Long) map.get("Task Metrics.Result Serialization Time"));
-              istmt.setLong(20, (Long) map.get("Task Metrics.Memory Bytes Spilled"));
-              istmt.setLong(21, (Long) map.get("Task Metrics.Disk Bytes Spilled"));
+		istmt.setLong(15, 0L);
+		istmt.setLong(16, 0L);
+		istmt.setLong(17, 0L);
+		istmt.setLong(18, 0L);
+		istmt.setLong(19, 0L);
+		istmt.setLong(20, 0L);
+		istmt.setLong(21, 0L);
+		
+              try {istmt.setLong(15, (Long) map.get("Task Metrics.Executor Deserialize Time"));} catch(Exception e) {}
+              try {istmt.setLong(16, (Long) map.get("Task Metrics.Executor Run Time"));} catch(Exception e) {}
+              try {istmt.setLong(17, (Long) map.get("Task Metrics.Result Size"));} catch(Exception e) {}
+              try {istmt.setLong(18, (Long) map.get("Task Metrics.JVM GC Time"));} catch(Exception e) {}
+              try {istmt.setLong(19, (Long) map.get("Task Metrics.Result Serialization Time"));} catch(Exception e) {}
+              try {istmt.setLong(20, (Long) map.get("Task Metrics.Memory Bytes Spilled"));} catch(Exception e) {}
+              try {istmt.setLong(21, (Long) map.get("Task Metrics.Disk Bytes Spilled"));} catch(Exception e) {}
               if(map.get("Task Metrics.Input Metrics.Bytes Read") != null) {
                 istmt.setLong(22, (Long) map.get("Task Metrics.Input Metrics.Bytes Read"));
                 istmt.setLong(23, (Long) map.get("Task Metrics.Input Metrics.Records Read"));

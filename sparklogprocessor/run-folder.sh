@@ -1,7 +1,7 @@
 #!/bin/bash
 
 prefix="/home/mayuresh/global_log/sparklogprocessor/"
-folder="container"
+folder="shuffle-fraction"
 repeat=5
 
 for program in "kmeans.sh";
