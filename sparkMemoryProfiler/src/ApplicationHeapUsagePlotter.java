@@ -34,50 +34,71 @@ public class ApplicationHeapUsagePlotter extends ApplicationFrame {
 
 	public static void main(String args[]) {
 
-		String applicationID = "application_1446265188032_0241";
-		String testName = "test64";
-//		String gcAlgorithm = "G1";
-		String gcAlgorithm = "Parallel GC";
-		boolean showUsedCPU = true;
+		// String applicationID = "application_1446265188032_0303";
+		// String testName = "test65";
+		// String applicationID = "application_1447137723020_0022";
+		// String testName = "test66";
+		// // String gcAlgorithm = "G1";
+		// String gcAlgorithm = "Parallel GC";
+		// boolean showUsedCPU = false;
+
+		String applicationID = args[0];
+		String gcAlgorithm = args[1];
+		boolean showUsedCPU;
+		int executor = -1;
+
+		if (args[2].equals("true"))
+			showUsedCPU = true;
+		else
+			showUsedCPU = false;
+		if (args.length >= 4)
+			executor = Integer.valueOf(args[3]);
 
 		ApplicationHeapUsagePlotter multipleaxisdemo1 = new ApplicationHeapUsagePlotter(
-				testName, applicationID, applicationID, gcAlgorithm, showUsedCPU);
+				applicationID, applicationID, gcAlgorithm, showUsedCPU,
+				executor);
 		multipleaxisdemo1.pack();
 		RefineryUtilities.centerFrameOnScreen(multipleaxisdemo1);
 		multipleaxisdemo1.setVisible(true);
 	}
 
-	public ApplicationHeapUsagePlotter(String testName, String applicationID,
-			String s, String gcAlgorithm, boolean showUsedCPU) {
+	public ApplicationHeapUsagePlotter(String applicationID, String s,
+			String gcAlgorithm, boolean showUsedCPU, int executor) {
 		super(s);
 		this.setLayout(new GridLayout(2, 5));
 
-		File basedir = new File("/home/yuzhanghan1982/2015summer/results/"
-				+ testName + "/" + applicationID);
+		// File basedir = new File("/home/yuzhanghan1982/2015summer/results/"
+		File basedir = new File("/home/yuzhang/spark-1.5.1/logs/"
+				+ applicationID);
 		File[] children = basedir.listFiles();
 		Arrays.sort(children);
 		for (int index = 0; index <= children.length - 1; index++) {
-			if (children[index].isDirectory()) {
+			if (children[index].isDirectory() && children[index].getName().matches("\\d+")) {
 
-				FilenameFilter textFilter = new FilenameFilter() {
-					public boolean accept(File dir, String name) {
-						if (name.startsWith("sparkOutput_worker_application_")) {
-							return true;
-						} else {
-							return false;
+				if (executor < 0
+						|| executor > 0
+						&& Integer.valueOf(children[index].getName()) == executor) {
+					FilenameFilter textFilter = new FilenameFilter() {
+						public boolean accept(File dir, String name) {
+							if (name.startsWith("sparkOutput_worker_application_")) {
+								return true;
+							} else {
+								return false;
+							}
 						}
-					}
-				};
-				ChartPanel chartpanel = (ChartPanel) createDemoPanel(
-						children[index].getName(),
-						children[index].listFiles(textFilter)[0]
-								.getAbsolutePath(), gcAlgorithm, showUsedCPU);
-				chartpanel.setPreferredSize(new Dimension(600, 270));
-				chartpanel.setDomainZoomable(true);
-				chartpanel.setRangeZoomable(true);
+					};
+					ChartPanel chartpanel = (ChartPanel) createDemoPanel(
+							children[index].getName(),
+							children[index].listFiles(textFilter)[0]
+									.getAbsolutePath(), gcAlgorithm,
+							showUsedCPU);
+					chartpanel.setPreferredSize(new Dimension(600, 270));
+					chartpanel.setDomainZoomable(true);
+					chartpanel.setRangeZoomable(true);
 
-				// setContentPane(chartpanel);
-				add(chartpanel);
+					// setContentPane(chartpanel);
+					add(chartpanel);
+				}
 			}
 		}
 	}
@@ -118,7 +139,7 @@ public class ApplicationHeapUsagePlotter extends ApplicationFrame {
 			xyplot.mapDatasetToRangeAxis(index, index);
 			XYItemRenderer renderer2 = new StandardXYItemRenderer();
 			// renderer2.setSeriesPaint(0, Color.red);
-			 ;
+			;
 			xyplot.setRenderer(index, renderer2);
 		}
 		ChartUtilities.applyCurrentTheme(jfreechart);
@@ -244,11 +265,11 @@ public class ApplicationHeapUsagePlotter extends ApplicationFrame {
 
 	public static JPanel createDemoPanel(String executorID, String filename,
 			String gcAlgorithm, boolean showUsedCPU) {
-		JFreeChart jfreechart = createChart(executorID, filename, gcAlgorithm, showUsedCPU);
+		JFreeChart jfreechart = createChart(executorID, filename, gcAlgorithm,
+				showUsedCPU);
 		ChartPanel chartpanel = new ChartPanel(jfreechart);
 		chartpanel.setMouseWheelEnabled(true);
 
 		return chartpanel;
 	}
 }
-
