@@ -95,7 +95,7 @@ public class ApplicationHeapUsagePlotter extends ApplicationFrame {
 	private static JFreeChart createChart(String executorID, String filename, String gcAlgorithm, boolean showUsedCPU) {
 		ArrayList<XYDataset> xydatasets = createDataset(filename, gcAlgorithm);
 		JFreeChart jfreechart = ChartFactory.createXYLineChart("Resource Usage",
-				"Sample index", "Heap (Byte)", xydatasets.get(0),
+				"Sample index", "Memory (Byte)", xydatasets.get(0),
 				PlotOrientation.VERTICAL, true, true, false);
 		jfreechart.addSubtitle(new TextTitle("Executor " + executorID));
 		XYPlot xyplot = (XYPlot) jfreechart.getPlot();
@@ -225,10 +225,10 @@ catch (Exception e)
 		} else if (gcAlgorithm.equals("Parallel GC")) {
 			XYSeries PSOldGen = new XYSeries("PS Old Gen");
 			XYSeries PSYoungGen = new XYSeries("PS Young Gen");
-			XYSeries UsedHeap = new XYSeries("Used Heap");
+			//XYSeries UsedHeap = new XYSeries("Used Heap");
 			XYSeries MaxHeap = new XYSeries("Max Heap");
-			XYSeries UsedOffHeap = new XYSeries("Used OffHeap");
-			XYSeries MaxOffHeap = new XYSeries("Max OffHeap");
+			//XYSeries UsedOffHeap = new XYSeries("Used OffHeap");
+			XYSeries TotalMem = new XYSeries("Total Memory");
 			XYSeries UsedCPU = new XYSeries("Used CPU");
 
 			String line;
@@ -247,18 +247,31 @@ catch (Exception e)
 								Long.valueOf(tokens[1])
 										+ Long.valueOf(tokens[2])
 										+ Long.valueOf(tokens[3]));
-						UsedHeap.add(index, Long.valueOf(tokens[5]));
+						//UsedHeap.add(index, Long.valueOf(tokens[5]));
 						MaxHeap.add(index, Long.valueOf(tokens[7]));
 						if(tokens.length >= 11) {
-						UsedOffHeap.add(index, Long.valueOf(tokens[8]));
-						MaxOffHeap.add(index, Long.valueOf(tokens[10]));
-						if (tokens.length == 12)
+						//UsedOffHeap.add(index, Long.valueOf(tokens[8]));
+						//MaxOffHeap.add(index, Long.valueOf(tokens[10]));
+						 if (tokens.length == 12)
 							UsedCPU.add(index,
 									Math.max(0.0, Double.valueOf(tokens[tokens.length - 1])));
-                                                if (tokens.length == 13)
+                                                 if (tokens.length == 13) {
+							Long mem = -1L;
+							try { mem = Long.valueOf(tokens[tokens.length - 2]); } catch(Exception e) {}
+							if(mem.equals(new Long(-1))) {
                                                         UsedCPU.add(index,
                                                                         Math.max(0.0, Double.valueOf(tokens[tokens.length - 2])));
-
+							} else {
+							TotalMem.add(index, mem);
+                                                        UsedCPU.add(index,
+                                                                        Math.max(0.0, Double.valueOf(tokens[tokens.length - 1])));
+							}
+						 }
+						 if (tokens.length == 14) {
+                                                        TotalMem.add(index, (Long.valueOf(tokens[tokens.length - 3])));
+                                                        UsedCPU.add(index,
+                                                                        Math.max(0.0, Double.valueOf(tokens[tokens.length - 2])));
+						 }
 						} else {
                                                 if (tokens.length >= 9)
                                                         UsedCPU.add(index,
@@ -280,17 +293,17 @@ catch (Exception e)
 			sc = new XYSeriesCollection();
 			sc.addSeries(PSYoungGen);
 			xyDatasets.add(sc);
-			sc = new XYSeriesCollection();
-			sc.addSeries(UsedHeap);
-			xyDatasets.add(sc);
+			//sc = new XYSeriesCollection();
+			//sc.addSeries(UsedHeap);
+			//xyDatasets.add(sc);
 			sc = new XYSeriesCollection();
 			sc.addSeries(MaxHeap);
 			xyDatasets.add(sc);
+                        //sc = new XYSeriesCollection();
+                        //sc.addSeries(UsedOffHeap);
+                        //xyDatasets.add(sc);
                         sc = new XYSeriesCollection();
-                        sc.addSeries(UsedOffHeap);
-                        xyDatasets.add(sc);
-                        sc = new XYSeriesCollection();
-                        sc.addSeries(MaxOffHeap);
+                        sc.addSeries(TotalMem);
                         xyDatasets.add(sc);
 			sc = new XYSeriesCollection();
 			sc.addSeries(UsedCPU);

@@ -213,6 +213,35 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
     }
   }
 
+  def getProcessUsedMemory(processID: String): Long = {
+    var memory = -1L;
+    var process = ""
+    val commands = new java.util.Vector[String]()
+    commands.add("/bin/bash")
+    commands.add("-c")
+    commands.add("ps aux | grep " + processID)
+    val pb=new java.lang.ProcessBuilder(commands)
+    val pr=pb.start()
+    pr.waitFor()
+    if (pr.exitValue()==0) {
+     val outReader=new java.io.BufferedReader(new java.io.InputStreamReader(pr.getInputStream()));
+     var source = ""
+     source = outReader.readLine()
+     while(source != null) { 
+      try {
+      val tokens = source.split(" +")
+      if(tokens(1).equals(processID)) {
+       memory = 1024L*tokens(5).toLong      
+      }
+      } catch { case e: Exception => () }
+      finally {
+       source = outReader.readLine()
+      }
+     }
+    }
+    return memory
+  } 
+
   def main(args: Array[String]) {
 
     var driverUrl: String = null
@@ -296,7 +325,7 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
       b =>
         s += b.getName() + "\t";
     }
-    s += "Used heap\tCommitted heap\tMax heap\tUsed nonheap\tCommitted nonheap\tMax nonheap\tUsed CPU"
+    s += "Used heap\tCommitted heap\tMax heap\tUsed nonheap\tCommitted nonheap\tMax nonheap\tTotal memory\tUsed CPU"
     writer.write(s + "\n")
     writer.flush()
 
@@ -305,6 +334,23 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
     var prevProcessCPUTime: Double = 0
     var upTime: Double = 0
     var processCPUTime: Double = 0
+
+    var processID: String = ""
+
+    val commands = new java.util.Vector[String]()
+    commands.add("/bin/bash")
+    commands.add("-c")
+    commands.add("echo $PPID")
+    val pb=new java.lang.ProcessBuilder(commands)
+    val pr=pb.start()
+    pr.waitFor()
+    if (pr.exitValue()==0) {
+     val outReader=new java.io.BufferedReader(new java.io.InputStreamReader(pr.getInputStream()));
+     processID = outReader.readLine().trim()
+     println("Found process ID: " + processID)
+    } else {
+     println("Error while getting PID")
+    }  
 
     val ex = new ScheduledThreadPoolExecutor(1)
     ex.setRemoveOnCancelPolicy(true)
@@ -322,15 +368,13 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
         s += memBean.getHeapMemoryUsage().getMax() + "\t"
         s += memBean.getNonHeapMemoryUsage().getUsed() + "\t"
         s += memBean.getNonHeapMemoryUsage().getCommitted() + "\t"
-        s += memBean.getNonHeapMemoryUsage().getMax()
-
-        if (i % TIMESTAMP_PERIOD == 0) {
-
+        s += memBean.getNonHeapMemoryUsage().getMax() + "\t"
+        try { s += getProcessUsedMemory(processID) } catch{ case e:Exception => e.printStackTrace() }
           upTime = rtBean.getUptime() * 10000
           processCPUTime = osBean.getProcessCpuTime()
           var elapsedCPU: Double = processCPUTime - prevProcessCPUTime
           var elapsedTime: Double = upTime - prevUpTime
-          var usedCPU: Double = -1.0
+          var usedCPU: Double = 0
           if (elapsedTime > 0.0) {
             usedCPU = math.min(99.0, elapsedCPU / (elapsedTime * availableProcessors))
             avgUsedCPU += usedCPU
@@ -342,6 +386,7 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
           prevUpTime = upTime
           prevProcessCPUTime = processCPUTime
 
+        if (i % TIMESTAMP_PERIOD == 0) {
           var time: String = dateFormat.format(new Date())
           s += "\t" + time
         }
