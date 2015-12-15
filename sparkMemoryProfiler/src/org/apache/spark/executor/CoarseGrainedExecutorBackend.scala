@@ -213,8 +213,10 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
     }
   }
 
-  def getProcessUsedMemory(processID: String): Long = {
-    var memory = -1L;
+  def getProcessUsedMemoryAndCPU(processID: String): (Long, Double) = {
+    var memory = 0L;
+    var CPU = 0d;
+    val NUMCPU = 8;
     var process = ""
     val commands = new java.util.Vector[String]()
     commands.add("/bin/bash")
@@ -231,7 +233,8 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
       try {
       val tokens = source.split(" +")
       if(tokens(1).equals(processID)) {
-       memory = 1024L*tokens(5).toLong      
+       memory = 1024L*tokens(5).toLong
+       CPU = tokens(2).toDouble / NUMCPU      
       }
       } catch { case e: Exception => () }
       finally {
@@ -239,7 +242,7 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
       }
      }
     }
-    return memory
+    return (memory, CPU)
   } 
 
   def main(args: Array[String]) {
@@ -336,6 +339,8 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
     var processCPUTime: Double = 0
 
     var processID: String = ""
+    var datanodePID: String = ""
+    var nodemanagerPID: String = ""
 
     val commands = new java.util.Vector[String]()
     commands.add("/bin/bash")
@@ -351,6 +356,38 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
     } else {
      println("Error while getting PID")
     }  
+
+    val jps = new java.util.Vector[String]()
+    jps.add("/bin/bash")
+    jps.add("-c")
+    jps.add("jps")
+    val pbi=new java.lang.ProcessBuilder(jps)
+    val pri = pbi.start()
+    pri.waitFor()
+    if (pri.exitValue()==0) {
+     val outReader=new java.io.BufferedReader(new java.io.InputStreamReader(pri.getInputStream()));
+     var source = ""
+     source = outReader.readLine()
+     while(source != null) { 
+      try {
+      val tokens = source.split(" +")
+      if(tokens(1).equals("DataNode")) {
+       datanodePID = tokens(0)
+       println("Found datanode PID: " + datanodePID)     
+      }
+      if(tokens(1).equals("NodeManager")) {
+       nodemanagerPID = tokens(0)
+       println("Found nodemanager pid: " + nodemanagerPID)
+      }
+      } catch { case e: Exception => () }
+      finally {
+       source = outReader.readLine()
+      }
+    }
+   } else {
+     println("Error while getting jps output")
+   }
+
 
     val ex = new ScheduledThreadPoolExecutor(1)
     ex.setRemoveOnCancelPolicy(true)
@@ -369,7 +406,8 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
         s += memBean.getNonHeapMemoryUsage().getUsed() + "\t"
         s += memBean.getNonHeapMemoryUsage().getCommitted() + "\t"
         s += memBean.getNonHeapMemoryUsage().getMax() + "\t"
-        try { s += getProcessUsedMemory(processID) } catch{ case e:Exception => e.printStackTrace() }
+        var res: (Long, Double) = (0, 0);
+        try { res = getProcessUsedMemoryAndCPU(processID); s += res._1 } catch{ case e:Exception => e.printStackTrace() }
           upTime = rtBean.getUptime() * 10000
           processCPUTime = osBean.getProcessCpuTime()
           var elapsedCPU: Double = processCPUTime - prevProcessCPUTime
@@ -385,6 +423,11 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
           //          s += "\n" + upTime + "\t" + processCPUTime
           prevUpTime = upTime
           prevProcessCPUTime = processCPUTime
+
+          s += "\t" + res._2
+
+        try { res = getProcessUsedMemoryAndCPU(datanodePID); s += "\t" + res._1 + "\t" + res._2 } catch{ case e:Exception => e.printStackTrace() }
+        try { res = getProcessUsedMemoryAndCPU(nodemanagerPID); s += "\t" + res._1 + "\t" + res._2 } catch{ case e:Exception => e.printStackTrace() }
 
         if (i % TIMESTAMP_PERIOD == 0) {
           var time: String = dateFormat.format(new Date())
