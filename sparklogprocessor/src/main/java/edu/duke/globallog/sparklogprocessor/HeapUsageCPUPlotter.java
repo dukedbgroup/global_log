@@ -26,15 +26,11 @@ import javax.swing.JPanel;
 
 import org.jfree.chart.*;
 import org.jfree.chart.axis.*;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
-import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.plot.*;
+import org.jfree.chart.renderer.xy.*;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.time.*;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.data.xy.*;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
@@ -94,20 +90,22 @@ public class HeapUsageCPUPlotter extends ApplicationFrame {
 
 	private static JFreeChart createChart(String executorID, String filename, String gcAlgorithm, boolean showUsedCPU) {
 		ArrayList<XYDataset> xydatasets = createDataset(filename, gcAlgorithm);
-		JFreeChart jfreechart = ChartFactory.createXYLineChart("Resource Usage",
-				"Sample index", "Memory (Bytes)", xydatasets.get(0),
-				PlotOrientation.VERTICAL, true, true, false);
-		jfreechart.addSubtitle(new TextTitle("Executor " + executorID));
-		XYPlot xyplot = (XYPlot) jfreechart.getPlot();
+		// create stacked area plot
+		XYPlot xyplot = new XYPlot();
+		xyplot.setDataset(0, xydatasets.get(0));
+		xyplot.setDomainAxis(new NumberAxis("Sample index"));
+		xyplot.setRangeAxis(0, new NumberAxis("Memory (Bytes)"));
+		xyplot.setRenderer(0, new StackedXYAreaRenderer(XYAreaRenderer.AREA));
+		//JFreeChart jfreechart = ChartFactory.createStackedXYAreaChart("Resource Usage",
+		//		"Sample index", "Memory (Bytes)", xydatasets.get(0),
+		//		PlotOrientation.VERTICAL, true, true, false);
+		//jfreechart.addSubtitle(new TextTitle("Executor " + executorID));
+		//XYPlot xyplot = (XYPlot) jfreechart.getPlot();
 		xyplot.setOrientation(PlotOrientation.VERTICAL);
 		xyplot.setDomainPannable(true);
 		xyplot.setRangePannable(true);
-		// xyplot.getRangeAxis().setFixedDimension(15D);
-		// NumberAxis numberaxis = new NumberAxis("Range Axis 2");
-		// numberaxis.setFixedDimension(10D);
-		// numberaxis.setAutoRangeIncludesZero(false);
-		// xyplot.setRangeAxis(1, numberaxis);
-		// xyplot.setRangeAxisLocation(1, AxisLocation.BOTTOM_OR_LEFT);
+		xyplot.setSeriesRenderingOrder(SeriesRenderingOrder.FORWARD);
+		xyplot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD);
 
 		XYDataset xydataset;
 		int index;
@@ -117,10 +115,10 @@ public class HeapUsageCPUPlotter extends ApplicationFrame {
 			xyplot.setDataset(index, xydataset);
 			// xyplot.mapDatasetToRangeAxis(1, 1);
                   if(!"Used CPU".equals(xydataset.getSeriesKey(0))) {
-			StandardXYItemRenderer standardxyitemrenderer = new StandardXYItemRenderer();
+			XYItemRenderer standardxyitemrenderer = new StandardXYItemRenderer();
 			xyplot.setRenderer(index, standardxyitemrenderer);
 		  } else {	
-			NumberAxis axis2 = new NumberAxis("Used CPU (%)");
+			NumberAxis axis2 = new NumberAxis("CPU (%)");
 			// axis2.setFixedDimension(10.0);
 			axis2.setAutoRangeIncludesZero(false);
 			axis2.setUpperBound(100);
@@ -137,6 +135,8 @@ public class HeapUsageCPUPlotter extends ApplicationFrame {
 			xyplot.setRenderer(index, renderer2);
 		  }
 		}
+		JFreeChart jfreechart = new JFreeChart("Resource usage", xyplot);
+                jfreechart.addSubtitle(new TextTitle("Executor " + executorID));
 		ChartUtilities.applyCurrentTheme(jfreechart);
 		xyplot.getRenderer().setSeriesPaint(0, Color.black);
 		return jfreechart;
@@ -224,14 +224,14 @@ catch (Exception e)
 			xyDatasets.add(sc);
 			return xyDatasets;
 		} else if (gcAlgorithm.equals("Parallel GC")) {
-			XYSeries PSOldGen = new XYSeries("Old Gen");
-			XYSeries PSYoungGen = new XYSeries("Old+Young Gen");
-			XYSeries PermGen = new XYSeries("Old+Young+Perm Gen");
+			XYSeries PSOldGen = new XYSeries("Old Gen",false,false);
+			XYSeries PSYoungGen = new XYSeries("Young Gen",false,false);
+			XYSeries PermGen = new XYSeries("Perm Gen",false,false);
 			//XYSeries UsedHeap = new XYSeries("Used Heap");
-			XYSeries MaxHeap = new XYSeries("Max Heap");
+			XYSeries MaxHeap = new XYSeries("Max Heap",false,false);
 			//XYSeries UsedOffHeap = new XYSeries("Used OffHeap");
-			XYSeries TotalMem = new XYSeries("Total Used Memory");
-			XYSeries UsedCPU = new XYSeries("Used CPU");
+			XYSeries TotalMem = new XYSeries("Used Memory",false,false);
+			XYSeries UsedCPU = new XYSeries("Used CPU",false,false);
 
 			String line;
 			long index = 1;
@@ -248,10 +248,10 @@ catch (Exception e)
 								index,
 								Long.valueOf(tokens[1])
 										+ Long.valueOf(tokens[2])
-										+ Long.valueOf(tokens[3]));
-						PermGen.add(index, Long.valueOf(tokens[1]) + Long.valueOf(tokens[2]) + Long.valueOf(tokens[3]) + Long.valueOf(tokens[4]));
+										);
+						PermGen.add(index, Long.valueOf(tokens[4]));
 						MaxHeap.add(index, Long.valueOf(tokens[7]));
-						UsedCPU.add(index, Math.max(0.0, Double.valueOf(tokens[12])));
+						UsedCPU.add(index, Math.max(0.0, Double.valueOf(tokens[13])));
                                                 TotalMem.add(index, Long.valueOf(tokens[11]));
 
 					
@@ -264,27 +264,34 @@ catch (Exception e)
 
 			ArrayList<XYDataset> xyDatasets = new ArrayList<XYDataset>();
 			XYSeriesCollection sc;
-			sc = new XYSeriesCollection();
-			sc.addSeries(PSOldGen);
-			xyDatasets.add(sc);
-			sc = new XYSeriesCollection();
-			sc.addSeries(PSYoungGen);
-			xyDatasets.add(sc);
-			sc = new XYSeriesCollection();
-			sc.addSeries(PermGen);
-			xyDatasets.add(sc);
-			sc = new XYSeriesCollection();
-			sc.addSeries(TotalMem);
-			xyDatasets.add(sc);
+			//sc = new XYSeriesCollection();
+			//sc.addSeries(PSOldGen);
+			//xyDatasets.add(sc);
+			//sc = new XYSeriesCollection();
+			//sc.addSeries(PSYoungGen);
+			//xyDatasets.add(sc);
+			//sc = new XYSeriesCollection();
+			//sc.addSeries(PermGen);
+			//xyDatasets.add(sc);
+
+			DefaultTableXYDataset td = new DefaultTableXYDataset();
+			td.addSeries(PSOldGen);
+			td.addSeries(PSYoungGen);
+			td.addSeries(PermGen);
+			xyDatasets.add(td);
+
+			td = new DefaultTableXYDataset();
+			td.addSeries(MaxHeap);
+			xyDatasets.add(td);
                         //sc = new XYSeriesCollection();
                         //sc.addSeries(UsedOffHeap);
                         //xyDatasets.add(sc);
-                        sc = new XYSeriesCollection();
-                        sc.addSeries(UsedCPU);
-                        xyDatasets.add(sc);
-			sc = new XYSeriesCollection();
-			sc.addSeries(MaxHeap);
-			xyDatasets.add(sc);
+                        td = new DefaultTableXYDataset();
+                        td.addSeries(UsedCPU);
+                        xyDatasets.add(td);
+			td = new DefaultTableXYDataset();
+			td.addSeries(TotalMem);
+			xyDatasets.add(td);
 			return xyDatasets;
 		}
 

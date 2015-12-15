@@ -94,7 +94,7 @@ public class MemoryCPUPlotter extends ApplicationFrame {
 
 	private static JFreeChart createChart(String executorID, String filename, String gcAlgorithm, boolean showUsedCPU) {
 		ArrayList<XYDataset> xydatasets = createDataset(filename, gcAlgorithm);
-		JFreeChart jfreechart = ChartFactory.createXYLineChart("Resource Usage",
+		JFreeChart jfreechart = ChartFactory.createXYLineChart("Resource usage",
 				"Sample index", "Memory (Bytes)", xydatasets.get(0),
 				PlotOrientation.VERTICAL, true, true, false);
 		jfreechart.addSubtitle(new TextTitle("Executor " + executorID));
@@ -169,8 +169,8 @@ catch (Exception e)
 
 			XYSeries SparkMem = new XYSeries("Spark Used Mem");
 			XYSeries SparkCPU = new XYSeries("Spark Used CPU");
-			XYSeries DNMem = new XYSeries("DataNode Used Mem");
-			XYSeries DNCPU = new XYSeries("DataNode Used CPU");
+			XYSeries DNMem = new XYSeries("DN Used Mem");
+			XYSeries DNCPU = new XYSeries("DN Used CPU");
 			XYSeries NMMem = new XYSeries("NM Used Mem");
 			XYSeries NMCPU = new XYSeries("NM Used CPU");
 
