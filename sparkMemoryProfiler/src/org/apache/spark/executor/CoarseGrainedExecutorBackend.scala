@@ -213,12 +213,12 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
     }
   }
 
-  def getProcessUsedMemoryAndCPU(processID: String): (Long, Double) = {
-    var memory = 0L;
+  def getProcessUsedMemoryAndCPU(processID: String): (Double, Double) = {
+    var memory = 0d;
     var CPU = 0d;
     val NUMCPU = 8;
     var process = ""
-    val commands = new java.util.Vector[String]()
+/*    val commands = new java.util.Vector[String]()
     commands.add("/bin/bash")
     commands.add("-c")
     commands.add("ps aux | grep " + processID)
@@ -242,6 +242,16 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
       }
      }
     }
+*/
+
+    val topout = Seq("/bin/sh", "-c", "top -n 1 -b -p " + processID + " | tail -1").!!.trim.split(" +")
+    val len = topout(5).length
+    if(topout(5).endsWith("g")) { memory = 1024L*1024L*1024L*topout(5).take(len-1).toDouble }
+    else if(topout(5).endsWith("m")) { memory = 1024L*1024L*topout(5).take(len-1).toDouble }
+    else if(topout(5).endsWith("k")) { memory = 1024L*topout(5).take(len-1).toDouble }
+    else { memory = topout(5).toDouble }
+    CPU = topout(8).toDouble / NUMCPU
+
     return (memory, CPU)
   } 
 
@@ -342,7 +352,7 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
     var datanodePID: String = ""
     var nodemanagerPID: String = ""
 
-    val commands = new java.util.Vector[String]()
+/*    val commands = new java.util.Vector[String]()
     commands.add("/bin/bash")
     commands.add("-c")
     commands.add("echo $PPID")
@@ -356,6 +366,9 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
     } else {
      println("Error while getting PID")
     }  
+*/
+    val pname = ManagementFactory.getRuntimeMXBean().getName()
+    processID = pname.substring(0, pname.indexOf('@'))
 
     val jps = new java.util.Vector[String]()
     jps.add("/bin/bash")
@@ -373,11 +386,11 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
       val tokens = source.split(" +")
       if(tokens(1).equals("DataNode")) {
        datanodePID = tokens(0)
-       println("Found datanode PID: " + datanodePID)     
+       //println("Found datanode PID: " + datanodePID)     
       }
       if(tokens(1).equals("NodeManager")) {
        nodemanagerPID = tokens(0)
-       println("Found nodemanager pid: " + nodemanagerPID)
+       //println("Found nodemanager pid: " + nodemanagerPID)
       }
       } catch { case e: Exception => () }
       finally {
@@ -406,8 +419,13 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
         s += memBean.getNonHeapMemoryUsage().getUsed() + "\t"
         s += memBean.getNonHeapMemoryUsage().getCommitted() + "\t"
         s += memBean.getNonHeapMemoryUsage().getMax() + "\t"
-        var res: (Long, Double) = (0, 0);
-        try { res = getProcessUsedMemoryAndCPU(processID); s += res._1 } catch{ case e:Exception => e.printStackTrace() }
+        // get used memory from jmap
+        // val jmapout = Seq("/bin/sh", "-c", "jmap -histo " + processID + " | tail -1").!!.trim 
+        // s += jmapout.split(" +")(2)
+
+        // record off heap memory usage
+        s += org.apache.spark.unsafe.Platform.TOTAL_BYTES;
+
           upTime = rtBean.getUptime() * 10000
           processCPUTime = osBean.getProcessCpuTime()
           var elapsedCPU: Double = processCPUTime - prevProcessCPUTime
@@ -419,12 +437,11 @@ private[spark] object CoarseGrainedExecutorBackend extends Logging {
             numberOfCPUSamples += 1
           }
           s += "\t" + usedCPU.toString()
-          //          s += "\n" + prevUpTime + "\t" + prevProcessCPUTime
-          //          s += "\n" + upTime + "\t" + processCPUTime
           prevUpTime = upTime
           prevProcessCPUTime = processCPUTime
 
-          s += "\t" + res._2
+          var res: (Double, Double) = (0, 0);
+          try { res = getProcessUsedMemoryAndCPU(processID); s += "\t" + res._1 + "\t" + res._2 } catch{ case e:Exception => e.printStackTrace() }
 
         try { res = getProcessUsedMemoryAndCPU(datanodePID); s += "\t" + res._1 + "\t" + res._2 } catch{ case e:Exception => e.printStackTrace() }
         try { res = getProcessUsedMemoryAndCPU(nodemanagerPID); s += "\t" + res._1 + "\t" + res._2 } catch{ case e:Exception => e.printStackTrace() }
