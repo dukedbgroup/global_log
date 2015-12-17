@@ -184,12 +184,12 @@ catch (Exception e)
 					// Deal with the line
 					if (!line.contains("application") && !line.contains("Code")) {
 						String tokens[] = line.split("\t");
-						SparkMem.add(index, Long.valueOf(tokens[11]));
-						SparkCPU.add(index, Double.valueOf(tokens[13]));
-						DNMem.add(index, Long.valueOf(tokens[14]));
-						DNCPU.add(index, Double.valueOf(tokens[15]));
-                                                NMMem.add(index, Long.valueOf(tokens[16]));
-                                                NMCPU.add(index, Double.valueOf(tokens[17]));
+						SparkMem.add(index, Double.valueOf(tokens[13]));
+						SparkCPU.add(index, Double.valueOf(tokens[14]));
+						DNMem.add(index, Double.valueOf(tokens[15]));
+						DNCPU.add(index, Double.valueOf(tokens[16]));
+                                                NMMem.add(index, Double.valueOf(tokens[17]));
+                                                NMCPU.add(index, Double.valueOf(tokens[18]));
 					}
 					index++;
 				}

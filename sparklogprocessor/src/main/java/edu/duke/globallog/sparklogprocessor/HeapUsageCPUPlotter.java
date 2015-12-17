@@ -115,8 +115,9 @@ public class HeapUsageCPUPlotter extends ApplicationFrame {
 			xyplot.setDataset(index, xydataset);
 			// xyplot.mapDatasetToRangeAxis(1, 1);
                   if(!"Used CPU".equals(xydataset.getSeriesKey(0))) {
-			XYItemRenderer standardxyitemrenderer = new StandardXYItemRenderer();
-			xyplot.setRenderer(index, standardxyitemrenderer);
+			XYItemRenderer xyitemrenderer; 
+			xyitemrenderer = new StandardXYItemRenderer();
+			xyplot.setRenderer(index, xyitemrenderer);
 		  } else {	
 			NumberAxis axis2 = new NumberAxis("CPU (%)");
 			// axis2.setFixedDimension(10.0);
@@ -227,10 +228,10 @@ catch (Exception e)
 			XYSeries PSOldGen = new XYSeries("Old Gen",false,false);
 			XYSeries PSYoungGen = new XYSeries("Young Gen",false,false);
 			XYSeries PermGen = new XYSeries("Perm Gen",false,false);
-			//XYSeries UsedHeap = new XYSeries("Used Heap");
+			XYSeries OffHeap = new XYSeries("Offheap",false,false);
 			XYSeries MaxHeap = new XYSeries("Max Heap",false,false);
 			//XYSeries UsedOffHeap = new XYSeries("Used OffHeap");
-			XYSeries TotalMem = new XYSeries("Used Memory",false,false);
+			XYSeries TotalMem = new XYSeries("RSS",false,false);
 			XYSeries UsedCPU = new XYSeries("Used CPU",false,false);
 
 			String line;
@@ -251,8 +252,9 @@ catch (Exception e)
 										);
 						PermGen.add(index, Long.valueOf(tokens[4]));
 						MaxHeap.add(index, Long.valueOf(tokens[7]));
-						UsedCPU.add(index, Math.max(0.0, Double.valueOf(tokens[13])));
-                                                TotalMem.add(index, Long.valueOf(tokens[11]));
+						OffHeap.add(index, Long.valueOf(tokens[11]));
+						UsedCPU.add(index, Math.max(0.0, Double.valueOf(tokens[14])));
+                                                TotalMem.add(index, Double.valueOf(tokens[13]));
 
 					
 						index++;
@@ -278,16 +280,17 @@ catch (Exception e)
 			td.addSeries(PSOldGen);
 			td.addSeries(PSYoungGen);
 			td.addSeries(PermGen);
+			td.addSeries(OffHeap);
 			xyDatasets.add(td);
 
 			td = new DefaultTableXYDataset();
-			td.addSeries(MaxHeap);
+			td.addSeries(UsedCPU);
 			xyDatasets.add(td);
                         //sc = new XYSeriesCollection();
                         //sc.addSeries(UsedOffHeap);
                         //xyDatasets.add(sc);
                         td = new DefaultTableXYDataset();
-                        td.addSeries(UsedCPU);
+                        td.addSeries(MaxHeap);
                         xyDatasets.add(td);
 			td = new DefaultTableXYDataset();
 			td.addSeries(TotalMem);
