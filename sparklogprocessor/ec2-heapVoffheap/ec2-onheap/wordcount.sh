@@ -1,0 +1,3 @@
+# sort shuffle 32 cores, shuffle fraction 0.6
+hadoop dfs -rmr /output
+~/spark/bin/spark-submit --class org.apache.spark.examples.WordCountDF --master yarn-client --num-executors 10 --driver-memory 10G --executor-memory 16G --executor-cores 16 --conf spark.eventLog.enabled=true --conf spark.eventLog.dir=hdfs://54.88.131.58:9000/sparkEventLog --conf "spark.executor.extraJavaOptions=-XX:+PrintFlagsFinal -XX:+PrintReferenceGC -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintAdaptiveSizePolicy -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark" ~/spark/examples/target/scala-2.10/spark-examples-1.6.0-SNAPSHOT-hadoop2.6.0.jar "hdfs://54.88.131.58:9000/HiBench/Wordcount/Input_5" "hdfs://54.88.131.58:9000/output"
