@@ -36,6 +36,8 @@ import org.jfree.ui.RefineryUtilities;
 
 public class HeapUsageCPUPlotter extends ApplicationFrame {
 
+	// Hack: hard coding to 5GB
+	private static Long MAX_PHYSICAL = 5*1024*1024*1024L;
 	
 	public static void main(String args[]) {
 		
@@ -137,7 +139,7 @@ public class HeapUsageCPUPlotter extends ApplicationFrame {
 		  }
 		}
 		JFreeChart jfreechart = new JFreeChart("Resource usage", xyplot);
-                jfreechart.addSubtitle(new TextTitle("Executor " + executorID));
+                jfreechart.addSubtitle(new TextTitle("Executor: " + filename.substring(filename.lastIndexOf("application")).substring(12)));
 		ChartUtilities.applyCurrentTheme(jfreechart);
 		xyplot.getRenderer().setSeriesPaint(0, Color.black);
 		return jfreechart;
@@ -227,12 +229,13 @@ catch (Exception e)
 		} else if (gcAlgorithm.equals("Parallel GC")) {
 			XYSeries PSOldGen = new XYSeries("Old Gen",false,false);
 			XYSeries PSYoungGen = new XYSeries("Young Gen",false,false);
-			XYSeries PermGen = new XYSeries("Perm Gen",false,false);
-			XYSeries OffHeap = new XYSeries("Offheap",false,false);
+			XYSeries PermGen = new XYSeries("JVM Internal",false,false);
+			XYSeries OffHeap = new XYSeries("Spark Offheap",false,false);
 			XYSeries MaxHeap = new XYSeries("Max Heap",false,false);
 			//XYSeries UsedOffHeap = new XYSeries("Used OffHeap");
-			XYSeries TotalMem = new XYSeries("RSS",false,false);
+			XYSeries MaxPhysical = new XYSeries("Max Physical",false,false);
 			XYSeries UsedCPU = new XYSeries("Used CPU",false,false);
+                        XYSeries TotalMem = new XYSeries("RSS",false,false);
 
 			String line;
 			long index = 1;
@@ -250,12 +253,13 @@ catch (Exception e)
 								Long.valueOf(tokens[1])
 										+ Long.valueOf(tokens[2])
 										);
-						PermGen.add(index, Long.valueOf(tokens[4]));
+						PermGen.add(index, Long.valueOf(tokens[4]) + Long.valueOf(tokens[0]));
 						MaxHeap.add(index, Long.valueOf(tokens[7]));
 						OffHeap.add(index, Long.valueOf(tokens[11]));
+//OffHeap.add(index, 0L);
 						UsedCPU.add(index, Math.max(0.0, Double.valueOf(tokens[14])));
                                                 TotalMem.add(index, Double.valueOf(tokens[13]));
-
+						MaxPhysical.add(index, MAX_PHYSICAL);
 					
 						index++;
 					}
@@ -290,10 +294,13 @@ catch (Exception e)
                         //sc.addSeries(UsedOffHeap);
                         //xyDatasets.add(sc);
                         td = new DefaultTableXYDataset();
-                        td.addSeries(MaxHeap);
+                        td.addSeries(TotalMem);
                         xyDatasets.add(td);
-			td = new DefaultTableXYDataset();
-			td.addSeries(TotalMem);
+                        td = new DefaultTableXYDataset();
+                        td.addSeries(MaxPhysical);
+                        xyDatasets.add(td);
+ 			td = new DefaultTableXYDataset();
+			td.addSeries(MaxHeap);
 			xyDatasets.add(td);
 			return xyDatasets;
 		}

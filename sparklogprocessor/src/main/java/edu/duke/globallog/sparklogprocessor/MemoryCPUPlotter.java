@@ -188,8 +188,8 @@ catch (Exception e)
 						SparkCPU.add(index, Double.valueOf(tokens[14]));
 						DNMem.add(index, Double.valueOf(tokens[15]));
 						DNCPU.add(index, Double.valueOf(tokens[16]));
-                                                NMMem.add(index, Double.valueOf(tokens[17]));
-                                                NMCPU.add(index, Double.valueOf(tokens[18]));
+                                                try { NMMem.add(index, Double.valueOf(tokens[17])); } catch(Exception e) { NMMem.add(index, 0); }
+                                                try { NMCPU.add(index, Double.valueOf(tokens[18])); } catch(Exception e) { NMCPU.add(index, 0); }
 					}
 					index++;
 				}
