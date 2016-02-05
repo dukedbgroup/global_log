@@ -38,6 +38,8 @@ public class HeapUsageCPUPlotter extends ApplicationFrame {
 
 	// Hack: hard coding to 5GB
 	private static Long MAX_PHYSICAL = 5*1024*1024*1024L;
+
+	private static Boolean SPARK_POOLS = false;
 	
 	public static void main(String args[]) {
 		
@@ -47,6 +49,10 @@ public class HeapUsageCPUPlotter extends ApplicationFrame {
 //		String gcAlgorithm = "G1";
 		String gcAlgorithm = "Parallel GC";
 		boolean showUsedCPU = true;
+
+		if(args.length > 1 && "true".equals(args[1])) {
+			SPARK_POOLS = true;
+		}
 		
 		HeapUsageCPUPlotter multipleaxisdemo1 = new HeapUsageCPUPlotter(
 				testName, applicationID,
@@ -138,8 +144,9 @@ public class HeapUsageCPUPlotter extends ApplicationFrame {
 			xyplot.setRenderer(index, renderer2);
 		  }
 		}
-		JFreeChart jfreechart = new JFreeChart("Resource usage", xyplot);
-                jfreechart.addSubtitle(new TextTitle("Executor: " + filename.substring(filename.lastIndexOf("application")).substring(12)));
+		JFreeChart jfreechart = new JFreeChart("Executor: " + filename.substring(filename.lastIndexOf("application")).substring(12), xyplot);
+		jfreechart.removeLegend();
+//                jfreechart.addSubtitle(new TextTitle("Executor: " + filename.substring(filename.lastIndexOf("application")).substring(12)));
 		ChartUtilities.applyCurrentTheme(jfreechart);
 		xyplot.getRenderer().setSeriesPaint(0, Color.black);
 		return jfreechart;
@@ -237,6 +244,9 @@ catch (Exception e)
 			XYSeries UsedCPU = new XYSeries("Used CPU",false,false);
                         XYSeries TotalMem = new XYSeries("RSS",false,false);
 
+			XYSeries Storage = new XYSeries("Storage", false, false);
+                        XYSeries Execution = new XYSeries("Execution", false, false);
+                        XYSeries UsedHeap = new XYSeries("Used Heap", false, false);
 			String line;
 			long index = 1;
 			try {
@@ -260,6 +270,15 @@ catch (Exception e)
 						UsedCPU.add(index, Math.max(0.0, Double.valueOf(tokens[14])));
                                                 TotalMem.add(index, Double.valueOf(tokens[13]));
 						MaxPhysical.add(index, MAX_PHYSICAL);
+
+						UsedHeap.add(index, Long.valueOf(tokens[0]) + Long.valueOf(tokens[1]) + Long.valueOf(tokens[2]) + Long.valueOf(tokens[3]) + Long.valueOf(tokens[4]));
+						if(tokens.length > 20) {
+						  Storage.add(index, Long.valueOf(tokens[19]));
+						  Execution.add(index, Long.valueOf(tokens[20]));
+						} else {
+						  Storage.add(index, 0L);
+						  Execution.add(index, 0L);
+						}
 					
 						index++;
 					}
@@ -280,6 +299,7 @@ catch (Exception e)
 			//sc.addSeries(PermGen);
 			//xyDatasets.add(sc);
 
+		  if(!SPARK_POOLS) {
 			DefaultTableXYDataset td = new DefaultTableXYDataset();
 			td.addSeries(PSOldGen);
 			td.addSeries(PSYoungGen);
@@ -302,6 +322,18 @@ catch (Exception e)
  			td = new DefaultTableXYDataset();
 			td.addSeries(MaxHeap);
 			xyDatasets.add(td);
+		  } else {
+                        DefaultTableXYDataset td = new DefaultTableXYDataset();
+                        td.addSeries(Storage);
+                        td.addSeries(Execution);
+                        xyDatasets.add(td);
+                        td = new DefaultTableXYDataset();
+                        td.addSeries(UsedHeap);
+                        xyDatasets.add(td);
+                        td = new DefaultTableXYDataset();
+                        td.addSeries(MaxHeap);
+                        xyDatasets.add(td);
+ 		  }
 			return xyDatasets;
 		}
 
@@ -312,7 +344,11 @@ catch (Exception e)
 			String gcAlgorithm, boolean showUsedCPU) {
 		JFreeChart jfreechart = createChart(executorID, filename, gcAlgorithm, showUsedCPU);
 	try {
-		writeAsPDF(jfreechart, new FileOutputStream("/home/mayuresh/pics/" + filename.substring(filename.lastIndexOf("application")) + ".pdf"), 640, 480);
+		String name = "/home/mayuresh/pics/" + filename.substring(filename.lastIndexOf("application"));
+		if(SPARK_POOLS) {
+			name += "-spark";
+		}
+		writeAsPDF(jfreechart, new FileOutputStream(name + ".pdf"), 640, 480);
 	} catch(Exception e) {
 		e.printStackTrace();
 	}

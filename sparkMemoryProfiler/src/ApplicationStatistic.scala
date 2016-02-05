@@ -11,10 +11,11 @@ object ApplicationStatistic {
 
   def main(args: Array[String]) {
 
-    var applicationID: String = "application_1446265188032_0145"
+    var applicationID: String = "application_1447540585201_" + args(0)
+//    var applicationID: String = "application_1446655589988_" + args(0)
     var testName: String = "test63"
     
-    var filename: String = "/home/yuzhanghan1982/2015summer/results/" + testName + "/" + applicationID
+    var filename: String = "/home/mayuresh/heap-logs/" + applicationID
 
     var executor_maxUsedHeap: Map[Int, Long] = Map()
     var executor_medUsedHeap: Map[Int, Long] = Map()
@@ -46,7 +47,7 @@ object ApplicationStatistic {
     var result = executor_maxUsedHeap.toList.sortBy(_._2).last
     println(result._1 + "\t" + result._2 / 1000000 + " MB")
 
-    println("\n\nExecutor - max used heap")
+/*    println("\n\nExecutor - max used heap")
     executor_maxUsedHeap.toList.sortBy(_._1).foreach {
       e =>
         println(e._1 + "\t" + e._2 / 1000000 + " MB")
@@ -66,6 +67,6 @@ object ApplicationStatistic {
     executor_time.toList.sortBy(_._1).foreach {
       e =>
         println(e._1 + "\t" + e._2)
-    }
+    }*/
   }
 }
