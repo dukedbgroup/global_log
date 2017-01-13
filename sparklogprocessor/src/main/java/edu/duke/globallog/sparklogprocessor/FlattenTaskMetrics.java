@@ -60,7 +60,7 @@ public class FlattenTaskMetrics
           String sql = "CREATE TABLE IF NOT EXISTS " + TASK_TABLE + " (appId VARCHAR(255), " +
              "stageId BIGINT, stageAttemptId BIGINT, taskId BIGINT, taskIndex BIGINT, " + 
              "taskAttempt BIGINT, launchTime BIGINT, executorId VARCHAR(8), host VARCHAR(255), " + 
-             "locality VARCHAR(255), speculative BOOLEAN, resultTime INTEGER, finishTime BIGINT, " + 
+             "locality VARCHAR(255), speculative BOOLEAN, resultTime BIGINT, finishTime BIGINT, " + 
              "failed BOOLEAN, deserializeTime BIGINT, runTime BIGINT, resultSize BIGINT, " + 
              "GCTime BIGINT, serializeTime BIGINT, memorySpilled BIGINT, diskSpilled BIGINT, " + 
              "bytesRead BIGINT, recordsRead BIGINT )";

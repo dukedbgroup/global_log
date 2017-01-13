@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,6 +32,8 @@ import org.jfree.chart.renderer.xy.*;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.time.*;
 import org.jfree.data.xy.*;
+import org.jfree.graphics2d.svg.SVGGraphics2D;
+import org.jfree.graphics2d.svg.SVGUtils;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
@@ -67,8 +70,9 @@ public class HeapUsageCPUPlotter extends ApplicationFrame {
 		super(s);
 		this.setLayout(new GridLayout(2, 5));
 
-		File basedir = new File(applicationID);
+		File basedir = new File("/home/mayuresh/heap-logs/" + applicationID);
 		File[] children = basedir.listFiles();
+System.out.println("Base dir: " + basedir);
 		Arrays.sort(children);
 		for (int index = 0; index <= children.length - 1; index++) {
 			if (children[index].isDirectory()) {
@@ -89,7 +93,6 @@ public class HeapUsageCPUPlotter extends ApplicationFrame {
 				chartpanel.setPreferredSize(new Dimension(600, 270));
 				chartpanel.setDomainZoomable(true);
 				chartpanel.setRangeZoomable(true);
-
 				// setContentPane(chartpanel);
 				add(chartpanel);
 			}
@@ -125,7 +128,9 @@ public class HeapUsageCPUPlotter extends ApplicationFrame {
                   if(!"Used CPU".equals(xydataset.getSeriesKey(0))) {
 			XYItemRenderer xyitemrenderer; 
 			xyitemrenderer = new StandardXYItemRenderer();
-			xyplot.setRenderer(index, xyitemrenderer);
+                	xyitemrenderer.setBaseStroke(new java.awt.BasicStroke(3));
+                        xyitemrenderer.setSeriesStroke(0, new java.awt.BasicStroke(1.0f, java.awt.BasicStroke.CAP_BUTT, java.awt.BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
+                        xyplot.setRenderer(index, xyitemrenderer);
 		  } else {	
 			NumberAxis axis2 = new NumberAxis("CPU (%)");
 			// axis2.setFixedDimension(10.0);
@@ -139,16 +144,15 @@ public class HeapUsageCPUPlotter extends ApplicationFrame {
 			//xyplot.setDataset(index, xydatasets.get(index));
 			xyplot.mapDatasetToRangeAxis(index, index);
 			XYItemRenderer renderer2 = new StandardXYItemRenderer();
-			// renderer2.setSeriesPaint(0, Color.red);
-			 ;
 			xyplot.setRenderer(index, renderer2);
 		  }
 		}
 		JFreeChart jfreechart = new JFreeChart("Executor: " + filename.substring(filename.lastIndexOf("application")).substring(12), xyplot);
 		jfreechart.removeLegend();
-//                jfreechart.addSubtitle(new TextTitle("Executor: " + filename.substring(filename.lastIndexOf("application")).substring(12)));
+//              jfreechart.addSubtitle(new TextTitle("Executor: " + filename.substring(filename.lastIndexOf("application")).substring(12)));
 		ChartUtilities.applyCurrentTheme(jfreechart);
 		xyplot.getRenderer().setSeriesPaint(0, Color.black);
+		xyplot.getRenderer().setBaseStroke(new java.awt.BasicStroke(24));
 		return jfreechart;
 	}
 
@@ -156,7 +160,7 @@ private static void writeAsPDF( JFreeChart chart, FileOutputStream out, int widt
 { 
 try 
 { 
-Rectangle pagesize = new Rectangle( width, height ); 
+com.itextpdf.text.Rectangle pagesize = new com.itextpdf.text.Rectangle( width, height ); 
 Document document = new Document( pagesize, 50, 50, 50, 50 ); 
 PdfWriter writer = PdfWriter.getInstance( document, out ); 
 document.open(); 
@@ -174,6 +178,20 @@ catch (Exception e)
  e.printStackTrace();
 } 
 }
+
+	private static void writeToSVG( JFreeChart chart, File file, int width, int height )
+	{
+		try {
+	        SVGGraphics2D g2 = new SVGGraphics2D(width, height);
+	        Rectangle r = new Rectangle(0, 0, width, height);
+	        chart.draw(g2, r);
+        	SVGUtils.writeToSVG(file, g2.getSVGElement());
+		}
+		catch (Exception e)
+		{	
+			 e.printStackTrace();
+		}
+	}
 
 
 	private static ArrayList<XYDataset> createDataset(String filename,
@@ -307,9 +325,9 @@ catch (Exception e)
 			td.addSeries(OffHeap);
 			xyDatasets.add(td);
 
-			td = new DefaultTableXYDataset();
-			td.addSeries(UsedCPU);
-			xyDatasets.add(td);
+			// td = new DefaultTableXYDataset();
+			// td.addSeries(UsedCPU);
+			// xyDatasets.add(td);
                         //sc = new XYSeriesCollection();
                         //sc.addSeries(UsedOffHeap);
                         //xyDatasets.add(sc);
@@ -348,7 +366,8 @@ catch (Exception e)
 		if(SPARK_POOLS) {
 			name += "-spark";
 		}
-		writeAsPDF(jfreechart, new FileOutputStream(name + ".pdf"), 640, 480);
+		writeToSVG(jfreechart, new java.io.File(name + ".svg"), 640, 480);
+//		writeAsPDF(jfreechart, new FileOutputStream(name + ".pdf"), 640, 480);
 	} catch(Exception e) {
 		e.printStackTrace();
 	}
