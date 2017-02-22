@@ -27,7 +27,7 @@ public class SummaryStats
     final String PERF_MONITOR_HOME = "/home/mayuresh/heap-logs/";
     final String PERF_FILE_PREFIX = "sparkOutput_worker_";
 
-    final String TASK_METRICS_TABLE = "TASK_METRICS";
+    final String TASK_METRICS_TABLE = "TASK_METRICS_ALL";
     final String IDENTITY_TABLE = "STAGE_IDENTITY";
     final String TASK_NUMBERS_TABLE = "TASK_NUMBERS";
     final String TASK_TIMES_TABLE = "TASK_TIMES";
@@ -47,26 +47,30 @@ public class SummaryStats
              "ipBytesRead BIGINT, ipRecordsRead BIGINT, " +
              "shRemoteBytesRead BIGINT, shLocalBytesRead BIGINT, shRecordsRead BIGINT, " +
              "opBytesWritten BIGINT, opRecordsWritten BIGINT, " +
-             "shBytesWritten BIGINT, shRecordsWritten BIGINT)";
+             "shBytesWritten BIGINT, shRecordsWritten BIGINT, " +
+             "PRIMARY KEY(appId, stageId, executorId))";
       stmt.executeUpdate(sql1);
 
       String sql2 = "CREATE TABLE IF NOT EXISTS " + TASK_TIMES_TABLE + " (appId VARCHAR(255), " +
              "stageId BIGINT, executorId VARCHAR(8), host VARCHAR(255), " +
              "avgTaskTime BIGINT, maxTaskTime BIGINT, avgDeserTime BIGINT, maxDeserTime BIGINT, " + 
              "avgResultTime BIGINT, maxResultTime BIGINT, avgGCTime BIGINT, maxGCTime BIGINT, " + 
-             "shFetchWaitTime BIGINT, shWriteTime BIGINT)"; 
+             "shFetchWaitTime BIGINT, shWriteTime BIGINT, " +
+             "PRIMARY KEY(appId, stageId, executorId))";
       stmt.executeUpdate(sql2);
 
       String sql3 = "CREATE TABLE IF NOT EXISTS " + TASK_NUMBERS_TABLE + " (appId VARCHAR(255), " +
              "stageId BIGINT, executorId VARCHAR(8), numTasks BIGINT, " +
-             "numFailed BIGINT, numProcessLocal BIGINT, numNodeLocal BIGINT, numRackLocal BIGINT" +
-             "avgResultSize BIGINT, maxResultSize BIGINT, avgSpillMem BIGINT, maxSpillMem BIGINT)";
+             "numFailed BIGINT, numProcessLocal BIGINT, numNodeLocal BIGINT, numRackLocal BIGINT, " +
+             "avgResultSize BIGINT, maxResultSize BIGINT, avgSpillMem BIGINT, maxSpillMem BIGINT, " +
+             "PRIMARY KEY(appId, stageId, executorId))";
       stmt.executeUpdate(sql3);
 
       String sql4 = "CREATE TABLE IF NOT EXISTS " + APP_ENV_TABLE + " (appId VARCHAR(255), " +
              "maxHeap BIGINT, maxCores BIGINT, yarnOverhead BIGINT, numExecs BIGINT, " + 
              "sparkMemoryFraction DECIMAL(4,2), offHeap BOOLEAN, offHeapSize BIGINT, " +
-             "serializer VARCHAR(255), gcAlgo VARCHAR(255), newRatio BIGINT)";
+             "serializer VARCHAR(255), gcAlgo VARCHAR(255), newRatio BIGINT, " +
+             "PRIMARY KEY(appId))";
       stmt.executeUpdate(sql4);
 
       String sql5 = "CREATE TABLE IF NOT EXISTS " + PERF_MONITORS_TABLE + " (appId VARCHAR(255), " +
@@ -75,13 +79,14 @@ public class SummaryStats
              "maxOldGenUsed BIGINT, numOldGC BIGINT, numYoungGC BIGINT, " +
              "totalOldCollection BIGINT, totalYoungCollection BIGINT, " +
              "maxStorageUsed BIGINT, maxExecutionUsed BIGINT, " + 
-             "totalTime BIGINT, numSamples BIGINT)";
+             "totalTime BIGINT, numSamples BIGINT, " +
+             "PRIMARY KEY(appId, stageId, executorId))";
       stmt.executeUpdate(sql5);
 
       try { stmt.close(); } catch(Exception e) {}
 
 //      String qsql1 = "SELECT distinct(stageId) as result from " + TASK_METRICS_TABLE + " where appId = " + APP_ID;
-      String qsql2 = "SELECT distinct(executorId) as result from " + TASK_METRICS_TABLE + " where appId = " + APP_ID;
+      String qsql2 = "SELECT distinct(executorId) as result FROM " + TASK_METRICS_TABLE + " WHERE appId = \"" + APP_ID + "\"";
 
 //      PreparedStatement qstmt1 = conn.prepareStatement(qsql1);
       PreparedStatement qstmt2 = conn.prepareStatement(qsql2);
@@ -107,13 +112,14 @@ public class SummaryStats
              "sum(opRecordsWritten) as eight, " +
              "sum(shBytesWritten) as nine, sum(shRecordsWritten) as ten, " +
              "avg(finishTime-launchTime) as elevan, max(finishTime-launchTime) as twelve, " +
-             "avg(deserTime) as thirteen, max(deserTime) as fourteen, " +
+             "avg(deserializeTime) as thirteen, max(deserializeTime) as fourteen, " +
              "avg(resultTime) as fifteen, max(resultTime) as sixteen, " +
              "avg(GCTime) as seventeen, max(GCTime) as eighteen, " +
              "sum(shFetchWaitTime) as nineteen, sum(shWriteTime) as twenty," +
              "count(1) as twoone, avg(resultSize) as twotwo, max(resultSize) as twothree, " +
              "avg(memorySpilled) as twofour, max(memorySpilled) as twofive " +
-             "from " + TASK_METRICS_TABLE + " WHERE appId = ?, stageId = ? and executorId = ?";
+             "FROM " + TASK_METRICS_TABLE + 
+             " WHERE appId = ? AND stageId = ? AND executorId = ?";
       PreparedStatement qstmt3 = conn.prepareStatement(qsql3);
 
       String isql1 = "INSERT INTO " + IDENTITY_TABLE + " values " +
@@ -126,15 +132,15 @@ public class SummaryStats
              "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
       String qsql4 = "SELECT count(1) as count from " + TASK_METRICS_TABLE + 
-             " WHERE failed = TRUE, appId = ?, stageId = ?, and executorId = ?";
+             " WHERE failed = TRUE AND appId = ? AND stageId = ? AND executorId = ?";
       String qsql5 = "SELECT count(1) as count from " + TASK_METRICS_TABLE +
-             " WHERE locality=\"PROCESS_LOCAL\", appId = ?, stageId = ? and executorId = ?";
+             " WHERE locality=\'PROCESS_LOCAL\' AND appId = ? AND stageId = ? AND executorId = ?";
       String qsql6 = "SELECT count(1) as count from " + TASK_METRICS_TABLE +
-             " WHERE locality=\"NODE_LOCAL\", appId = ?, stageId = ? and executorId = ?";
+             " WHERE locality=\'NODE_LOCAL\' AND appId = ? AND stageId = ? AND executorId = ?";
       String qsql7 = "SELECT count(1) as count from " + TASK_METRICS_TABLE +
-             " WHERE locality=\"RACK_LOCAL\", appId = ?, stageId = ? and executorId = ?";
+             " WHERE locality=\'RACK_LOCAL\' AND appId = ? AND stageId = ? AND executorId = ?";
       String qsql8 = "SELECT stageId, (max(finishTime)-min(launchTime)) as stageTime from " +
-             TASK_METRICS_TABLE + "WHERE appId = ? and executorId = ? group by stageId";
+             TASK_METRICS_TABLE + " WHERE appId = ? AND executorId = ? group by stageId";
 
       PreparedStatement qstmt4 = conn.prepareStatement(qsql4);
       PreparedStatement qstmt5 = conn.prepareStatement(qsql5);
@@ -150,8 +156,9 @@ public class SummaryStats
 
       for(String exec: execs) {
         // hard-coding file path pattern
-        String fileToRead = PERF_MONITOR_HOME + exec + "/" + PERF_FILE_PREFIX + APP_ID + "_" + exec + ".txt";
+        String fileToRead = PERF_MONITOR_HOME + APP_ID + "/" + exec + "/" + PERF_FILE_PREFIX + APP_ID + "_" + exec + ".txt";
         Long totalLines = Files.lines(Paths.get(fileToRead)).count() - 2; //first two header lines
+
         Map<String, Double> stageTimeMap = new HashMap<String, Double>();
         // Map<String, Long> stageStartLineMap = new HashMap<String, Long>();
         Map<String, Long> stageNumLinesMap = new HashMap<String, Long>();
@@ -169,7 +176,7 @@ public class SummaryStats
         // Long startLine = 2L;
         for(String stage: stageTimeMap.keySet()) {
           // stageStartLineMap.put(stage, startLine);
-          Long numLines = totalLines * Math.round(stageTimeMap.get(stage) / totalTime);
+          Long numLines = Math.round(totalLines * stageTimeMap.get(stage) / totalTime);
           stageNumLinesMap.put(stage, numLines);
           // startLine += numLines;
         }
@@ -199,10 +206,10 @@ public class SummaryStats
           istmt3.setObject(3, exec); istmt4.setObject(3, exec);
 
           ResultSet rs3 = qstmt3.executeQuery();
-          ResultSet rs4 = qstmt3.executeQuery();
-          ResultSet rs5 = qstmt3.executeQuery();
-          ResultSet rs6 = qstmt3.executeQuery();
-          ResultSet rs7 = qstmt3.executeQuery();
+          ResultSet rs4 = qstmt4.executeQuery();
+          ResultSet rs5 = qstmt5.executeQuery();
+          ResultSet rs6 = qstmt6.executeQuery();
+          ResultSet rs7 = qstmt7.executeQuery();
 
           while(rs3.next()) {
             String host = rs3.getString("one");
@@ -242,8 +249,8 @@ public class SummaryStats
             istmt2.setObject(10, maxResultTime);
             Double avgGCTime = rs3.getDouble("seventeen");
             istmt2.setObject(11, avgGCTime);
-            Double maxGCTime = rs3.getDouble("eightteen");
-            istmt2.setObject(12, avgGCTime);
+            Double maxGCTime = rs3.getDouble("eighteen");
+            istmt2.setObject(12, maxGCTime);
             Double shFetchWaitTime = rs3.getDouble("nineteen");
             istmt2.setObject(13, shFetchWaitTime);
             Double shWriteTime = rs3.getDouble("twenty");
@@ -269,9 +276,9 @@ public class SummaryStats
             Double maxResultSize = rs3.getDouble("twothree");
             istmt3.setObject(10, maxResultSize);
             Double avgSpillSize = rs3.getDouble("twofour");
-            istmt3.setObject(11, avgResultSize);
+            istmt3.setObject(11, avgSpillSize);
             Double maxSpillSize = rs3.getDouble("twofive");
-            istmt3.setObject(12, maxResultSize);
+            istmt3.setObject(12, maxSpillSize);
             istmt3.addBatch();
 
             istmt4.setObject(4, host);
@@ -328,18 +335,23 @@ public class SummaryStats
             istmt4.setObject(12, totalYoungCollection);
             istmt4.setObject(13, maxStorageUsed);
             istmt4.setObject(14, maxExecutionUsed);
-            istmt4.setObject(15, stageNumLinesMap.get(stage));
-            istmt4.setObject(16, stageTimeMap.get(stage));
+            istmt4.setObject(15, stageTimeMap.get(stage));
+            istmt4.setObject(16, stageNumLinesMap.get(stage));
             istmt4.addBatch();
           }
         }
         br.close();
       }
 
+System.out.println("--Running " + istmt1);
+System.out.println("--Running " + istmt2);
+System.out.println("--Running " + istmt3);
+System.out.println("--Running " + istmt4);
       istmt1.executeBatch();
       istmt2.executeBatch();
       istmt3.executeBatch();
       istmt4.executeBatch();
+      conn.commit();
 
       try { qstmt3.close(); } catch(Exception e) {}
       try { qstmt4.close(); } catch(Exception e) {}
