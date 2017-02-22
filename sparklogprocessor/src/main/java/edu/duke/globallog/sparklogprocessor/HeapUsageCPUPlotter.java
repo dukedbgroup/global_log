@@ -40,7 +40,7 @@ import org.jfree.ui.RefineryUtilities;
 public class HeapUsageCPUPlotter extends ApplicationFrame {
 
 	// Hack: hard coding to 5GB
-	private static Long MAX_PHYSICAL = 5*1024*1024*1024L;
+	private static Long MAX_PHYSICAL = 7*1024*1024*1024L;
 
 	private static Boolean SPARK_POOLS = false;
 	
@@ -147,12 +147,25 @@ System.out.println("Base dir: " + basedir);
 			xyplot.setRenderer(index, renderer2);
 		  }
 		}
-		JFreeChart jfreechart = new JFreeChart("Executor: " + filename.substring(filename.lastIndexOf("application")).substring(12), xyplot);
-		jfreechart.removeLegend();
+		String name = "Executor: " + filename.substring(filename.lastIndexOf("application")).substring(12);
+		name = name.substring(0, name.length()-4);
+		JFreeChart jfreechart = new JFreeChart(name, xyplot);
+		// jfreechart.removeLegend();
 //              jfreechart.addSubtitle(new TextTitle("Executor: " + filename.substring(filename.lastIndexOf("application")).substring(12)));
 		ChartUtilities.applyCurrentTheme(jfreechart);
+                // jfreechart.getLegend().setItemFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 16));
 		xyplot.getRenderer().setSeriesPaint(0, Color.black);
-		xyplot.getRenderer().setBaseStroke(new java.awt.BasicStroke(24));
+//                xyplot.getRenderer(1).setSeriesPaint(0, Color.magenta);
+//                xyplot.getRenderer(2).setSeriesPaint(0, Color.cyan);
+		if(SPARK_POOLS) {
+	                xyplot.getRenderer().setSeriesPaint(0, Color.PINK);
+	                xyplot.getRenderer().setSeriesPaint(1, Color.ORANGE);
+	                xyplot.getRenderer(1).setSeriesPaint(0, Color.BLACK);
+	                xyplot.getRenderer(2).setSeriesPaint(0, Color.BLUE);
+                        xyplot.getRenderer(3).setSeriesPaint(0, Color.GREEN);
+		}
+		xyplot.getRenderer(1).setBaseStroke(new java.awt.BasicStroke(5.0f));
+                xyplot.getRenderer(2).setBaseStroke(new java.awt.BasicStroke(5.0f));
 		return jfreechart;
 	}
 
@@ -196,6 +209,8 @@ catch (Exception e)
 
 	private static ArrayList<XYDataset> createDataset(String filename,
 			String gcAlgorithm) {
+
+		boolean java8 = true;
 
 		if (gcAlgorithm.equals("G1")) {
 			XYSeries G1OldGen = new XYSeries("G1 Old Gen");
@@ -255,12 +270,12 @@ catch (Exception e)
 			XYSeries PSOldGen = new XYSeries("Old Gen",false,false);
 			XYSeries PSYoungGen = new XYSeries("Young Gen",false,false);
 			XYSeries PermGen = new XYSeries("JVM Internal",false,false);
-			XYSeries OffHeap = new XYSeries("Spark Offheap",false,false);
+			XYSeries OffHeap = new XYSeries("Used Off-heap",false,false);
 			XYSeries MaxHeap = new XYSeries("Max Heap",false,false);
-			//XYSeries UsedOffHeap = new XYSeries("Used OffHeap");
+			// XYSeries UsedOffHeap = new XYSeries("Used OffHeap");
 			XYSeries MaxPhysical = new XYSeries("Max Physical",false,false);
 			XYSeries UsedCPU = new XYSeries("Used CPU",false,false);
-                        XYSeries TotalMem = new XYSeries("RSS",false,false);
+                        XYSeries TotalMem = new XYSeries("Resident Set Size",false,false);
 
 			XYSeries Storage = new XYSeries("Storage", false, false);
                         XYSeries Execution = new XYSeries("Execution", false, false);
@@ -275,27 +290,34 @@ catch (Exception e)
 					// Deal with the line
 					if (!line.contains("application") && !line.contains("Code")) {
 						String tokens[] = line.split("\t");
-						PSOldGen.add(index, Long.valueOf(tokens[3]));
-						PSYoungGen.add(
+						if(java8) { PSOldGen.add(index, Long.valueOf(tokens[5])); }
+						else { PSOldGen.add(index, Long.valueOf(tokens[3])); }
+						if(java8) { PSYoungGen.add(index, Long.valueOf(tokens[3]) + Long.valueOf(tokens[4])); }
+						else { PSYoungGen.add(
 								index,
 								Long.valueOf(tokens[1])
-										+ Long.valueOf(tokens[2])
-										);
-						PermGen.add(index, Long.valueOf(tokens[4]) + Long.valueOf(tokens[0]));
-						MaxHeap.add(index, Long.valueOf(tokens[7]));
-						OffHeap.add(index, Long.valueOf(tokens[11]));
-//OffHeap.add(index, 0L);
-						UsedCPU.add(index, Math.max(0.0, Double.valueOf(tokens[14])));
-                                                TotalMem.add(index, Double.valueOf(tokens[13]));
+										+ Long.valueOf(tokens[2])); }
+						if(java8) { PermGen.add(index, Long.valueOf(tokens[0]) + Long.valueOf(tokens[1]) + Long.valueOf(tokens[2])); }
+						else { PermGen.add(index, Long.valueOf(tokens[4]) + Long.valueOf(tokens[0])); }
+						if(java8) { MaxHeap.add(index, Long.valueOf(tokens[8])); }
+						else { MaxHeap.add(index, Long.valueOf(tokens[7])); }
+						if(java8) { OffHeap.add(index, Long.valueOf(tokens[12])); }
+						else { OffHeap.add(index, Long.valueOf(tokens[11])); }
+						if(java8) { UsedCPU.add(index, Math.max(0.0, Double.valueOf(tokens[15]))); }
+						else { UsedCPU.add(index, Math.max(0.0, Double.valueOf(tokens[14]))); }
+						if(java8) { TotalMem.add(index, Double.valueOf(tokens[14])); }
+						else { TotalMem.add(index, Double.valueOf(tokens[13])); }
+						if(java8) { 
+                                                  UsedHeap.add(index, Long.valueOf(tokens[0]) + Long.valueOf(tokens[1]) + Long.valueOf(tokens[2]) + Long.valueOf(tokens[3]) + Long.valueOf(tokens[4]) + Long.valueOf(tokens[5])); }
+						else {
+						  UsedHeap.add(index, Long.valueOf(tokens[0]) + Long.valueOf(tokens[1]) + Long.valueOf(tokens[2]) + Long.valueOf(tokens[3]) + Long.valueOf(tokens[4])); }
 						MaxPhysical.add(index, MAX_PHYSICAL);
-
-						UsedHeap.add(index, Long.valueOf(tokens[0]) + Long.valueOf(tokens[1]) + Long.valueOf(tokens[2]) + Long.valueOf(tokens[3]) + Long.valueOf(tokens[4]));
-						if(tokens.length > 20) {
-						  Storage.add(index, Long.valueOf(tokens[19]));
-						  Execution.add(index, Long.valueOf(tokens[20]));
+						if(java8) {
+						  Storage.add(index, Long.valueOf(tokens[20]));
+						  Execution.add(index, Long.valueOf(tokens[21]));
 						} else {
-						  Storage.add(index, 0L);
-						  Execution.add(index, 0L);
+                                                  Storage.add(index, Long.valueOf(tokens[19]));
+                                                  Execution.add(index, Long.valueOf(tokens[20]));
 						}
 					
 						index++;
@@ -325,18 +347,18 @@ catch (Exception e)
 			td.addSeries(OffHeap);
 			xyDatasets.add(td);
 
-			// td = new DefaultTableXYDataset();
-			// td.addSeries(UsedCPU);
-			// xyDatasets.add(td);
-                        //sc = new XYSeriesCollection();
-                        //sc.addSeries(UsedOffHeap);
-                        //xyDatasets.add(sc);
+			td = new DefaultTableXYDataset();
+			td.addSeries(UsedCPU);
+			xyDatasets.add(td);
+                        // sc = new XYSeriesCollection();
+                        // sc.addSeries(UsedOffHeap);
+                        // xyDatasets.add(sc);
                         td = new DefaultTableXYDataset();
                         td.addSeries(TotalMem);
                         xyDatasets.add(td);
                         td = new DefaultTableXYDataset();
-                        td.addSeries(MaxPhysical);
-                        xyDatasets.add(td);
+                        //td.addSeries(MaxPhysical);
+                        //xyDatasets.add(td);
  			td = new DefaultTableXYDataset();
 			td.addSeries(MaxHeap);
 			xyDatasets.add(td);
@@ -344,6 +366,9 @@ catch (Exception e)
                         DefaultTableXYDataset td = new DefaultTableXYDataset();
                         td.addSeries(Storage);
                         td.addSeries(Execution);
+                        xyDatasets.add(td);
+                        td = new DefaultTableXYDataset();
+                        td.addSeries(PSOldGen);
                         xyDatasets.add(td);
                         td = new DefaultTableXYDataset();
                         td.addSeries(UsedHeap);
@@ -363,11 +388,12 @@ catch (Exception e)
 		JFreeChart jfreechart = createChart(executorID, filename, gcAlgorithm, showUsedCPU);
 	try {
 		String name = "/home/mayuresh/pics/" + filename.substring(filename.lastIndexOf("application"));
+		name = name.substring(0, name.length()-4); // take away .txt extension
 		if(SPARK_POOLS) {
 			name += "-spark";
 		}
-		writeToSVG(jfreechart, new java.io.File(name + ".svg"), 640, 480);
-//		writeAsPDF(jfreechart, new FileOutputStream(name + ".pdf"), 640, 480);
+//		writeToSVG(jfreechart, new java.io.File(name + ".svg"), 640, 480);
+		writeAsPDF(jfreechart, new FileOutputStream(name + ".pdf"), 640, 480);
 	} catch(Exception e) {
 		e.printStackTrace();
 	}
