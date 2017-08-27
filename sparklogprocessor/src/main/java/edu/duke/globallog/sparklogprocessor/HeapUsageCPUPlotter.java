@@ -40,7 +40,7 @@ import org.jfree.ui.RefineryUtilities;
 public class HeapUsageCPUPlotter extends ApplicationFrame {
 
 	// Hack: hard coding to 5GB
-	private static Long MAX_PHYSICAL = 7*1024*1024*1024L;
+	private static Long MAX_PHYSICAL = 5*1024*1024*1024L;
 
 	private static Boolean SPARK_POOLS = false;
 	
@@ -191,6 +191,16 @@ catch (Exception e)
  e.printStackTrace();
 } 
 }
+
+	private static void writeToPNG(JFreeChart chart, FileOutputStream out, int width, int height) {
+		try {
+		  ChartUtilities.writeChartAsPNG(out, chart, width, height);
+		}
+                catch (Exception e)
+                {
+                         e.printStackTrace();
+                }
+	}
 
 	private static void writeToSVG( JFreeChart chart, File file, int width, int height )
 	{
@@ -357,8 +367,8 @@ catch (Exception e)
                         td.addSeries(TotalMem);
                         xyDatasets.add(td);
                         td = new DefaultTableXYDataset();
-                        //td.addSeries(MaxPhysical);
-                        //xyDatasets.add(td);
+                        td.addSeries(MaxPhysical);
+                        xyDatasets.add(td);
  			td = new DefaultTableXYDataset();
 			td.addSeries(MaxHeap);
 			xyDatasets.add(td);
@@ -394,6 +404,7 @@ catch (Exception e)
 		}
 //		writeToSVG(jfreechart, new java.io.File(name + ".svg"), 640, 480);
 		writeAsPDF(jfreechart, new FileOutputStream(name + ".pdf"), 640, 480);
+                writeToPNG(jfreechart, new FileOutputStream(name + ".png"), 640, 480);
 	} catch(Exception e) {
 		e.printStackTrace();
 	}

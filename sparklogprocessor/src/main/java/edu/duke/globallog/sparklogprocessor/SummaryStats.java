@@ -67,6 +67,7 @@ public class SummaryStats
       stmt.executeUpdate(sql3);
 
       String sql4 = "CREATE TABLE IF NOT EXISTS " + APP_ENV_TABLE + " (appId VARCHAR(255), " +
+             "appName VARCHAR(255), startTime datetime, runTime DECIMAL(6,2), " + 
              "maxHeap BIGINT, maxCores BIGINT, yarnOverhead BIGINT, numExecs BIGINT, " + 
              "sparkMemoryFraction DECIMAL(4,2), offHeap BOOLEAN, offHeapSize BIGINT, " +
              "serializer VARCHAR(255), gcAlgo VARCHAR(255), newRatio BIGINT, " +
@@ -130,6 +131,8 @@ public class SummaryStats
              "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       String isql4 = "INSERT INTO " + PERF_MONITORS_TABLE + " values " +
              "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      String isql5 = "INSERT INTO " + APP_ENV_TABLE + " values " +
+             "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
       String qsql4 = "SELECT count(1) as count from " + TASK_METRICS_TABLE + 
              " WHERE failed = TRUE AND appId = ? AND stageId = ? AND executorId = ?";
@@ -151,6 +154,7 @@ public class SummaryStats
       PreparedStatement istmt2 = conn.prepareStatement(isql2);
       PreparedStatement istmt3 = conn.prepareStatement(isql3);
       PreparedStatement istmt4 = conn.prepareStatement(isql4);
+      PreparedStatement istmt5 = conn.prepareStatement(isql5);
 
       conn.setAutoCommit(false);
 
@@ -343,14 +347,33 @@ public class SummaryStats
         br.close();
       }
 
+      // HACK: Populate fake env table entry
+      istmt5.setObject(1, APP_ID);
+      istmt5.setObject(2, "SortDF");
+      istmt5.setObject(3, new java.sql.Timestamp(java.util.Calendar.getInstance().getTime().getTime()));
+      istmt5.setObject(4, 5);
+      istmt5.setObject(5, 4);
+      istmt5.setObject(6, 4);
+      istmt5.setObject(7, 1);
+      istmt5.setObject(8, 10);
+      istmt5.setObject(9, 0.6);
+      istmt5.setObject(10, 1);
+      istmt5.setObject(11, 2);
+      istmt5.setObject(12, "java");
+      istmt5.setObject(13, "parallel");
+      istmt5.setObject(14, 2);
+      istmt5.addBatch();
+
 System.out.println("--Running " + istmt1);
 System.out.println("--Running " + istmt2);
 System.out.println("--Running " + istmt3);
 System.out.println("--Running " + istmt4);
+System.out.println("--Running " + istmt5);
       istmt1.executeBatch();
       istmt2.executeBatch();
       istmt3.executeBatch();
       istmt4.executeBatch();
+      istmt5.executeBatch();
       conn.commit();
 
       try { qstmt3.close(); } catch(Exception e) {}
@@ -363,7 +386,7 @@ System.out.println("--Running " + istmt4);
       try { istmt2.close(); } catch(Exception e) {}
       try { istmt3.close(); } catch(Exception e) {}
       try { istmt4.close(); } catch(Exception e) {}
-
+      try { istmt5.close(); } catch(Exception e) {}
     } 
     catch(Exception e) {
           e.printStackTrace();

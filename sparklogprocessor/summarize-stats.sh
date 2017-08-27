@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Parsing events: $1"
+echo "summarizing for: $1"
 
 if [[ -z "$1" ]]; then
   exit
@@ -17,5 +17,5 @@ appsuffix=""
 
 for appNo in $(seq -f "%04g" $first $last)
 do
-   mvn exec:java -e -Dexec.mainClass="edu.duke.globallog.sparklogprocessor.FlattenTaskMetrics" -Dexec.args="hdfs://xeno-62:9000/sparkEventLog/$appprefix$appNo$appsuffix"
+   mvn exec:java -e -Dexec.mainClass="edu.duke.globallog.sparklogprocessor.SummaryStats" -Dexec.args="$appprefix$appNo$appsuffix"
 done
