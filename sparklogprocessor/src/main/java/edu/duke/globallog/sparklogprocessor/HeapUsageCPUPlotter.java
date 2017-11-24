@@ -309,8 +309,9 @@ catch (Exception e)
 										+ Long.valueOf(tokens[2])); }
 						if(java8) { PermGen.add(index, Long.valueOf(tokens[0]) + Long.valueOf(tokens[1]) + Long.valueOf(tokens[2])); }
 						else { PermGen.add(index, Long.valueOf(tokens[4]) + Long.valueOf(tokens[0])); }
-						if(java8) { MaxHeap.add(index, Long.valueOf(tokens[8])); }
-						else { MaxHeap.add(index, Long.valueOf(tokens[7])); }
+						Long maxHeap = 0L;
+						if(java8) { MaxHeap.add(index, Long.valueOf(tokens[8])); maxHeap = Long.valueOf(tokens[8]); }
+						else { MaxHeap.add(index, Long.valueOf(tokens[7])); maxHeap = Long.valueOf(tokens[7]); }
 						if(java8) { OffHeap.add(index, Long.valueOf(tokens[12])); }
 						else { OffHeap.add(index, Long.valueOf(tokens[11])); }
 						if(java8) { UsedCPU.add(index, Math.max(0.0, Double.valueOf(tokens[15]))); }
@@ -321,7 +322,7 @@ catch (Exception e)
                                                   UsedHeap.add(index, Long.valueOf(tokens[0]) + Long.valueOf(tokens[1]) + Long.valueOf(tokens[2]) + Long.valueOf(tokens[3]) + Long.valueOf(tokens[4]) + Long.valueOf(tokens[5])); }
 						else {
 						  UsedHeap.add(index, Long.valueOf(tokens[0]) + Long.valueOf(tokens[1]) + Long.valueOf(tokens[2]) + Long.valueOf(tokens[3]) + Long.valueOf(tokens[4])); }
-						MaxPhysical.add(index, MAX_PHYSICAL);
+						MaxPhysical.add(index, maxHeap + 1024*1024*1024); // MaxPhysical.add(index, MAX_PHYSICAL);
 						if(java8) {
 						  Storage.add(index, Long.valueOf(tokens[20]));
 						  Execution.add(index, Long.valueOf(tokens[21]));
