@@ -1,12 +1,13 @@
 package edu.duke.globallog.sparklogprocessor;
 
 import java.io.*;
-import java.nio.file.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import mikera.vectorz.Vector;
 
@@ -17,16 +18,28 @@ class Stage
   Long shuffleBytesRead; 
   Long shuffleBytesWritten;
   Long opBytes;
+  Long cacheStorage;
   Vector vec;
+  int clusterId;
 
-  Stage(Long a, Long b, Long c, Long d, Long e) {
+  Stage(Long a, Long b, Long c, Long d, Long e, Long f) {
     ipBytes = a;
     cachedBytes = b;
     shuffleBytesRead = c;
     shuffleBytesWritten = d;
     opBytes = e;
+    cacheStorage = f;
     vec = Vector.of(new double[]{
-      a.doubleValue(), b.doubleValue(), c.doubleValue(), d.doubleValue(), e.doubleValue()});
+      a.doubleValue(), b.doubleValue(), c.doubleValue(), d.doubleValue(), e.doubleValue(), f.doubleValue()});
+    clusterId = -1;
+  }
+
+  void setClusterId(int n) {
+    clusterId = n;
+  }
+
+  int getClusterId() {
+    return clusterId;
   }
 
   //implementation of stage matching
@@ -37,9 +50,18 @@ class Stage
     }
     Stage s = (Stage) o;
 
+    if(this.clusterId > -1 || s.clusterId > -1) {
+      if(this.clusterId == s.clusterId) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     // use vector algebra
-System.out.println("--Distance found: " + this.vec.toNormal().distance(s.vec.toNormal()));
-    if(distance(s) <= 0.5) {
+System.out.println("--Distance found in " + this.vec + " and " + s.vec + " -> regular: "
+ + this.vec.toNormal().distance(s.vec.toNormal()) + " normalized: " + this.vec.distance(s.vec));
+    if(distance(s) <= 0.1) {
       return true;
     }
 /*
@@ -144,7 +166,21 @@ class Config
 
   @Override
   public String toString() {
+    return "[" + appId + ", " + maxHeap + ", " + maxCores + ", " +
+      sparkMemoryFraction + ", " + newRatio + "]";
+  }
+
+  public void setAppId(String appId) {
+    this.appId = appId;
+  }
+
+  public String getAppId() {
     return appId;
+  }
+
+  public Config clone() {
+    return new Config(appId, maxHeap, maxCores, yarnOverhead, numExecs,
+      sparkMemoryFraction, offHeap, offHeapSize, serializer, gcAlgo, newRatio);
   }
 }
 
@@ -227,6 +263,32 @@ class ConfigPlusMetrics {
   }
 }
 
+class EvalResult {
+
+  Integer seqId; // sequence no
+  String id; // title of eval record
+  Integer numRecords; // that are clustered
+  Integer numClusters;
+  Double randIndex;
+  Double condEntropy;
+  Double normMutualInfo;
+
+  public EvalResult(int a, String b, int c, int d, double e, double f, double g) {
+    seqId = a;
+    id = b;
+    numRecords = c;
+    numClusters = d;
+    randIndex = e;
+    condEntropy = f;
+    normMutualInfo = g;
+  }
+
+  @Override
+  public String toString() {
+    return seqId + "\t" + id + "\t" + numRecords + "\t" + numClusters + "\t" +
+      randIndex + "\t" + condEntropy + "\t" + normMutualInfo;
+  }
+}
 
 /**
  * Class to combine stats from spark event logs and resource monitors and summarize them
@@ -236,7 +298,9 @@ class ConfigPlusMetrics {
 public class TestRelM
 {
 
-  public static enum Mode { SIMILAR, SINGLE };
+  public static enum Mode { STAGE, CONFIG, SINGLE };
+
+  public static int STAGE_CLUSTERS = 15;
 
   public static void main(String[] args) {
     // connection to database
@@ -254,10 +318,20 @@ public class TestRelM
  //   Config conf = new Config("", maxHeap, 2L, yarnOverhead, 10, 0.6, false, 
  //     maxHeap, "java", "parallel", 2L);
 
-    Mode mode = Mode.SIMILAR;
-    String resultsPath = "results-similar";
+    Mode mode = Mode.STAGE;
+    String resultsPath = "results-similar"; // default
+    List<EvalResult> clusterResults = new ArrayList<EvalResult>();
+    String clusterResultsFile = "results.tsv"; // default
 
-    if("similar".equals(args[0])) {
+    if("stage".equals(args[0])) {
+      mode = Mode.STAGE;
+      if(!("".equals(args[1]))) {
+        resultsPath = args[1];
+      }
+    }
+
+    if("config".equals(args[0])) {
+      mode = Mode.CONFIG;
       if(!("".equals(args[1]))) {
         resultsPath = args[1];
       }
@@ -268,17 +342,11 @@ public class TestRelM
     }
 
     Stage[] stages = new Stage[5];
-    stages[0] = new Stage(132744302L, 134217728L, 0L, 0L, 0L);
-    stages[1] = new Stage(134619472L, 0L, 0L, 0L, 0L);
-    stages[2] = new Stage(137818123L, 0L, 0L, 41033290L, 0L);
-    stages[3] = new Stage(0L, 0L, 57856938L, 33035663L, 0L);
-    stages[4] = new Stage(0L, 0L, 11800L, 0L, 0L);
-
-    // for single mode
-    Map<Config, Map<Stage, Metrics>> configMap = new HashMap<Config, Map<Stage, Metrics>>();
-
-    // for similar mode
-    Map<Stage, Map<Config, List<ConfigPlusMetrics>>> stageMap = new HashMap<Stage, Map<Config, List<ConfigPlusMetrics>>>();
+    stages[0] = new Stage(132744302L, 134217728L, 0L, 0L, 0L, 0L);
+    stages[1] = new Stage(134619472L, 0L, 0L, 0L, 0L, 134217728L);
+    stages[2] = new Stage(137818123L, 0L, 0L, 41033290L, 0L, 134217728L);
+    stages[3] = new Stage(0L, 0L, 57856938L, 33035663L, 0L, 134217728L);
+    stages[4] = new Stage(0L, 0L, 11800L, 0L, 0L, 134217728L);
 
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -300,7 +368,8 @@ public class TestRelM
       stmt.executeUpdate(sql2);
 
       String qsql1 = "SELECT appId as one, ipBytes as two, cachedBytes as three, " +
-             "shuffleBytesRead as four, shuffleBytesWritten as five, opBytes as six, " +
+             "shuffleBytesRead as four, shuffleBytesWritten as five, " +
+             "opBytes as six, cacheStorage as seven, " +
              "maxHeap, maxCores, yarnOverhead, numExecs, sparkMemoryFraction, " +
              "offHeap, offHeapSize, serializer, gcAlgo, newRatio, failedExecs, " +
              "maxStorage, maxExecution, totalTime, maxUsedHeap, minUsageGap, " +
@@ -318,12 +387,14 @@ public class TestRelM
       ResultSet rs1 = qstmt1.executeQuery();
 
     if(mode.equals(Mode.SINGLE)) {
+      Map<Config, Map<Stage, Metrics>> configMap = new HashMap<Config, Map<Stage, Metrics>>();
+
       for(Stage stage: stages) {
         rs1.beforeFirst();
         while(rs1.next()) {
           // find matching rows, store configs along with row ids
           Stage candidate = new Stage(rs1.getLong("two"), rs1.getLong("three"), 
-            rs1.getLong("four"), rs1.getLong("five"), rs1.getLong("six"));
+            rs1.getLong("four"), rs1.getLong("five"), rs1.getLong("six"), rs1.getLong("seven"));
           if(stage.equals(candidate)) {
             Config conf = new Config(rs1.getString("one"), rs1.getLong("maxHeap"), 
               rs1.getLong("maxCores"), rs1.getLong("yarnOverhead"), rs1.getLong("numExecs"), 
@@ -412,26 +483,50 @@ public class TestRelM
 System.out.println("--Running " + istmt1);
       istmt1.executeBatch();
       conn.commit();
+
     } else {
-      // SIMILAR mode starts
+      // cluster stages first
+      List<Stage> stageList = new ArrayList<Stage>();
+      while(rs1.next()) {
+        Stage stage = new Stage(rs1.getLong("two"), rs1.getLong("three"),
+             rs1.getLong("four"), rs1.getLong("five"), rs1.getLong("six"), rs1.getLong("seven"));
+        stageList.add(stage);
+      }
+      DataClusterer stageClusterer = new DataClusterer();
+      stageClusterer.setStages(stageList);
+      stageClusterer.cluster(STAGE_CLUSTERS); // HACK: hard-coding number of clusters
+      int[] answers = stageClusterer.getAnswers();
+      int cnt = 0;
+      for(Stage stage: stageList) {
+        stage.setClusterId(answers[cnt++]);
+      }
+
+      // done clustering, reset resultset
+      rs1.beforeFirst();
+    if(mode.equals(Mode.STAGE)) {
+     // SIMILAR mode starts
+      Map<Stage, Map<Config, List<ConfigPlusMetrics>>> stageMap = new HashMap<Stage, Map<Config, List<ConfigPlusMetrics>>>();
+
+      cnt = 0;
       while(rs1.next()) {
         // find matching rows, store configs along with row ids
-        Stage candidate = new Stage(rs1.getLong("two"), rs1.getLong("three"),
-             rs1.getLong("four"), rs1.getLong("five"), rs1.getLong("six"));
+        Stage candidate = stageList.get(cnt++);//new Stage(rs1.getLong("two"), rs1.getLong("three"),
+             //rs1.getLong("four"), rs1.getLong("five"), rs1.getLong("six"));
         Config conf = new Config(rs1.getString("one"), rs1.getLong("maxHeap"),
               rs1.getLong("maxCores"), rs1.getLong("yarnOverhead"), rs1.getLong("numExecs"),
               rs1.getDouble("sparkMemoryFraction"),
               rs1.getBoolean("offHeap"), rs1.getLong("offHeapSize"),
               rs1.getString("serializer"), rs1.getString("gcAlgo"), rs1.getLong("newRatio"));
-        Config confExceptApp = new Config("", rs1.getLong("maxHeap"),
-              rs1.getLong("maxCores"), rs1.getLong("yarnOverhead"), rs1.getLong("numExecs"),
-              rs1.getDouble("sparkMemoryFraction"),
-              rs1.getBoolean("offHeap"), rs1.getLong("offHeapSize"),
-              rs1.getString("serializer"), rs1.getString("gcAlgo"), rs1.getLong("newRatio"));
+        Config confExceptApp = conf.clone();
+        confExceptApp.setAppId(""); 
         Metrics met = new Metrics(rs1.getLong("failedExecs"), rs1.getLong("maxStorage"),
               rs1.getLong("maxExecution"), rs1.getLong("totalTime"), rs1.getLong("maxUsedHeap"),
               rs1.getLong("minUsageGap"), rs1.getLong("totalGCTime"), rs1.getLong("maxOldGenUsed"),
               rs1.getLong("totalNumYoungGC"), rs1.getLong("totalNumOldGC"));
+
+if(conf.getAppId().equals("application_1508545462036_0404")) {
+// System.out.println("**403 alert: " + candidate + " cluster: " + candidate.getClusterId());
+}
 
         if(stageMap.containsKey(candidate)) {
           // check for existing config
@@ -460,25 +555,140 @@ System.out.println("--Running " + istmt1);
       }
 
       // print map to csvs
-      int cnt = 1;
+      cnt = 1;
       for(Stage stage: stageMap.keySet()) {
+        // List for all metrics used in clustering
+        List<Metrics> metList = new ArrayList<Metrics>();
+        List<Integer> confIds = new ArrayList<Integer>();
+
         BufferedWriter writer = new BufferedWriter(new FileWriter(
           new File(resultsPath + "/" + cnt + ".tsv")));
         writer.write(stage + System.getProperty("line.separator"));
 
-System.out.println("*Stats for stage: " + stage);
+System.out.println("*Stats for stage " + stage.getClusterId() + " : " + stage);
         Map<Config, List<ConfigPlusMetrics>> confMap = stageMap.get(stage);
+        int confId = 0;
         for(Config conf: confMap.keySet()) {
 //System.out.println("**Conf map found: " + conf);
           List<ConfigPlusMetrics> confList = confMap.get(conf);
           for(ConfigPlusMetrics confMet: confList) {
 //System.out.println("***Metrics for conf " + confMet.getConfig() + ": " + confMet.getMetrics());
-            writer.write(confMet.getConfig() + "\t" + confMet.getMetrics() +
+            writer.write(confMet.getConfig().getAppId() + "\t" + confMet.getMetrics() +
               System.getProperty("line.separator"));
+            metList.add(confMet.getMetrics());
+            confIds.add(confId);
           }
+          confId++;
         }
         writer.close();
         cnt++;
+        // Cluster metrics for this stage, see if the clusters adhere to configs
+//System.out.println("Clustering with config ids: " + Arrays.toString(confIds.toArray()));
+        DataClusterer clusterer = new DataClusterer();
+        clusterer.setMetrics(metList);
+        clusterer.cluster(confMap.size());
+        int[] result = clusterer.getAnswers();
+        List<Integer> resultList = Arrays.stream(result).boxed().collect(Collectors.toList());
+        // Evaluate cluster quality
+        ClusterEval eval = new ClusterEval();
+        eval.setClusterClasses(confIds);
+        eval.setClusterIds(resultList);
+        eval.pairEval();
+System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=" + eval.falsePositives() + "\n TN=" + eval.trueNegatives() + "\n FN=" + eval.falseNegatives() + "\n Rand Index = " + eval.randIndex() + "\n Jaccard = " + eval.jaccard() + "\n Cond entropy = " + eval.conditionalEntropy() + "\n Relative cond entropy = " + eval.relativeCondEntropy() + "\n Norm mutual info = " + eval.normMutualInfo());
+        clusterResults.add(new EvalResult(
+          cnt, stage.toString(), resultList.size(), confMap.size(), 
+          eval.randIndex(), eval.conditionalEntropy(), eval.normMutualInfo()));
+      }
+
+    } else if(mode.equals(Mode.CONFIG)) {
+      Map<Config, Map<Stage, List<ConfigPlusMetrics>>> confMap = 
+          new HashMap<Config, Map<Stage, List<ConfigPlusMetrics>>>();
+
+      cnt = 0;
+      while(rs1.next()) {
+        Stage stage = stageList.get(cnt++);
+        Config conf = new Config(rs1.getString("one"), rs1.getLong("maxHeap"),
+              rs1.getLong("maxCores"), rs1.getLong("yarnOverhead"), rs1.getLong("numExecs"),
+              rs1.getDouble("sparkMemoryFraction"),
+              rs1.getBoolean("offHeap"), rs1.getLong("offHeapSize"),
+              rs1.getString("serializer"), rs1.getString("gcAlgo"), rs1.getLong("newRatio"));
+        Config confExceptApp = conf.clone();
+        confExceptApp.setAppId(""); 
+        Metrics met = new Metrics(rs1.getLong("failedExecs"), rs1.getLong("maxStorage"),
+              rs1.getLong("maxExecution"), rs1.getLong("totalTime"), rs1.getLong("maxUsedHeap"),
+              rs1.getLong("minUsageGap"), rs1.getLong("totalGCTime"), rs1.getLong("maxOldGenUsed"),
+              rs1.getLong("totalNumYoungGC"), rs1.getLong("totalNumOldGC"));
+
+        if(confMap.containsKey(confExceptApp)) {
+          Map<Stage, List<ConfigPlusMetrics>> stageMap = confMap.get(confExceptApp);
+          if(stageMap.containsKey(stage)) {
+            List<ConfigPlusMetrics> metList = stageMap.get(stage);
+            metList.add(new ConfigPlusMetrics(conf, met));
+          } else {
+            List<ConfigPlusMetrics> metList = new ArrayList<ConfigPlusMetrics>();
+            metList.add(new ConfigPlusMetrics(conf, met));
+            stageMap.put(stage, metList);
+          }
+        } else {
+          List<ConfigPlusMetrics> metList = new ArrayList<ConfigPlusMetrics>();
+          metList.add(new ConfigPlusMetrics(conf, met));
+          Map<Stage, List<ConfigPlusMetrics>> stageMap = 
+            new HashMap<Stage, List<ConfigPlusMetrics>>();
+          stageMap.put(stage, metList);
+          confMap.put(confExceptApp, stageMap);
+        }
+      }
+
+      // cluster stages
+      int confCount = 1;
+      for(Config conf: confMap.keySet()) {
+        List<Metrics> metList = new ArrayList<Metrics>();
+        List<Integer> classIds = new ArrayList<Integer>();
+        BufferedWriter writer = new BufferedWriter(new FileWriter(
+          new File(resultsPath + "/" + confCount + ".tsv")));
+        writer.write(conf + System.getProperty("line.separator"));
+
+System.out.println("*Stats for conf " + confCount + " : " + conf);
+        Map<Stage, List<ConfigPlusMetrics>> stageMap = confMap.get(conf);
+        cnt = 0;
+        for(Stage stage: stageMap.keySet()) {
+          for(ConfigPlusMetrics confMet: stageMap.get(stage)) {
+            writer.write(confMet.getConfig().getAppId() + "\t" + confMet.getMetrics() +
+              System.getProperty("line.separator"));
+            metList.add(confMet.getMetrics());
+            classIds.add(cnt);
+          }
+          cnt++;
+        }
+
+        DataClusterer clusterer = new DataClusterer();
+        clusterer.setMetrics(metList);
+        clusterer.cluster(stageMap.size());
+        int[] result = clusterer.getAnswers();
+        List<Integer> resultList = Arrays.stream(result).boxed().collect(Collectors.toList());
+        // Evaluate cluster quality
+        ClusterEval eval = new ClusterEval();
+        eval.setClusterClasses(classIds);
+        eval.setClusterIds(resultList);
+        eval.pairEval();
+System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=" + eval.falsePositives() + "\n TN=" + eval.trueNegatives() + "\n FN=" + eval.falseNegatives() + "\n Rand Index = " + eval.randIndex() + "\n Jaccard = " + eval.jaccard() + "\n Cond entropy = " + eval.conditionalEntropy() + "\n Relative cond entropy = " + eval.relativeCondEntropy() + "\n Norm mutual info = " + eval.normMutualInfo());
+        clusterResults.add(new EvalResult(
+          cnt, conf.toString(), resultList.size(), stageMap.size(),
+          eval.randIndex(), eval.conditionalEntropy(), eval.normMutualInfo()));
+
+        writer.close();
+        confCount++;
+      }
+        
+    }// if else done
+      
+      if(clusterResults.size() > 0) {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(
+          new File(resultsPath + "/" + clusterResultsFile )));
+        for(EvalResult result: clusterResults) {
+          writer.write(result + System.getProperty("line.separator"));
+        }
+        writer.close();
       }
 
     }

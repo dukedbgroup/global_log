@@ -58,7 +58,8 @@ public class RelMTraining
 
       String sql1 = "CREATE TABLE IF NOT EXISTS " + RELM_TABLE + " (appId VARCHAR(255), " +
              "appName VARCHAR(255), stageId BIGINT, ipBytes BIGINT, cachedBytes BIGINT, " +
-             "shuffleBytesRead BIGINT, shuffleBytesWritten BIGINT, opBytes BIGINT, " + 
+             "shuffleBytesRead BIGINT, shuffleBytesWritten BIGINT, " +
+             "opBytes BIGINT, cacheStorage BIGINT, " + 
              "maxHeap BIGINT, maxCores BIGINT, yarnOverhead BIGINT, numExecs BIGINT, " + 
              "sparkMemoryFraction DECIMAL(4,2), offHeap BOOLEAN, offHeapSize BIGINT, " +
              "serializer VARCHAR(255), gcAlgo VARCHAR(255), newRatio BIGINT, " +
@@ -95,7 +96,7 @@ public class RelMTraining
              TASK_METRICS_TABLE + " WHERE appId = \"" + APP_ID + "\" and stageId = ?";
 
       String isql1 = "INSERT INTO " + RELM_TABLE + " values " +
-             "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+             "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       String isql2 = "INSERT INTO " + APP_ENV_TABLE + " values " +
              "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -146,25 +147,31 @@ public class RelMTraining
         istmt1.setObject(2, APP_NAME);
         istmt1.setObject(3, stage);
         istmt1.setObject(4, ipBytesRead / numTasks);
+        // HACK: Assuming that 1st stage is cache stage always
         if(Integer.parseInt(stage) % cacheStage == 0) {
           istmt1.setObject(5, MEMORY_STORAGE / numTasks);
         } else {
           istmt1.setObject(5, 0L);
         }
-        istmt1.setObject(6, shBytesRead / numTasks);
-        istmt1.setObject(7, shBytesWritten / numTasks);
-        istmt1.setObject(8, opBytesWritten / numTasks);
+        if(Integer.parseInt(stage) == 0) {
+          istmt1.setObject(6, 0L);
+        } else {
+          istmt1.setObject(6, MEMORY_STORAGE);
+        }
+        istmt1.setObject(7, shBytesRead / numTasks);
+        istmt1.setObject(8, shBytesWritten / numTasks);
+        istmt1.setObject(9, opBytesWritten / numTasks);
 
-        istmt1.setObject(9, maxHeap);
-        istmt1.setObject(10, maxCores);
-        istmt1.setObject(11, yarnOverhead);
-        istmt1.setObject(12, numExecs);
-        istmt1.setObject(13, sparkFraction);
-        istmt1.setObject(14, offHeap);
-        istmt1.setObject(15, offHeapSize);
-        istmt1.setObject(16, serializer);
-        istmt1.setObject(17, GCAlgo);
-        istmt1.setObject(18, newRatio);
+        istmt1.setObject(10, maxHeap);
+        istmt1.setObject(11, maxCores);
+        istmt1.setObject(12, yarnOverhead);
+        istmt1.setObject(13, numExecs);
+        istmt1.setObject(14, sparkFraction);
+        istmt1.setObject(15, offHeap);
+        istmt1.setObject(16, offHeapSize);
+        istmt1.setObject(17, serializer);
+        istmt1.setObject(18, GCAlgo);
+        istmt1.setObject(19, newRatio);
 
         qstmt3.clearParameters();
         qstmt3.setObject(2, stage);
