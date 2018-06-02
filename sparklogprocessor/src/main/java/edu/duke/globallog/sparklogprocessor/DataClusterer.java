@@ -49,6 +49,7 @@ System.out.println("Clustering output: " + java.util.Arrays.toString(answers));
     data = new Instances("data", attList, metList.size());
     for(Metrics met: metList) {
       Instance inst = new DenseInstance(10); //HACK: hard-coding metrics size
+//      inst.setValue(3, 0);
       inst.setValue(0, met.failedExecs);
       inst.setValue(1, met.maxStorage);
       inst.setValue(2, met.maxExecution);

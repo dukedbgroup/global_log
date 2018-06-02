@@ -2,11 +2,7 @@ package edu.duke.globallog.sparklogprocessor;
 
 import java.io.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import mikera.vectorz.Vector;
@@ -186,19 +182,34 @@ class Config
 
 class Metrics
 {
-  Long failedExecs;
-  Long maxStorage;
-  Long maxExecution; 
-  Long totalTime;
-  Long maxUsedHeap;
-  Long minUsageGap;
-  Long maxOldGenUsed;
-  Long totalGCTime;
-  Long totalNumYoungGC;
-  Long totalNumOldGC;
+  Double failedExecs;
+  Double maxStorage;
+  Double maxExecution; 
+  Double totalTime;
+  Double maxUsedHeap;
+  Double minUsageGap;
+  Double maxOldGenUsed;
+  Double totalGCTime;
+  Double totalNumYoungGC;
+  Double totalNumOldGC;
   Integer multiples;
 
-  Metrics(Long a, Long b, Long c, Long d, Long e, Long f, Long g, Long h, Long i, Long j) {
+  Metrics() {
+    failedExecs = 0d;
+    maxStorage = 0d;
+    maxExecution = 0d;
+    totalTime = 0d;
+    maxUsedHeap = 0d;
+    minUsageGap = 0d;
+    maxOldGenUsed = 0d;
+    totalGCTime = 0d;
+    totalNumYoungGC = 0d;
+    totalNumOldGC = 0d;
+    multiples = 0;
+  }
+
+  Metrics(Double a, Double b, Double c, Double d, Double e, 
+      Double f, Double g, Double h, Double i, Double j) {
     failedExecs = a;
     maxStorage = b;
     maxExecution = c;
@@ -298,9 +309,12 @@ class EvalResult {
 public class TestRelM
 {
 
-  public static enum Mode { STAGE, CONFIG, SINGLE };
+  public static enum Mode { STAGE, CONFIG, METRICS, SINGLE };
 
-  public static int STAGE_CLUSTERS = 15;
+  public static int STAGE_CLUSTERS = 30;
+
+  static List<String> IGNORE_APPS = new ArrayList<String>();
+  static Map<String, List<Long>> IGNORE_STAGES = new HashMap<String, List<Long>>();  
 
   public static void main(String[] args) {
     // connection to database
@@ -337,8 +351,19 @@ public class TestRelM
       }
     }
 
+    if("metrics".equals(args[0])) {
+      mode = Mode.METRICS;
+      if(!("".equals(args[1]))) {
+        resultsPath = args[1];
+      }
+    }
+
     if("single".equals(args[0])) {
       mode = Mode.SINGLE;
+    }
+
+    if(args.length > 2) {
+      STAGE_CLUSTERS = Integer.parseInt(args[2]);
     }
 
     Stage[] stages = new Stage[5];
@@ -369,19 +394,49 @@ public class TestRelM
 
       String qsql1 = "SELECT appId as one, ipBytes as two, cachedBytes as three, " +
              "shuffleBytesRead as four, shuffleBytesWritten as five, " +
-             "opBytes as six, cacheStorage as seven, " +
+             "opBytes as six, cacheStorage as seven, stageId as eight, " +
              "maxHeap, maxCores, yarnOverhead, numExecs, sparkMemoryFraction, " +
              "offHeap, offHeapSize, serializer, gcAlgo, newRatio, failedExecs, " +
              "maxStorage, maxExecution, totalTime, maxUsedHeap, minUsageGap, " +
              "maxOldGenUsed, totalGCTime, totalNumYoungGC, totalNumOldGC FROM " +
              RELM_TABLE;
- 
+
+      // ignore list
+      String qsql2 = "SELECT appId from (SELECT appId, count(Distinct stageId) AS cnt FROM TASK_NUMBERS GROUP BY appId) AS s WHERE s.cnt<=1";
+
+      // ignore stages
+      String qsql3 = "SELECT appId, stageId FROM (SELECT appId, stageId, (max(finishTime) - min(launchTime)) AS rTime FROM TASK_METRICS_ALL GROUP BY appId, stageId) as s WHERE rTime < 1000";
+
       String isql1 = "INSERT INTO " + TEST_RELM_TABLE + " values " +
              "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
       PreparedStatement qstmt1 = conn.prepareStatement(qsql1);
+      PreparedStatement qstmt2 = conn.prepareStatement(qsql2);
+      PreparedStatement qstmt3 = conn.prepareStatement(qsql3);
       PreparedStatement istmt1 = conn.prepareStatement(isql1);
       conn.setAutoCommit(false);
+
+      // populate ignore list
+      ResultSet rs2 = qstmt2.executeQuery();
+      while(rs2.next()) {
+        IGNORE_APPS.add(rs2.getString("appId"));
+      }
+      rs2.close();
+
+      // populate ignore stages
+      ResultSet rs3 = qstmt3.executeQuery();
+      while(rs3.next()) {
+        String appId = rs3.getString("appId");
+        Long stageId = rs3.getLong("stageId");
+        if(IGNORE_STAGES.containsKey(appId)) {
+          IGNORE_STAGES.get(appId).add(stageId);
+        } else {
+          List<Long> sList = new ArrayList<Long>();
+          sList.add(stageId);
+          IGNORE_STAGES.put(appId, sList); 
+        }
+      }
+      rs3.close();
 
       // Scan stages in training data and build configMap
       ResultSet rs1 = qstmt1.executeQuery();
@@ -392,19 +447,25 @@ public class TestRelM
       for(Stage stage: stages) {
         rs1.beforeFirst();
         while(rs1.next()) {
+          String appId = rs1.getString("one");
+          if(ignoreApp(appId)) { continue; } // to be ignored
+          Long stageId = rs1.getLong("eight");
+          if(ignoreStage(appId, stageId)) { continue; }
+
           // find matching rows, store configs along with row ids
           Stage candidate = new Stage(rs1.getLong("two"), rs1.getLong("three"), 
             rs1.getLong("four"), rs1.getLong("five"), rs1.getLong("six"), rs1.getLong("seven"));
           if(stage.equals(candidate)) {
-            Config conf = new Config(rs1.getString("one"), rs1.getLong("maxHeap"), 
+            Long maxHeapC = rs1.getLong("maxHeap");
+            Config conf = new Config(appId, maxHeapC, 
               rs1.getLong("maxCores"), rs1.getLong("yarnOverhead"), rs1.getLong("numExecs"), 
               rs1.getDouble("sparkMemoryFraction"),
               rs1.getBoolean("offHeap"), rs1.getLong("offHeapSize"),
               rs1.getString("serializer"), rs1.getString("gcAlgo"), rs1.getLong("newRatio"));
-            Metrics met = new Metrics(rs1.getLong("failedExecs"), rs1.getLong("maxStorage"), 
-              rs1.getLong("maxExecution"), rs1.getLong("totalTime"), rs1.getLong("maxUsedHeap"),
-              rs1.getLong("minUsageGap"), rs1.getLong("totalGCTime"), rs1.getLong("maxOldGenUsed"),
-              rs1.getLong("totalNumYoungGC"), rs1.getLong("totalNumOldGC"));
+            Metrics met = new Metrics((double)rs1.getLong("failedExecs"), (double)rs1.getLong("maxStorage"),
+              (double)rs1.getLong("maxExecution"), (double)rs1.getLong("totalTime"), ((double)rs1.getLong("maxUsedHeap"))/maxHeapC,
+              (double)rs1.getLong("minUsageGap"), (double)rs1.getLong("totalGCTime"), (double)rs1.getLong("maxOldGenUsed"),
+              (double)rs1.getLong("totalNumYoungGC"), (double)rs1.getLong("totalNumOldGC"));
 
             if(configMap.containsKey(conf)) {
               Map<Stage, Metrics> metricsMap = configMap.get(conf);
@@ -442,16 +503,16 @@ public class TestRelM
         istmt1.setObject(10, conf.gcAlgo);
         istmt1.setObject(11, conf.newRatio);
 
-        Long failedExecs = 0L;
-        Long maxStorage = 0L;
-        Long maxExecution = 0L;
-        Long totalTime = 0L;
-        Long maxUsedHeap = 0L;
-        Long minUsageGap = Long.MAX_VALUE;
-        Long maxOldGenUsed = 0L;
-        Long totalGCTime = 0L;
-        Long totalNumYoungGC = 0L;
-        Long totalNumOldGC = 0L;
+        Double failedExecs = 0d;
+        Double maxStorage = 0d;
+        Double maxExecution = 0d;
+        Double totalTime = 0d;
+        Double maxUsedHeap = 0d;
+        Double minUsageGap = Double.MAX_VALUE;
+        Double maxOldGenUsed = 0d;
+        Double totalGCTime = 0d;
+        Double totalNumYoungGC = 0d;
+        Double totalNumOldGC = 0d;
 
         for(Stage stage: metricsMap.keySet()) {
           Metrics met = metricsMap.get(stage).avg();
@@ -488,6 +549,11 @@ System.out.println("--Running " + istmt1);
       // cluster stages first
       List<Stage> stageList = new ArrayList<Stage>();
       while(rs1.next()) {
+        String appId = rs1.getString("one");
+        if(ignoreApp(appId)) { continue; }; // to be ignored
+        Long stageId = rs1.getLong("eight");
+        if(ignoreStage(appId, stageId)) { continue; }
+
         Stage stage = new Stage(rs1.getLong("two"), rs1.getLong("three"),
              rs1.getLong("four"), rs1.getLong("five"), rs1.getLong("six"), rs1.getLong("seven"));
         stageList.add(stage);
@@ -495,10 +561,10 @@ System.out.println("--Running " + istmt1);
       DataClusterer stageClusterer = new DataClusterer();
       stageClusterer.setStages(stageList);
       stageClusterer.cluster(STAGE_CLUSTERS); // HACK: hard-coding number of clusters
-      int[] answers = stageClusterer.getAnswers();
+      int[] stageClasses = stageClusterer.getAnswers();
       int cnt = 0;
       for(Stage stage: stageList) {
-        stage.setClusterId(answers[cnt++]);
+        stage.setClusterId(stageClasses[cnt++]);
       }
 
       // done clustering, reset resultset
@@ -509,24 +575,26 @@ System.out.println("--Running " + istmt1);
 
       cnt = 0;
       while(rs1.next()) {
+        String appId = rs1.getString("one");
+        if(ignoreApp(appId)) { continue; }; // to be ignored
+        Long stageId = rs1.getLong("eight");
+        if(ignoreStage(appId, stageId)) { continue; }
+
         // find matching rows, store configs along with row ids
         Stage candidate = stageList.get(cnt++);//new Stage(rs1.getLong("two"), rs1.getLong("three"),
              //rs1.getLong("four"), rs1.getLong("five"), rs1.getLong("six"));
-        Config conf = new Config(rs1.getString("one"), rs1.getLong("maxHeap"),
+        Long maxHeapC = rs1.getLong("maxHeap");
+        Config conf = new Config(appId, maxHeapC,
               rs1.getLong("maxCores"), rs1.getLong("yarnOverhead"), rs1.getLong("numExecs"),
               rs1.getDouble("sparkMemoryFraction"),
               rs1.getBoolean("offHeap"), rs1.getLong("offHeapSize"),
               rs1.getString("serializer"), rs1.getString("gcAlgo"), rs1.getLong("newRatio"));
         Config confExceptApp = conf.clone();
         confExceptApp.setAppId(""); 
-        Metrics met = new Metrics(rs1.getLong("failedExecs"), rs1.getLong("maxStorage"),
-              rs1.getLong("maxExecution"), rs1.getLong("totalTime"), rs1.getLong("maxUsedHeap"),
-              rs1.getLong("minUsageGap"), rs1.getLong("totalGCTime"), rs1.getLong("maxOldGenUsed"),
-              rs1.getLong("totalNumYoungGC"), rs1.getLong("totalNumOldGC"));
-
-if(conf.getAppId().equals("application_1508545462036_0404")) {
-// System.out.println("**403 alert: " + candidate + " cluster: " + candidate.getClusterId());
-}
+        Metrics met = new Metrics((double)rs1.getLong("failedExecs"), (double)rs1.getLong("maxStorage"),
+              (double)rs1.getLong("maxExecution"), (double)rs1.getLong("totalTime"), ((double)rs1.getLong("maxUsedHeap"))/maxHeapC,
+              (double)rs1.getLong("minUsageGap"), (double)rs1.getLong("totalGCTime"), (double)rs1.getLong("maxOldGenUsed"),
+              (double)rs1.getLong("totalNumYoungGC"), (double)rs1.getLong("totalNumOldGC"));
 
         if(stageMap.containsKey(candidate)) {
           // check for existing config
@@ -559,6 +627,7 @@ if(conf.getAppId().equals("application_1508545462036_0404")) {
       for(Stage stage: stageMap.keySet()) {
         // List for all metrics used in clustering
         List<Metrics> metList = new ArrayList<Metrics>();
+        List<Metrics> avgMetList = new ArrayList<Metrics>();
         List<Integer> confIds = new ArrayList<Integer>();
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(
@@ -571,17 +640,18 @@ System.out.println("*Stats for stage " + stage.getClusterId() + " : " + stage);
         for(Config conf: confMap.keySet()) {
 //System.out.println("**Conf map found: " + conf);
           List<ConfigPlusMetrics> confList = confMap.get(conf);
+          avgMetList.add(new Metrics());
           for(ConfigPlusMetrics confMet: confList) {
 //System.out.println("***Metrics for conf " + confMet.getConfig() + ": " + confMet.getMetrics());
             writer.write(confMet.getConfig().getAppId() + "\t" + confMet.getMetrics() +
               System.getProperty("line.separator"));
             metList.add(confMet.getMetrics());
             confIds.add(confId);
+            avgMetList.get(confId).add(confMet.getMetrics());
           }
           confId++;
         }
         writer.close();
-        cnt++;
         // Cluster metrics for this stage, see if the clusters adhere to configs
 //System.out.println("Clustering with config ids: " + Arrays.toString(confIds.toArray()));
         DataClusterer clusterer = new DataClusterer();
@@ -598,6 +668,44 @@ System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=
         clusterResults.add(new EvalResult(
           cnt, stage.toString(), resultList.size(), confMap.size(), 
           eval.randIndex(), eval.conditionalEntropy(), eval.normMutualInfo()));
+
+        // Skyline for stage
+        List<Metrics> skyMetList = avgMetList.stream()
+          .map(m -> m.avg()).collect(Collectors.toList());
+        SortableMetrics sortMet = new SortableMetrics(skyMetList);
+        Integer[] skyline = sortMet.skyline(0.1);
+        Arrays.sort(skyline);
+        int nextSky = 0;
+        int confCount = 0;
+System.out.println("Skyline configs: \n");
+        writer = new BufferedWriter(new FileWriter(
+          new File(resultsPath + "/sky-" + cnt + ".tsv")));
+        writer.write(stage + System.getProperty("line.separator"));
+
+        for(Config conf: confMap.keySet()) {
+          if(nextSky < skyline.length && skyline[nextSky] == confCount) {
+            String confStr = conf.toString();
+            writer.write(confStr + "\t" + skyMetList.get(confCount) +
+              System.getProperty("line.separator"));
+System.out.println("--" + confStr + "\t" + skyMetList.get(confCount));
+            nextSky++;
+          }
+          confCount++;
+        }
+        /*for(Config conf: confMap.keySet()) {
+          int prevCount = confCount;
+          List<ConfigPlusMetrics> confList = confMap.get(conf);
+          confCount += confList.size();
+          while(nextSky < skyline.length && skyline[nextSky] < confCount) {
+            String appId = confList.get(skyline[nextSky] - prevCount).getConfig().toString();
+            writer.write(appId + System.getProperty("line.separator"));
+System.out.println("--" + appId + "\n");
+            nextSky++;
+          }
+        }*/
+        writer.close();
+
+        cnt++;
       }
 
     } else if(mode.equals(Mode.CONFIG)) {
@@ -606,18 +714,24 @@ System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=
 
       cnt = 0;
       while(rs1.next()) {
+        String appId = rs1.getString("one");
+        if(ignoreApp(appId)) { continue; }; // to be ignored
+        Long stageId = rs1.getLong("eight");
+        if(ignoreStage(appId, stageId)) { continue; }
+
         Stage stage = stageList.get(cnt++);
-        Config conf = new Config(rs1.getString("one"), rs1.getLong("maxHeap"),
+        Long maxHeapC = rs1.getLong("maxHeap");
+        Config conf = new Config(appId, maxHeapC,
               rs1.getLong("maxCores"), rs1.getLong("yarnOverhead"), rs1.getLong("numExecs"),
               rs1.getDouble("sparkMemoryFraction"),
               rs1.getBoolean("offHeap"), rs1.getLong("offHeapSize"),
               rs1.getString("serializer"), rs1.getString("gcAlgo"), rs1.getLong("newRatio"));
         Config confExceptApp = conf.clone();
         confExceptApp.setAppId(""); 
-        Metrics met = new Metrics(rs1.getLong("failedExecs"), rs1.getLong("maxStorage"),
-              rs1.getLong("maxExecution"), rs1.getLong("totalTime"), rs1.getLong("maxUsedHeap"),
-              rs1.getLong("minUsageGap"), rs1.getLong("totalGCTime"), rs1.getLong("maxOldGenUsed"),
-              rs1.getLong("totalNumYoungGC"), rs1.getLong("totalNumOldGC"));
+        Metrics met = new Metrics((double)rs1.getLong("failedExecs"), (double)rs1.getLong("maxStorage"),
+              (double)rs1.getLong("maxExecution"), (double)rs1.getLong("totalTime"), ((double)rs1.getLong("maxUsedHeap"))/maxHeapC,
+              (double)rs1.getLong("minUsageGap"), (double)rs1.getLong("totalGCTime"), (double)rs1.getLong("maxOldGenUsed"),
+              (double)rs1.getLong("totalNumYoungGC"), (double)rs1.getLong("totalNumOldGC"));
 
         if(confMap.containsKey(confExceptApp)) {
           Map<Stage, List<ConfigPlusMetrics>> stageMap = confMap.get(confExceptApp);
@@ -673,13 +787,53 @@ System.out.println("*Stats for conf " + confCount + " : " + conf);
         eval.pairEval();
 System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=" + eval.falsePositives() + "\n TN=" + eval.trueNegatives() + "\n FN=" + eval.falseNegatives() + "\n Rand Index = " + eval.randIndex() + "\n Jaccard = " + eval.jaccard() + "\n Cond entropy = " + eval.conditionalEntropy() + "\n Relative cond entropy = " + eval.relativeCondEntropy() + "\n Norm mutual info = " + eval.normMutualInfo());
         clusterResults.add(new EvalResult(
-          cnt, conf.toString(), resultList.size(), stageMap.size(),
+          confCount, conf.toString(), resultList.size(), stageMap.size(),
           eval.randIndex(), eval.conditionalEntropy(), eval.normMutualInfo()));
 
         writer.close();
         confCount++;
       }
-        
+    
+    } else if(mode.equals(Mode.METRICS)) {
+
+      List<Metrics> metList = new ArrayList<Metrics>();
+      while(rs1.next()) {
+        String appId = rs1.getString("one");
+        if(ignoreApp(appId)) { continue; }; // to be ignored
+        Long stageId = rs1.getLong("eight");
+        if(ignoreStage(appId, stageId)) { continue; }
+
+        Long maxHeapC = rs1.getLong("maxHeap");
+        Metrics met = new Metrics((double)rs1.getLong("failedExecs"), (double)rs1.getLong("maxStorage"),
+              (double)rs1.getLong("maxExecution"), (double)rs1.getLong("totalTime"), ((double)rs1.getLong("maxUsedHeap"))/maxHeapC,
+              (double)rs1.getLong("minUsageGap"), (double)rs1.getLong("totalGCTime"), (double)rs1.getLong("maxOldGenUsed"),
+              (double)rs1.getLong("totalNumYoungGC"), (double)rs1.getLong("totalNumOldGC"));
+
+        metList.add(met);
+      }
+    
+      List<Integer> classList = Arrays.stream(stageClasses).boxed().collect(Collectors.toList());
+// random results
+// List<Integer> resultList = new ArrayList<Integer>();
+//      for(int i=0; i<stageClasses.length; i++) {
+//        resultList.add(java.util.concurrent.ThreadLocalRandom.current().nextInt(0, STAGE_CLUSTERS));
+//      }
+//      int numClusters = java.util.Collections.max(classList) + 1;
+      DataClusterer clusterer = new DataClusterer();
+      clusterer.setMetrics(metList);
+      clusterer.cluster(STAGE_CLUSTERS);
+      int[] result = clusterer.getAnswers();
+      List<Integer> resultList = Arrays.stream(result).boxed().collect(Collectors.toList());
+      // Evaluate cluster quality
+      ClusterEval eval = new ClusterEval();
+      eval.setClusterClasses(classList);
+      eval.setClusterIds(resultList);
+      eval.pairEval();
+System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=" + eval.falsePositives() + "\n TN=" + eval.trueNegatives() + "\n FN=" + eval.falseNegatives() + "\n Rand Index = " + eval.randIndex() + "\n Jaccard = " + eval.jaccard() + "\n Cond entropy = " + eval.conditionalEntropy() + "\n Relative cond entropy = " + eval.relativeCondEntropy() + "\n Norm mutual info = " + eval.normMutualInfo());
+      clusterResults.add(new EvalResult(
+          0, "all stages", resultList.size(), STAGE_CLUSTERS,
+          eval.randIndex(), eval.conditionalEntropy(), eval.normMutualInfo()));
+
     }// if else done
       
       if(clusterResults.size() > 0) {
@@ -694,6 +848,8 @@ System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=
     }
 
       try { qstmt1.close(); } catch(Exception e) {}
+      try { qstmt2.close(); } catch(Exception e) {}
+      try { qstmt3.close(); } catch(Exception e) {}
       try { istmt1.close(); } catch(Exception e) {}
     } 
     catch(Exception e) {
@@ -701,5 +857,26 @@ System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=
     } finally {
           try { conn.close(); } catch(Exception e) {}
     }
+  }
+
+  //HACK: hardcoded
+  static boolean ignoreApp(String appId) {
+    // first if is covered by second if, REMOVE
+    if(appId.compareTo("application_1508545462036_0175") >=0 && appId.compareTo("application_1508545462036_0190") <= 0 ) {
+      return true; // these apps are failed but still in our database
+    }
+    if(IGNORE_APPS.contains(appId)) {
+      return true;
+    }
+    return false;
+  }
+
+  static boolean ignoreStage(String appId, Long stageId) {
+    if(IGNORE_STAGES.containsKey(appId)) {
+      if(IGNORE_STAGES.get(appId).contains(stageId)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

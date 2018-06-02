@@ -24,8 +24,8 @@ public class ClusterEval {
 
   boolean isConsistent() {
     if(clusterClasses != null && clusterIds != null &&
-       clusterClasses.size() == clusterIds.size() &&
-       Collections.max(clusterClasses) == Collections.max(clusterIds)) {
+       clusterClasses.size() == clusterIds.size()) {
+//       Collections.max(clusterClasses) == Collections.max(clusterIds)) {
          return true;
     }
 try {
