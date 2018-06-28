@@ -59,13 +59,14 @@ public class RelMTraining
       String sql1 = "CREATE TABLE IF NOT EXISTS " + RELM_TABLE + " (appId VARCHAR(255), " +
              "appName VARCHAR(255), stageId BIGINT, ipBytes BIGINT, cachedBytes BIGINT, " +
              "shuffleBytesRead BIGINT, shuffleBytesWritten BIGINT, " +
-             "opBytes BIGINT, cacheStorage BIGINT, " + 
+             "opBytes BIGINT, " + 
              "maxHeap BIGINT, maxCores BIGINT, yarnOverhead BIGINT, numExecs BIGINT, " + 
              "sparkMemoryFraction DECIMAL(4,2), offHeap BOOLEAN, offHeapSize BIGINT, " +
              "serializer VARCHAR(255), gcAlgo VARCHAR(255), newRatio BIGINT, " +
              "failedExecs BIGINT, maxStorage BIGINT, maxExecution BIGINT, totalTime BIGINT, " +
              "maxUsedHeap BIGINT, minUsageGap BIGINT, maxOldGenUsed BIGINT, " +
              "totalGCTime BIGINT, totalNumYoungGC BIGINT, totalNumOldGC BIGINT, " +
+             "cacheStorage BIGINT, faliedTasks BIGING, " +
              "PRIMARY KEY(appId, stageId))";
       stmt.executeUpdate(sql1);
 
@@ -83,7 +84,8 @@ public class RelMTraining
              "sum(shLocalBytesRead+shRemoteBytesRead) as three, sum(shBytesWritten) as four, " +
              "sum(opBytesWritten) as five from " + IDENTITY_TABLE + " where appId = \"" + APP_ID + 
              "\" GROUP BY stageId";
-      String qsql2 = "SELECT sum(numTasks) as result FROM " + TASK_NUMBERS_TABLE + 
+      String qsql2 = "SELECT sum(numTasks) as nTasks, sum(failedTasks) as fTasks FROM "
+             + TASK_NUMBERS_TABLE + 
              " WHERE appId = \"" + APP_ID + "\" and stageId = ?";
       String qsql3 = "SELECT max(maxHeapUsed) as one, max(maxOldGenUsed) as two, " +
              "sum(numOldGC) as three, sum(numYoungGC) as four, " +
@@ -96,7 +98,7 @@ public class RelMTraining
              TASK_METRICS_TABLE + " WHERE appId = \"" + APP_ID + "\" and stageId = ?";
 
       String isql1 = "INSERT INTO " + RELM_TABLE + " values " +
-             "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+             "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       String isql2 = "INSERT INTO " + APP_ENV_TABLE + " values " +
              "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -135,11 +137,13 @@ public class RelMTraining
         Double opBytesWritten = rs1.getDouble("five");
 
         Double numTasks = 0.0;
+        Double failedTasks = 0.0;
         qstmt2.clearParameters();
         qstmt2.setObject(1, stage);
         ResultSet rs2 = qstmt2.executeQuery();
         while(rs2.next()) {
-          numTasks = rs2.getDouble("result");
+          numTasks = rs2.getDouble("nTasks");
+          failedTasks = rs2.getDouble("fTasks");
         }
 
         istmt1.clearParameters();
@@ -154,24 +158,24 @@ public class RelMTraining
           istmt1.setObject(5, 0L);
         }
         if(Integer.parseInt(stage) == 0) {
-          istmt1.setObject(6, 0L);
+          istmt1.setObject(29, 0L);
         } else {
-          istmt1.setObject(6, MEMORY_STORAGE);
+          istmt1.setObject(29, MEMORY_STORAGE);
         }
-        istmt1.setObject(7, shBytesRead / numTasks);
-        istmt1.setObject(8, shBytesWritten / numTasks);
-        istmt1.setObject(9, opBytesWritten / numTasks);
+        istmt1.setObject(6, shBytesRead / numTasks);
+        istmt1.setObject(7, shBytesWritten / numTasks);
+        istmt1.setObject(8, opBytesWritten / numTasks);
 
-        istmt1.setObject(10, maxHeap);
-        istmt1.setObject(11, maxCores);
-        istmt1.setObject(12, yarnOverhead);
-        istmt1.setObject(13, numExecs);
-        istmt1.setObject(14, sparkFraction);
-        istmt1.setObject(15, offHeap);
-        istmt1.setObject(16, offHeapSize);
-        istmt1.setObject(17, serializer);
-        istmt1.setObject(18, GCAlgo);
-        istmt1.setObject(19, newRatio);
+        istmt1.setObject(9, maxHeap);
+        istmt1.setObject(10, maxCores);
+        istmt1.setObject(11, yarnOverhead);
+        istmt1.setObject(12, numExecs);
+        istmt1.setObject(13, sparkFraction);
+        istmt1.setObject(14, offHeap);
+        istmt1.setObject(15, offHeapSize);
+        istmt1.setObject(16, serializer);
+        istmt1.setObject(17, GCAlgo);
+        istmt1.setObject(18, newRatio);
 
         qstmt3.clearParameters();
         qstmt3.setObject(2, stage);
@@ -185,16 +189,17 @@ public class RelMTraining
           istmt1.setObject(22, rs3.getDouble("eight"));
           istmt1.setObject(23, rs3.getDouble("one"));
           istmt1.setObject(24, rs3.getDouble("seven"));
-          istmt1.setObject(26, rs3.getDouble("two"));
+          istmt1.setObject(25, rs3.getDouble("two"));
           istmt1.setObject(27, rs3.getDouble("four"));
           istmt1.setObject(28, rs3.getDouble("three"));
         }
+        istmt1.setObject(30, failedTasks);
  
         qstmt4.clearParameters();
         qstmt4.setObject(1, stage);
         ResultSet rs4 = qstmt4.executeQuery();
         while(rs4.next()) {
-          istmt1.setObject(25, rs4.getDouble("result"));
+          istmt1.setObject(26, rs4.getDouble("result"));
         }
 
         qstmt5.clearParameters();

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import mikera.vectorz.Vector;
 
-class Stage
+class Stage implements Serializable
 {
   Long ipBytes;
   Long cachedBytes;
@@ -88,7 +88,7 @@ System.out.println("--Distance found in " + this.vec + " and " + s.vec + " -> re
   }
 }
 
-class Config
+class Config implements Serializable
 {
   String appId;
   Long maxHeap;
@@ -180,9 +180,10 @@ class Config
   }
 }
 
-class Metrics
+class Metrics implements Serializable
 {
   Double failedExecs;
+  Double failedTasks;
   Double maxStorage;
   Double maxExecution; 
   Double totalTime;
@@ -196,6 +197,7 @@ class Metrics
 
   Metrics() {
     failedExecs = 0d;
+    failedTasks = 0d;
     maxStorage = 0d;
     maxExecution = 0d;
     totalTime = 0d;
@@ -209,22 +211,24 @@ class Metrics
   }
 
   Metrics(Double a, Double b, Double c, Double d, Double e, 
-      Double f, Double g, Double h, Double i, Double j) {
+      Double f, Double g, Double h, Double i, Double j, Double k) {
     failedExecs = a;
-    maxStorage = b;
-    maxExecution = c;
-    totalTime = d;
-    maxUsedHeap = e;
-    minUsageGap = f;
-    maxOldGenUsed = g;
-    totalGCTime = h;
-    totalNumYoungGC = i;
-    totalNumOldGC = j;
+    failedTasks = b;
+    maxStorage = c;
+    maxExecution = d;
+    totalTime = e;
+    maxUsedHeap = f;
+    minUsageGap = g;
+    maxOldGenUsed = h;
+    totalGCTime = i;
+    totalNumYoungGC = j;
+    totalNumOldGC = k;
     multiples = 1;
   }
 
   Metrics add(Metrics m) {
     failedExecs += m.failedExecs;
+    failedTasks += m.failedTasks;
     maxStorage += m.maxStorage;
     maxExecution += m.maxExecution;
     totalTime += m.totalTime;
@@ -239,15 +243,16 @@ class Metrics
   }
 
   Metrics avg() {
-    return new Metrics(failedExecs/multiples, maxStorage/multiples, 
-      maxExecution/multiples, totalTime/multiples, maxUsedHeap/multiples,
+    return new Metrics(failedExecs/multiples, failedTasks/multiples,
+      maxStorage/multiples, maxExecution/multiples,
+      totalTime/multiples, maxUsedHeap/multiples,
       minUsageGap/multiples, maxOldGenUsed/multiples, totalGCTime/multiples,
       totalNumYoungGC/multiples, totalNumOldGC/multiples);
   }
 
   @Override
   public String toString() {
-    return  failedExecs +
+    return  failedExecs + "\t" + failedTasks +
       "\t" + maxStorage + "\t" + maxExecution +
       "\t" + totalTime + "\t" + maxUsedHeap +
       "\t" + minUsageGap + "\t" + maxOldGenUsed +
@@ -256,7 +261,7 @@ class Metrics
   }
 }
 
-class ConfigPlusMetrics {
+class ConfigPlusMetrics implements Serializable {
   Config config;
   Metrics metrics;
 
@@ -274,7 +279,7 @@ class ConfigPlusMetrics {
   }
 }
 
-class EvalResult {
+class EvalResult implements Serializable {
 
   Integer seqId; // sequence no
   String id; // title of eval record
@@ -309,7 +314,7 @@ class EvalResult {
 public class TestRelM
 {
 
-  public static enum Mode { STAGE, CONFIG, METRICS, SINGLE };
+  public static enum Mode { STAGE, CONFIG, TEST, SINGLE };
 
   public static int STAGE_CLUSTERS = 30;
 
@@ -327,8 +332,6 @@ public class TestRelM
     final String RELM_TABLE = "RELM_DATA";
     final String TEST_RELM_TABLE = "TEST_RELM";
 
-    Long maxHeap = 2*1024*1024*1024L;
-    Long yarnOverhead = 1*1024*1024*1024L;
  //   Config conf = new Config("", maxHeap, 2L, yarnOverhead, 10, 0.6, false, 
  //     maxHeap, "java", "parallel", 2L);
 
@@ -351,8 +354,8 @@ public class TestRelM
       }
     }
 
-    if("metrics".equals(args[0])) {
-      mode = Mode.METRICS;
+    if("test".equals(args[0])) {
+      mode = Mode.TEST;
       if(!("".equals(args[1]))) {
         resultsPath = args[1];
       }
@@ -366,12 +369,17 @@ public class TestRelM
       STAGE_CLUSTERS = Integer.parseInt(args[2]);
     }
 
-    Stage[] stages = new Stage[5];
+    Stage[] stages = new Stage[6];
     stages[0] = new Stage(132744302L, 134217728L, 0L, 0L, 0L, 0L);
-    stages[1] = new Stage(134619472L, 0L, 0L, 0L, 0L, 134217728L);
-    stages[2] = new Stage(137818123L, 0L, 0L, 41033290L, 0L, 134217728L);
-    stages[3] = new Stage(0L, 0L, 57856938L, 33035663L, 0L, 134217728L);
-    stages[4] = new Stage(0L, 0L, 11800L, 0L, 0L, 134217728L);
+    //stages[1] = new Stage(134619472L, 0L, 0L, 0L, 0L, 36507221988L);
+    stages[1] = new Stage(137818123L, 0L, 0L, 41033290L, 0L, 36507221988L);
+    stages[2] = new Stage(0L, 0L, 57856938L, 33035663L, 0L, 36507221988L);
+    //stages[4] = new Stage(0L, 0L, 11800L, 0L, 0L, 36507221988L);
+    stages[3] = new Stage(132744302L, 134217728L, 0L, 0L, 0L, 36507221988L);
+    //stages[6] = new Stage(134619472L, 0L, 0L, 0L, 0L, 36507221988L);
+    stages[4] = new Stage(137818123L, 0L, 0L, 41033290L, 0L, 36507221988L);
+    stages[5] = new Stage(0L, 0L, 57856938L, 33035663L, 0L, 36507221988L);
+    //stages[9] = new Stage(0L, 0L, 11800L, 0L, 0L, 36507221988L);
 
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -397,7 +405,7 @@ public class TestRelM
              "opBytes as six, cacheStorage as seven, stageId as eight, " +
              "maxHeap, maxCores, yarnOverhead, numExecs, sparkMemoryFraction, " +
              "offHeap, offHeapSize, serializer, gcAlgo, newRatio, failedExecs, " +
-             "maxStorage, maxExecution, totalTime, maxUsedHeap, minUsageGap, " +
+             "failedTasks, maxStorage, maxExecution, totalTime, maxUsedHeap, minUsageGap, " +
              "maxOldGenUsed, totalGCTime, totalNumYoungGC, totalNumOldGC FROM " +
              RELM_TABLE;
 
@@ -462,7 +470,8 @@ public class TestRelM
               rs1.getDouble("sparkMemoryFraction"),
               rs1.getBoolean("offHeap"), rs1.getLong("offHeapSize"),
               rs1.getString("serializer"), rs1.getString("gcAlgo"), rs1.getLong("newRatio"));
-            Metrics met = new Metrics((double)rs1.getLong("failedExecs"), (double)rs1.getLong("maxStorage"),
+            Metrics met = new Metrics((double)rs1.getLong("failedExecs"), 
+              (double) rs1.getLong("failedTasks"), (double)rs1.getLong("maxStorage"),
               (double)rs1.getLong("maxExecution"), (double)rs1.getLong("totalTime"), ((double)rs1.getLong("maxUsedHeap"))/maxHeapC,
               (double)rs1.getLong("minUsageGap"), (double)rs1.getLong("totalGCTime"), (double)rs1.getLong("maxOldGenUsed"),
               (double)rs1.getLong("totalNumYoungGC"), (double)rs1.getLong("totalNumOldGC"));
@@ -504,6 +513,7 @@ public class TestRelM
         istmt1.setObject(11, conf.newRatio);
 
         Double failedExecs = 0d;
+        Double failedTasks = 0d;
         Double maxStorage = 0d;
         Double maxExecution = 0d;
         Double totalTime = 0d;
@@ -517,6 +527,7 @@ public class TestRelM
         for(Stage stage: metricsMap.keySet()) {
           Metrics met = metricsMap.get(stage).avg();
           failedExecs += met.failedExecs;
+          failedTasks += met.failedTasks;
           maxStorage = Math.max(maxStorage, met.maxStorage);
           maxExecution = Math.max(maxExecution, met.maxExecution);
           totalTime += met.totalTime;
@@ -562,9 +573,14 @@ System.out.println("--Running " + istmt1);
       stageClusterer.setStages(stageList);
       stageClusterer.cluster(STAGE_CLUSTERS); // HACK: hard-coding number of clusters
       int[] stageClasses = stageClusterer.getAnswers();
+      Stage[] stageCentroids = stageClusterer.getCentroids();
       int cnt = 0;
       for(Stage stage: stageList) {
         stage.setClusterId(stageClasses[cnt++]);
+      }
+      cnt = 0;
+      for(Stage cent: stageCentroids) {
+        cent.setClusterId(cnt++);
       }
 
       // done clustering, reset resultset
@@ -581,7 +597,7 @@ System.out.println("--Running " + istmt1);
         if(ignoreStage(appId, stageId)) { continue; }
 
         // find matching rows, store configs along with row ids
-        Stage candidate = stageList.get(cnt++);//new Stage(rs1.getLong("two"), rs1.getLong("three"),
+        Stage candidate = stageCentroids[stageList.get(cnt++).getClusterId()];//new Stage(rs1.getLong("two"), rs1.getLong("three"),
              //rs1.getLong("four"), rs1.getLong("five"), rs1.getLong("six"));
         Long maxHeapC = rs1.getLong("maxHeap");
         Config conf = new Config(appId, maxHeapC,
@@ -591,7 +607,8 @@ System.out.println("--Running " + istmt1);
               rs1.getString("serializer"), rs1.getString("gcAlgo"), rs1.getLong("newRatio"));
         Config confExceptApp = conf.clone();
         confExceptApp.setAppId(""); 
-        Metrics met = new Metrics((double)rs1.getLong("failedExecs"), (double)rs1.getLong("maxStorage"),
+        Metrics met = new Metrics((double)rs1.getLong("failedExecs"), 
+              (double) rs1.getLong("failedTasks"), (double)rs1.getLong("maxStorage"),
               (double)rs1.getLong("maxExecution"), (double)rs1.getLong("totalTime"), ((double)rs1.getLong("maxUsedHeap"))/maxHeapC,
               (double)rs1.getLong("minUsageGap"), (double)rs1.getLong("totalGCTime"), (double)rs1.getLong("maxOldGenUsed"),
               (double)rs1.getLong("totalNumYoungGC"), (double)rs1.getLong("totalNumOldGC"));
@@ -622,12 +639,14 @@ System.out.println("--Running " + istmt1);
         }
       }
 
-      // print map to csvs
+      // print skyline to csvs
       cnt = 1;
+      Map<Stage, Set<Config>> skySet = new HashMap<Stage, Set<Config>>();
+      Map<Stage, Map<Config, Metrics>> avgMetrics = new HashMap<Stage, Map<Config, Metrics>>();
       for(Stage stage: stageMap.keySet()) {
         // List for all metrics used in clustering
         List<Metrics> metList = new ArrayList<Metrics>();
-        List<Metrics> avgMetList = new ArrayList<Metrics>();
+        Map<Config, Metrics> avgMetMap = new HashMap<Config, Metrics>();
         List<Integer> confIds = new ArrayList<Integer>();
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(
@@ -640,18 +659,20 @@ System.out.println("*Stats for stage " + stage.getClusterId() + " : " + stage);
         for(Config conf: confMap.keySet()) {
 //System.out.println("**Conf map found: " + conf);
           List<ConfigPlusMetrics> confList = confMap.get(conf);
-          avgMetList.add(new Metrics());
+          Metrics aggMetrics = new Metrics();
           for(ConfigPlusMetrics confMet: confList) {
 //System.out.println("***Metrics for conf " + confMet.getConfig() + ": " + confMet.getMetrics());
             writer.write(confMet.getConfig().getAppId() + "\t" + confMet.getMetrics() +
               System.getProperty("line.separator"));
             metList.add(confMet.getMetrics());
             confIds.add(confId);
-            avgMetList.get(confId).add(confMet.getMetrics());
+            aggMetrics.add(confMet.getMetrics());
           }
+          avgMetMap.put(conf, aggMetrics.avg());
           confId++;
         }
         writer.close();
+        avgMetrics.put(stage, avgMetMap);
         // Cluster metrics for this stage, see if the clusters adhere to configs
 //System.out.println("Clustering with config ids: " + Arrays.toString(confIds.toArray()));
         DataClusterer clusterer = new DataClusterer();
@@ -670,28 +691,43 @@ System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=
           eval.randIndex(), eval.conditionalEntropy(), eval.normMutualInfo()));
 
         // Skyline for stage
-        List<Metrics> skyMetList = avgMetList.stream()
-          .map(m -> m.avg()).collect(Collectors.toList());
+        List<Metrics> skyMetList = avgMetMap.values().stream().collect(Collectors.toList());
         SortableMetrics sortMet = new SortableMetrics(skyMetList);
         Integer[] skyline = sortMet.skyline(0.1);
         Arrays.sort(skyline);
+        Set<Config> skyConfigs = new HashSet<Config>();
         int nextSky = 0;
+        int confCount = 0;
+        for(Config cand: confMap.keySet()) {
+          if(skyline[nextSky] == confCount) {
+            skyConfigs.add(cand);
+            nextSky++;
+          }
+          if(nextSky >= skyline.length) { break; }
+          confCount++;
+        }
+        skySet.put(stage, skyConfigs);
+
+        /*int nextSky = 0;
         int confCount = 0;
 System.out.println("Skyline configs: \n");
         writer = new BufferedWriter(new FileWriter(
           new File(resultsPath + "/sky-" + cnt + ".tsv")));
         writer.write(stage + System.getProperty("line.separator"));
 
+        List<ConfigPlusMetrics> skyList = new ArrayList<ConfigPlusMetrics>();
         for(Config conf: confMap.keySet()) {
           if(nextSky < skyline.length && skyline[nextSky] == confCount) {
             String confStr = conf.toString();
             writer.write(confStr + "\t" + skyMetList.get(confCount) +
               System.getProperty("line.separator"));
 System.out.println("--" + confStr + "\t" + skyMetList.get(confCount));
+            skyList.add(new ConfigPlusMetrics(conf, skyMetList.get(confCount)));
             nextSky++;
           }
           confCount++;
         }
+        skyMap.put(stage, skyList);*/
         /*for(Config conf: confMap.keySet()) {
           int prevCount = confCount;
           List<ConfigPlusMetrics> confList = confMap.get(conf);
@@ -702,11 +738,54 @@ System.out.println("--" + confStr + "\t" + skyMetList.get(confCount));
 System.out.println("--" + appId + "\n");
             nextSky++;
           }
-        }*/
-        writer.close();
+        }
+        writer.close();*/
 
         cnt++;
       }
+
+      // merge skylines from all stages
+      Set<Config> mergedSkySet = skySet.values().stream()
+        .flatMap(x -> x.stream())
+        .collect(Collectors.toSet());
+
+      // build skyMap
+      Map<Stage, List<ConfigPlusMetrics>> skyMap = new HashMap<Stage, List<ConfigPlusMetrics>>();
+      cnt = 1;
+      for(Stage stage: avgMetrics.keySet()) {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(
+          new File(resultsPath + "/sky-" + cnt + ".tsv")));
+        writer.write(stage + System.getProperty("line.separator"));
+System.out.println("-Skyline for stage: " + stage);
+        List<ConfigPlusMetrics> skyList = new ArrayList<ConfigPlusMetrics>();
+        Map<Config, Metrics> confMets = avgMetrics.get(stage);
+        for(Config conf: mergedSkySet) {
+          if(confMets.containsKey(conf)) {
+            skyList.add(new ConfigPlusMetrics(conf, confMets.get(conf)));
+            if(skySet.get(stage).contains(conf)) {
+System.out.println("Adding to skyline *legit* config: " + conf); 
+              writer.write(conf.toString() + "\t" + confMets.get(conf) +
+                System.getProperty("line.separator"));
+            } else {
+System.out.println("Adding to skyline *forced* config: " + conf);
+            }
+          }
+        }
+        skyMap.put(stage, skyList);
+        writer.close();
+        cnt++;
+      }
+
+      // write skyMap
+      try(
+        FileOutputStream fout = new FileOutputStream(resultsPath + "/sky-results.ser", true);
+        ObjectOutputStream oos = new ObjectOutputStream(fout);
+      ){
+        oos.writeObject(skyMap);
+      } catch (Exception ex) {
+         ex.printStackTrace();
+      }
+      
 
     } else if(mode.equals(Mode.CONFIG)) {
       Map<Config, Map<Stage, List<ConfigPlusMetrics>>> confMap = 
@@ -728,7 +807,8 @@ System.out.println("--" + appId + "\n");
               rs1.getString("serializer"), rs1.getString("gcAlgo"), rs1.getLong("newRatio"));
         Config confExceptApp = conf.clone();
         confExceptApp.setAppId(""); 
-        Metrics met = new Metrics((double)rs1.getLong("failedExecs"), (double)rs1.getLong("maxStorage"),
+        Metrics met = new Metrics((double)rs1.getLong("failedExecs"),
+              (double) rs1.getLong("failedTasks"), (double)rs1.getLong("maxStorage"),
               (double)rs1.getLong("maxExecution"), (double)rs1.getLong("totalTime"), ((double)rs1.getLong("maxUsedHeap"))/maxHeapC,
               (double)rs1.getLong("minUsageGap"), (double)rs1.getLong("totalGCTime"), (double)rs1.getLong("maxOldGenUsed"),
               (double)rs1.getLong("totalNumYoungGC"), (double)rs1.getLong("totalNumOldGC"));
@@ -764,7 +844,7 @@ System.out.println("--" + appId + "\n");
 
 System.out.println("*Stats for conf " + confCount + " : " + conf);
         Map<Stage, List<ConfigPlusMetrics>> stageMap = confMap.get(conf);
-        cnt = 0;
+        cnt = 0; 
         for(Stage stage: stageMap.keySet()) {
           for(ConfigPlusMetrics confMet: stageMap.get(stage)) {
             writer.write(confMet.getConfig().getAppId() + "\t" + confMet.getMetrics() +
@@ -794,7 +874,72 @@ System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=
         confCount++;
       }
     
-    } else if(mode.equals(Mode.METRICS)) {
+    } else if(mode.equals(Mode.TEST)) {
+      Map<Stage, List<ConfigPlusMetrics>> skyMap = new HashMap<Stage, List<ConfigPlusMetrics>>();
+      try (
+        FileInputStream streamIn = new FileInputStream(resultsPath + "/sky-results.ser");
+        ObjectInputStream ois = new ObjectInputStream(streamIn);
+      ) {
+        skyMap = (HashMap) ois.readObject();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+
+      Map<Config, Metrics> skyResults = new HashMap<Config, Metrics>();
+      boolean first = true; 
+      for(Stage stage: stages) {
+        Stage match = closestCentroid(stageCentroids, stage);
+        List<ConfigPlusMetrics> candidates = skyMap.get(match);
+        if(first) {
+          for(ConfigPlusMetrics candidate: candidates) {
+            skyResults.put(candidate.getConfig(), candidate.getMetrics());
+          }
+          first = false;
+        } else {
+          List<Config> toBeDeleted = new ArrayList<Config>();
+          for(Config conf: skyResults.keySet()) {
+            boolean found = false;
+            for(ConfigPlusMetrics candidate: candidates) {
+              if(candidate.getConfig().equals(conf)) {
+System.out.println("Found config: " + conf);
+                Metrics met = skyResults.get(conf);
+                Metrics nmet = candidate.getMetrics();
+                met.failedExecs += nmet.failedExecs;
+                met.failedTasks += nmet.failedTasks;
+                met.maxStorage = Math.max(met.maxStorage, nmet.maxStorage);
+                met.maxExecution = Math.max(met.maxExecution, nmet.maxExecution);
+                met.totalTime += nmet.totalTime;
+                met.maxUsedHeap = Math.max(met.maxUsedHeap, nmet.maxUsedHeap);
+                met.minUsageGap = Math.min(met.minUsageGap, nmet.minUsageGap);
+                met.maxOldGenUsed = Math.max(met.maxOldGenUsed, nmet.maxOldGenUsed);
+                met.totalGCTime += nmet.totalGCTime;
+                met.totalNumYoungGC += nmet.totalNumYoungGC;
+                met.totalNumOldGC += nmet.totalNumOldGC;
+                found = true;
+                break;
+              }
+            }
+            if(!found) {
+              toBeDeleted.add(conf);
+            }
+          }
+          for(Config conf: toBeDeleted) {
+System.out.println("Removing config: " + conf);
+            skyResults.remove(conf);
+          }
+        }
+      }
+
+      // write skyresults
+System.out.println("-- Possible candidates along with estimated metrics: " + skyResults);
+       BufferedWriter writer = new BufferedWriter(new FileWriter(
+          new File(resultsPath + "/candidates")));
+       writer.write(skyResults + System.getProperty("line.separator"));
+       writer.close();
+    } 
+
+/*
+    else if(mode.equals(Mode.METRICS)) {
 
       List<Metrics> metList = new ArrayList<Metrics>();
       while(rs1.next()) {
@@ -845,7 +990,7 @@ System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=
         writer.close();
       }
 
-    }
+    */}
 
       try { qstmt1.close(); } catch(Exception e) {}
       try { qstmt2.close(); } catch(Exception e) {}
@@ -857,6 +1002,21 @@ System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=
     } finally {
           try { conn.close(); } catch(Exception e) {}
     }
+  }
+
+  // Find a stage centroid closest to a candidate stage
+  static Stage closestCentroid(Stage[] centroids, Stage lookFor) {
+    int index = 0;
+    double distance = Double.MAX_VALUE;
+    for(int i=0; i<centroids.length; i++) {
+      double d = lookFor.distance(centroids[i]);
+      if(d < distance) {
+        distance = d;
+        index = i;
+      }
+    }
+System.out.println("Stage " + lookFor + " is closest to " + centroids[index] + " with distance " + distance);
+    return centroids[index];
   }
 
   //HACK: hardcoded

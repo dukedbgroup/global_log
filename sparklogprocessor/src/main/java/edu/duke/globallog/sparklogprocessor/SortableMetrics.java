@@ -38,12 +38,14 @@ class ArrayIndexComparator implements Comparator<Integer>
 public class SortableMetrics {
 
   List<Metrics> metrics;
+  Double[][] arrays;
   Integer[][] indices;
   Integer[] skyline;
 
-  static int NUM_METRICS = 10;
+  static int NUM_METRICS = 11;
   static boolean[] SORT_ORDER =
-    {true, false, false, true, false, true, false, true, true, true};
+    {true, true, false, false, true, false, true, false, true, true, true};
+  static int MAX_POST_MINIMAL = 10; // #entrries allowed beyong minimal in any dimension
 
   public SortableMetrics(List<Metrics> metrics) {
     this.metrics = metrics;
@@ -52,26 +54,27 @@ public class SortableMetrics {
 
   void buildIndex() {
     int count = metrics.size();
-    Double[][] arrays = new Double[NUM_METRICS][count];
+    arrays = new Double[NUM_METRICS][count];
 
     int i = 0;
     for(Metrics met: metrics) {
       arrays[0][i] = met.failedExecs;
-      arrays[1][i] = met.maxStorage;
-      arrays[2][i] = met.maxExecution;
-      arrays[3][i] = met.totalTime;
-      arrays[4][i] = met.maxUsedHeap;
-      arrays[5][i] = met.minUsageGap;
-      arrays[6][i] = met.maxOldGenUsed;
-      arrays[7][i] = met.totalGCTime;
-      arrays[8][i] = met.totalNumYoungGC;
-      arrays[9][i] = met.totalNumOldGC;
+      arrays[1][i] = met.failedTasks;
+      arrays[2][i] = met.maxStorage;
+      arrays[3][i] = met.maxExecution;
+      arrays[4][i] = met.totalTime;
+      arrays[5][i] = met.maxUsedHeap;
+      arrays[6][i] = met.minUsageGap;
+      arrays[7][i] = met.maxOldGenUsed;
+      arrays[8][i] = met.totalGCTime;
+      arrays[9][i] = met.totalNumYoungGC;
+      arrays[10][i] = met.totalNumOldGC;
       i++;
     }
 
     indices = new Integer[NUM_METRICS][count];
     ArrayIndexComparator[] comparators = new ArrayIndexComparator[NUM_METRICS];
-    for(i=0; i<10; i++) {
+    for(i=0; i<NUM_METRICS; i++) {
       comparators[i] = new ArrayIndexComparator(arrays[i], SORT_ORDER[i]);
       indices[i] = comparators[i].createIndexArray();
       Arrays.sort(indices[i], comparators[i]);
@@ -81,15 +84,20 @@ public class SortableMetrics {
   public Integer[] skyline(double epsilon) {
     int[] pointers = new int[NUM_METRICS];
     boolean[] done = new boolean[NUM_METRICS];
+    double[] minimal = new double[NUM_METRICS];
+    int[] post_minimal = new int[NUM_METRICS];
     for(int i=0; i<NUM_METRICS; i++) {
       pointers[i] = 0;
       done[i] = false;
+      minimal[i] = -1.0;
+      post_minimal[i] = -1;
     }
 
     // round robin search
-    List<Integer> skyList = new ArrayList<Integer>();
+    Set<Integer> skyList = new HashSet<Integer>();
     int doneCount = 0;
-    for(int i=0; ; i++) {
+    int i=0;
+    for( ; ; i++) {
       int nextList = i % NUM_METRICS;
       if(done[nextList]) {
         if(doneCount >= NUM_METRICS) { 
@@ -99,16 +107,36 @@ public class SortableMetrics {
         }
       }
       int nextCand = pointers[nextList]++;
-      Integer entry = indices[nextList][nextCand];
-System.out.println("-Looking candidate " + nextCand + " from list: " + nextList + " , entry: " + entry);
-      if(skyList.contains(entry)) {
-System.out.println("-Done list: " + nextList);
+      if(nextCand >= metrics.size()) {
+System.out.println("-Done exhausted list: " + nextList + " at i=" + i);
         done[nextList] = true;
         doneCount++;
-      } else {
+        continue;
+      }
+      Integer entry = indices[nextList][nextCand];
+//System.out.println("-Looking candidate " + nextCand + " from list: " + nextList + " , entry: " + entry);
+      if(skyList.contains(entry) && minimal[nextList] < 0d) {
+System.out.println("-Minimal for #" + nextList + " is: " + arrays[nextList][entry] + " at i=" + i); 
+        minimal[nextList] = arrays[nextList][entry];
+        post_minimal[nextList] = 0;
+      } else if(minimal[nextList] >= 0d &&
+          Math.abs(1.0-(arrays[nextList][entry]/minimal[nextList])) > epsilon) {
+System.out.println("-Done list: " + nextList + " at i=" + i);
+        done[nextList] = true;
+        doneCount++;
+      } else if(!skyList.contains(entry)) {
+        if(post_minimal[nextList] >= 0) {
+          post_minimal[nextList]++;
+        }
+        if(post_minimal[nextList] >= MAX_POST_MINIMAL) {
+System.out.println("-Done post minimal list: " + nextList + " at i=" + i); 
+          done[nextList] = true;
+          doneCount++;
+        }
         skyList.add(entry);
       }
     }
+System.out.println("--#indices parsed: " + i + " , #included in skylist:" + skyList.size());
 
     return skyList.toArray(new Integer[skyList.size()]);
   }
