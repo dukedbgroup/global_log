@@ -49,7 +49,7 @@ System.out.println("!!!!Inconsistent:\n Size of cluster classes: " + clusterClas
       return -1;
     }
     Map<Integer, Map<Integer, Integer>> clusterPartCounts = 
-      new HashMap<Integer, Map<Integer,Integer>>();
+      new LinkedHashMap<Integer, Map<Integer,Integer>>();
     int cnt = 0;
     for(Integer id: clusterIds) {
       Integer part = clusterClasses.get(cnt++);
@@ -61,7 +61,7 @@ System.out.println("!!!!Inconsistent:\n Size of cluster classes: " + clusterClas
           partCounts.put(part, 1);
         }
       } else {
-        Map<Integer, Integer> partCounts = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> partCounts = new LinkedHashMap<Integer, Integer>();
         partCounts.put(part, 1);
         clusterPartCounts.put(id, partCounts);
       }
@@ -83,7 +83,7 @@ System.out.println("!!!!Inconsistent:\n Size of cluster classes: " + clusterClas
     if(!isConsistent()) {
       return -1;
     }
-    Map<Integer, Integer> clusterCounts = new HashMap<Integer, Integer>();
+    Map<Integer, Integer> clusterCounts = new LinkedHashMap<Integer, Integer>();
     for(Integer id: clusterIds) {
       if(clusterCounts.containsKey(id)) {
         clusterCounts.put(id, 1 + clusterCounts.get(id));
@@ -105,7 +105,7 @@ System.out.println("!!!!Inconsistent:\n Size of cluster classes: " + clusterClas
     if(!isConsistent()) {
       return -1;
     }
-    Map<Integer, Integer> partCounts = new HashMap<Integer, Integer>();
+    Map<Integer, Integer> partCounts = new LinkedHashMap<Integer, Integer>();
     for(Integer id: clusterClasses) {
       if(partCounts.containsKey(id)) {
         partCounts.put(id, 1 + partCounts.get(id));
@@ -202,9 +202,9 @@ System.out.println("Mutual entropy: " + info);
       return;
     }
 
-    Map<Integer, Integer> classCounts = new HashMap<Integer, Integer>();
+    Map<Integer, Integer> classCounts = new LinkedHashMap<Integer, Integer>();
     Map<Integer, Map<Integer, Integer>> clusterCounts = 
-      new HashMap<Integer, Map<Integer, Integer>>();
+      new LinkedHashMap<Integer, Map<Integer, Integer>>();
     int curIndex = 0;
     for(int i=0; i<clusterClasses.size(); i++) {
       int classId = clusterClasses.get(i);
@@ -219,7 +219,7 @@ System.out.println("Mutual entropy: " + info);
         }
       } else {
         classCounts.put(classId, 1);
-        Map<Integer, Integer> clusterMap = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> clusterMap = new LinkedHashMap<Integer, Integer>();
         clusterMap.put(clusterId, 1);
         clusterCounts.put(classId, clusterMap);
       }

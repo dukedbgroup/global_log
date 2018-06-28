@@ -3,10 +3,6 @@ package edu.duke.globallog.sparklogprocessor;
 import java.io.*;
 import java.nio.file.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 
 /**
  * Class to combine stats from spark event logs and resource monitors and summarize them

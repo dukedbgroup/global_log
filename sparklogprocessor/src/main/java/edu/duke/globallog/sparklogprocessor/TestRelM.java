@@ -57,7 +57,7 @@ class Stage implements Serializable
     // use vector algebra
 System.out.println("--Distance found in " + this.vec + " and " + s.vec + " -> regular: "
  + this.vec.toNormal().distance(s.vec.toNormal()) + " normalized: " + this.vec.distance(s.vec));
-    if(distance(s) <= 0.1) {
+    if(normalDistance(s) <= 0.1) {
       return true;
     }
 /*
@@ -74,6 +74,10 @@ System.out.println("--Distance found in " + this.vec + " and " + s.vec + " -> re
 
   // Find vector distance
   public double distance(Stage s) {
+    return this.vec.distance(s.vec);
+  }
+
+  private double normalDistance(Stage s) {
     return this.vec.toNormal().distance(s.vec.toNormal());
   }
 
@@ -319,7 +323,7 @@ public class TestRelM
   public static int STAGE_CLUSTERS = 30;
 
   static List<String> IGNORE_APPS = new ArrayList<String>();
-  static Map<String, List<Long>> IGNORE_STAGES = new HashMap<String, List<Long>>();  
+  static Map<String, List<Long>> IGNORE_STAGES = new LinkedHashMap<String, List<Long>>();  
 
   public static void main(String[] args) {
     // connection to database
@@ -375,7 +379,7 @@ public class TestRelM
     stages[1] = new Stage(137818123L, 0L, 0L, 41033290L, 0L, 36507221988L);
     stages[2] = new Stage(0L, 0L, 57856938L, 33035663L, 0L, 36507221988L);
     //stages[4] = new Stage(0L, 0L, 11800L, 0L, 0L, 36507221988L);
-    stages[3] = new Stage(132744302L, 134217728L, 0L, 0L, 0L, 36507221988L);
+    stages[3] = new Stage(132744302L, 134217728L, 0L, 0L, 0L, 36007221988L);
     //stages[6] = new Stage(134619472L, 0L, 0L, 0L, 0L, 36507221988L);
     stages[4] = new Stage(137818123L, 0L, 0L, 41033290L, 0L, 36507221988L);
     stages[5] = new Stage(0L, 0L, 57856938L, 33035663L, 0L, 36507221988L);
@@ -450,7 +454,7 @@ public class TestRelM
       ResultSet rs1 = qstmt1.executeQuery();
 
     if(mode.equals(Mode.SINGLE)) {
-      Map<Config, Map<Stage, Metrics>> configMap = new HashMap<Config, Map<Stage, Metrics>>();
+      Map<Config, Map<Stage, Metrics>> configMap = new LinkedHashMap<Config, Map<Stage, Metrics>>();
 
       for(Stage stage: stages) {
         rs1.beforeFirst();
@@ -484,7 +488,7 @@ public class TestRelM
                 metricsMap.put(stage, met);
               }
             } else {
-              Map<Stage, Metrics> metricsMap = new HashMap<Stage, Metrics>();
+              Map<Stage, Metrics> metricsMap = new LinkedHashMap<Stage, Metrics>();
               metricsMap.put(stage, met);
               configMap.put(conf, metricsMap);
             }
@@ -578,6 +582,7 @@ System.out.println("--Running " + istmt1);
       for(Stage stage: stageList) {
         stage.setClusterId(stageClasses[cnt++]);
       }
+      // set stage centroids
       cnt = 0;
       for(Stage cent: stageCentroids) {
         cent.setClusterId(cnt++);
@@ -587,9 +592,12 @@ System.out.println("--Running " + istmt1);
       rs1.beforeFirst();
     if(mode.equals(Mode.STAGE)) {
      // SIMILAR mode starts
-      Map<Stage, Map<Config, List<ConfigPlusMetrics>>> stageMap = new HashMap<Stage, Map<Config, List<ConfigPlusMetrics>>>();
+      Map<Stage, Map<Config, List<ConfigPlusMetrics>>> stageMap = new LinkedHashMap<Stage, Map<Config, List<ConfigPlusMetrics>>>();
 
       cnt = 0;
+      BufferedWriter writer = new BufferedWriter(new FileWriter(
+          new File(resultsPath + "/centroids.tsv")));
+      writer.write("skyId\tClusterId\tStageId\n");
       while(rs1.next()) {
         String appId = rs1.getString("one");
         if(ignoreApp(appId)) { continue; }; // to be ignored
@@ -630,26 +638,29 @@ System.out.println("--Running " + istmt1);
         } else {
           // new entry in map
           Map<Config, List<ConfigPlusMetrics>> confMap = 
-              new HashMap<Config, List<ConfigPlusMetrics>>();
+              new LinkedHashMap<Config, List<ConfigPlusMetrics>>();
           List<ConfigPlusMetrics> confList = 
               new ArrayList<ConfigPlusMetrics>();
           confList.add(new ConfigPlusMetrics(conf, met));
           confMap.put(confExceptApp, confList);
           stageMap.put(candidate, confMap);
+          writer.write(stageMap.size() + "\t" + candidate.getClusterId() + "\t" +
+            candidate + System.getProperty("line.separator"));
         }
       }
+      writer.close();
 
       // print skyline to csvs
       cnt = 1;
-      Map<Stage, Set<Config>> skySet = new HashMap<Stage, Set<Config>>();
-      Map<Stage, Map<Config, Metrics>> avgMetrics = new HashMap<Stage, Map<Config, Metrics>>();
+      Map<Stage, Set<Config>> skySet = new LinkedHashMap<Stage, Set<Config>>();
+      Map<Stage, Map<Config, Metrics>> avgMetrics = new LinkedHashMap<Stage, Map<Config, Metrics>>();
       for(Stage stage: stageMap.keySet()) {
         // List for all metrics used in clustering
         List<Metrics> metList = new ArrayList<Metrics>();
-        Map<Config, Metrics> avgMetMap = new HashMap<Config, Metrics>();
+        Map<Config, Metrics> avgMetMap = new LinkedHashMap<Config, Metrics>();
         List<Integer> confIds = new ArrayList<Integer>();
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(
+        writer = new BufferedWriter(new FileWriter(
           new File(resultsPath + "/" + cnt + ".tsv")));
         writer.write(stage + System.getProperty("line.separator"));
 
@@ -750,10 +761,10 @@ System.out.println("--" + appId + "\n");
         .collect(Collectors.toSet());
 
       // build skyMap
-      Map<Stage, List<ConfigPlusMetrics>> skyMap = new HashMap<Stage, List<ConfigPlusMetrics>>();
+      Map<Stage, List<ConfigPlusMetrics>> skyMap = new LinkedHashMap<Stage, List<ConfigPlusMetrics>>();
       cnt = 1;
       for(Stage stage: avgMetrics.keySet()) {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(
+        writer = new BufferedWriter(new FileWriter(
           new File(resultsPath + "/sky-" + cnt + ".tsv")));
         writer.write(stage + System.getProperty("line.separator"));
 System.out.println("-Skyline for stage: " + stage);
@@ -789,7 +800,7 @@ System.out.println("Adding to skyline *forced* config: " + conf);
 
     } else if(mode.equals(Mode.CONFIG)) {
       Map<Config, Map<Stage, List<ConfigPlusMetrics>>> confMap = 
-          new HashMap<Config, Map<Stage, List<ConfigPlusMetrics>>>();
+          new LinkedHashMap<Config, Map<Stage, List<ConfigPlusMetrics>>>();
 
       cnt = 0;
       while(rs1.next()) {
@@ -827,7 +838,7 @@ System.out.println("Adding to skyline *forced* config: " + conf);
           List<ConfigPlusMetrics> metList = new ArrayList<ConfigPlusMetrics>();
           metList.add(new ConfigPlusMetrics(conf, met));
           Map<Stage, List<ConfigPlusMetrics>> stageMap = 
-            new HashMap<Stage, List<ConfigPlusMetrics>>();
+            new LinkedHashMap<Stage, List<ConfigPlusMetrics>>();
           stageMap.put(stage, metList);
           confMap.put(confExceptApp, stageMap);
         }
@@ -875,17 +886,17 @@ System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=
       }
     
     } else if(mode.equals(Mode.TEST)) {
-      Map<Stage, List<ConfigPlusMetrics>> skyMap = new HashMap<Stage, List<ConfigPlusMetrics>>();
+      Map<Stage, List<ConfigPlusMetrics>> skyMap = new LinkedHashMap<Stage, List<ConfigPlusMetrics>>();
       try (
         FileInputStream streamIn = new FileInputStream(resultsPath + "/sky-results.ser");
         ObjectInputStream ois = new ObjectInputStream(streamIn);
       ) {
-        skyMap = (HashMap) ois.readObject();
+        skyMap = (LinkedHashMap) ois.readObject();
       } catch (Exception e) {
         e.printStackTrace();
       }
 
-      Map<Config, Metrics> skyResults = new HashMap<Config, Metrics>();
+      Map<Config, Metrics> skyResults = new LinkedHashMap<Config, Metrics>();
       boolean first = true; 
       for(Stage stage: stages) {
         Stage match = closestCentroid(stageCentroids, stage);
