@@ -15,13 +15,15 @@ public class TrainRelM
 {
 
   // utility function to parse command line string showing flowgraph
-  // e.g. "2->1 3->1,2 4->3"
-  static Map<String, List<String>> parseParentsMap(String mapString) {
-    return Arrays.stream(mapString.split(" "))
+  // e.g. "2->1|3->1,2|4->3"
+  static Map<String, Set<String>> parseParentsMap(String mapString) {
+    return Arrays.stream(mapString.split("#"))
       .map(s -> s.split("->"))
       .collect(Collectors.toMap(
          a -> a[0],
-         a -> Arrays.stream(a[1].split(",")).collect(Collectors.toList())
+         a -> Arrays.stream(a[1].split(",")).collect(Collectors.toCollection(LinkedHashSet::new)),
+         (u, v) -> u,
+         LinkedHashMap::new
       ));
   }
 
@@ -56,7 +58,7 @@ public class TrainRelM
     final String serializer = args[10];
     final String GCAlgo = args[11];
     final Long newRatio = Long.parseLong(args[12]);
-    final Map<String, List<String>> parents = parseParentsMap(args[13]);
+    final Map<String, Set<String>> parents = parseParentsMap(args[13]);
 
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -173,8 +175,8 @@ public class TrainRelM
       Double endTime = Double.MIN_VALUE;
 
       // need the following maps to find bytes written by stages
-      Map<String, Double> cacheReadByStage = new HashMap<String, Double>();
-      Map<String, Double> tasksByStage = new HashMap<String, Double>();
+      Map<String, Double> cacheReadByStage = new LinkedHashMap<String, Double>();
+      Map<String, Double> tasksByStage = new LinkedHashMap<String, Double>();
 
       ResultSet rs1 = qstmt1.executeQuery();
       while(rs1.next()) {
@@ -245,12 +247,17 @@ public class TrainRelM
         Double cacheRead = 0.0;
         if(parents.containsKey(stage)) {
           if(shBytesRead > 0.0) { // shuffle read stage
-            istmt1.setObject(4, ipBytesRead);
+            istmt1.setObject(4, shBytesRead);
             istmt1.setObject(9, 0.0);
             istmt1.setObject(38, 1.0 - diskSpilled / shBytesRead); // perf1
           } else { // cached RDD read
-            istmt1.setObject(4, cacheBytesRead);
-            istmt1.setObject(9, cacheBytesRead);
+            if(cacheBytesRead > 0.0) {
+              istmt1.setObject(4, cacheBytesRead);
+              istmt1.setObject(9, cacheBytesRead);
+            } else { // pLocalTasks will be 0 here
+              istmt1.setObject(4, ipBytesRead);
+              istmt1.setObject(9, 0.0);
+            }
             istmt1.setObject(38, pLocalTasks / numTasks); // perf1
             cacheReadByStage.put(stage, cacheBytesRead * numTasks); // saving total cache size
           }
@@ -326,14 +333,14 @@ System.out.println("--Running " + istmt2);
       conn.commit();
 
       // update cached bytes
-      Map<String, Double> cachedBytesPerStage = new HashMap<String, Double>();
+      Map<String, Double> cachedBytesPerStage = new LinkedHashMap<String, Double>();
       for(String stage: parents.keySet()) {
-        Double readBytes = cacheReadByStage.get(stage);
+        Double readBytes = cacheReadByStage.getOrDefault(stage, 0.0);
         for(String source: parents.get(stage)) {
           if(cachedBytesPerStage.containsKey(source)) {
             readBytes = Math.max(0, readBytes - cachedBytesPerStage.get(source));
           } else {
-            Double tasks = tasksByStage.get(source);
+            Double tasks = tasksByStage.getOrDefault(source, 1.0);
             ustmt1.clearParameters();
             ustmt1.setObject(1, readBytes / tasks);
             ustmt1.setObject(2, source);
