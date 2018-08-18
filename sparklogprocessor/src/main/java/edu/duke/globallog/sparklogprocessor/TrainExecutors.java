@@ -15,13 +15,16 @@ public class TrainExecutors
 {
 
   // utility function to parse command line string showing flowgraph
-  // e.g. "2->1 3->1,2 4->3"
-  static Map<String, List<String>> parseParentsMap(String mapString) {
-    return Arrays.stream(mapString.split(" "))
+  // e.g. "2->1#3->1,2#4->3"
+
+  static Map<String, Set<String>> parseParentsMap(String mapString) {
+    return Arrays.stream(mapString.split("#"))
       .map(s -> s.split("->"))
       .collect(Collectors.toMap(
          a -> a[0],
-         a -> Arrays.stream(a[1].split(",")).collect(Collectors.toList())
+         a -> Arrays.stream(a[1].split(",")).collect(Collectors.toCollection(LinkedHashSet::new)),
+         (u, v) -> u,
+         LinkedHashMap::new
       ));
   }
 
@@ -44,7 +47,8 @@ public class TrainExecutors
     final String APP_NAME = args[1];
     final Long maxHeap = Long.parseLong(args[2]);
     final Long yarnOverhead = Long.parseLong(args[3]);
-    final Map<String, List<String>> parents = parseParentsMap(args[4]);
+    final Map<String, Set<String>> parents = parseParentsMap(args[4]);
+    final Long totalStages = Long.parseLong(args[5]);
 
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -55,7 +59,8 @@ public class TrainExecutors
       String sql1 = "CREATE TABLE IF NOT EXISTS " + EXEC_TABLE + " (appId VARCHAR(255), " +
              "appName VARCHAR(255), stageId BIGINT, execId VARCHAR(8), ipBytes BIGINT, " +
              "cachedBytes BIGINT, shuffleBytesWritten BIGINT, " +
-             "shLocalBytesRead BIGINT, shRemoteBytesRead BIGINT, cacheBytesRead BIGINT, " + 
+             "shLocalBytesRead BIGINT, shRemoteBytesRead BIGINT, opBytes BIGINT, " +
+             "cacheBytesRead BIGINT, " + 
              "failed BOOLEAN, numTasks BIGINT, failedTasks BIGINT, " +
              "pLocalTasks BIGINT, diskBytesSpilled BIGINT, " + 
              "rssUsedAtStart BIGINT, rssUsedAtEnd BIGINT, " +
@@ -65,7 +70,8 @@ public class TrainExecutors
 
       try { stmt.close(); } catch(Exception e) {}
 
-      String qsql1 = "SELECT executorId, max(finishTime)-min(launchTime) as one from " +
+      String qsql1 = "SELECT executorId, max(finishTime)-min(launchTime) as one, " +
+             "max(stageId) as two from " +
              TASK_METRICS_TABLE + " where appId=\"" + APP_ID + "\"" +
              " group by executorId order by executorId";
       String qsql2 = "SELECT stageId, max(finishTime)-min(launchTime) as one from " +
@@ -75,25 +81,23 @@ public class TrainExecutors
              "sum(shBytesWritten) as three, " +
              "sum(shLocalBytesRead) as four, sum(shRemoteBytesRead) as five, " +
              "sum(opBytesWritten) as six, sum(diskSpilled) as seven from " +
-             TASK_METRICS_TABLE +
-             " where taskId in (select taskId from " + TASK_METRICS_TABLE +
+             TASK_METRICS_TABLE + " where appId=\"" + APP_ID + "\" " +
+             " and taskId in (select taskId from " + TASK_METRICS_TABLE +
              " where appId=\"" + APP_ID + "\" " +
              "and stageId=? and executorId=? " +
              "group by taskId having count(1)=1)";
-      String qsql4 = "select count(1) as cnt from " + TASK_METRICS_TABLE + " where" +
-             " taskId in (select taskId from " +
+      String qsql4 = "select count(1) as cnt from " + TASK_METRICS_TABLE +
+             " where appId=\"" + APP_ID + "\" " +
+             "and taskId in (select taskId from " +
              TASK_METRICS_TABLE + " where appId=\"" + APP_ID +
              "\" and stageId = ? and executorId=? and failed = 1 " +
              "group by taskId having count(1)=1)";
       String qsql5 = "select count(1) as cnt, sum(ipBytesRead) as bytes " +
-             " from " + TASK_METRICS_TABLE + " where " +
-             "taskId in (select taskId from " + TASK_METRICS_TABLE + 
+             " from " + TASK_METRICS_TABLE + " where appId=\"" + APP_ID + "\" " +
+             "and taskId in (select taskId from " + TASK_METRICS_TABLE + 
              " where appId=\"" + APP_ID + "\" and stageId = ? and " +
              "executorId=? and locality = \'process_local\' " +
              "group by taskId having count(1)=1)";
-      String qsql6 = "select min(launchTime) as one, max(finishTime) as two, " +
-             "from " + TASK_METRICS_TABLE + " where appId=\"" + APP_ID +
-             "\" and stageId = ? and executorId = ?";
 
       String isql1 = "INSERT INTO " + EXEC_TABLE + " values " +
              "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -119,6 +123,7 @@ public class TrainExecutors
       while(rs1.next()) { // executors
         String exec = rs1.getString("executorId");
         Double totalTime = rs1.getDouble("one");
+        Long maxStage = rs1.getLong("two");
         // hard-coding file path pattern
         String fileToRead = PERF_MONITOR_HOME + APP_ID + "/" + exec + "/" + PERF_FILE_PREFIX + APP_ID + "_" + exec + ".txt";
         Long totalLines = Files.lines(Paths.get(fileToRead)).count() - 2; //first two header lines
@@ -141,6 +146,7 @@ public class TrainExecutors
             execsMap.put(stage, new LinkedHashSet<String>());
           }
           execsMap.get(stage).add(exec);
+System.out.println("--Exploring: " + exec + ", stage: " + stage);
 
           qstmt3.clearParameters();
           qstmt3.setObject(1, stage);
@@ -160,23 +166,35 @@ public class TrainExecutors
 
           // dataflow stats
           ResultSet rs3 = qstmt3.executeQuery();
-          Double totalIPBytes = rs3.getDouble("two");
-          istmt1.setObject(6, 0.0);
-          istmt1.setObject(7, rs3.getDouble("three"));
-          istmt1.setObject(8, rs3.getDouble("four"));
-          istmt1.setObject(9, rs3.getDouble("five"));
-          istmt1.setObject(10, rs3.getDouble("six"));
-          istmt1.setObject(16, rs3.getDouble("seven"));
+          Double totalIPBytes = 0.0;
+          Double nTasks = 0.0;
+          while(rs3.next()) {
+            totalIPBytes = rs3.getDouble("two");
+            istmt1.setObject(6, 0.0);
+            istmt1.setObject(7, rs3.getDouble("three"));
+            istmt1.setObject(8, rs3.getDouble("four"));
+            istmt1.setObject(9, rs3.getDouble("five"));
+            istmt1.setObject(10, rs3.getDouble("six"));
+            istmt1.setObject(16, rs3.getDouble("seven"));
+            nTasks = rs3.getDouble("one");
+          }
 
           // number stats
-          Double nTasks = rs3.getDouble("one");
+          Double fTasks = 0.0;
+          Double pTasks = 0.0;
+          Double localBytes = 0.0;
           ResultSet rs4 = qstmt4.executeQuery();
-          Double fTasks = rs4.getDouble("cnt");
+          while(rs4.next()) {
+            fTasks = rs4.getDouble("cnt");
+          }
           ResultSet rs5 = qstmt5.executeQuery();
-          Double pTasks = rs5.getDouble("cnt");
-          Double localBytes = rs5.getDouble("bytes");
+          while(rs5.next()) {
+            pTasks = rs5.getDouble("cnt");
+            localBytes = rs5.getDouble("bytes");
+          }
           istmt1.setObject(11, localBytes);
           cacheReadMap.put(stage+"#"+exec, localBytes);
+System.out.println("Local bytes: " + localBytes + ", total bytes: " + totalIPBytes);
           tasksMap.put(stage+"#"+exec, nTasks);
           istmt1.setObject(5, totalIPBytes - localBytes); // disk bytes
           istmt1.setObject(13, nTasks);
@@ -186,6 +204,7 @@ public class TrainExecutors
           // metrics
           istmt1.setObject(17, currentRSS); //rssBegin
           Long linesToRead = Math.round(totalLines * sTime / totalTime);
+System.out.println("Lines to read: " + linesToRead);
           try {
             for(long i=0; i<linesToRead; i++) {
               String line = br.readLine();
@@ -195,10 +214,19 @@ public class TrainExecutors
           } catch(Exception e) {
             e.printStackTrace();
           }
+System.out.println("Final RSS found: " + currentRSS);
           istmt1.setObject(18, currentRSS); //rssEnd
+          // HACK: failed exec check
+          if(stage.equals(maxStage.toString()) && maxStage < totalStages - 2) {
+            istmt1.setObject(12, true); // failed
+          } else {
+            istmt1.setObject(12, false);
+          }
 
           istmt1.addBatch();
         } // stages end
+
+        br.close();
 
       } // executors end
 
