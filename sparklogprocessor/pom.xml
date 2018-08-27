@@ -97,5 +97,18 @@
         <artifactId>commons-math3</artifactId>
         <version>3.6.1</version>
     </dependency>
+
+    <dependency>
+        <groupId>flanagan</groupId>
+        <artifactId>flanagan</artifactId>
+        <version>1.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/net.sourceforge.parallelcolt/parallelcolt -->
+    <dependency>
+        <groupId>net.sourceforge.parallelcolt</groupId>
+        <artifactId>parallelcolt</artifactId>
+        <version>0.10.1</version>
+    </dependency>
+
   </dependencies>
 </project>

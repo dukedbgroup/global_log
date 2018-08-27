@@ -53,7 +53,7 @@ public class TrainingBase {
     return null;
   }
 
-  Statement newPreparedStatement(String query) {
+  PreparedStatement newPreparedStatement(String query) {
     try {
       return conn.prepareStatement(query);
     }
