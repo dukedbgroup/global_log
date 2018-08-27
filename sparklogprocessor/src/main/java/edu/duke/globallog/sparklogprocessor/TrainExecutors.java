@@ -237,6 +237,9 @@ System.out.println("--Running " + istmt1);
       // update cached bytes
       Map<String, Double> cachedBytesMap = new HashMap<String, Double>();
       for(String stage: parents.keySet()) {
+        if(!execsMap.containsKey(stage)) {
+          continue;
+        }
         for(String exec: execsMap.get(stage)) {
           Double readBytes = cacheReadMap.get(stage+"#"+exec);
           for(String source: parents.get(stage)) {

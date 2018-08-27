@@ -377,12 +377,12 @@ public class TestRelM
     stages[0] = new Stage(132744302L, 134217728L, 0L, 0L, 0L, 0L);
     //stages[1] = new Stage(134619472L, 0L, 0L, 0L, 0L, 36507221988L);
     stages[1] = new Stage(137818123L, 0L, 0L, 41033290L, 0L, 36507221988L);
-    stages[2] = new Stage(0L, 0L, 57856938L, 33035663L, 0L, 36507221988L);
+    stages[2] = new Stage(0L, 0L, 57856938L, 33035663L, 0L, 35157221988L);
     //stages[4] = new Stage(0L, 0L, 11800L, 0L, 0L, 36507221988L);
     stages[3] = new Stage(132744302L, 134217728L, 0L, 0L, 0L, 36007221988L);
     //stages[6] = new Stage(134619472L, 0L, 0L, 0L, 0L, 36507221988L);
     stages[4] = new Stage(137818123L, 0L, 0L, 41033290L, 0L, 36507221988L);
-    stages[5] = new Stage(0L, 0L, 57856938L, 33035663L, 0L, 36507221988L);
+    stages[5] = new Stage(0L, 0L, 57856938L, 33035663L, 0L, 35157221988L);
     //stages[9] = new Stage(0L, 0L, 11800L, 0L, 0L, 36507221988L);
 
     try {
@@ -991,7 +991,7 @@ System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=
           eval.randIndex(), eval.conditionalEntropy(), eval.normMutualInfo()));
 
     }// if else done
-      
+    */  
       if(clusterResults.size() > 0) {
         BufferedWriter writer = new BufferedWriter(new FileWriter(
           new File(resultsPath + "/" + clusterResultsFile )));
@@ -1001,7 +1001,7 @@ System.out.println("Evaluation results: \n TP=" + eval.truePositives() + "\n FP=
         writer.close();
       }
 
-    */}
+    }
 
       try { qstmt1.close(); } catch(Exception e) {}
       try { qstmt2.close(); } catch(Exception e) {}
