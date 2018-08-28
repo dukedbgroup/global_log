@@ -23,6 +23,9 @@ public class TrainingBase {
   final String APP_ENV_TABLE = "APP_ENV";
   final String PERF_MONITORS_TABLE = "PERF_MONITORS";
 
+  final String PERF_MONITOR_HOME = "/home/mayuresh/heap-logs/";
+  final String PERF_FILE_PREFIX = "sparkOutput_worker_";
+
   void startConnection() {
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();

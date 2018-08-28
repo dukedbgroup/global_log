@@ -2,18 +2,69 @@ package edu.duke.globallog.sparklogprocessor;
 
 import java.io.*;
 
-import cern.colt.matrix.tdouble.DoubleFactory1D;
-import cern.colt.matrix.tdouble.DoubleFactory2D;
-import mikera.vectorz.Vector;
+import cern.colt.matrix.tdouble.*;
+import cern.colt.matrix.tdouble.*;
+import cern.colt.matrix.tint.*;
 
 public class RegressionResults implements Serializable {
 
   int DegFree;
   int numVariables;
-  DoubleFactory1D means;
-  DoubleFactory1D stdDeviations;
-  DoubleFactory2D coVar;
+  IntMatrix1D varNumbers;
+  DoubleMatrix1D means;
+  DoubleMatrix1D stdDeviations;
+  DoubleMatrix2D coVar;
   
+  public void setVarNumbers(int[] arr) {
+    varNumbers = IntFactory1D.dense.make(arr);
+  }
+
+  public void setMeans(double[] arr) {
+    means = DoubleFactory1D.dense.make(arr);
+  }
+
+  public void setStdDeviations(double[] arr) {
+    stdDeviations = DoubleFactory1D.dense.make(arr);
+  }
+
+  public void setCoVar(double[][] arr) {
+    coVar = DoubleFactory2D.dense.make(arr);
+  }
+
+  public void mergeResults(RegressionResults a, RegressionResults b) 
+    throws IllegalArgumentException {
+    if(a.getNumVariables() == 0 && b.getNumVariables() == 0) {
+      return; // nothing to do
+    }
+    if(a.getNumVariables() == 0) {
+      DegFree = b.getDegFree();
+      numVariables = b.getNumVariables();
+      varNumbers = b.getVarNumbers();
+      means = b.getMeans();
+      stdDeviations = b.getStdDeviations();
+      coVar = b.getCoVar();
+      return;
+    }
+    if(b.getNumVariables() == 0) {
+      DegFree = a.getDegFree();
+      numVariables = a.getNumVariables();
+      varNumbers = a.getVarNumbers();
+      means = a.getMeans();
+      stdDeviations = a.getStdDeviations();
+      coVar = a.getCoVar();
+      return;
+    }
+    if(a.getDegFree() != b.getDegFree()) {
+      throw new IllegalArgumentException("Degrees of Freedom do not match");
+    }
+    DegFree = a.getDegFree();
+    numVariables = a.getNumVariables() + b.getNumVariables();
+    varNumbers = IntFactory1D.dense.append(a.getVarNumbers(), b.getVarNumbers());
+    means = DoubleFactory1D.dense.append(a.getMeans(), b.getMeans());
+    stdDeviations = DoubleFactory1D.dense.append(a.getStdDeviations(), b.getStdDeviations());
+    coVar = DoubleFactory2D.dense.composeDiagonal(a.getCoVar(), b.getCoVar());
+  }
+
   /**
    * Get DegFree.
    *
@@ -57,9 +108,9 @@ public class RegressionResults implements Serializable {
   /**
    * Get means.
    *
-   * @return means as DoubleFactory1D.
+   * @return means as DoubleMatrix1D.
    */
-  public DoubleFactory1D getMeans()
+  public DoubleMatrix1D getMeans()
   {
       return means;
   }
@@ -69,7 +120,7 @@ public class RegressionResults implements Serializable {
    *
    * @param means the value to set.
    */
-  public void setMeans(DoubleFactory1D means)
+  public void setMeans(DoubleMatrix1D means)
   {
       this.means = means;
   }
@@ -77,9 +128,9 @@ public class RegressionResults implements Serializable {
   /**
    * Get stdDeviations.
    *
-   * @return stdDeviations as DoubleFactory1D.
+   * @return stdDeviations as DoubleMatrix1D.
    */
-  public DoubleFactory1D getStdDeviations()
+  public DoubleMatrix1D getStdDeviations()
   {
       return stdDeviations;
   }
@@ -89,7 +140,7 @@ public class RegressionResults implements Serializable {
    *
    * @param stdDeviations the value to set.
    */
-  public void setStdDeviations(DoubleFactory1D stdDeviations)
+  public void setStdDeviations(DoubleMatrix1D stdDeviations)
   {
       this.stdDeviations = stdDeviations;
   }
@@ -97,9 +148,9 @@ public class RegressionResults implements Serializable {
   /**
    * Get coVar.
    *
-   * @return coVar as DoubleFactory2D.
+   * @return coVar as DoubleMatrix2D.
    */
-  public DoubleFactory2D getCoVar()
+  public DoubleMatrix2D getCoVar()
   {
       return coVar;
   }
@@ -109,8 +160,28 @@ public class RegressionResults implements Serializable {
    *
    * @param coVar the value to set.
    */
-  public void setCoVar(DoubleFactory2D coVar)
+  public void setCoVar(DoubleMatrix2D coVar)
   {
       this.coVar = coVar;
+  }
+  
+  /**
+   * Get varNumbers.
+   *
+   * @return varNumbers as IntMatrix1D.
+   */
+  public IntMatrix1D getVarNumbers()
+  {
+      return varNumbers;
+  }
+  
+  /**
+   * Set varNumbers.
+   *
+   * @param varNumbers the value to set.
+   */
+  public void setVarNumbers(IntMatrix1D varNumbers)
+  {
+      this.varNumbers = varNumbers;
   }
 }

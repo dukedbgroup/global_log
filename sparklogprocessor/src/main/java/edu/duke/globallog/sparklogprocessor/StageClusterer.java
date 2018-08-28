@@ -165,12 +165,12 @@ public class StageClusterer extends TrainingBase {
 
   public static void main(String[] args) {
     int n = 30;
-    if(args.length > 1) {
+    if(args.length >= 1) {
       n = Integer.parseInt(args[1]);
     }
 
     String resultPath = "cluster-results";
-    if(args.length > 2) {
+    if(args.length >= 2) {
       resultPath = args[2];
     }
 
