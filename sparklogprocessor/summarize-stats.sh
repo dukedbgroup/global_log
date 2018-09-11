@@ -12,10 +12,10 @@ else
   last=$2
 fi
 
-appprefix="application_1508545462036_"
+appprefix="application_1535007510432_"
 appsuffix=""
 
 for appNo in $(seq -f "%04g" $first $last)
 do
-   mvn exec:java -e -Dexec.mainClass="edu.duke.globallog.sparklogprocessor.SummaryStats" -Dexec.args="$appprefix$appNo$appsuffix"
+   mvn exec:java -e -Dexec.mainClass="edu.duke.globallog.sparklogprocessor.SummaryStats" -Dexec.args="$appprefix$appNo$appsuffix" -Dexec.cleanupDaemonThreads=false
 done

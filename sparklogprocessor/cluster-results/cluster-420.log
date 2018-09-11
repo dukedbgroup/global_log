@@ -1,0 +1,517 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building sparklogprocessor 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- exec-maven-plugin:1.4.0:java (default-cli) @ sparklogprocessor ---
+Running for cluster: 420
+Adding: application_1535007510432_0080, 2, 1
+Adding: application_1535007510432_0080, 2, 10
+Adding: application_1535007510432_0080, 2, 11
+Adding: application_1535007510432_0080, 2, 12
+Adding: application_1535007510432_0080, 2, 2
+Adding: application_1535007510432_0080, 2, 4
+Adding: application_1535007510432_0080, 2, 5
+Adding: application_1535007510432_0080, 2, 6
+Adding: application_1535007510432_0080, 2, 7
+Adding: application_1535007510432_0080, 2, 8
+Adding: application_1535007510432_0080, 2, 9
+Adding: application_1535007510432_0081, 2, 1
+Adding: application_1535007510432_0081, 2, 10
+Adding: application_1535007510432_0081, 2, 11
+Adding: application_1535007510432_0081, 2, 12
+Adding: application_1535007510432_0081, 2, 2
+Adding: application_1535007510432_0081, 2, 3
+Adding: application_1535007510432_0081, 2, 4
+Adding: application_1535007510432_0081, 2, 5
+Adding: application_1535007510432_0081, 2, 7
+Adding: application_1535007510432_0081, 2, 8
+Adding: application_1535007510432_0081, 2, 9
+Adding: application_1535007510432_0117, 2, 1
+Adding: application_1535007510432_0117, 2, 11
+Adding: application_1535007510432_0117, 2, 14
+Adding: application_1535007510432_0117, 2, 15
+Adding: application_1535007510432_0117, 2, 16
+Adding: application_1535007510432_0117, 2, 2
+Adding: application_1535007510432_0117, 2, 3
+Adding: application_1535007510432_0117, 2, 4
+Adding: application_1535007510432_0117, 2, 5
+Adding: application_1535007510432_0117, 2, 6
+Adding: application_1535007510432_0117, 2, 7
+Adding: application_1535007510432_0117, 2, 8
+Adding: application_1535007510432_0117, 2, 9
+Adding: application_1535007510432_0124, 7, 12
+Adding: application_1535007510432_0124, 7, 14
+Adding: application_1535007510432_0124, 7, 15
+Adding: application_1535007510432_0124, 7, 16
+Adding: application_1535007510432_0124, 7, 18
+Adding: application_1535007510432_0124, 7, 19
+Adding: application_1535007510432_0124, 7, 20
+Adding: application_1535007510432_0124, 7, 21
+Adding: application_1535007510432_0124, 7, 22
+Adding: application_1535007510432_0124, 7, 23
+Adding: application_1535007510432_0124, 7, 8
+Adding: application_1535007510432_0124, 7, 9
+Putting: application_1535007510432_0080-> 1.0
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0080/1/sparkOutput_worker_application_1535007510432_0080_1.txt
+Reading lines: 1178 to 2207
+-Setting maxUnmgd: 1.5906955E8 at line 1321
+-Setting maxUnmgd: 1.6816854E8 at line 1410
+-Setting maxUnmgd: 1.6816854E8 at line 1515
+-Setting maxUnmgd: 1.6816854E8 at line 1599
+-Setting maxUnmgd: 1.6816854E8 at line 1716
+-Setting maxUnmgd: 1.6816854E8 at line 1872
+-Setting maxUnmgd: 1.6816854E8 at line 2079
+delta heap: -2.00334368E8, coll: 4.7905132E10, storage: 4.2371003E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.6816854E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0080/10/sparkOutput_worker_application_1535007510432_0080_10.txt
+Reading lines: 1201 to 2270
+-Setting maxUnmgd: 1.0319089E8 at line 1229
+-Setting maxUnmgd: 1.6166421E8 at line 1316
+-Setting maxUnmgd: 1.6166421E8 at line 1373
+-Setting maxUnmgd: 1.6166421E8 at line 1432
+-Setting maxUnmgd: 1.6166421E8 at line 1489
+-Setting maxUnmgd: 1.69535508E8 at line 1533
+-Setting maxUnmgd: 1.69535508E8 at line 1592
+-Setting maxUnmgd: 1.69535508E8 at line 1658
+-Setting maxUnmgd: 1.69535508E8 at line 1741
+-Setting maxUnmgd: 1.69535508E8 at line 1844
+-Setting maxUnmgd: 1.69535508E8 at line 1949
+-Setting maxUnmgd: 1.69535508E8 at line 2054
+-Setting maxUnmgd: 1.69535508E8 at line 2164
+delta heap: 1.19103912E8, coll: 4.9196391432E10, storage: 4.43156155E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.69535508E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0080/11/sparkOutput_worker_application_1535007510432_0080_11.txt
+Reading lines: 1179 to 2280
+-Setting maxUnmgd: 1.00197004E8 at line 1213
+-Setting maxUnmgd: 1.00197004E8 at line 1337
+-Setting maxUnmgd: 1.27127716E8 at line 1409
+-Setting maxUnmgd: 1.5537932E8 at line 1483
+-Setting maxUnmgd: 1.5537932E8 at line 1546
+-Setting maxUnmgd: 1.5537932E8 at line 1614
+-Setting maxUnmgd: 1.5537932E8 at line 1709
+-Setting maxUnmgd: 1.5537932E8 at line 1841
+-Setting maxUnmgd: 1.5537932E8 at line 1976
+-Setting maxUnmgd: 1.5537932E8 at line 2075
+-Setting maxUnmgd: 1.5537932E8 at line 2246
+delta heap: 1.7462068E8, coll: 5.0089127744E10, storage: 1.914879224E9, exec: 0.0, spilled: 0.0, maxUnmgd: 1.5537932E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0080/12/sparkOutput_worker_application_1535007510432_0080_12.txt
+Reading lines: 1169 to 2254
+-Setting maxUnmgd: 1.38112388E8 at line 1277
+-Setting maxUnmgd: 1.38112388E8 at line 1326
+-Setting maxUnmgd: 1.38112388E8 at line 1388
+-Setting maxUnmgd: 1.38112388E8 at line 1451
+-Setting maxUnmgd: 1.38112388E8 at line 1509
+-Setting maxUnmgd: 1.38112388E8 at line 1563
+-Setting maxUnmgd: 1.39211836E8 at line 1628
+-Setting maxUnmgd: 1.39211836E8 at line 1718
+-Setting maxUnmgd: 1.39211836E8 at line 1842
+-Setting maxUnmgd: 1.39211836E8 at line 1937
+-Setting maxUnmgd: 1.39211836E8 at line 2070
+-Setting maxUnmgd: 1.39268611E8 at line 2166
+delta heap: -1.9345704E8, coll: 4.9296188528E10, storage: 2.026263771E9, exec: 0.0, spilled: 0.0, maxUnmgd: 1.39268611E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0080/2/sparkOutput_worker_application_1535007510432_0080_2.txt
+Reading lines: 1164 to 2192
+-Setting maxUnmgd: 1.73657668E8 at line 1307
+-Setting maxUnmgd: 1.73657668E8 at line 1389
+-Setting maxUnmgd: 1.73657668E8 at line 1475
+-Setting maxUnmgd: 1.73657668E8 at line 1546
+-Setting maxUnmgd: 1.73657668E8 at line 1633
+-Setting maxUnmgd: 1.73657668E8 at line 1792
+-Setting maxUnmgd: 1.73657668E8 at line 1951
+-Setting maxUnmgd: 1.73657668E8 at line 2108
+delta heap: 1.08035032E8, coll: 4.7947976568E10, storage: 4.1741975E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.73657668E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0080/4/sparkOutput_worker_application_1535007510432_0080_4.txt
+Reading lines: 1203 to 2268
+-Setting maxUnmgd: 1.36766226E8 at line 1308
+-Setting maxUnmgd: 1.6514109E8 at line 1345
+-Setting maxUnmgd: 1.6514109E8 at line 1404
+-Setting maxUnmgd: 1.84017496E8 at line 1466
+-Setting maxUnmgd: 1.84017496E8 at line 1529
+-Setting maxUnmgd: 1.84017496E8 at line 1589
+-Setting maxUnmgd: 1.84017496E8 at line 1649
+-Setting maxUnmgd: 1.84017496E8 at line 1749
+-Setting maxUnmgd: 1.84017496E8 at line 1853
+-Setting maxUnmgd: 1.84017496E8 at line 1958
+-Setting maxUnmgd: 1.84017496E8 at line 2063
+-Setting maxUnmgd: 1.84017496E8 at line 2170
+delta heap: 2.391096E7, coll: 5.0119339872E10, storage: 4.37682269E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.84017496E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0080/5/sparkOutput_worker_application_1535007510432_0080_5.txt
+Reading lines: 1194 to 2266
+-Setting maxUnmgd: 1.09125226E8 at line 1196
+-Setting maxUnmgd: 1.59129374E8 at line 1288
+-Setting maxUnmgd: 1.59129374E8 at line 1344
+-Setting maxUnmgd: 1.59129374E8 at line 1402
+-Setting maxUnmgd: 1.6827426E8 at line 1444
+-Setting maxUnmgd: 1.6827426E8 at line 1501
+-Setting maxUnmgd: 1.6827426E8 at line 1558
+-Setting maxUnmgd: 1.6827426E8 at line 1617
+-Setting maxUnmgd: 1.6827426E8 at line 1691
+-Setting maxUnmgd: 1.6827426E8 at line 1761
+-Setting maxUnmgd: 1.6827426E8 at line 1875
+-Setting maxUnmgd: 1.6827426E8 at line 1988
+-Setting maxUnmgd: 1.6827426E8 at line 2099
+-Setting maxUnmgd: 1.6827426E8 at line 2211
+delta heap: 9.3822296E7, coll: 5.030568156E10, storage: 4.47716275E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.6827426E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0080/6/sparkOutput_worker_application_1535007510432_0080_6.txt
+Reading lines: 1186 to 2238
+-Setting maxUnmgd: 1.34555336E8 at line 1269
+-Setting maxUnmgd: 1.34555336E8 at line 1326
+-Setting maxUnmgd: 1.67259612E8 at line 1367
+-Setting maxUnmgd: 1.67259612E8 at line 1429
+-Setting maxUnmgd: 1.67259612E8 at line 1487
+-Setting maxUnmgd: 1.67259612E8 at line 1551
+-Setting maxUnmgd: 1.67259612E8 at line 1612
+-Setting maxUnmgd: 1.67259612E8 at line 1689
+-Setting maxUnmgd: 1.67259612E8 at line 1795
+-Setting maxUnmgd: 1.67259612E8 at line 1908
+-Setting maxUnmgd: 1.67259612E8 at line 2012
+-Setting maxUnmgd: 1.67259612E8 at line 2119
+delta heap: -2.88211368E8, coll: 4.8861117616E10, storage: 4.39047415E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.67259612E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0080/7/sparkOutput_worker_application_1535007510432_0080_7.txt
+Reading lines: 1202 to 2270
+-Setting maxUnmgd: 1.0793881E8 at line 1247
+-Setting maxUnmgd: 1.39042368E8 at line 1341
+-Setting maxUnmgd: 1.55276088E8 at line 1380
+-Setting maxUnmgd: 1.55276088E8 at line 1440
+-Setting maxUnmgd: 1.60114316E8 at line 1481
+-Setting maxUnmgd: 1.60114316E8 at line 1540
+-Setting maxUnmgd: 1.60114316E8 at line 1602
+-Setting maxUnmgd: 1.60114316E8 at line 1665
+-Setting maxUnmgd: 1.68684216E8 at line 1728
+-Setting maxUnmgd: 1.68684216E8 at line 1834
+-Setting maxUnmgd: 1.68684216E8 at line 1940
+-Setting maxUnmgd: 1.68684216E8 at line 2049
+-Setting maxUnmgd: 1.68684216E8 at line 2162
+-Setting maxUnmgd: 1.68684216E8 at line 2231
+delta heap: -2.0690248E7, coll: 5.105933896E10, storage: 4.4279181E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.68684216E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0080/8/sparkOutput_worker_application_1535007510432_0080_8.txt
+Reading lines: 1193 to 2280
+-Setting maxUnmgd: 1.51882298E8 at line 1284
+-Setting maxUnmgd: 1.51882298E8 at line 1379
+-Setting maxUnmgd: 1.51882298E8 at line 1473
+-Setting maxUnmgd: 1.51882298E8 at line 1569
+-Setting maxUnmgd: 1.51882298E8 at line 1644
+-Setting maxUnmgd: 1.82813583E8 at line 1782
+-Setting maxUnmgd: 1.82813583E8 at line 1946
+-Setting maxUnmgd: 1.82813583E8 at line 2117
+delta heap: -2.72179752E8, coll: 5.260228832E10, storage: 4.42771689E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.82813583E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0080/9/sparkOutput_worker_application_1535007510432_0080_9.txt
+Reading lines: 1316 to 2509
+-Setting maxUnmgd: 1.5115164E8 at line 1385
+-Setting maxUnmgd: 1.76344718E8 at line 1497
+-Setting maxUnmgd: 1.76344718E8 at line 1592
+-Setting maxUnmgd: 1.76344718E8 at line 1691
+-Setting maxUnmgd: 3.07281636E8 at line 1775
+-Setting maxUnmgd: 3.07281636E8 at line 1958
+-Setting maxUnmgd: 3.07281636E8 at line 2092
+-Setting maxUnmgd: 3.07281636E8 at line 2264
+-Setting maxUnmgd: 3.07281636E8 at line 2479
+delta heap: 3.36723312E8, coll: 4.3052641336E10, storage: 4.6311419E8, exec: 0.0, spilled: 0.0, maxUnmgd: 3.07281636E8
+Putting: application_1535007510432_0081-> 1.0
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0081/1/sparkOutput_worker_application_1535007510432_0081_1.txt
+Reading lines: 923 to 1723
+-Setting maxUnmgd: 1.36827968E8 at line 1140
+-Setting maxUnmgd: 1.78267348E8 at line 1294
+-Setting maxUnmgd: 1.78267348E8 at line 1555
+delta heap: -9.2239296E7, coll: 7.4202879168E10, storage: 6.72490734E8, exec: 4.36666368E8, spilled: 0.0, maxUnmgd: 1.78267348E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0081/10/sparkOutput_worker_application_1535007510432_0081_10.txt
+Reading lines: 1146 to 2043
+-Setting maxUnmgd: 1.54186144E8 at line 1394
+-Setting maxUnmgd: 1.54186144E8 at line 1462
+-Setting maxUnmgd: 1.54186144E8 at line 1528
+-Setting maxUnmgd: 1.63700808E8 at line 1619
+-Setting maxUnmgd: 1.84921472E8 at line 1748
+-Setting maxUnmgd: 1.85943616E8 at line 1908
+delta heap: -1.4623576E8, coll: 9.0741153712E10, storage: 7.37929376E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.85943616E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0081/11/sparkOutput_worker_application_1535007510432_0081_11.txt
+Reading lines: 896 to 1657
+-Setting maxUnmgd: 1.19185232E8 at line 1065
+-Setting maxUnmgd: 1.19185232E8 at line 1195
+-Setting maxUnmgd: 2.05377244E8 at line 1358
+-Setting maxUnmgd: 2.05377244E8 at line 1567
+delta heap: -4.7205792E7, coll: 6.7541114656E10, storage: 6.67518966E8, exec: 2.35077632E8, spilled: 0.0, maxUnmgd: 2.05377244E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0081/12/sparkOutput_worker_application_1535007510432_0081_12.txt
+Reading lines: 1054 to 1873
+-Setting maxUnmgd: 1.55960824E8 at line 1292
+-Setting maxUnmgd: 1.85880208E8 at line 1422
+-Setting maxUnmgd: 1.85880208E8 at line 1664
+delta heap: -2.2503288E8, coll: 7.2768691456E10, storage: 6.62159764E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.85880208E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0081/2/sparkOutput_worker_application_1535007510432_0081_2.txt
+Reading lines: 1056 to 1880
+-Setting maxUnmgd: 1.90267364E8 at line 1618
+delta heap: -8.4826448E7, coll: 6.9337242896E10, storage: 6.60401748E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.90267364E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0081/3/sparkOutput_worker_application_1535007510432_0081_3.txt
+Reading lines: 1063 to 1930
+-Setting maxUnmgd: 1.21799387E8 at line 1272
+-Setting maxUnmgd: 1.40617716E8 at line 1400
+-Setting maxUnmgd: 1.55523124E8 at line 1564
+-Setting maxUnmgd: 1.671483E8 at line 1809
+delta heap: 5.10022104E8, coll: 8.3827671032E10, storage: 6.84734158E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.671483E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0081/4/sparkOutput_worker_application_1535007510432_0081_4.txt
+Reading lines: 1055 to 1898
+-Setting maxUnmgd: 1.5342176E8 at line 1112
+-Setting maxUnmgd: 1.5342176E8 at line 1319
+-Setting maxUnmgd: 1.5342176E8 at line 1453
+-Setting maxUnmgd: 1.6006118E8 at line 1703
+delta heap: 2.13906424E8, coll: 8.2989974072E10, storage: 6.87550793E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.6006118E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0081/5/sparkOutput_worker_application_1535007510432_0081_5.txt
+Reading lines: 1062 to 1885
+-Setting maxUnmgd: 1.26145535E8 at line 1283
+-Setting maxUnmgd: 1.49473848E8 at line 1390
+-Setting maxUnmgd: 1.65897068E8 at line 1498
+-Setting maxUnmgd: 1.76063948E8 at line 1677
+-Setting maxUnmgd: 1.76063948E8 at line 1852
+delta heap: 4.5172624E7, coll: 8.1571259032E10, storage: 6.82681571E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.76063948E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0081/7/sparkOutput_worker_application_1535007510432_0081_7.txt
+Reading lines: 1056 to 1937
+-Setting maxUnmgd: 1.62830528E8 at line 1301
+-Setting maxUnmgd: 1.62830528E8 at line 1410
+-Setting maxUnmgd: 1.69455376E8 at line 1558
+-Setting maxUnmgd: 1.69455376E8 at line 1783
+delta heap: -6.0923608E8, coll: 8.7838741616E10, storage: 6.91292465E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.69455376E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0081/8/sparkOutput_worker_application_1535007510432_0081_8.txt
+Reading lines: 1060 to 1895
+-Setting maxUnmgd: 1.67372531E8 at line 1279
+-Setting maxUnmgd: 1.67372531E8 at line 1391
+-Setting maxUnmgd: 1.73355412E8 at line 1514
+-Setting maxUnmgd: 1.73355412E8 at line 1738
+delta heap: 2.26280992E8, coll: 8.42180256E10, storage: 6.85080789E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.73355412E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0081/9/sparkOutput_worker_application_1535007510432_0081_9.txt
+Reading lines: 1049 to 1888
+-Setting maxUnmgd: 1.54944191E8 at line 1243
+-Setting maxUnmgd: 1.73950544E8 at line 1351
+-Setting maxUnmgd: 1.73950544E8 at line 1462
+-Setting maxUnmgd: 1.73950544E8 at line 1665
+-Setting maxUnmgd: 1.81793588E8 at line 1845
+delta heap: -2.47159784E8, coll: 8.3787654568E10, storage: 6.85030257E8, exec: 0.0, spilled: 0.0, maxUnmgd: 1.81793588E8
+Putting: application_1535007510432_0117-> 4.0
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0117/1/sparkOutput_worker_application_1535007510432_0117_1.txt
+Reading lines: 1302 to 2894
+-Setting maxUnmgd: 3.73740016E8 at line 2698
+-Setting maxUnmgd: 5.17001881E8 at line 2861
+delta heap: -4.02781688E8, coll: 5.5931579856E10, storage: 1.794724268E9, exec: 7.14402512E8, spilled: 0.0, maxUnmgd: 5.17001881E8
+-Skipping: application_1535007510432_0117, 11
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0117/11/sparkOutput_worker_application_1535007510432_0117_11.txt
+Reading lines: 896 to 1968
+-Setting maxUnmgd: 6.80493375E8 at line 1080
+-Setting maxUnmgd: 7.20587415E8 at line 1548
+-Setting maxUnmgd: 1.614296303E9 at line 1948
+-Setting maxUnmgd: 1.755761319E9 at line 1949
+-Setting maxUnmgd: 1.755761319E9 at line 1950
+-Setting maxUnmgd: 1.755761319E9 at line 1953
+-Setting maxUnmgd: 1.755761319E9 at line 1954
+-Setting maxUnmgd: 1.778625919E9 at line 1955
+-Setting maxUnmgd: 1.778625919E9 at line 1956
+-Setting maxUnmgd: 1.779651639E9 at line 1957
+-Setting maxUnmgd: 1.782461631E9 at line 1958
+-Setting maxUnmgd: 1.782461631E9 at line 1961
+-Setting maxUnmgd: 1.782461631E9 at line 1963
+-Skipping: application_1535007510432_0117, 11
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0117/14/sparkOutput_worker_application_1535007510432_0117_14.txt
+Reading lines: 1182 to 2666
+-Setting maxUnmgd: 6.81950975E8 at line 1877
+-Setting maxUnmgd: 1.317971823E9 at line 2263
+-Setting maxUnmgd: 1.321015455E9 at line 2411
+-Setting maxUnmgd: 1.321015455E9 at line 2531
+-Setting maxUnmgd: 1.321015455E9 at line 2548
+-Setting maxUnmgd: 1.342950269E9 at line 2550
+-Setting maxUnmgd: 1.342950269E9 at line 2554
+-Setting maxUnmgd: 1.342950269E9 at line 2556
+-Setting maxUnmgd: 1.342950269E9 at line 2558
+-Setting maxUnmgd: 1.342950269E9 at line 2559
+-Setting maxUnmgd: 1.342950269E9 at line 2564
+-Setting maxUnmgd: 1.389374699E9 at line 2613
+-Setting maxUnmgd: 1.389374699E9 at line 2615
+-Setting maxUnmgd: 1.389374699E9 at line 2625
+-Setting maxUnmgd: 1.389374699E9 at line 2633
+-Setting maxUnmgd: 1.389374699E9 at line 2644
+-Setting maxUnmgd: 1.389374699E9 at line 2645
+-Setting maxUnmgd: 1.389374699E9 at line 2649
+-Setting maxUnmgd: 1.389374699E9 at line 2655
+-Setting maxUnmgd: 1.389374699E9 at line 2657
+-Setting maxUnmgd: 1.389374699E9 at line 2658
+-Setting maxUnmgd: 1.389374699E9 at line 2663
+delta heap: 2.9555616E7, coll: 1.617205636E10, storage: 9.62280185E8, exec: 5.98412537E8, spilled: 0.0, maxUnmgd: 1.389374699E9
+-Skipping: application_1535007510432_0117, 15
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0117/15/sparkOutput_worker_application_1535007510432_0117_15.txt
+Reading lines: 730 to 1340
+-Skipping: application_1535007510432_0117, 15
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0117/16/sparkOutput_worker_application_1535007510432_0117_16.txt
+Reading lines: 1914 to 4285
+-Setting maxUnmgd: 4.79794677E8 at line 2137
+-Setting maxUnmgd: 5.07322679E8 at line 2377
+-Setting maxUnmgd: 5.07322679E8 at line 4108
+delta heap: 1.64686016E8, coll: 6.3472260384E10, storage: 1.200000049E9, exec: 0.0, spilled: 0.0, maxUnmgd: 5.07322679E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0117/2/sparkOutput_worker_application_1535007510432_0117_2.txt
+Reading lines: 1937 to 4045
+-Setting maxUnmgd: 4.05049195E8 at line 2166
+-Setting maxUnmgd: 4.15696563E8 at line 2306
+-Setting maxUnmgd: 4.15696563E8 at line 2400
+delta heap: 4.08005384E8, coll: 4.6698487064E10, storage: 1.214997882E9, exec: 0.0, spilled: 0.0, maxUnmgd: 4.15696563E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0117/3/sparkOutput_worker_application_1535007510432_0117_3.txt
+Reading lines: 2005 to 3889
+-Setting maxUnmgd: 3.28589719E8 at line 2168
+-Setting maxUnmgd: 3.6143544E8 at line 2221
+-Setting maxUnmgd: 4.3732687E8 at line 2279
+-Setting maxUnmgd: 4.3732687E8 at line 2429
+-Setting maxUnmgd: 4.3732687E8 at line 2528
+delta heap: -1.5431376E8, coll: 9.7986004168E10, storage: 1.575341449E9, exec: 0.0, spilled: 0.0, maxUnmgd: 4.3732687E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0117/4/sparkOutput_worker_application_1535007510432_0117_4.txt
+Reading lines: 1850 to 3834
+-Setting maxUnmgd: 4.4753022E8 at line 2133
+-Setting maxUnmgd: 4.90110728E8 at line 2223
+-Setting maxUnmgd: 4.90110728E8 at line 2352
+delta heap: 1.49573344E8, coll: 8.2734370232E10, storage: 1.456837525E9, exec: 0.0, spilled: 0.0, maxUnmgd: 4.90110728E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0117/5/sparkOutput_worker_application_1535007510432_0117_5.txt
+Reading lines: 1985 to 3831
+-Setting maxUnmgd: 4.90693424E8 at line 2148
+-Setting maxUnmgd: 4.90693424E8 at line 2232
+-Setting maxUnmgd: 4.90693424E8 at line 3053
+-Setting maxUnmgd: 4.90693424E8 at line 3075
+delta heap: -2.25165352E8, coll: 8.8016295664E10, storage: 1.058876586E9, exec: 0.0, spilled: 0.0, maxUnmgd: 4.90693424E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0117/6/sparkOutput_worker_application_1535007510432_0117_6.txt
+Reading lines: 2018 to 4406
+-Setting maxUnmgd: 4.07509212E8 at line 2196
+-Setting maxUnmgd: 4.07509212E8 at line 2248
+-Setting maxUnmgd: 4.24147903E8 at line 2305
+-Setting maxUnmgd: 4.24147903E8 at line 2424
+delta heap: -7.25148016E8, coll: 9.3528544512E10, storage: 1.49210336E9, exec: 0.0, spilled: 0.0, maxUnmgd: 4.24147903E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0117/7/sparkOutput_worker_application_1535007510432_0117_7.txt
+Reading lines: 1988 to 3681
+-Setting maxUnmgd: 4.41402568E8 at line 2153
+-Setting maxUnmgd: 4.41402568E8 at line 2248
+-Setting maxUnmgd: 4.48930755E8 at line 2345
+delta heap: -3.4575932E8, coll: 7.5292721336E10, storage: 1.479669819E9, exec: 0.0, spilled: 0.0, maxUnmgd: 4.48930755E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0117/8/sparkOutput_worker_application_1535007510432_0117_8.txt
+Reading lines: 1983 to 3845
+-Setting maxUnmgd: 3.43628792E8 at line 2134
+-Setting maxUnmgd: 3.84391732E8 at line 2193
+-Setting maxUnmgd: 4.14364531E8 at line 2253
+-Setting maxUnmgd: 4.14364531E8 at line 2356
+-Setting maxUnmgd: 5.79976439E8 at line 2510
+delta heap: -6.4805544E8, coll: 6.7700709552E10, storage: 1.476123502E9, exec: 0.0, spilled: 0.0, maxUnmgd: 5.79976439E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0117/9/sparkOutput_worker_application_1535007510432_0117_9.txt
+Reading lines: 1999 to 4459
+-Setting maxUnmgd: 3.57909675E8 at line 2199
+-Setting maxUnmgd: 4.08999561E8 at line 2266
+-Setting maxUnmgd: 4.08999561E8 at line 2388
+delta heap: -9.4216996E8, coll: 8.8981215504E10, storage: 1.486062697E9, exec: 0.0, spilled: 0.0, maxUnmgd: 4.08999561E8
+Putting: application_1535007510432_0124-> 4.0
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0124/12/sparkOutput_worker_application_1535007510432_0124_12.txt
+Reading lines: 3668 to 4362
+-Setting maxUnmgd: 2.53940494E8 at line 3921
+-Setting maxUnmgd: 3.38099262E8 at line 4240
+delta heap: -3.47361944E8, coll: 5.5250740336E10, storage: 1.954240682E9, exec: 0.0, spilled: 0.0, maxUnmgd: 3.38099262E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0124/14/sparkOutput_worker_application_1535007510432_0124_14.txt
+Reading lines: 3330 to 3859
+-Setting maxUnmgd: 2.64831178E8 at line 3384
+-Setting maxUnmgd: 4.49473038E8 at line 3630
+-Setting maxUnmgd: 5.0268527E8 at line 3641
+-Setting maxUnmgd: 5.41198434E8 at line 3646
+-Setting maxUnmgd: 5.41198434E8 at line 3652
+-Setting maxUnmgd: 5.41198434E8 at line 3695
+delta heap: 1.19974864E8, coll: 3.02269904E10, storage: 2.20461997E9, exec: 0.0, spilled: 0.0, maxUnmgd: 5.41198434E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0124/15/sparkOutput_worker_application_1535007510432_0124_15.txt
+Reading lines: 3161 to 3791
+-Setting maxUnmgd: 2.67615161E8 at line 3163
+-Setting maxUnmgd: 2.93638889E8 at line 3550
+-Setting maxUnmgd: 4.21433471E8 at line 3587
+-Setting maxUnmgd: 4.48932293E8 at line 3606
+-Setting maxUnmgd: 4.74673645E8 at line 3626
+-Setting maxUnmgd: 5.31582109E8 at line 3655
+delta heap: -3.28085272E8, coll: 5.781369472E10, storage: 2.085509432E9, exec: 0.0, spilled: 0.0, maxUnmgd: 5.31582109E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0124/16/sparkOutput_worker_application_1535007510432_0124_16.txt
+Reading lines: 3020 to 3808
+-Setting maxUnmgd: 2.51347246E8 at line 3278
+-Setting maxUnmgd: 6.27215298E8 at line 3449
+-Setting maxUnmgd: 8.07892746E8 at line 3494
+-Setting maxUnmgd: 8.07892746E8 at line 3503
+-Setting maxUnmgd: 8.07892746E8 at line 3553
+-Setting maxUnmgd: 8.07892746E8 at line 3594
+delta heap: -4.93545848E8, coll: 5.4520364896E10, storage: 1.955205332E9, exec: 1.34742016E8, spilled: 0.0, maxUnmgd: 8.07892746E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0124/18/sparkOutput_worker_application_1535007510432_0124_18.txt
+Reading lines: 3202 to 3940
+-Setting maxUnmgd: 2.79107642E8 at line 3231
+-Setting maxUnmgd: 3.6665447E8 at line 3604
+-Setting maxUnmgd: 3.7656579E8 at line 3648
+-Setting maxUnmgd: 4.42713702E8 at line 3666
+-Setting maxUnmgd: 4.42713702E8 at line 3809
+-Setting maxUnmgd: 4.87064686E8 at line 3833
+delta heap: -6.9532168E7, coll: 5.4372769584E10, storage: 2.086519288E9, exec: 0.0, spilled: 0.0, maxUnmgd: 4.87064686E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0124/19/sparkOutput_worker_application_1535007510432_0124_19.txt
+Reading lines: 2733 to 3254
+-Setting maxUnmgd: 2.69265481E8 at line 2757
+delta heap: 1.43358072E8, coll: 3.4220162304E10, storage: 1.708052775E9, exec: 0.0, spilled: 0.0, maxUnmgd: 2.69265481E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0124/20/sparkOutput_worker_application_1535007510432_0124_20.txt
+Reading lines: 2453 to 2987
+-Setting maxUnmgd: 2.48310413E8 at line 2549
+-Setting maxUnmgd: 4.72952625E8 at line 2914
+delta heap: -4.19730632E8, coll: 3.5207467984E10, storage: 1.955300695E9, exec: 0.0, spilled: 0.0, maxUnmgd: 4.72952625E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0124/21/sparkOutput_worker_application_1535007510432_0124_21.txt
+Reading lines: 2704 to 3283
+-Setting maxUnmgd: 2.84459613E8 at line 2832
+-Setting maxUnmgd: 3.76554725E8 at line 3197
+delta heap: -2.98481256E8, coll: 4.6799072112E10, storage: 2.096770907E9, exec: 0.0, spilled: 0.0, maxUnmgd: 3.76554725E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0124/22/sparkOutput_worker_application_1535007510432_0124_22.txt
+Reading lines: 2669 to 3450
+-Setting maxUnmgd: 2.85819909E8 at line 2758
+-Setting maxUnmgd: 4.37890145E8 at line 3089
+-Setting maxUnmgd: 4.37890145E8 at line 3139
+delta heap: -4.05532752E8, coll: 5.6066751008E10, storage: 2.283266666E9, exec: 1.34873088E8, spilled: 0.0, maxUnmgd: 4.37890145E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0124/23/sparkOutput_worker_application_1535007510432_0124_23.txt
+Reading lines: 0 to 654
+delta heap: -7.57047928E8, coll: 1.978612912E9, storage: 6906396.0, exec: 0.0, spilled: 0.0, maxUnmgd: 1.41436264E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0124/8/sparkOutput_worker_application_1535007510432_0124_8.txt
+Reading lines: 3158 to 3763
+-Setting maxUnmgd: 4.0965563E8 at line 3368
+-Setting maxUnmgd: 4.0965563E8 at line 3493
+-Setting maxUnmgd: 4.0965563E8 at line 3745
+delta heap: -6.4166976E8, coll: 2.3393907304E10, storage: 1.671739E9, exec: 6.04504064E8, spilled: 0.0, maxUnmgd: 4.0965563E8
+Reading file: /home/mayuresh/heap-logs/application_1535007510432_0124/9/sparkOutput_worker_application_1535007510432_0124_9.txt
+Reading lines: 3260 to 3882
+-Setting maxUnmgd: 2.73745314E8 at line 3437
+-Setting maxUnmgd: 6.23600782E8 at line 3651
+-Setting maxUnmgd: 9.0857931E8 at line 3653
+-Setting maxUnmgd: 9.0857931E8 at line 3654
+-Setting maxUnmgd: 9.0857931E8 at line 3656
+-Setting maxUnmgd: 9.0857931E8 at line 3658
+-Setting maxUnmgd: 9.0857931E8 at line 3661
+-Setting maxUnmgd: 9.0857931E8 at line 3662
+-Setting maxUnmgd: 9.0857931E8 at line 3663
+-Setting maxUnmgd: 9.0857931E8 at line 3665
+delta heap: -7.6985944E7, coll: 3.1913840104E10, storage: 1.912723444E9, exec: 1.34479872E8, spilled: 0.0, maxUnmgd: 9.0857931E8
+Stats-> mean: 3.508823767333334E8 std: 2.4310709901951936E8 max: 1.389374699E9
+--Beta bars: [5.707628791074063E9, -68.81442066066057, 3751.424818233216, -6.379497277382928, 1.817538787929851E9]
+Beta std dev: [8.260615362805721E9, 102.61569335874445, 5108.186714441763, 33.19632084057056, 1.4613065699416919E9]
+Degree freedom: 42.0
+Beta covariance: [[6.82377661722219E19, -9.221777154983824E10, 4.64229782128258E12, 4.731513548905516E10, -4.6395276910352855E18], [-9.221777154989194E10, 10529.98052349587, -523990.8536302708, -197.26339334149685, 1.7007531662924868E10], [4.642297821285234E12, -523990.85363027087, 2.6093571509599335E7, 9430.753205751082, -8.610515275371356E11], [4.7315135489047264E10, -197.26339334061055, 9430.753205706944, 1101.9957173500993, -4.6649474802969765E10], [-4.6395276910349896E18, 1.7007531662885834E10, -8.610515275351919E11, -4.664947480297056E10, 2.13541689135475251E18]]
+Variables used: [0, 2, 3, 4]
+sum of squares: 1.2670080106278167E22
+--Beta bars: [0.08637466681153241, 0.629295247666385]
+Beta std dev: [0.03568020617802419, 0.04194444750840666]
+Degree freedom: 45.0
+Beta covariance: [[0.0012730771129063157, -7.885636389926966E-4], [-7.885636389926966E-4, 0.0017593366767854814]]
+Variables used: [7, 8]
+sum of squares: 8.6461671683356948E18
+Attempted LU Decomposition of a singular matrix in Matrix.luDecomp()
+NaN matrix returned and matrixCheck set to false
+--Beta bars: [NaN, NaN]
+Beta std dev: [NaN, NaN]
+Degree freedom: 45.0
+Beta covariance: [[NaN, NaN], [NaN, NaN]]
+Variables used: 9
+sum of squares: NaN
+--Beta bars: [5.755225232727266E7, 1.2235474921818185E8]
+Beta std dev: [7.700574530529927E7, 2.569897678413592E7]
+Degree freedom: 45.0
+Beta covariance: [[5.929884810024621E15, -1.7143268882061698E15], [-1.7143268882061698E15, 6.60437407751557E14]]
+Variables used: [0, 2, 3, 4]
+sum of squares: 3.1300517569501942E18
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 02:22 min
+[INFO] Finished at: 2018-09-10T08:45:02-04:00
+[INFO] Final Memory: 20M/491M
+[INFO] ------------------------------------------------------------------------

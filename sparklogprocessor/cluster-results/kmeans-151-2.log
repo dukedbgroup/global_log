@@ -1,0 +1,167 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building sparklogprocessor 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- exec-maven-plugin:1.4.0:java (default-cli) @ sparklogprocessor ---
+Running for cluster: 151
+Adding: application_1508545462036_0213, 7, 1
+Adding: application_1508545462036_0213, 7, 10
+Adding: application_1508545462036_0213, 7, 2
+Adding: application_1508545462036_0213, 7, 3
+Adding: application_1508545462036_0213, 7, 4
+Adding: application_1508545462036_0213, 7, 5
+Adding: application_1508545462036_0213, 7, 6
+Adding: application_1508545462036_0213, 7, 7
+Adding: application_1508545462036_0213, 7, 8
+Adding: application_1508545462036_0213, 7, 9
+Adding: application_1508545462036_0213, 9, 1
+Adding: application_1508545462036_0213, 9, 10
+Adding: application_1508545462036_0213, 9, 2
+Adding: application_1508545462036_0213, 9, 3
+Adding: application_1508545462036_0213, 9, 4
+Adding: application_1508545462036_0213, 9, 5
+Adding: application_1508545462036_0213, 9, 6
+Adding: application_1508545462036_0213, 9, 7
+Adding: application_1508545462036_0213, 9, 8
+Adding: application_1508545462036_0213, 9, 9
+Adding: application_1508545462036_0254, 7, 1
+Adding: application_1508545462036_0254, 7, 10
+Adding: application_1508545462036_0254, 7, 2
+Adding: application_1508545462036_0254, 7, 3
+Adding: application_1508545462036_0254, 7, 4
+Adding: application_1508545462036_0254, 7, 5
+Adding: application_1508545462036_0254, 7, 6
+Adding: application_1508545462036_0254, 7, 7
+Adding: application_1508545462036_0254, 7, 8
+Adding: application_1508545462036_0254, 7, 9
+Adding: application_1508545462036_0254, 9, 1
+Adding: application_1508545462036_0254, 9, 10
+Adding: application_1508545462036_0254, 9, 2
+Adding: application_1508545462036_0254, 9, 3
+Adding: application_1508545462036_0254, 9, 4
+Adding: application_1508545462036_0254, 9, 5
+Adding: application_1508545462036_0254, 9, 6
+Adding: application_1508545462036_0254, 9, 7
+Adding: application_1508545462036_0254, 9, 8
+Adding: application_1508545462036_0254, 9, 9
+java.lang.NumberFormatException: For input string: "11 "
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Long.parseLong(Long.java:589)
+	at java.lang.Long.parseLong(Long.java:631)
+	at edu.duke.globallog.sparklogprocessor.ParamLearner.populateInputs(ParamLearner.java:60)
+	at edu.duke.globallog.sparklogprocessor.ParamLearner.main(ParamLearner.java:394)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/1/sparkOutput_worker_application_1508545462036_0213_1.txt
+Reading lines: 5212 to 6521
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/10/sparkOutput_worker_application_1508545462036_0213_10.txt
+Reading lines: 5210 to 6514
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/2/sparkOutput_worker_application_1508545462036_0213_2.txt
+Reading lines: 5184 to 6393
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/3/sparkOutput_worker_application_1508545462036_0213_3.txt
+Reading lines: 5201 to 6505
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/4/sparkOutput_worker_application_1508545462036_0213_4.txt
+Reading lines: 5188 to 6359
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/5/sparkOutput_worker_application_1508545462036_0213_5.txt
+Reading lines: 5186 to 6365
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/6/sparkOutput_worker_application_1508545462036_0213_6.txt
+Reading lines: 5177 to 6387
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/7/sparkOutput_worker_application_1508545462036_0213_7.txt
+Reading lines: 5193 to 6420
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/8/sparkOutput_worker_application_1508545462036_0213_8.txt
+Reading lines: 5197 to 6400
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/9/sparkOutput_worker_application_1508545462036_0213_9.txt
+Reading lines: 5189 to 6402
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/1/sparkOutput_worker_application_1508545462036_0213_1.txt
+Reading lines: 8029 to 9522
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/10/sparkOutput_worker_application_1508545462036_0213_10.txt
+Reading lines: 8025 to 9652
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/2/sparkOutput_worker_application_1508545462036_0213_2.txt
+Reading lines: 7986 to 9607
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/3/sparkOutput_worker_application_1508545462036_0213_3.txt
+Reading lines: 8011 to 9487
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/4/sparkOutput_worker_application_1508545462036_0213_4.txt
+Reading lines: 7991 to 9512
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/5/sparkOutput_worker_application_1508545462036_0213_5.txt
+Reading lines: 7988 to 9478
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/6/sparkOutput_worker_application_1508545462036_0213_6.txt
+Reading lines: 7975 to 9461
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/7/sparkOutput_worker_application_1508545462036_0213_7.txt
+Reading lines: 7998 to 9508
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/8/sparkOutput_worker_application_1508545462036_0213_8.txt
+Reading lines: 8006 to 9518
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/9/sparkOutput_worker_application_1508545462036_0213_9.txt
+Reading lines: 7993 to 9462
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/1/sparkOutput_worker_application_1508545462036_0254_1.txt
+Reading lines: 2184 to 2748
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/10/sparkOutput_worker_application_1508545462036_0254_10.txt
+Reading lines: 2275 to 2850
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/2/sparkOutput_worker_application_1508545462036_0254_2.txt
+Reading lines: 2232 to 2784
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/3/sparkOutput_worker_application_1508545462036_0254_3.txt
+Reading lines: 2261 to 2843
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/4/sparkOutput_worker_application_1508545462036_0254_4.txt
+Reading lines: 2247 to 2822
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/5/sparkOutput_worker_application_1508545462036_0254_5.txt
+Reading lines: 2281 to 2866
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/6/sparkOutput_worker_application_1508545462036_0254_6.txt
+Reading lines: 2354 to 2914
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/7/sparkOutput_worker_application_1508545462036_0254_7.txt
+Reading lines: 2341 to 2950
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/8/sparkOutput_worker_application_1508545462036_0254_8.txt
+Reading lines: 2145 to 2702
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/9/sparkOutput_worker_application_1508545462036_0254_9.txt
+Reading lines: 2338 to 2877
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/1/sparkOutput_worker_application_1508545462036_0254_1.txt
+Reading lines: 3021 to 3619
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/10/sparkOutput_worker_application_1508545462036_0254_10.txt
+Reading lines: 3147 to 3712
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/2/sparkOutput_worker_application_1508545462036_0254_2.txt
+Reading lines: 3088 to 3652
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/3/sparkOutput_worker_application_1508545462036_0254_3.txt
+Reading lines: 3128 to 3775
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/4/sparkOutput_worker_application_1508545462036_0254_4.txt
+Reading lines: 3108 to 3633
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/5/sparkOutput_worker_application_1508545462036_0254_5.txt
+Reading lines: 3155 to 3759
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/6/sparkOutput_worker_application_1508545462036_0254_6.txt
+Reading lines: 3256 to 3882
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/7/sparkOutput_worker_application_1508545462036_0254_7.txt
+Reading lines: 3238 to 3885
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/8/sparkOutput_worker_application_1508545462036_0254_8.txt
+Reading lines: 2968 to 3530
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/9/sparkOutput_worker_application_1508545462036_0254_9.txt
+Reading lines: 3234 to 3873
+Beta bars: [1.8100929176523841, 10.23831886369829]
+Beta std dev: [0.07708476309467491, 0.44191566095049173]
+Degree freedom: 38.0
+Beta covariance: [[0.005942060701362155, -0.005401958490446851], [-0.005401958490446851, 0.19528945139330994]]
+Variables used: [0, 3]
+sum of squares: 5.3968590965460985E20
+java.lang.ArrayIndexOutOfBoundsException: 0
+	at flanagan.math.Matrix.<init>(Matrix.java:134)
+	at flanagan.analysis.Regression.generalLinear(Regression.java:2961)
+	at flanagan.analysis.Regression.linearMono(Regression.java:1867)
+	at flanagan.analysis.Regression.linear(Regression.java:1838)
+	at edu.duke.globallog.sparklogprocessor.ParamLearner.runRegression(ParamLearner.java:291)
+	at edu.duke.globallog.sparklogprocessor.ParamLearner.main(ParamLearner.java:395)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 01:49 min
+[INFO] Finished at: 2018-08-28T17:04:44-04:00
+[INFO] Final Memory: 22M/532M
+[INFO] ------------------------------------------------------------------------

@@ -8,6 +8,8 @@ import java.util.stream.*;
 
 import flanagan.analysis.Regression;
 
+import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
+
 class AppStageExec {
     String appId;
     Long stageId;
@@ -101,7 +103,9 @@ System.out.println("Adding: " + appId + ", " + stageId + ", " + execId);
 
     // task times
     String qsql2 = "SELECT min(launchTime) as one, max(finishTime) as two, "
-      + "sum(memorySpilled) as three, sum(diskSpilled) as four"
+      + "sum(memorySpilled) as three, sum(diskSpilled) as four, "
+      + "sum(opRecordsWritten) as five, sum(shRecordsWritten) as six, "
+      + "count(1) as seven"
       + " FROM " + TASK_METRICS_TABLE + " WHERE appId=? and stageId=? and executorId=?";
     PreparedStatement qstmt2 = newPreparedStatement(qsql2);
     String qsql3 = "SELECT min(launchTime) as one, max(finishTime) as two"
@@ -114,18 +118,30 @@ System.out.println("Adding: " + appId + ", " + stageId + ", " + execId);
       + " FROM " + PERF_MONITORS_TABLE + " WHERE appId=? and stageId=? and executorId=?";
     PreparedStatement qstmt4 = newPreparedStatement(qsql4);
 
+    // max cores
+    String qsql5 = "SELECT distinct(maxCores) as cores from " + RELM_TABLE
+      + " WHERE appId=?";
+    PreparedStatement qstmt5 = newPreparedStatement(qsql5);
+
     // regression parameters
     int numExamples = inputs.size();
     if(numExamples < 10) {
       System.out.println("Less than 10 examples provided!");
       return;
     }
-    double[][] xArr1 = new double[7][numExamples];
+    double[][] xArr1 = new double[6][numExamples];
     double[][] xArr2 = new double[2][numExamples];
+    double[][] xArr3 = new double[2][numExamples];
+    double[][] xArr4 = new double[1][numExamples];
     double[] yArr1 = new double[numExamples];
     double[] yArr2 = new double[numExamples];
+    double[] yArr3 = new double[numExamples];
+    double[] yArr4 = new double[numExamples];
     try {
       int cnt = 0;
+      int failcnt = 0;
+      SummaryStatistics stats = new SummaryStatistics();
+      Map<String, Double> appToCores = new LinkedHashMap<String, Double>();
       for(AppStageExec ip: inputs) {
         String appId = ip.getAppId();
         Long stageId = ip.getStageId();
@@ -137,14 +153,28 @@ System.out.println("Adding: " + appId + ", " + stageId + ", " + execId);
         qstmt3.setObject(2, execId);
         ResultSet rs3 = qstmt3.executeQuery();
         ResultSet rs4 = runPreparedStatement(qstmt4, ip);
-
+        // store DoP=maxCores
+        if(!appToCores.containsKey(appId)) {
+          qstmt5.clearParameters();
+          qstmt5.setObject(1, appId);
+          ResultSet rs5 = qstmt5.executeQuery();
+          if(rs5.next()) {
+            double cores = rs5.getDouble("cores");
+System.out.println("Putting: " + appId + "-> " + cores);
+            appToCores.put(appId, cores);
+          }
+        }
+        
         double ipBytes = 0d, cachedBytes = 0d, cacheBytesRead = 0d, shBytesWritten = 0d;
+        double opRecords = 0d, shRecordsWritten = 0d;
         double shLocalBytesRead = 0d, shRemoteBytesRead = 0d, opBytes = 0d;
         double memSpilled = 0d, diskSpilled = 0d;
+        double numTasks = 0d, maxCores = 0d;
         double globalStartTime = 0d, globalFinishTime = 0d;
         double stageStartTime = 0d, stageFinishTime = 0d;
         double maxStorage = 0d, maxExecution = 0d, totalCollection = 0d;
         double deltaStorage = 0d, deltaExecution = 0d, deltaHeap = 0d;
+        double maxUnmgd = 0d;
 
         while(rs1.next()) {
           ipBytes = rs1.getDouble("one");
@@ -153,13 +183,20 @@ System.out.println("Adding: " + appId + ", " + stageId + ", " + execId);
           shBytesWritten = rs1.getDouble("three");
           shLocalBytesRead = rs1.getDouble("four");
           shRemoteBytesRead = rs1.getDouble("five");
-          opBytes = rs1.getDouble("six");
+          opBytes = rs1.getDouble("six");          
+        }
+        if(ipBytes == 0d && cachedBytes == 0d && cacheBytesRead == 0d && shBytesWritten == 0d) {
+System.out.println("-Skipping: " + appId + ", " + execId);
+          // continue;
         }
         while(rs2.next()) {
           stageStartTime = rs2.getDouble("one");
           stageFinishTime = rs2.getDouble("two");
           memSpilled = rs2.getDouble("three");
           diskSpilled = rs2.getDouble("four");
+          opRecords = rs2.getDouble("five");
+          shRecordsWritten = rs2.getDouble("six");
+          numTasks = rs2.getDouble("seven");
         }
         while(rs3.next()) {
           globalStartTime = rs3.getDouble("one");
@@ -193,53 +230,103 @@ System.out.println("Adding: " + appId + ", " + stageId + ", " + execId);
           deltaStorage = deltaExecution = deltaHeap = 0d;
           double prevStorage = 0d;
           double prevExecution = 0d;
+          double prevOld = 0d; 
+          double prevYoung = 0d;
+          maxUnmgd = 0d;
           Iterator<String> iterator = lines.iterator();
           while(iterator.hasNext()) {
             String line = iterator.next();
             String[] tokens = line.split("\t");
+            double y = Double.parseDouble(tokens[3]) + Double.parseDouble(tokens[4]);
+            double o = Double.parseDouble(tokens[5]);
             double h = Double.parseDouble(tokens[6]);
             double s = Double.parseDouble(tokens[20]);
             double e = Double.parseDouble(tokens[21]);
-            deltaStorage += Math.min(s-prevStorage, 0d);
-            deltaExecution += Math.min(s-prevExecution, 0d);
+            deltaStorage += Math.max(s-prevStorage, 0d);
+            deltaExecution += Math.max(e-prevExecution, 0d);
             if(currentLine == startLine) {
               deltaHeap = h;
             } else if(currentLine == lastLine) {
               deltaHeap -= h;
               break;
             }
+            if(o < prevOld) { // old GC 
+              maxUnmgd = Math.max(maxUnmgd, h-s-e);
+System.out.println("-Setting maxUnmgd: " + maxUnmgd + " at line " + currentLine);
+            }
+            if(y < prevYoung) { // young gc
+              maxUnmgd = Math.max(maxUnmgd, y); // hack, only when previoud isn't available
+            }
             prevStorage = s;
             prevExecution = e;
+            prevOld = o;
+            prevYoung = y;
             currentLine++;
           }
         } catch(Exception e) {
           e.printStackTrace();
         }
 
-        // input decompresssion
-        xArr1[0][cnt] = ipBytes;
-        // next two for serialization buffers 
-        xArr1[1][cnt] = shBytesWritten + opBytes;
-        // bytes cached to disk, only for mem and disk model
-        // 0 for mem only model
-        xArr1[2][cnt] = cachedBytes - deltaStorage;
-        // next two for deserialization array
-        xArr1[3][cnt] = cacheBytesRead;
-        xArr1[4][cnt] = shLocalBytesRead + shRemoteBytesRead;
-        // next two for network fetches
-        xArr1[5][cnt] = shRemoteBytesRead;
-        xArr1[6][cnt] = 0; // should be remote cache bytes read, but not available
-        // next two are for execution memory model
-        xArr2[0][cnt] = shBytesWritten;
-        xArr2[1][cnt] = shLocalBytesRead + shRemoteBytesRead;
-        // y value giving total bytes seen by JVM heap
-        // subtracting storage and execution which are on accounted for on LHS
-        yArr1[cnt] = deltaHeap + totalCollection - deltaStorage - deltaExecution;
-        // execution memory needed
-        yArr2[cnt] = deltaExecution + memSpilled;
+        // surge model
+        xArr4[0][failcnt] = appToCores.get(appId); // number of parallel tasks
+        yArr4[failcnt] = maxUnmgd;
 
+        if(ipBytes == 0d && cachedBytes == 0d && cacheBytesRead == 0d && shBytesWritten == 0d) {
+System.out.println("-Skipping: " + appId + ", " + execId);
+          failcnt++;
+          continue;
+        } else {
+        // unmanaged model
+          xArr1[0][cnt] = ipBytes;
+          xArr1[1][cnt] = shLocalBytesRead + shRemoteBytesRead;
+          xArr1[2][cnt] = opBytes;
+          xArr1[3][cnt] = shBytesWritten;
+        // not needed the next two
+          xArr1[4][cnt] = numTasks; // opRecords;
+          xArr1[5][cnt] = 0; // shRecordsWritten;
+          yArr1[cnt] = deltaHeap + totalCollection - deltaStorage;
+
+        // storage model
+          xArr2[0][cnt] = ipBytes;
+          xArr2[1][cnt] = cacheBytesRead; // only for kmeans
+          yArr2[cnt] = deltaStorage;
+
+        // execution model
+          xArr3[0][cnt] = shBytesWritten;
+          xArr3[0][cnt] = shLocalBytesRead + shRemoteBytesRead;
+          yArr3[cnt] = deltaExecution + memSpilled;
+        }
+
+/*
+        // input decompresssion
+        xArr1[0][cnt] = ipBytes; // managed
+        // next two for serialization buffers 
+        xArr1[1][cnt] = opBytes; // unmanaged but limited
+        // bytes cached in SER storage level model
+        // 0 for mem only (deserialized) model
+        xArr1[2][cnt] = 0;// unmanaged
+        // next two for deserialization array
+        xArr1[3][cnt] = cacheBytesRead; // managed
+        xArr1[4][cnt] = shLocalBytesRead + shRemoteBytesRead; // managed
+        // next two for network fetches
+        xArr1[5][cnt] = shRemoteBytesRead; // unmanaged
+        xArr1[6][cnt] = 0; //shBytesWritten; // should be remote cache bytes read, but not available
+        // next two are for execution memory model // unmanaged
+        xArr2[0][cnt] = shBytesWritten; // managed
+        xArr2[1][cnt] = shLocalBytesRead + shRemoteBytesRead; //managed
+        xArr2[2][cnt] = 0;
+        // cached bytes 
+        xArr3[0][cnt] = ipBytes;  
+*/
+System.out.println("delta heap: " + deltaHeap + ", coll: " + totalCollection + ", storage: " + deltaStorage + ", exec: " + deltaExecution + ", spilled: " + memSpilled + ", maxUnmgd: " + maxUnmgd);
+
+        stats.addValue(maxUnmgd);
+
+        failcnt++;
         cnt++;
       } // loop over
+
+System.out.println("Stats-> mean: " + stats.getMean() + " std: " + stats.getStandardDeviation() + " max: " + stats.getMax());
 
         // check if any row is all zeroes
         int[] goodRows1 = findNonEmptyRows(xArr1);
@@ -251,18 +338,18 @@ System.out.println("Adding: " + appId + ", " + stageId + ", " + execId);
           System.arraycopy(xArr1[row], 0, xArr1new[i], 0, numExamples);
           i++;
         }
-System.out.println("New Array 1: " + Arrays.deepToString(xArr1new));
+//System.out.println("New Array 1: " + Arrays.deepToString(xArr1new));
         i = 0;
         for(int row: goodRows2) {
           System.arraycopy(xArr2[row], 0, xArr2new[i], 0, numExamples);
           i++;
         }
-System.out.println("New Array 2: " + Arrays.deepToString(xArr2new));
+//System.out.println("New Array 2: " + Arrays.deepToString(xArr2new));
         // run two regression models, handle exceptions 
         Regression reg1 = new Regression(xArr1new, yArr1);
         RegressionResults results1 = new RegressionResults();
         try {
-          reg1.linear(0); // with 0 intercept
+          reg1.linear(); // not with 0 intercept
           double[] betaBars = reg1.getBestEstimates();
           double[] betaErrors = reg1.getBestEstimatesErrors();
           double df = reg1.getDegFree();
@@ -273,11 +360,13 @@ System.out.println("New Array 2: " + Arrays.deepToString(xArr2new));
           results1.setMeans(betaBars);
           results1.setStdDeviations(betaErrors);
           results1.setCoVar(cov);
-    System.out.println("Beta bars: " + Arrays.toString(betaBars));
+    System.out.println("--Beta bars: " + Arrays.toString(betaBars));
     System.out.println("Beta std dev: " + Arrays.toString(betaErrors));
     System.out.println("Degree freedom: " + df);
     System.out.println("Beta covariance: " + Arrays.deepToString(cov));
     System.out.println("Variables used: " + Arrays.toString(goodRows1));
+//    System.out.println("Beta residuals: " + Arrays.toString(reg1.getResiduals()));
+    System.out.println("sum of squares: " + reg1.getSumOfSquares());
         } catch(Exception e) {
           e.printStackTrace();
         }
@@ -293,23 +382,83 @@ System.out.println("New Array 2: " + Arrays.deepToString(xArr2new));
           for(i=0; i<goodRows2.length; i++) {
             goodRows2[i] += 7; // these variables follow the variables in model 1
           }
-          results1.setDegFree((int) df);
-          results1.setNumVariables(goodRows2.length);
-          results1.setVarNumbers(goodRows2);
-          results1.setMeans(betaBars);
-          results1.setStdDeviations(betaErrors);
-          results1.setCoVar(cov);
-    System.out.println("Beta bars: " + Arrays.toString(betaBars));
+          results2.setDegFree((int) df);
+          results2.setNumVariables(goodRows2.length);
+          results2.setVarNumbers(goodRows2);
+          results2.setMeans(betaBars);
+          results2.setStdDeviations(betaErrors);
+          results2.setCoVar(cov);
+    System.out.println("--Beta bars: " + Arrays.toString(betaBars));
     System.out.println("Beta std dev: " + Arrays.toString(betaErrors));
     System.out.println("Degree freedom: " + df);
     System.out.println("Beta covariance: " + Arrays.deepToString(cov));
     System.out.println("Variables used: " + Arrays.toString(goodRows2));
+//    System.out.println("Beta residuals: " + Arrays.toString(reg2.getResiduals()));
+    System.out.println("sum of squares: " + reg2.getSumOfSquares());
+        } catch(Exception e) {
+          e.printStackTrace();
+        }
+
+        Regression reg3 = new Regression(xArr3, yArr3);
+        RegressionResults results3 = new RegressionResults();
+        try {
+          reg3.linear(0); // with 0 intercept
+          double[] betaBars = reg3.getBestEstimates();
+          double[] betaErrors = reg3.getBestEstimatesErrors();
+          double df = reg3.getDegFree();
+          double[][] cov = reg3.getCovMatrix();
+          //for(i=0; i<goodRows2.length; i++) {
+          //  goodRows2[i] += 7; // these variables follow the variables in model 1
+          //}
+          results3.setDegFree((int) df);
+          results3.setNumVariables(2); // hardcoding
+          results3.setVarNumbers(new int[]{9, 10}); // hardcoding
+          results3.setMeans(betaBars);
+          results3.setStdDeviations(betaErrors);
+          results3.setCoVar(cov);
+    System.out.println("--Beta bars: " + Arrays.toString(betaBars));
+    System.out.println("Beta std dev: " + Arrays.toString(betaErrors));
+    System.out.println("Degree freedom: " + df);
+    System.out.println("Beta covariance: " + Arrays.deepToString(cov));
+    System.out.println("Variables used: [9 10]");
+//    System.out.println("Beta residuals: " + Arrays.toString(reg2.getResiduals()));
+    System.out.println("sum of squares: " + reg3.getSumOfSquares());
+        } catch(Exception e) {
+          e.printStackTrace();
+        }
+
+        Regression reg4 = new Regression(xArr4, yArr4);
+        RegressionResults results4 = new RegressionResults();
+        try {
+          reg4.linear(); // not with 0 intercept
+          double[] betaBars = reg4.getBestEstimates();
+          double[] betaErrors = reg4.getBestEstimatesErrors();
+          double df = reg4.getDegFree();
+          double[][] cov = reg4.getCovMatrix();
+          results4.setDegFree((int) df);
+          results4.setNumVariables(1); // hardcoding
+          results4.setVarNumbers(new int[]{11}); // hardcoding
+          results4.setMeans(betaBars);
+          results4.setStdDeviations(betaErrors);
+          results4.setCoVar(cov);
+    System.out.println("--Beta bars: " + Arrays.toString(betaBars));
+    System.out.println("Beta std dev: " + Arrays.toString(betaErrors));
+    System.out.println("Degree freedom: " + df);
+    System.out.println("Beta covariance: " + Arrays.deepToString(cov));
+    System.out.println("Variables used: 11");
+//    System.out.println("Beta residuals: " + Arrays.toString(reg1.getResiduals()));
+    System.out.println("sum of squares: " + reg4.getSumOfSquares());
         } catch(Exception e) {
           e.printStackTrace();
         }
 
       // merge two results 
-      results.mergeResults(results1, results2);
+      RegressionResults tempR = new RegressionResults();
+      RegressionResults tempR2 = new RegressionResults();
+      tempR.mergeResults(results1, results2);
+      tempR2.mergeResults(tempR, results3);
+      results.mergeResults(tempR2, results4);
+
       
       closeStatement(qstmt1);
       closeStatement(qstmt2);
@@ -362,7 +511,7 @@ System.out.println("New Array 2: " + Arrays.deepToString(xArr2new));
     double[][] cov = reg.getCovMatrix();
     double[] residuals = reg.getResiduals();
     double ss = reg.getSumOfSquares();
-    System.out.println("Beta bars: " + Arrays.toString(betaBars));
+    System.out.println("--Beta bars: " + Arrays.toString(betaBars));
     System.out.println("Beta std dev: " + Arrays.toString(betaErrors));
     System.out.println("Beta variation %: " + Arrays.toString(betaVariances));
     System.out.println("Beta t values: " + Arrays.toString(tValues));

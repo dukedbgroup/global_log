@@ -1,0 +1,2401 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building sparklogprocessor 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- exec-maven-plugin:1.4.0:java (default-cli) @ sparklogprocessor ---
+Running for cluster: 26
+Adding: application_1508545462036_0213, 7, 1
+Adding: application_1508545462036_0213, 7, 10
+Adding: application_1508545462036_0213, 7, 2
+Adding: application_1508545462036_0213, 7, 3
+Adding: application_1508545462036_0213, 7, 4
+Adding: application_1508545462036_0213, 7, 5
+Adding: application_1508545462036_0213, 7, 6
+Adding: application_1508545462036_0213, 7, 7
+Adding: application_1508545462036_0213, 7, 8
+Adding: application_1508545462036_0213, 7, 9
+Adding: application_1508545462036_0213, 8, 1
+Adding: application_1508545462036_0213, 8, 10
+Adding: application_1508545462036_0213, 8, 2
+Adding: application_1508545462036_0213, 8, 3
+Adding: application_1508545462036_0213, 8, 4
+Adding: application_1508545462036_0213, 8, 5
+Adding: application_1508545462036_0213, 8, 6
+Adding: application_1508545462036_0213, 8, 7
+Adding: application_1508545462036_0213, 8, 8
+Adding: application_1508545462036_0213, 8, 9
+Adding: application_1508545462036_0213, 9, 1
+Adding: application_1508545462036_0213, 9, 10
+Adding: application_1508545462036_0213, 9, 2
+Adding: application_1508545462036_0213, 9, 3
+Adding: application_1508545462036_0213, 9, 4
+Adding: application_1508545462036_0213, 9, 5
+Adding: application_1508545462036_0213, 9, 6
+Adding: application_1508545462036_0213, 9, 7
+Adding: application_1508545462036_0213, 9, 8
+Adding: application_1508545462036_0213, 9, 9
+Adding: application_1508545462036_0218, 5, 1
+Adding: application_1508545462036_0218, 5, 10
+Adding: application_1508545462036_0218, 5, 2
+Adding: application_1508545462036_0218, 5, 3
+Adding: application_1508545462036_0218, 5, 4
+Adding: application_1508545462036_0218, 5, 5
+Adding: application_1508545462036_0218, 5, 6
+Adding: application_1508545462036_0218, 5, 7
+Adding: application_1508545462036_0218, 5, 8
+Adding: application_1508545462036_0218, 5, 9
+Adding: application_1508545462036_0218, 6, 1
+Adding: application_1508545462036_0218, 6, 10
+Adding: application_1508545462036_0218, 6, 2
+Adding: application_1508545462036_0218, 6, 3
+Adding: application_1508545462036_0218, 6, 4
+Adding: application_1508545462036_0218, 6, 5
+Adding: application_1508545462036_0218, 6, 6
+Adding: application_1508545462036_0218, 6, 7
+Adding: application_1508545462036_0218, 6, 8
+Adding: application_1508545462036_0218, 6, 9
+Adding: application_1508545462036_0218, 7, 1
+Adding: application_1508545462036_0218, 7, 10
+Adding: application_1508545462036_0218, 7, 2
+Adding: application_1508545462036_0218, 7, 3
+Adding: application_1508545462036_0218, 7, 4
+Adding: application_1508545462036_0218, 7, 5
+Adding: application_1508545462036_0218, 7, 6
+Adding: application_1508545462036_0218, 7, 7
+Adding: application_1508545462036_0218, 7, 8
+Adding: application_1508545462036_0218, 7, 9
+Adding: application_1508545462036_0219, 11, 1
+Adding: application_1508545462036_0219, 11, 10
+Adding: application_1508545462036_0219, 11, 2
+Adding: application_1508545462036_0219, 11, 3
+Adding: application_1508545462036_0219, 11, 4
+Adding: application_1508545462036_0219, 11, 5
+Adding: application_1508545462036_0219, 11, 6
+Adding: application_1508545462036_0219, 11, 7
+Adding: application_1508545462036_0219, 11, 8
+Adding: application_1508545462036_0219, 11, 9
+Adding: application_1508545462036_0222, 7, 1
+Adding: application_1508545462036_0222, 7, 10
+Adding: application_1508545462036_0222, 7, 2
+Adding: application_1508545462036_0222, 7, 3
+Adding: application_1508545462036_0222, 7, 4
+Adding: application_1508545462036_0222, 7, 5
+Adding: application_1508545462036_0222, 7, 6
+Adding: application_1508545462036_0222, 7, 7
+Adding: application_1508545462036_0222, 7, 8
+Adding: application_1508545462036_0222, 7, 9
+Adding: application_1508545462036_0222, 9, 1
+Adding: application_1508545462036_0222, 9, 10
+Adding: application_1508545462036_0222, 9, 2
+Adding: application_1508545462036_0222, 9, 3
+Adding: application_1508545462036_0222, 9, 4
+Adding: application_1508545462036_0222, 9, 5
+Adding: application_1508545462036_0222, 9, 6
+Adding: application_1508545462036_0222, 9, 7
+Adding: application_1508545462036_0222, 9, 8
+Adding: application_1508545462036_0222, 9, 9
+Adding: application_1508545462036_0222, 11, 1
+Adding: application_1508545462036_0222, 11, 10
+Adding: application_1508545462036_0222, 11, 2
+Adding: application_1508545462036_0222, 11, 3
+Adding: application_1508545462036_0222, 11, 4
+Adding: application_1508545462036_0222, 11, 5
+Adding: application_1508545462036_0222, 11, 6
+Adding: application_1508545462036_0222, 11, 7
+Adding: application_1508545462036_0222, 11, 8
+Adding: application_1508545462036_0222, 11, 9
+Adding: application_1508545462036_0224, 11, 1
+Adding: application_1508545462036_0224, 11, 10
+Adding: application_1508545462036_0224, 11, 2
+Adding: application_1508545462036_0224, 11, 3
+Adding: application_1508545462036_0224, 11, 4
+Adding: application_1508545462036_0224, 11, 5
+Adding: application_1508545462036_0224, 11, 6
+Adding: application_1508545462036_0224, 11, 7
+Adding: application_1508545462036_0224, 11, 8
+Adding: application_1508545462036_0224, 11, 9
+Adding: application_1508545462036_0226, 5, 1
+Adding: application_1508545462036_0226, 5, 10
+Adding: application_1508545462036_0226, 5, 2
+Adding: application_1508545462036_0226, 5, 3
+Adding: application_1508545462036_0226, 5, 4
+Adding: application_1508545462036_0226, 5, 5
+Adding: application_1508545462036_0226, 5, 6
+Adding: application_1508545462036_0226, 5, 7
+Adding: application_1508545462036_0226, 5, 8
+Adding: application_1508545462036_0226, 5, 9
+Adding: application_1508545462036_0226, 7, 1
+Adding: application_1508545462036_0226, 7, 10
+Adding: application_1508545462036_0226, 7, 2
+Adding: application_1508545462036_0226, 7, 3
+Adding: application_1508545462036_0226, 7, 4
+Adding: application_1508545462036_0226, 7, 5
+Adding: application_1508545462036_0226, 7, 6
+Adding: application_1508545462036_0226, 7, 7
+Adding: application_1508545462036_0226, 7, 8
+Adding: application_1508545462036_0226, 7, 9
+Adding: application_1508545462036_0227, 5, 1
+Adding: application_1508545462036_0227, 5, 10
+Adding: application_1508545462036_0227, 5, 2
+Adding: application_1508545462036_0227, 5, 3
+Adding: application_1508545462036_0227, 5, 4
+Adding: application_1508545462036_0227, 5, 5
+Adding: application_1508545462036_0227, 5, 6
+Adding: application_1508545462036_0227, 5, 7
+Adding: application_1508545462036_0227, 5, 8
+Adding: application_1508545462036_0227, 5, 9
+Adding: application_1508545462036_0227, 7, 1
+Adding: application_1508545462036_0227, 7, 10
+Adding: application_1508545462036_0227, 7, 2
+Adding: application_1508545462036_0227, 7, 3
+Adding: application_1508545462036_0227, 7, 4
+Adding: application_1508545462036_0227, 7, 5
+Adding: application_1508545462036_0227, 7, 6
+Adding: application_1508545462036_0227, 7, 7
+Adding: application_1508545462036_0227, 7, 8
+Adding: application_1508545462036_0227, 7, 9
+Adding: application_1508545462036_0228, 7, 1
+Adding: application_1508545462036_0228, 7, 10
+Adding: application_1508545462036_0228, 7, 2
+Adding: application_1508545462036_0228, 7, 3
+Adding: application_1508545462036_0228, 7, 4
+Adding: application_1508545462036_0228, 7, 5
+Adding: application_1508545462036_0228, 7, 6
+Adding: application_1508545462036_0228, 7, 7
+Adding: application_1508545462036_0228, 7, 8
+Adding: application_1508545462036_0228, 7, 9
+Adding: application_1508545462036_0228, 9, 1
+Adding: application_1508545462036_0228, 9, 10
+Adding: application_1508545462036_0228, 9, 2
+Adding: application_1508545462036_0228, 9, 3
+Adding: application_1508545462036_0228, 9, 4
+Adding: application_1508545462036_0228, 9, 5
+Adding: application_1508545462036_0228, 9, 6
+Adding: application_1508545462036_0228, 9, 7
+Adding: application_1508545462036_0228, 9, 8
+Adding: application_1508545462036_0228, 9, 9
+Adding: application_1508545462036_0229, 5, 1
+Adding: application_1508545462036_0229, 5, 10
+Adding: application_1508545462036_0229, 5, 2
+Adding: application_1508545462036_0229, 5, 3
+Adding: application_1508545462036_0229, 5, 4
+Adding: application_1508545462036_0229, 5, 5
+Adding: application_1508545462036_0229, 5, 6
+Adding: application_1508545462036_0229, 5, 7
+Adding: application_1508545462036_0229, 5, 8
+Adding: application_1508545462036_0229, 5, 9
+Adding: application_1508545462036_0229, 7, 1
+Adding: application_1508545462036_0229, 7, 10
+Adding: application_1508545462036_0229, 7, 2
+Adding: application_1508545462036_0229, 7, 3
+Adding: application_1508545462036_0229, 7, 4
+Adding: application_1508545462036_0229, 7, 5
+Adding: application_1508545462036_0229, 7, 6
+Adding: application_1508545462036_0229, 7, 7
+Adding: application_1508545462036_0229, 7, 8
+Adding: application_1508545462036_0229, 7, 9
+Adding: application_1508545462036_0229, 9, 1
+Adding: application_1508545462036_0229, 9, 10
+Adding: application_1508545462036_0229, 9, 2
+Adding: application_1508545462036_0229, 9, 3
+Adding: application_1508545462036_0229, 9, 4
+Adding: application_1508545462036_0229, 9, 5
+Adding: application_1508545462036_0229, 9, 6
+Adding: application_1508545462036_0229, 9, 7
+Adding: application_1508545462036_0229, 9, 8
+Adding: application_1508545462036_0229, 9, 9
+Adding: application_1508545462036_0230, 7, 1
+Adding: application_1508545462036_0230, 7, 10
+Adding: application_1508545462036_0230, 7, 2
+Adding: application_1508545462036_0230, 7, 3
+Adding: application_1508545462036_0230, 7, 4
+Adding: application_1508545462036_0230, 7, 5
+Adding: application_1508545462036_0230, 7, 6
+Adding: application_1508545462036_0230, 7, 7
+Adding: application_1508545462036_0230, 7, 8
+Adding: application_1508545462036_0230, 7, 9
+Adding: application_1508545462036_0231, 7, 1
+Adding: application_1508545462036_0231, 7, 10
+Adding: application_1508545462036_0231, 7, 2
+Adding: application_1508545462036_0231, 7, 3
+Adding: application_1508545462036_0231, 7, 4
+Adding: application_1508545462036_0231, 7, 5
+Adding: application_1508545462036_0231, 7, 6
+Adding: application_1508545462036_0231, 7, 7
+Adding: application_1508545462036_0231, 7, 8
+Adding: application_1508545462036_0231, 7, 9
+Adding: application_1508545462036_0231, 9, 1
+Adding: application_1508545462036_0231, 9, 10
+Adding: application_1508545462036_0231, 9, 2
+Adding: application_1508545462036_0231, 9, 3
+Adding: application_1508545462036_0231, 9, 4
+Adding: application_1508545462036_0231, 9, 5
+Adding: application_1508545462036_0231, 9, 6
+Adding: application_1508545462036_0231, 9, 7
+Adding: application_1508545462036_0231, 9, 8
+Adding: application_1508545462036_0231, 9, 9
+Adding: application_1508545462036_0231, 11, 1
+Adding: application_1508545462036_0231, 11, 10
+Adding: application_1508545462036_0231, 11, 2
+Adding: application_1508545462036_0231, 11, 3
+Adding: application_1508545462036_0231, 11, 4
+Adding: application_1508545462036_0231, 11, 5
+Adding: application_1508545462036_0231, 11, 6
+Adding: application_1508545462036_0231, 11, 7
+Adding: application_1508545462036_0231, 11, 8
+Adding: application_1508545462036_0231, 11, 9
+Adding: application_1508545462036_0232, 9, 1
+Adding: application_1508545462036_0232, 9, 10
+Adding: application_1508545462036_0232, 9, 2
+Adding: application_1508545462036_0232, 9, 3
+Adding: application_1508545462036_0232, 9, 4
+Adding: application_1508545462036_0232, 9, 5
+Adding: application_1508545462036_0232, 9, 6
+Adding: application_1508545462036_0232, 9, 7
+Adding: application_1508545462036_0232, 9, 8
+Adding: application_1508545462036_0232, 9, 9
+Adding: application_1508545462036_0232, 11, 1
+Adding: application_1508545462036_0232, 11, 10
+Adding: application_1508545462036_0232, 11, 2
+Adding: application_1508545462036_0232, 11, 3
+Adding: application_1508545462036_0232, 11, 4
+Adding: application_1508545462036_0232, 11, 5
+Adding: application_1508545462036_0232, 11, 6
+Adding: application_1508545462036_0232, 11, 7
+Adding: application_1508545462036_0232, 11, 8
+Adding: application_1508545462036_0232, 11, 9
+Adding: application_1508545462036_0233, 7, 1
+Adding: application_1508545462036_0233, 7, 10
+Adding: application_1508545462036_0233, 7, 2
+Adding: application_1508545462036_0233, 7, 3
+Adding: application_1508545462036_0233, 7, 4
+Adding: application_1508545462036_0233, 7, 5
+Adding: application_1508545462036_0233, 7, 6
+Adding: application_1508545462036_0233, 7, 7
+Adding: application_1508545462036_0233, 7, 8
+Adding: application_1508545462036_0233, 7, 9
+Adding: application_1508545462036_0233, 9, 1
+Adding: application_1508545462036_0233, 9, 10
+Adding: application_1508545462036_0233, 9, 2
+Adding: application_1508545462036_0233, 9, 3
+Adding: application_1508545462036_0233, 9, 4
+Adding: application_1508545462036_0233, 9, 5
+Adding: application_1508545462036_0233, 9, 6
+Adding: application_1508545462036_0233, 9, 7
+Adding: application_1508545462036_0233, 9, 8
+Adding: application_1508545462036_0233, 9, 9
+Adding: application_1508545462036_0233, 11, 1
+Adding: application_1508545462036_0233, 11, 10
+Adding: application_1508545462036_0233, 11, 2
+Adding: application_1508545462036_0233, 11, 3
+Adding: application_1508545462036_0233, 11, 4
+Adding: application_1508545462036_0233, 11, 5
+Adding: application_1508545462036_0233, 11, 6
+Adding: application_1508545462036_0233, 11, 7
+Adding: application_1508545462036_0233, 11, 8
+Adding: application_1508545462036_0233, 11, 9
+Adding: application_1508545462036_0234, 5, 1
+Adding: application_1508545462036_0234, 5, 10
+Adding: application_1508545462036_0234, 5, 2
+Adding: application_1508545462036_0234, 5, 3
+Adding: application_1508545462036_0234, 5, 4
+Adding: application_1508545462036_0234, 5, 5
+Adding: application_1508545462036_0234, 5, 6
+Adding: application_1508545462036_0234, 5, 7
+Adding: application_1508545462036_0234, 5, 8
+Adding: application_1508545462036_0234, 5, 9
+Adding: application_1508545462036_0234, 7, 1
+Adding: application_1508545462036_0234, 7, 10
+Adding: application_1508545462036_0234, 7, 2
+Adding: application_1508545462036_0234, 7, 3
+Adding: application_1508545462036_0234, 7, 4
+Adding: application_1508545462036_0234, 7, 5
+Adding: application_1508545462036_0234, 7, 6
+Adding: application_1508545462036_0234, 7, 7
+Adding: application_1508545462036_0234, 7, 8
+Adding: application_1508545462036_0234, 7, 9
+Adding: application_1508545462036_0235, 11, 1
+Adding: application_1508545462036_0235, 11, 10
+Adding: application_1508545462036_0235, 11, 2
+Adding: application_1508545462036_0235, 11, 3
+Adding: application_1508545462036_0235, 11, 4
+Adding: application_1508545462036_0235, 11, 5
+Adding: application_1508545462036_0235, 11, 6
+Adding: application_1508545462036_0235, 11, 7
+Adding: application_1508545462036_0235, 11, 8
+Adding: application_1508545462036_0235, 11, 9
+Adding: application_1508545462036_0238, 7, 1
+Adding: application_1508545462036_0238, 7, 10
+Adding: application_1508545462036_0238, 7, 2
+Adding: application_1508545462036_0238, 7, 3
+Adding: application_1508545462036_0238, 7, 4
+Adding: application_1508545462036_0238, 7, 5
+Adding: application_1508545462036_0238, 7, 6
+Adding: application_1508545462036_0238, 7, 7
+Adding: application_1508545462036_0238, 7, 8
+Adding: application_1508545462036_0238, 7, 9
+Adding: application_1508545462036_0241, 9, 1
+Adding: application_1508545462036_0241, 9, 10
+Adding: application_1508545462036_0241, 9, 2
+Adding: application_1508545462036_0241, 9, 3
+Adding: application_1508545462036_0241, 9, 4
+Adding: application_1508545462036_0241, 9, 5
+Adding: application_1508545462036_0241, 9, 6
+Adding: application_1508545462036_0241, 9, 7
+Adding: application_1508545462036_0241, 9, 8
+Adding: application_1508545462036_0241, 9, 9
+Adding: application_1508545462036_0241, 11, 1
+Adding: application_1508545462036_0241, 11, 10
+Adding: application_1508545462036_0241, 11, 2
+Adding: application_1508545462036_0241, 11, 3
+Adding: application_1508545462036_0241, 11, 4
+Adding: application_1508545462036_0241, 11, 5
+Adding: application_1508545462036_0241, 11, 6
+Adding: application_1508545462036_0241, 11, 7
+Adding: application_1508545462036_0241, 11, 8
+Adding: application_1508545462036_0241, 11, 9
+Adding: application_1508545462036_0242, 9, 1
+Adding: application_1508545462036_0242, 9, 10
+Adding: application_1508545462036_0242, 9, 2
+Adding: application_1508545462036_0242, 9, 3
+Adding: application_1508545462036_0242, 9, 4
+Adding: application_1508545462036_0242, 9, 5
+Adding: application_1508545462036_0242, 9, 6
+Adding: application_1508545462036_0242, 9, 7
+Adding: application_1508545462036_0242, 9, 8
+Adding: application_1508545462036_0242, 9, 9
+Adding: application_1508545462036_0242, 11, 1
+Adding: application_1508545462036_0242, 11, 10
+Adding: application_1508545462036_0242, 11, 2
+Adding: application_1508545462036_0242, 11, 3
+Adding: application_1508545462036_0242, 11, 4
+Adding: application_1508545462036_0242, 11, 5
+Adding: application_1508545462036_0242, 11, 6
+Adding: application_1508545462036_0242, 11, 7
+Adding: application_1508545462036_0242, 11, 8
+Adding: application_1508545462036_0242, 11, 9
+Adding: application_1508545462036_0243, 7, 1
+Adding: application_1508545462036_0243, 7, 10
+Adding: application_1508545462036_0243, 7, 2
+Adding: application_1508545462036_0243, 7, 3
+Adding: application_1508545462036_0243, 7, 4
+Adding: application_1508545462036_0243, 7, 5
+Adding: application_1508545462036_0243, 7, 6
+Adding: application_1508545462036_0243, 7, 7
+Adding: application_1508545462036_0243, 7, 8
+Adding: application_1508545462036_0243, 7, 9
+Adding: application_1508545462036_0243, 9, 1
+Adding: application_1508545462036_0243, 9, 10
+Adding: application_1508545462036_0243, 9, 2
+Adding: application_1508545462036_0243, 9, 3
+Adding: application_1508545462036_0243, 9, 4
+Adding: application_1508545462036_0243, 9, 5
+Adding: application_1508545462036_0243, 9, 6
+Adding: application_1508545462036_0243, 9, 7
+Adding: application_1508545462036_0243, 9, 8
+Adding: application_1508545462036_0243, 9, 9
+Adding: application_1508545462036_0243, 10, 1
+Adding: application_1508545462036_0243, 10, 10
+Adding: application_1508545462036_0243, 10, 2
+Adding: application_1508545462036_0243, 10, 3
+Adding: application_1508545462036_0243, 10, 4
+Adding: application_1508545462036_0243, 10, 5
+Adding: application_1508545462036_0243, 10, 6
+Adding: application_1508545462036_0243, 10, 7
+Adding: application_1508545462036_0243, 10, 8
+Adding: application_1508545462036_0243, 10, 9
+Adding: application_1508545462036_0243, 11, 1
+Adding: application_1508545462036_0243, 11, 10
+Adding: application_1508545462036_0243, 11, 2
+Adding: application_1508545462036_0243, 11, 3
+Adding: application_1508545462036_0243, 11, 4
+Adding: application_1508545462036_0243, 11, 5
+Adding: application_1508545462036_0243, 11, 6
+Adding: application_1508545462036_0243, 11, 7
+Adding: application_1508545462036_0243, 11, 8
+Adding: application_1508545462036_0243, 11, 9
+Adding: application_1508545462036_0246, 11, 1
+Adding: application_1508545462036_0246, 11, 10
+Adding: application_1508545462036_0246, 11, 2
+Adding: application_1508545462036_0246, 11, 3
+Adding: application_1508545462036_0246, 11, 4
+Adding: application_1508545462036_0246, 11, 5
+Adding: application_1508545462036_0246, 11, 6
+Adding: application_1508545462036_0246, 11, 7
+Adding: application_1508545462036_0246, 11, 8
+Adding: application_1508545462036_0246, 11, 9
+Adding: application_1508545462036_0247, 11, 1
+Adding: application_1508545462036_0247, 11, 10
+Adding: application_1508545462036_0247, 11, 2
+Adding: application_1508545462036_0247, 11, 3
+Adding: application_1508545462036_0247, 11, 4
+Adding: application_1508545462036_0247, 11, 5
+Adding: application_1508545462036_0247, 11, 6
+Adding: application_1508545462036_0247, 11, 7
+Adding: application_1508545462036_0247, 11, 8
+Adding: application_1508545462036_0247, 11, 9
+Adding: application_1508545462036_0248, 5, 1
+Adding: application_1508545462036_0248, 5, 10
+Adding: application_1508545462036_0248, 5, 2
+Adding: application_1508545462036_0248, 5, 3
+Adding: application_1508545462036_0248, 5, 4
+Adding: application_1508545462036_0248, 5, 5
+Adding: application_1508545462036_0248, 5, 6
+Adding: application_1508545462036_0248, 5, 7
+Adding: application_1508545462036_0248, 5, 8
+Adding: application_1508545462036_0248, 5, 9
+Adding: application_1508545462036_0248, 7, 1
+Adding: application_1508545462036_0248, 7, 10
+Adding: application_1508545462036_0248, 7, 2
+Adding: application_1508545462036_0248, 7, 3
+Adding: application_1508545462036_0248, 7, 4
+Adding: application_1508545462036_0248, 7, 5
+Adding: application_1508545462036_0248, 7, 6
+Adding: application_1508545462036_0248, 7, 7
+Adding: application_1508545462036_0248, 7, 8
+Adding: application_1508545462036_0248, 7, 9
+Adding: application_1508545462036_0249, 5, 1
+Adding: application_1508545462036_0249, 5, 10
+Adding: application_1508545462036_0249, 5, 2
+Adding: application_1508545462036_0249, 5, 3
+Adding: application_1508545462036_0249, 5, 4
+Adding: application_1508545462036_0249, 5, 5
+Adding: application_1508545462036_0249, 5, 6
+Adding: application_1508545462036_0249, 5, 7
+Adding: application_1508545462036_0249, 5, 8
+Adding: application_1508545462036_0249, 5, 9
+Adding: application_1508545462036_0249, 7, 1
+Adding: application_1508545462036_0249, 7, 10
+Adding: application_1508545462036_0249, 7, 2
+Adding: application_1508545462036_0249, 7, 3
+Adding: application_1508545462036_0249, 7, 4
+Adding: application_1508545462036_0249, 7, 5
+Adding: application_1508545462036_0249, 7, 6
+Adding: application_1508545462036_0249, 7, 7
+Adding: application_1508545462036_0249, 7, 8
+Adding: application_1508545462036_0249, 7, 9
+Adding: application_1508545462036_0251, 11, 1
+Adding: application_1508545462036_0251, 11, 10
+Adding: application_1508545462036_0251, 11, 2
+Adding: application_1508545462036_0251, 11, 3
+Adding: application_1508545462036_0251, 11, 4
+Adding: application_1508545462036_0251, 11, 5
+Adding: application_1508545462036_0251, 11, 6
+Adding: application_1508545462036_0251, 11, 7
+Adding: application_1508545462036_0251, 11, 8
+Adding: application_1508545462036_0251, 11, 9
+Adding: application_1508545462036_0253, 9, 1
+Adding: application_1508545462036_0253, 9, 10
+Adding: application_1508545462036_0253, 9, 2
+Adding: application_1508545462036_0253, 9, 3
+Adding: application_1508545462036_0253, 9, 4
+Adding: application_1508545462036_0253, 9, 5
+Adding: application_1508545462036_0253, 9, 6
+Adding: application_1508545462036_0253, 9, 7
+Adding: application_1508545462036_0253, 9, 8
+Adding: application_1508545462036_0253, 9, 9
+Adding: application_1508545462036_0253, 11, 1
+Adding: application_1508545462036_0253, 11, 10
+Adding: application_1508545462036_0253, 11, 2
+Adding: application_1508545462036_0253, 11, 3
+Adding: application_1508545462036_0253, 11, 4
+Adding: application_1508545462036_0253, 11, 5
+Adding: application_1508545462036_0253, 11, 6
+Adding: application_1508545462036_0253, 11, 7
+Adding: application_1508545462036_0253, 11, 8
+Adding: application_1508545462036_0253, 11, 9
+Adding: application_1508545462036_0254, 7, 1
+Adding: application_1508545462036_0254, 7, 10
+Adding: application_1508545462036_0254, 7, 2
+Adding: application_1508545462036_0254, 7, 3
+Adding: application_1508545462036_0254, 7, 4
+Adding: application_1508545462036_0254, 7, 5
+Adding: application_1508545462036_0254, 7, 6
+Adding: application_1508545462036_0254, 7, 7
+Adding: application_1508545462036_0254, 7, 8
+Adding: application_1508545462036_0254, 7, 9
+Adding: application_1508545462036_0254, 9, 1
+Adding: application_1508545462036_0254, 9, 10
+Adding: application_1508545462036_0254, 9, 2
+Adding: application_1508545462036_0254, 9, 3
+Adding: application_1508545462036_0254, 9, 4
+Adding: application_1508545462036_0254, 9, 5
+Adding: application_1508545462036_0254, 9, 6
+Adding: application_1508545462036_0254, 9, 7
+Adding: application_1508545462036_0254, 9, 8
+Adding: application_1508545462036_0254, 9, 9
+Adding: application_1508545462036_0255, 5, 1
+Adding: application_1508545462036_0255, 5, 10
+Adding: application_1508545462036_0255, 5, 2
+Adding: application_1508545462036_0255, 5, 3
+Adding: application_1508545462036_0255, 5, 4
+Adding: application_1508545462036_0255, 5, 5
+Adding: application_1508545462036_0255, 5, 6
+Adding: application_1508545462036_0255, 5, 7
+Adding: application_1508545462036_0255, 5, 8
+Adding: application_1508545462036_0255, 5, 9
+Adding: application_1508545462036_0255, 7, 1
+Adding: application_1508545462036_0255, 7, 10
+Adding: application_1508545462036_0255, 7, 2
+Adding: application_1508545462036_0255, 7, 3
+Adding: application_1508545462036_0255, 7, 4
+Adding: application_1508545462036_0255, 7, 5
+Adding: application_1508545462036_0255, 7, 6
+Adding: application_1508545462036_0255, 7, 7
+Adding: application_1508545462036_0255, 7, 8
+Adding: application_1508545462036_0255, 7, 9
+Adding: application_1508545462036_0255, 9, 1
+Adding: application_1508545462036_0255, 9, 10
+Adding: application_1508545462036_0255, 9, 2
+Adding: application_1508545462036_0255, 9, 3
+Adding: application_1508545462036_0255, 9, 4
+Adding: application_1508545462036_0255, 9, 5
+Adding: application_1508545462036_0255, 9, 6
+Adding: application_1508545462036_0255, 9, 7
+Adding: application_1508545462036_0255, 9, 8
+Adding: application_1508545462036_0255, 9, 9
+Adding: application_1508545462036_0256, 7, 1
+Adding: application_1508545462036_0256, 7, 10
+Adding: application_1508545462036_0256, 7, 2
+Adding: application_1508545462036_0256, 7, 3
+Adding: application_1508545462036_0256, 7, 4
+Adding: application_1508545462036_0256, 7, 5
+Adding: application_1508545462036_0256, 7, 6
+Adding: application_1508545462036_0256, 7, 7
+Adding: application_1508545462036_0256, 7, 8
+Adding: application_1508545462036_0256, 7, 9
+Adding: application_1508545462036_0256, 9, 1
+Adding: application_1508545462036_0256, 9, 10
+Adding: application_1508545462036_0256, 9, 2
+Adding: application_1508545462036_0256, 9, 3
+Adding: application_1508545462036_0256, 9, 4
+Adding: application_1508545462036_0256, 9, 5
+Adding: application_1508545462036_0256, 9, 6
+Adding: application_1508545462036_0256, 9, 7
+Adding: application_1508545462036_0256, 9, 8
+Adding: application_1508545462036_0256, 9, 9
+Adding: application_1508545462036_0257, 7, 1
+Adding: application_1508545462036_0257, 7, 10
+Adding: application_1508545462036_0257, 7, 2
+Adding: application_1508545462036_0257, 7, 3
+Adding: application_1508545462036_0257, 7, 4
+Adding: application_1508545462036_0257, 7, 5
+Adding: application_1508545462036_0257, 7, 6
+Adding: application_1508545462036_0257, 7, 7
+Adding: application_1508545462036_0257, 7, 8
+Adding: application_1508545462036_0257, 7, 9
+Adding: application_1508545462036_0257, 9, 1
+Adding: application_1508545462036_0257, 9, 10
+Adding: application_1508545462036_0257, 9, 2
+Adding: application_1508545462036_0257, 9, 3
+Adding: application_1508545462036_0257, 9, 4
+Adding: application_1508545462036_0257, 9, 5
+Adding: application_1508545462036_0257, 9, 6
+Adding: application_1508545462036_0257, 9, 7
+Adding: application_1508545462036_0257, 9, 8
+Adding: application_1508545462036_0257, 9, 9
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/1/sparkOutput_worker_application_1508545462036_0213_1.txt
+Reading lines: 5212 to 6521
+delta heap: -1.4168488E8, coll: 1.8951947544E10, storage: 2.349503164E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/10/sparkOutput_worker_application_1508545462036_0213_10.txt
+Reading lines: 5210 to 6514
+delta heap: -2.23926232E8, coll: 2.084163936E10, storage: 2.347399614E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/2/sparkOutput_worker_application_1508545462036_0213_2.txt
+Reading lines: 5184 to 6393
+delta heap: -6.5173408E7, coll: 1.9996086624E10, storage: 2.063444876E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/3/sparkOutput_worker_application_1508545462036_0213_3.txt
+Reading lines: 5201 to 6505
+delta heap: -5.5396712E7, coll: 2.1140633776E10, storage: 2.412191472E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/4/sparkOutput_worker_application_1508545462036_0213_4.txt
+Reading lines: 5188 to 6359
+delta heap: -1.781524E7, coll: 1.7864153096E10, storage: 1.910724694E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/5/sparkOutput_worker_application_1508545462036_0213_5.txt
+Reading lines: 5186 to 6365
+delta heap: 2.27190256E8, coll: 1.9262274456E10, storage: 1.899757737E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/6/sparkOutput_worker_application_1508545462036_0213_6.txt
+Reading lines: 5177 to 6387
+delta heap: -1.54439864E8, coll: 1.826476648E10, storage: 2.038085791E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/7/sparkOutput_worker_application_1508545462036_0213_7.txt
+Reading lines: 5193 to 6420
+delta heap: -1.38149944E8, coll: 1.8838510856E10, storage: 2.043825693E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/8/sparkOutput_worker_application_1508545462036_0213_8.txt
+Reading lines: 5197 to 6400
+delta heap: -2.1990928E8, coll: 1.833480052E10, storage: 2.037709893E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/9/sparkOutput_worker_application_1508545462036_0213_9.txt
+Reading lines: 5189 to 6402
+delta heap: -6.9806736E7, coll: 1.8514001176E10, storage: 2.046761947E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/1/sparkOutput_worker_application_1508545462036_0213_1.txt
+Reading lines: 6521 to 8029
+delta heap: 3.37992032E8, coll: 2.4143965592E10, storage: 2.346152249E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/10/sparkOutput_worker_application_1508545462036_0213_10.txt
+Reading lines: 6518 to 8023
+delta heap: 1.64873632E8, coll: 2.4093450544E10, storage: 2.353152108E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/2/sparkOutput_worker_application_1508545462036_0213_2.txt
+Reading lines: 6486 to 7966
+delta heap: -3.05565848E8, coll: 2.3510439336E10, storage: 2.316367618E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/3/sparkOutput_worker_application_1508545462036_0213_3.txt
+Reading lines: 6506 to 8002
+delta heap: 2.04674712E8, coll: 2.3857390152E10, storage: 2.342742871E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/4/sparkOutput_worker_application_1508545462036_0213_4.txt
+Reading lines: 6490 to 7839
+delta heap: 2.5650784E7, coll: 2.3253467736E10, storage: 1.899155316E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/5/sparkOutput_worker_application_1508545462036_0213_5.txt
+Reading lines: 6488 to 7872
+delta heap: 5.8208016E7, coll: 2.4007074392E10, storage: 1.894744467E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/6/sparkOutput_worker_application_1508545462036_0213_6.txt
+Reading lines: 6477 to 7846
+delta heap: -3.84230512E8, coll: 2.2622341696E10, storage: 1.843007692E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/7/sparkOutput_worker_application_1508545462036_0213_7.txt
+Reading lines: 6496 to 7818
+delta heap: -3.25185024E8, coll: 2.1829820232E10, storage: 1.895503235E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/8/sparkOutput_worker_application_1508545462036_0213_8.txt
+Reading lines: 6502 to 7867
+delta heap: 1.41895936E8, coll: 2.2136546848E10, storage: 1.996893836E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/9/sparkOutput_worker_application_1508545462036_0213_9.txt
+Reading lines: 6492 to 7855
+delta heap: 3465808.0, coll: 2.3592939048E10, storage: 1.999399182E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/1/sparkOutput_worker_application_1508545462036_0213_1.txt
+Reading lines: 8029 to 9522
+delta heap: 2.546668E7, coll: 1.9491645304E10, storage: 2.048128382E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/10/sparkOutput_worker_application_1508545462036_0213_10.txt
+Reading lines: 8025 to 9652
+delta heap: 1.38121328E8, coll: 1.794475772E10, storage: 2.343592021E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/2/sparkOutput_worker_application_1508545462036_0213_2.txt
+Reading lines: 7986 to 9607
+delta heap: 1.07247512E8, coll: 1.7465303152E10, storage: 2.386454527E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/3/sparkOutput_worker_application_1508545462036_0213_3.txt
+Reading lines: 8011 to 9487
+delta heap: 6.2364496E7, coll: 1.6004830384E10, storage: 2.048296889E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/4/sparkOutput_worker_application_1508545462036_0213_4.txt
+Reading lines: 7991 to 9512
+delta heap: -1.401172E8, coll: 1.867775328E10, storage: 2.033447379E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/5/sparkOutput_worker_application_1508545462036_0213_5.txt
+Reading lines: 7988 to 9478
+delta heap: 1.85113744E8, coll: 1.90934856E10, storage: 1.895320945E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/6/sparkOutput_worker_application_1508545462036_0213_6.txt
+Reading lines: 7975 to 9461
+delta heap: 7.5239624E7, coll: 1.8485372848E10, storage: 1.854011672E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/7/sparkOutput_worker_application_1508545462036_0213_7.txt
+Reading lines: 7998 to 9508
+delta heap: -8.5148304E7, coll: 1.9184716576E10, storage: 2.038682875E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/8/sparkOutput_worker_application_1508545462036_0213_8.txt
+Reading lines: 8006 to 9518
+delta heap: -3.68638904E8, coll: 1.8541683456E10, storage: 2.034696609E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/9/sparkOutput_worker_application_1508545462036_0213_9.txt
+Reading lines: 7993 to 9462
+delta heap: 7.3575264E7, coll: 1.6605080584E10, storage: 2.024069789E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/1/sparkOutput_worker_application_1508545462036_0218_1.txt
+Reading lines: 2848 to 3729
+delta heap: 4.3002872E7, coll: 4.8498464552E10, storage: 2.407224044E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/10/sparkOutput_worker_application_1508545462036_0218_10.txt
+Reading lines: 2834 to 3783
+delta heap: 1.81455968E8, coll: 5.1480150224E10, storage: 2.637505755E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/2/sparkOutput_worker_application_1508545462036_0218_2.txt
+Reading lines: 2849 to 3727
+delta heap: -2.5922828E8, coll: 4.7947719392E10, storage: 2.382904704E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/3/sparkOutput_worker_application_1508545462036_0218_3.txt
+Reading lines: 2860 to 3792
+delta heap: 1.05992488E8, coll: 4.7742884104E10, storage: 2.46271589E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/4/sparkOutput_worker_application_1508545462036_0218_4.txt
+Reading lines: 2854 to 3731
+delta heap: 1612656.0, coll: 4.7964120888E10, storage: 2.377626209E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/5/sparkOutput_worker_application_1508545462036_0218_5.txt
+Reading lines: 2847 to 3748
+delta heap: -1.38596296E8, coll: 4.6984655448E10, storage: 2.446247288E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/6/sparkOutput_worker_application_1508545462036_0218_6.txt
+Reading lines: 2846 to 3769
+delta heap: 2.4539032E7, coll: 4.7964089512E10, storage: 2.549464614E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/7/sparkOutput_worker_application_1508545462036_0218_7.txt
+Reading lines: 2846 to 3742
+delta heap: -2.65544176E8, coll: 4.9087786336E10, storage: 2.482184034E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/8/sparkOutput_worker_application_1508545462036_0218_8.txt
+Reading lines: 2848 to 3742
+delta heap: -8.1485256E7, coll: 4.8494911192E10, storage: 2.375890674E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/9/sparkOutput_worker_application_1508545462036_0218_9.txt
+Reading lines: 2848 to 3736
+delta heap: 2.9540632E7, coll: 4.7113069216E10, storage: 2.347837274E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/1/sparkOutput_worker_application_1508545462036_0218_1.txt
+Reading lines: 3802 to 4817
+delta heap: 5.9871208E7, coll: 4.9269281504E10, storage: 2.300310205E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/10/sparkOutput_worker_application_1508545462036_0218_10.txt
+Reading lines: 3783 to 4842
+delta heap: -5.0189136E7, coll: 5.2518373272E10, storage: 2.532336058E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/2/sparkOutput_worker_application_1508545462036_0218_2.txt
+Reading lines: 3803 to 4813
+delta heap: 1.16751352E8, coll: 4.8472522568E10, storage: 2.281949797E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/3/sparkOutput_worker_application_1508545462036_0218_3.txt
+Reading lines: 3817 to 4892
+delta heap: 2.23448768E8, coll: 5.233688332E10, storage: 2.456633815E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/4/sparkOutput_worker_application_1508545462036_0218_4.txt
+Reading lines: 3809 to 4821
+delta heap: -2.67869624E8, coll: 4.9047475256E10, storage: 2.271167351E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/5/sparkOutput_worker_application_1508545462036_0218_5.txt
+Reading lines: 3800 to 4837
+delta heap: -2.42841824E8, coll: 5.0401556976E10, storage: 2.405798782E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/6/sparkOutput_worker_application_1508545462036_0218_6.txt
+Reading lines: 3799 to 4867
+delta heap: 9.2014808E7, coll: 5.2394845784E10, storage: 2.538827724E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/7/sparkOutput_worker_application_1508545462036_0218_7.txt
+Reading lines: 3799 to 4839
+delta heap: -3.7932532E8, coll: 5.101479304E10, storage: 2.420513661E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/8/sparkOutput_worker_application_1508545462036_0218_8.txt
+Reading lines: 3801 to 4834
+delta heap: 2.71111128E8, coll: 5.0560547536E10, storage: 2.421246781E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/9/sparkOutput_worker_application_1508545462036_0218_9.txt
+Reading lines: 3802 to 4829
+delta heap: -1.67581616E8, coll: 4.8821614816E10, storage: 2.359018592E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/1/sparkOutput_worker_application_1508545462036_0218_1.txt
+Reading lines: 4874 to 5976
+delta heap: -1.66293496E8, coll: 5.0112833128E10, storage: 2.424611366E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/10/sparkOutput_worker_application_1508545462036_0218_10.txt
+Reading lines: 4849 to 6006
+delta heap: 7.7733904E7, coll: 5.549184516E10, storage: 2.599352242E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/2/sparkOutput_worker_application_1508545462036_0218_2.txt
+Reading lines: 4874 to 5992
+delta heap: -1.358632E8, coll: 5.0479976384E10, storage: 2.433478839E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/3/sparkOutput_worker_application_1508545462036_0218_3.txt
+Reading lines: 4893 to 6084
+delta heap: 5560464.0, coll: 5.4354998896E10, storage: 2.600710268E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/4/sparkOutput_worker_application_1508545462036_0218_4.txt
+Reading lines: 4882 to 5994
+delta heap: -3.640144E7, coll: 5.02654558E10, storage: 2.4302178E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/5/sparkOutput_worker_application_1508545462036_0218_5.txt
+Reading lines: 4871 to 6003
+delta heap: -1.19440032E8, coll: 5.1085161792E10, storage: 2.447372934E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/6/sparkOutput_worker_application_1508545462036_0218_6.txt
+Reading lines: 4870 to 6031
+delta heap: 7.4509024E7, coll: 5.36675784E10, storage: 2.558926946E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/7/sparkOutput_worker_application_1508545462036_0218_7.txt
+Reading lines: 4869 to 6001
+delta heap: -1.48554792E8, coll: 5.2056559696E10, storage: 2.529753038E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/8/sparkOutput_worker_application_1508545462036_0218_8.txt
+Reading lines: 4872 to 6006
+delta heap: -2.42702664E8, coll: 5.13660444E10, storage: 2.419652385E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0218/9/sparkOutput_worker_application_1508545462036_0218_9.txt
+Reading lines: 4874 to 5998
+delta heap: -2.9345824E7, coll: 5.048743264E10, storage: 2.429464722E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0219/1/sparkOutput_worker_application_1508545462036_0219_1.txt
+Reading lines: 5852 to 6601
+delta heap: 1.44388208E8, coll: 2.0277435872E10, storage: 2.272389243E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0219/10/sparkOutput_worker_application_1508545462036_0219_10.txt
+Reading lines: 5909 to 6631
+delta heap: -1.50036976E8, coll: 2.0432697784E10, storage: 2.177993181E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0219/2/sparkOutput_worker_application_1508545462036_0219_2.txt
+Reading lines: 5918 to 6673
+delta heap: -1.4854216E8, coll: 2.0020965408E10, storage: 2.421040528E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0219/3/sparkOutput_worker_application_1508545462036_0219_3.txt
+Reading lines: 5893 to 6630
+delta heap: -1.64105056E8, coll: 1.990797004E10, storage: 2.236741257E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0219/4/sparkOutput_worker_application_1508545462036_0219_4.txt
+Reading lines: 5884 to 6595
+delta heap: -7.5445448E7, coll: 2.0896785144E10, storage: 2.049596693E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0219/5/sparkOutput_worker_application_1508545462036_0219_5.txt
+Reading lines: 5908 to 6665
+delta heap: -1.06571536E8, coll: 2.0482321256E10, storage: 2.349320435E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0219/6/sparkOutput_worker_application_1508545462036_0219_6.txt
+Reading lines: 5884 to 6640
+delta heap: 4.57602E7, coll: 1.9581524944E10, storage: 2.276163519E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0219/7/sparkOutput_worker_application_1508545462036_0219_7.txt
+Reading lines: 5918 to 6637
+delta heap: -2.09792864E8, coll: 1.9381669096E10, storage: 2.104919318E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0219/8/sparkOutput_worker_application_1508545462036_0219_8.txt
+Reading lines: 5879 to 6598
+delta heap: -1.54210632E8, coll: 1.8799633328E10, storage: 2.15313016E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0219/9/sparkOutput_worker_application_1508545462036_0219_9.txt
+Reading lines: 5886 to 6597
+delta heap: -8.2576928E7, coll: 2.0203962176E10, storage: 2.204453859E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/1/sparkOutput_worker_application_1508545462036_0222_1.txt
+Reading lines: 4693 to 5355
+delta heap: 7.3242616E7, coll: 3.1785583336E10, storage: 2.763995577E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/10/sparkOutput_worker_application_1508545462036_0222_10.txt
+Reading lines: 4726 to 5423
+delta heap: -5.7880168E7, coll: 3.453744616E10, storage: 1.711858007E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/2/sparkOutput_worker_application_1508545462036_0222_2.txt
+Reading lines: 4687 to 5324
+delta heap: -2.2889912E7, coll: 3.0521840584E10, storage: 2.386128334E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/3/sparkOutput_worker_application_1508545462036_0222_3.txt
+Reading lines: 4689 to 5379
+delta heap: -1.06238136E8, coll: 3.3381484976E10, storage: 2.931425714E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/4/sparkOutput_worker_application_1508545462036_0222_4.txt
+Reading lines: 4684 to 5340
+delta heap: 1.95785584E8, coll: 3.1429160016E10, storage: 2.810509503E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/5/sparkOutput_worker_application_1508545462036_0222_5.txt
+Reading lines: 4662 to 5321
+delta heap: 3.39603736E8, coll: 3.2828214384E10, storage: 2.685300633E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/6/sparkOutput_worker_application_1508545462036_0222_6.txt
+Reading lines: 4667 to 5293
+delta heap: 2082832.0, coll: 3.1867094728E10, storage: 2.486461609E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/7/sparkOutput_worker_application_1508545462036_0222_7.txt
+Reading lines: 4700 to 5375
+delta heap: -6.2610648E7, coll: 3.11032102E10, storage: 2.813594605E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/8/sparkOutput_worker_application_1508545462036_0222_8.txt
+Reading lines: 4697 to 5368
+delta heap: 1.8589336E7, coll: 3.3148592048E10, storage: 2.879122323E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/9/sparkOutput_worker_application_1508545462036_0222_9.txt
+Reading lines: 4680 to 5337
+delta heap: 1.8672916E8, coll: 3.2987879072E10, storage: 2.804005491E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/1/sparkOutput_worker_application_1508545462036_0222_1.txt
+Reading lines: 6687 to 7484
+delta heap: 8.5558488E7, coll: 2.6259522392E10, storage: 2.952703444E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/10/sparkOutput_worker_application_1508545462036_0222_10.txt
+Reading lines: 6734 to 7506
+delta heap: -8.5224176E7, coll: 2.6636121816E10, storage: 2.657356898E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/2/sparkOutput_worker_application_1508545462036_0222_2.txt
+Reading lines: 6678 to 7421
+delta heap: 1.81234144E8, coll: 2.4571433096E10, storage: 2.68706095E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/3/sparkOutput_worker_application_1508545462036_0222_3.txt
+Reading lines: 6681 to 7422
+delta heap: 2.61224096E8, coll: 2.4356971456E10, storage: 2.706130689E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/4/sparkOutput_worker_application_1508545462036_0222_4.txt
+Reading lines: 6674 to 7407
+delta heap: -1.62619288E8, coll: 2.5066629096E10, storage: 2.533264366E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/5/sparkOutput_worker_application_1508545462036_0222_5.txt
+Reading lines: 6642 to 7410
+delta heap: 2.809344E7, coll: 2.4706544984E10, storage: 2.817614166E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/6/sparkOutput_worker_application_1508545462036_0222_6.txt
+Reading lines: 6650 to 7372
+delta heap: -5.632496E7, coll: 2.393752564E10, storage: 2.528931403E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/7/sparkOutput_worker_application_1508545462036_0222_7.txt
+Reading lines: 6697 to 7436
+delta heap: 1.2918832E7, coll: 2.6179997744E10, storage: 2.545307975E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/8/sparkOutput_worker_application_1508545462036_0222_8.txt
+Reading lines: 6692 to 7410
+delta heap: -3.6114128E7, coll: 2.4385585432E10, storage: 2.558077169E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/9/sparkOutput_worker_application_1508545462036_0222_9.txt
+Reading lines: 6668 to 7403
+delta heap: -7185784.0, coll: 2.4430286992E10, storage: 2.648932373E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/1/sparkOutput_worker_application_1508545462036_0222_1.txt
+Reading lines: 8980 to 9812
+delta heap: 7.4078392E7, coll: 3.9562290808E10, storage: 2.684367429E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/10/sparkOutput_worker_application_1508545462036_0222_10.txt
+Reading lines: 9043 to 9887
+delta heap: -3.0697716E8, coll: 4.1124221864E10, storage: 2.606891139E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/2/sparkOutput_worker_application_1508545462036_0222_2.txt
+Reading lines: 8969 to 9800
+delta heap: -2.03978704E8, coll: 3.6845950016E10, storage: 2.542204659E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/3/sparkOutput_worker_application_1508545462036_0222_3.txt
+Reading lines: 8972 to 9826
+delta heap: 6332832.0, coll: 4.359194448E10, storage: 2.72601041E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/4/sparkOutput_worker_application_1508545462036_0222_4.txt
+Reading lines: 8962 to 9846
+delta heap: 5.4782808E7, coll: 4.145622524E10, storage: 2.926719562E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/5/sparkOutput_worker_application_1508545462036_0222_5.txt
+Reading lines: 8920 to 9801
+delta heap: 1.4999704E7, coll: 3.9882944192E10, storage: 2.695417764E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/6/sparkOutput_worker_application_1508545462036_0222_6.txt
+Reading lines: 8930 to 9751
+delta heap: 1.52130984E8, coll: 3.7063456344E10, storage: 2.663784793E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/7/sparkOutput_worker_application_1508545462036_0222_7.txt
+Reading lines: 8993 to 9817
+delta heap: -1.6559296E7, coll: 4.0985311136E10, storage: 2.385686342E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/8/sparkOutput_worker_application_1508545462036_0222_8.txt
+Reading lines: 8987 to 9819
+delta heap: -4.41698E7, coll: 3.9934326704E10, storage: 2.599082615E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0222/9/sparkOutput_worker_application_1508545462036_0222_9.txt
+Reading lines: 8955 to 9769
+delta heap: -2.23433992E8, coll: 4.1299028688E10, storage: 2.487982752E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0224/1/sparkOutput_worker_application_1508545462036_0224_1.txt
+Reading lines: 5768 to 6525
+delta heap: -1.35087736E8, coll: 1.0180794024E10, storage: 2.228048561E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0224/10/sparkOutput_worker_application_1508545462036_0224_10.txt
+Reading lines: 5769 to 6543
+delta heap: -3.7524696E7, coll: 9.410796552E9, storage: 2.180566593E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0224/2/sparkOutput_worker_application_1508545462036_0224_2.txt
+Reading lines: 6281 to 7116
+delta heap: 5.2772432E7, coll: 1.1141571104E10, storage: 2.43882067E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0224/3/sparkOutput_worker_application_1508545462036_0224_3.txt
+Reading lines: 6321 to 7205
+delta heap: -2.46059224E8, coll: 1.1930230376E10, storage: 2.430769881E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0224/4/sparkOutput_worker_application_1508545462036_0224_4.txt
+Reading lines: 6263 to 7120
+delta heap: -8.1966976E7, coll: 1.0755744336E10, storage: 2.569182337E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0224/5/sparkOutput_worker_application_1508545462036_0224_5.txt
+Reading lines: 6259 to 7066
+delta heap: -4.543172E7, coll: 1.1131544912E10, storage: 2.304149279E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0224/6/sparkOutput_worker_application_1508545462036_0224_6.txt
+Reading lines: 6264 to 7114
+delta heap: -9.1996072E7, coll: 1.0669927304E10, storage: 2.557843472E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0224/7/sparkOutput_worker_application_1508545462036_0224_7.txt
+Reading lines: 6267 to 7022
+delta heap: -1.016788E8, coll: 1.0526797256E10, storage: 2.113322672E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0224/8/sparkOutput_worker_application_1508545462036_0224_8.txt
+Reading lines: 6255 to 7109
+delta heap: 1.23898792E8, coll: 1.162887396E10, storage: 2.58505846E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0224/9/sparkOutput_worker_application_1508545462036_0224_9.txt
+Reading lines: 6269 to 7118
+delta heap: -9.0917616E7, coll: 1.1363006696E10, storage: 2.439412138E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/1/sparkOutput_worker_application_1508545462036_0226_1.txt
+Reading lines: 2981 to 3494
+delta heap: 3.53822408E8, coll: 2.2506206224E10, storage: 2.22639452E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/10/sparkOutput_worker_application_1508545462036_0226_10.txt
+Reading lines: 2964 to 3479
+delta heap: -3.83646752E8, coll: 1.6269745632E10, storage: 2.384875355E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/2/sparkOutput_worker_application_1508545462036_0226_2.txt
+Reading lines: 2966 to 3481
+delta heap: -4.1415024E7, coll: 1.962130908E10, storage: 2.33400386E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/3/sparkOutput_worker_application_1508545462036_0226_3.txt
+Reading lines: 2977 to 3526
+delta heap: -2.20954664E8, coll: 2.5564761256E10, storage: 2.550633371E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/4/sparkOutput_worker_application_1508545462036_0226_4.txt
+Reading lines: 2973 to 3527
+delta heap: -1.15768E8, coll: 2.4545388888E10, storage: 2.505954263E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/5/sparkOutput_worker_application_1508545462036_0226_5.txt
+Reading lines: 2994 to 3497
+delta heap: -1.18420296E8, coll: 1.7094242832E10, storage: 2.183580313E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/6/sparkOutput_worker_application_1508545462036_0226_6.txt
+Reading lines: 2973 to 3471
+delta heap: 1.53314904E8, coll: 2.3005292112E10, storage: 2.084641706E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/7/sparkOutput_worker_application_1508545462036_0226_7.txt
+Reading lines: 2971 to 3499
+delta heap: -2.6037248E8, coll: 1.8458358352E10, storage: 2.365752382E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/8/sparkOutput_worker_application_1508545462036_0226_8.txt
+Reading lines: 2969 to 3444
+delta heap: -2.00963056E8, coll: 1.5052072632E10, storage: 2.057582687E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/9/sparkOutput_worker_application_1508545462036_0226_9.txt
+Reading lines: 2935 to 3450
+delta heap: 2.72561032E8, coll: 2.4750693912E10, storage: 2.359586578E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/1/sparkOutput_worker_application_1508545462036_0226_1.txt
+Reading lines: 4625 to 5268
+delta heap: 2.23836984E8, coll: 3.9354751888E10, storage: 2.470140891E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/10/sparkOutput_worker_application_1508545462036_0226_10.txt
+Reading lines: 4598 to 5240
+delta heap: 5.48831936E8, coll: 3.8262577856E10, storage: 2.346228287E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/2/sparkOutput_worker_application_1508545462036_0226_2.txt
+Reading lines: 4601 to 5223
+delta heap: -1.882928E7, coll: 3.7825743032E10, storage: 2.304791645E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/3/sparkOutput_worker_application_1508545462036_0226_3.txt
+Reading lines: 4619 to 5254
+delta heap: 4.22467016E8, coll: 3.7772058856E10, storage: 2.296538767E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/4/sparkOutput_worker_application_1508545462036_0226_4.txt
+Reading lines: 4612 to 5261
+delta heap: -2.03352944E8, coll: 3.7261139424E10, storage: 2.444529608E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/5/sparkOutput_worker_application_1508545462036_0226_5.txt
+Reading lines: 4610 to 5266
+delta heap: 2.29997664E8, coll: 3.8482147968E10, storage: 2.355742887E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/6/sparkOutput_worker_application_1508545462036_0226_6.txt
+Reading lines: 4613 to 5278
+delta heap: 4.8413128E7, coll: 3.8736360608E10, storage: 2.362872261E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/7/sparkOutput_worker_application_1508545462036_0226_7.txt
+Reading lines: 4611 to 5282
+delta heap: 5.81195136E8, coll: 3.7598313608E10, storage: 2.353077026E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/8/sparkOutput_worker_application_1508545462036_0226_8.txt
+Reading lines: 4605 to 5253
+delta heap: 3.76787648E8, coll: 3.966478068E10, storage: 2.43067669E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0226/9/sparkOutput_worker_application_1508545462036_0226_9.txt
+Reading lines: 4553 to 5203
+delta heap: 4.0157304E8, coll: 3.888877172E10, storage: 2.457088212E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/1/sparkOutput_worker_application_1508545462036_0227_1.txt
+Reading lines: 3224 to 3753
+delta heap: -2.81626632E8, coll: 2.0651200968E10, storage: 2.62052212E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/10/sparkOutput_worker_application_1508545462036_0227_10.txt
+Reading lines: 3224 to 3743
+delta heap: -3.12714864E8, coll: 2.0712857184E10, storage: 2.509843344E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/2/sparkOutput_worker_application_1508545462036_0227_2.txt
+Reading lines: 3225 to 3740
+delta heap: -2.293844E7, coll: 2.0985740552E10, storage: 2.401383865E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/3/sparkOutput_worker_application_1508545462036_0227_3.txt
+Reading lines: 3228 to 3742
+delta heap: -1.5597624E8, coll: 2.2282869288E10, storage: 2.446554591E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/4/sparkOutput_worker_application_1508545462036_0227_4.txt
+Reading lines: 3224 to 3740
+delta heap: -5.5734264E7, coll: 2.1528016112E10, storage: 2.452023647E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/5/sparkOutput_worker_application_1508545462036_0227_5.txt
+Reading lines: 3200 to 3748
+delta heap: -2.20058728E8, coll: 2.31325834E10, storage: 2.573787061E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/6/sparkOutput_worker_application_1508545462036_0227_6.txt
+Reading lines: 3215 to 3746
+delta heap: -3.38295656E8, coll: 2.25235056E10, storage: 2.561615744E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/7/sparkOutput_worker_application_1508545462036_0227_7.txt
+Reading lines: 3227 to 3752
+delta heap: 4.99768224E8, coll: 2.058858588E10, storage: 2.444182892E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/8/sparkOutput_worker_application_1508545462036_0227_8.txt
+Reading lines: 3226 to 3774
+delta heap: -3.8887424E7, coll: 2.346868932E10, storage: 2.451635177E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/9/sparkOutput_worker_application_1508545462036_0227_9.txt
+Reading lines: 3228 to 3750
+delta heap: -8224304.0, coll: 1.9117005288E10, storage: 2.535823343E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/1/sparkOutput_worker_application_1508545462036_0227_1.txt
+Reading lines: 4880 to 5518
+delta heap: -8574528.0, coll: 3.2994969456E10, storage: 2.572865364E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/10/sparkOutput_worker_application_1508545462036_0227_10.txt
+Reading lines: 4880 to 5505
+delta heap: 2.50648664E8, coll: 3.1359179536E10, storage: 2.477199927E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/2/sparkOutput_worker_application_1508545462036_0227_2.txt
+Reading lines: 4882 to 5505
+delta heap: -5.24271864E8, coll: 3.3267029736E10, storage: 2.562566117E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/3/sparkOutput_worker_application_1508545462036_0227_3.txt
+Reading lines: 4886 to 5546
+delta heap: -6.5007128E7, coll: 3.2991147936E10, storage: 2.723705721E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/4/sparkOutput_worker_application_1508545462036_0227_4.txt
+Reading lines: 4880 to 5502
+delta heap: 4.93828312E8, coll: 3.1612253416E10, storage: 2.53477943E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/5/sparkOutput_worker_application_1508545462036_0227_5.txt
+Reading lines: 4844 to 5497
+delta heap: 1.84630808E8, coll: 3.3126612232E10, storage: 2.575186873E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/6/sparkOutput_worker_application_1508545462036_0227_6.txt
+Reading lines: 4867 to 5499
+delta heap: -5.9839116E8, coll: 3.1771028192E10, storage: 2.490778382E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/7/sparkOutput_worker_application_1508545462036_0227_7.txt
+Reading lines: 4886 to 5513
+delta heap: -4.97378608E8, coll: 3.182783664E10, storage: 2.556353304E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/8/sparkOutput_worker_application_1508545462036_0227_8.txt
+Reading lines: 4884 to 5461
+delta heap: -3.58478088E8, coll: 2.905824288E10, storage: 2.279783837E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0227/9/sparkOutput_worker_application_1508545462036_0227_9.txt
+Reading lines: 4887 to 5520
+delta heap: -5.06893424E8, coll: 3.250833304E10, storage: 2.52199605E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/1/sparkOutput_worker_application_1508545462036_0228_1.txt
+Reading lines: 4643 to 5310
+delta heap: -1.04554488E8, coll: 3.027283184E10, storage: 2.522624047E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/10/sparkOutput_worker_application_1508545462036_0228_10.txt
+Reading lines: 4660 to 5300
+delta heap: 4.60222344E8, coll: 2.903911908E10, storage: 2.35064751E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/2/sparkOutput_worker_application_1508545462036_0228_2.txt
+Reading lines: 4655 to 5302
+delta heap: -3.30117496E8, coll: 3.1051371136E10, storage: 2.324834429E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/3/sparkOutput_worker_application_1508545462036_0228_3.txt
+Reading lines: 4585 to 5211
+delta heap: -2.66467272E8, coll: 2.998127392E10, storage: 2.32034922E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/4/sparkOutput_worker_application_1508545462036_0228_4.txt
+Reading lines: 4647 to 5316
+delta heap: 7.0954384E7, coll: 3.1244896376E10, storage: 2.267515058E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/5/sparkOutput_worker_application_1508545462036_0228_5.txt
+Reading lines: 4649 to 5296
+delta heap: -5.57592248E8, coll: 2.9015555E10, storage: 2.380263264E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/6/sparkOutput_worker_application_1508545462036_0228_6.txt
+Reading lines: 4654 to 5332
+delta heap: -1.88736616E8, coll: 2.8117249904E10, storage: 2.428700779E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/7/sparkOutput_worker_application_1508545462036_0228_7.txt
+Reading lines: 4647 to 5318
+delta heap: 1.7884692E8, coll: 3.099119508E10, storage: 2.532832558E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/8/sparkOutput_worker_application_1508545462036_0228_8.txt
+Reading lines: 4643 to 5281
+delta heap: -6.46886856E8, coll: 2.994690724E10, storage: 2.376369592E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/9/sparkOutput_worker_application_1508545462036_0228_9.txt
+Reading lines: 4670 to 5332
+delta heap: 7.6530088E7, coll: 3.0362962032E10, storage: 2.405552583E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/1/sparkOutput_worker_application_1508545462036_0228_1.txt
+Reading lines: 6638 to 7397
+delta heap: -1.30793104E8, coll: 2.1589091712E10, storage: 2.474868559E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/10/sparkOutput_worker_application_1508545462036_0228_10.txt
+Reading lines: 6662 to 7432
+delta heap: 7.96002584E8, coll: 2.271311264E10, storage: 2.528643113E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/2/sparkOutput_worker_application_1508545462036_0228_2.txt
+Reading lines: 6656 to 7403
+delta heap: 5.2211544E8, coll: 2.2333378264E10, storage: 2.28675731E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/3/sparkOutput_worker_application_1508545462036_0228_3.txt
+Reading lines: 6554 to 7273
+delta heap: -6.98946088E8, coll: 2.3278581584E10, storage: 2.183898985E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/4/sparkOutput_worker_application_1508545462036_0228_4.txt
+Reading lines: 6644 to 7435
+delta heap: -8.32600976E8, coll: 2.322754936E10, storage: 2.237792859E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/5/sparkOutput_worker_application_1508545462036_0228_5.txt
+Reading lines: 6647 to 7447
+delta heap: -2.0880508E8, coll: 2.29199276E10, storage: 2.555088439E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/6/sparkOutput_worker_application_1508545462036_0228_6.txt
+Reading lines: 6654 to 7388
+delta heap: 5.75757512E8, coll: 2.1912425512E10, storage: 2.126682886E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/7/sparkOutput_worker_application_1508545462036_0228_7.txt
+Reading lines: 6644 to 7411
+delta heap: 3.965776E7, coll: 2.2478672024E10, storage: 2.523809323E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/8/sparkOutput_worker_application_1508545462036_0228_8.txt
+Reading lines: 6637 to 7410
+delta heap: -1.75638688E8, coll: 2.2169172304E10, storage: 2.5222247E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0228/9/sparkOutput_worker_application_1508545462036_0228_9.txt
+Reading lines: 6676 to 7431
+delta heap: -9.58373776E8, coll: 2.197961676E10, storage: 2.331463204E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/1/sparkOutput_worker_application_1508545462036_0229_1.txt
+Reading lines: 3347 to 3885
+delta heap: -1.37396352E8, coll: 2.0083832752E10, storage: 2.498276765E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/10/sparkOutput_worker_application_1508545462036_0229_10.txt
+Reading lines: 3341 to 3866
+delta heap: -4.61786344E8, coll: 1.8741916432E10, storage: 2.38502974E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/2/sparkOutput_worker_application_1508545462036_0229_2.txt
+Reading lines: 3333 to 3844
+delta heap: 7972072.0, coll: 1.6349195472E10, storage: 2.309919058E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/3/sparkOutput_worker_application_1508545462036_0229_3.txt
+Reading lines: 3326 to 3856
+delta heap: 1.70915096E8, coll: 1.6297689104E10, storage: 2.047708073E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/4/sparkOutput_worker_application_1508545462036_0229_4.txt
+Reading lines: 3329 to 3872
+delta heap: -2.4251224E8, coll: 1.601924396E10, storage: 2.287754198E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/5/sparkOutput_worker_application_1508545462036_0229_5.txt
+Reading lines: 3304 to 3820
+delta heap: -3.03026944E8, coll: 1.3431048472E10, storage: 2.277517616E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/6/sparkOutput_worker_application_1508545462036_0229_6.txt
+Reading lines: 3333 to 3887
+delta heap: 2.3183708E8, coll: 1.8743012968E10, storage: 2.641560497E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/7/sparkOutput_worker_application_1508545462036_0229_7.txt
+Reading lines: 3313 to 3838
+delta heap: -4.54818912E8, coll: 1.6809089168E10, storage: 2.299865718E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/8/sparkOutput_worker_application_1508545462036_0229_8.txt
+Reading lines: 3340 to 3908
+delta heap: -1.8478288E8, coll: 2.0418454864E10, storage: 2.47481432E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/9/sparkOutput_worker_application_1508545462036_0229_9.txt
+Reading lines: 3334 to 3914
+delta heap: 3.10179824E8, coll: 1.8482925656E10, storage: 2.687861851E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/1/sparkOutput_worker_application_1508545462036_0229_1.txt
+Reading lines: 4988 to 5613
+delta heap: -6.3709536E8, coll: 2.517649676E10, storage: 2.346760551E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/10/sparkOutput_worker_application_1508545462036_0229_10.txt
+Reading lines: 5009 to 5612
+delta heap: 1.32844496E8, coll: 2.385559424E10, storage: 2.357404747E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/2/sparkOutput_worker_application_1508545462036_0229_2.txt
+Reading lines: 4997 to 5628
+delta heap: 3.97021928E8, coll: 2.5040305984E10, storage: 2.526345485E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/3/sparkOutput_worker_application_1508545462036_0229_3.txt
+Reading lines: 4986 to 5634
+delta heap: -2.38227E8, coll: 2.6461716976E10, storage: 2.198287097E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/4/sparkOutput_worker_application_1508545462036_0229_4.txt
+Reading lines: 4991 to 5629
+delta heap: 2.81827384E8, coll: 2.4667960168E10, storage: 2.370775305E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/5/sparkOutput_worker_application_1508545462036_0229_5.txt
+Reading lines: 4953 to 5551
+delta heap: 1.9968592E7, coll: 2.403753124E10, storage: 2.359333831E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/6/sparkOutput_worker_application_1508545462036_0229_6.txt
+Reading lines: 4997 to 5640
+delta heap: -1.37258664E8, coll: 2.5182388136E10, storage: 2.546920108E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/7/sparkOutput_worker_application_1508545462036_0229_7.txt
+Reading lines: 4973 to 5612
+delta heap: 5.8073456E8, coll: 2.5549223672E10, storage: 2.510530949E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/8/sparkOutput_worker_application_1508545462036_0229_8.txt
+Reading lines: 5007 to 5639
+delta heap: 1.38385872E8, coll: 2.5115895832E10, storage: 2.355192346E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/9/sparkOutput_worker_application_1508545462036_0229_9.txt
+Reading lines: 4998 to 5630
+delta heap: 5.3663736E7, coll: 2.4598111368E10, storage: 2.535593116E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/1/sparkOutput_worker_application_1508545462036_0229_1.txt
+Reading lines: 6952 to 7686
+delta heap: -2.53817328E8, coll: 2.2450507432E10, storage: 2.358279236E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/10/sparkOutput_worker_application_1508545462036_0229_10.txt
+Reading lines: 6980 to 7692
+delta heap: -1.2755756E8, coll: 2.2253000448E10, storage: 2.343237427E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/2/sparkOutput_worker_application_1508545462036_0229_2.txt
+Reading lines: 6964 to 7704
+delta heap: 6.31446232E8, coll: 2.3515498752E10, storage: 2.528235011E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/3/sparkOutput_worker_application_1508545462036_0229_3.txt
+Reading lines: 6949 to 7709
+delta heap: -3.61057712E8, coll: 2.5518651512E10, storage: 2.463893083E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/4/sparkOutput_worker_application_1508545462036_0229_4.txt
+Reading lines: 6955 to 7709
+delta heap: -5.4861376E7, coll: 2.3298462216E10, storage: 2.384124856E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/5/sparkOutput_worker_application_1508545462036_0229_5.txt
+Reading lines: 6903 to 7597
+delta heap: 4.64610424E8, coll: 2.305212552E10, storage: 2.159092096E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/6/sparkOutput_worker_application_1508545462036_0229_6.txt
+Reading lines: 6964 to 7722
+delta heap: 1.0228664E7, coll: 2.3351517048E10, storage: 2.367214215E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/7/sparkOutput_worker_application_1508545462036_0229_7.txt
+Reading lines: 6936 to 7637
+delta heap: -8.5464648E7, coll: 2.227296728E10, storage: 2.350608985E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/8/sparkOutput_worker_application_1508545462036_0229_8.txt
+Reading lines: 6977 to 7739
+delta heap: -4.125404E8, coll: 2.3466988048E10, storage: 2.549520454E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0229/9/sparkOutput_worker_application_1508545462036_0229_9.txt
+Reading lines: 6966 to 7702
+delta heap: -1.9788184E8, coll: 2.3268889016E10, storage: 2.531726592E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0230/1/sparkOutput_worker_application_1508545462036_0230_1.txt
+Reading lines: 3769 to 4318
+delta heap: -4.95635776E8, coll: 3.291147432E10, storage: 2.328454666E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0230/10/sparkOutput_worker_application_1508545462036_0230_10.txt
+Reading lines: 3854 to 4425
+delta heap: 5.482172E7, coll: 3.3804320704E10, storage: 2.418170423E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0230/2/sparkOutput_worker_application_1508545462036_0230_2.txt
+Reading lines: 3856 to 4375
+delta heap: -3.1342968E7, coll: 3.1505513936E10, storage: 2.121969664E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0230/3/sparkOutput_worker_application_1508545462036_0230_3.txt
+Reading lines: 3836 to 4440
+delta heap: 3.70231808E8, coll: 3.5641938776E10, storage: 2.608133689E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0230/4/sparkOutput_worker_application_1508545462036_0230_4.txt
+Reading lines: 3830 to 4391
+delta heap: 4.60700464E8, coll: 3.1443042384E10, storage: 2.448408523E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0230/5/sparkOutput_worker_application_1508545462036_0230_5.txt
+Reading lines: 3854 to 4389
+delta heap: -1.33906936E8, coll: 3.1416127624E10, storage: 2.399664408E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0230/6/sparkOutput_worker_application_1508545462036_0230_6.txt
+Reading lines: 3850 to 4404
+delta heap: -2.72880904E8, coll: 3.2134346008E10, storage: 2.364399017E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0230/7/sparkOutput_worker_application_1508545462036_0230_7.txt
+Reading lines: 3840 to 4409
+delta heap: 1.04231952E9, coll: 3.356381356E10, storage: 2.458929021E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0230/8/sparkOutput_worker_application_1508545462036_0230_8.txt
+Reading lines: 3819 to 4393
+delta heap: 4.11919136E8, coll: 3.309018716E10, storage: 2.470071665E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0230/9/sparkOutput_worker_application_1508545462036_0230_9.txt
+Reading lines: 3841 to 4430
+delta heap: -1.09539496E8, coll: 3.5435499984E10, storage: 2.608263827E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/1/sparkOutput_worker_application_1508545462036_0231_1.txt
+Reading lines: 3026 to 3637
+delta heap: -1.992828E8, coll: 1.7638090936E10, storage: 2.677578669E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/10/sparkOutput_worker_application_1508545462036_0231_10.txt
+Reading lines: 3017 to 3565
+delta heap: -4.94809792E8, coll: 1.3890964056E10, storage: 2.374790405E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/2/sparkOutput_worker_application_1508545462036_0231_2.txt
+Reading lines: 3016 to 3570
+delta heap: -5.1731996E8, coll: 1.4817505368E10, storage: 2.36969922E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/3/sparkOutput_worker_application_1508545462036_0231_3.txt
+Reading lines: 2632 to 3111
+delta heap: -1.94521032E8, coll: 1.1956953672E10, storage: 1.983158016E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/4/sparkOutput_worker_application_1508545462036_0231_4.txt
+Reading lines: 3015 to 3550
+delta heap: -4.74303536E8, coll: 1.413506168E10, storage: 2.328024671E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/5/sparkOutput_worker_application_1508545462036_0231_5.txt
+Reading lines: 3031 to 3612
+delta heap: 5.8439624E7, coll: 1.8826124224E10, storage: 2.599081402E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/6/sparkOutput_worker_application_1508545462036_0231_6.txt
+Reading lines: 3009 to 3588
+delta heap: 1.82659544E8, coll: 1.4435191968E10, storage: 2.611822715E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/7/sparkOutput_worker_application_1508545462036_0231_7.txt
+Reading lines: 3010 to 3572
+delta heap: 1.22762016E8, coll: 2.1827748536E10, storage: 2.443013474E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/8/sparkOutput_worker_application_1508545462036_0231_8.txt
+Reading lines: 3009 to 3597
+delta heap: 3.90914384E8, coll: 1.4786425576E10, storage: 2.616901479E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/9/sparkOutput_worker_application_1508545462036_0231_9.txt
+Reading lines: 3012 to 3569
+delta heap: -7.87575664E8, coll: 1.4526731704E10, storage: 2.43117294E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/1/sparkOutput_worker_application_1508545462036_0231_1.txt
+Reading lines: 4235 to 4889
+delta heap: -3.11831368E8, coll: 3.2722273064E10, storage: 2.461765053E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/10/sparkOutput_worker_application_1508545462036_0231_10.txt
+Reading lines: 4222 to 4860
+delta heap: -4.19968728E8, coll: 2.9831138472E10, storage: 2.527577639E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/2/sparkOutput_worker_application_1508545462036_0231_2.txt
+Reading lines: 4221 to 4870
+delta heap: -3.60009832E8, coll: 3.3475768472E10, storage: 2.525155217E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/3/sparkOutput_worker_application_1508545462036_0231_3.txt
+Reading lines: 3683 to 4277
+delta heap: -1.75923888E8, coll: 3.0052292464E10, storage: 2.388764381E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/4/sparkOutput_worker_application_1508545462036_0231_4.txt
+Reading lines: 4219 to 4889
+delta heap: 1.66454248E8, coll: 3.0898081896E10, storage: 2.582307612E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/5/sparkOutput_worker_application_1508545462036_0231_5.txt
+Reading lines: 4241 to 4870
+delta heap: -3.80408656E8, coll: 3.2712866168E10, storage: 2.375529934E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/6/sparkOutput_worker_application_1508545462036_0231_6.txt
+Reading lines: 4211 to 4881
+delta heap: 1.48841184E8, coll: 3.456381388E10, storage: 2.58087772E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/7/sparkOutput_worker_application_1508545462036_0231_7.txt
+Reading lines: 4213 to 4849
+delta heap: -4.596314E8, coll: 3.3295210824E10, storage: 2.392809068E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/8/sparkOutput_worker_application_1508545462036_0231_8.txt
+Reading lines: 4211 to 4844
+delta heap: -4.29740704E8, coll: 3.2285979896E10, storage: 2.402651802E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/9/sparkOutput_worker_application_1508545462036_0231_9.txt
+Reading lines: 4216 to 4855
+delta heap: -5.2566328E8, coll: 3.1935692032E10, storage: 2.404292762E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/1/sparkOutput_worker_application_1508545462036_0231_1.txt
+Reading lines: 5593 to 6333
+delta heap: -4.97579648E8, coll: 3.1929467616E10, storage: 2.549600533E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/10/sparkOutput_worker_application_1508545462036_0231_10.txt
+Reading lines: 5576 to 6291
+delta heap: 5.75607944E8, coll: 3.0800641496E10, storage: 2.529568396E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/2/sparkOutput_worker_application_1508545462036_0231_2.txt
+Reading lines: 5574 to 6304
+delta heap: 8.48633384E8, coll: 3.5234847808E10, storage: 2.536810472E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/3/sparkOutput_worker_application_1508545462036_0231_3.txt
+Reading lines: 4865 to 5534
+delta heap: 3.52077632E8, coll: 3.3837867496E10, storage: 2.279884107E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/4/sparkOutput_worker_application_1508545462036_0231_4.txt
+Reading lines: 5572 to 6263
+delta heap: -2.23732448E8, coll: 3.1157866736E10, storage: 2.405460562E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/5/sparkOutput_worker_application_1508545462036_0231_5.txt
+Reading lines: 5602 to 6375
+delta heap: 1.38696728E8, coll: 3.286015504E10, storage: 2.597457401E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/6/sparkOutput_worker_application_1508545462036_0231_6.txt
+Reading lines: 5561 to 6247
+delta heap: -2.66665288E8, coll: 3.1815238024E10, storage: 2.378855977E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/7/sparkOutput_worker_application_1508545462036_0231_7.txt
+Reading lines: 5564 to 6241
+delta heap: -9.6686048E7, coll: 3.1104651056E10, storage: 2.219165612E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/8/sparkOutput_worker_application_1508545462036_0231_8.txt
+Reading lines: 5563 to 6266
+delta heap: 7.07662304E8, coll: 3.1867477104E10, storage: 2.523019413E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0231/9/sparkOutput_worker_application_1508545462036_0231_9.txt
+Reading lines: 5568 to 6272
+delta heap: -2.83014944E8, coll: 3.3754843088E10, storage: 2.52187812E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/1/sparkOutput_worker_application_1508545462036_0232_1.txt
+Reading lines: 4165 to 4765
+delta heap: -8.3817104E7, coll: 2.693657444E10, storage: 2.385772208E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/10/sparkOutput_worker_application_1508545462036_0232_10.txt
+Reading lines: 4161 to 4790
+delta heap: 7.8578168E8, coll: 2.6027370304E10, storage: 2.373073366E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/2/sparkOutput_worker_application_1508545462036_0232_2.txt
+Reading lines: 4157 to 4778
+delta heap: 5.5867896E8, coll: 2.7805338328E10, storage: 2.449734498E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/3/sparkOutput_worker_application_1508545462036_0232_3.txt
+Reading lines: 4154 to 4737
+delta heap: -3.9717784E7, coll: 2.6722742912E10, storage: 2.26076632E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/4/sparkOutput_worker_application_1508545462036_0232_4.txt
+Reading lines: 4163 to 4754
+delta heap: -1.31539224E8, coll: 2.7022781136E10, storage: 2.392361627E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/5/sparkOutput_worker_application_1508545462036_0232_5.txt
+Reading lines: 4105 to 4647
+delta heap: 3.83808896E8, coll: 2.3872216392E10, storage: 2.048258812E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/6/sparkOutput_worker_application_1508545462036_0232_6.txt
+Reading lines: 4145 to 4727
+delta heap: 2.2768672E7, coll: 2.6749408368E10, storage: 2.358567007E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/7/sparkOutput_worker_application_1508545462036_0232_7.txt
+Reading lines: 4145 to 4748
+delta heap: -7.6461104E7, coll: 2.6491468096E10, storage: 2.367565635E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/8/sparkOutput_worker_application_1508545462036_0232_8.txt
+Reading lines: 4155 to 4747
+delta heap: -1.55933328E8, coll: 2.6992870096E10, storage: 2.174587049E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/9/sparkOutput_worker_application_1508545462036_0232_9.txt
+Reading lines: 4144 to 4730
+delta heap: 1.27986384E8, coll: 2.4990339776E10, storage: 2.381206875E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/1/sparkOutput_worker_application_1508545462036_0232_1.txt
+Reading lines: 5463 to 6173
+delta heap: -3.14740088E8, coll: 2.3509202536E10, storage: 2.342447133E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/10/sparkOutput_worker_application_1508545462036_0232_10.txt
+Reading lines: 5458 to 6151
+delta heap: -1.22188056E8, coll: 2.4267345072E10, storage: 2.359433252E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/2/sparkOutput_worker_application_1508545462036_0232_2.txt
+Reading lines: 5453 to 6197
+delta heap: 6.03366112E8, coll: 2.4566940032E10, storage: 2.49937766E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/3/sparkOutput_worker_application_1508545462036_0232_3.txt
+Reading lines: 5449 to 6141
+delta heap: -1.3729184E8, coll: 2.3212718464E10, storage: 2.368361843E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/4/sparkOutput_worker_application_1508545462036_0232_4.txt
+Reading lines: 5461 to 6159
+delta heap: -4.8446968E7, coll: 2.1990704496E10, storage: 2.371910554E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/5/sparkOutput_worker_application_1508545462036_0232_5.txt
+Reading lines: 5385 to 6066
+delta heap: -2.27537472E8, coll: 2.1905054736E10, storage: 2.139499802E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/6/sparkOutput_worker_application_1508545462036_0232_6.txt
+Reading lines: 5438 to 6125
+delta heap: -4.0059064E7, coll: 2.4372283736E10, storage: 2.312846896E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/7/sparkOutput_worker_application_1508545462036_0232_7.txt
+Reading lines: 5437 to 6181
+delta heap: -3.48174736E8, coll: 2.5323368104E10, storage: 2.567449281E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/8/sparkOutput_worker_application_1508545462036_0232_8.txt
+Reading lines: 5450 to 6150
+delta heap: -9.6449608E7, coll: 2.269462792E10, storage: 2.226084829E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0232/9/sparkOutput_worker_application_1508545462036_0232_9.txt
+Reading lines: 5436 to 6127
+delta heap: -7.4106168E7, coll: 2.1879980904E10, storage: 2.370670685E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/1/sparkOutput_worker_application_1508545462036_0233_1.txt
+Reading lines: 3223 to 3762
+delta heap: 2.20331896E8, coll: 8.962804072E9, storage: 2.263963029E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/10/sparkOutput_worker_application_1508545462036_0233_10.txt
+Reading lines: 3193 to 3693
+delta heap: -5.34960984E8, coll: 1.1565334768E10, storage: 2.103818288E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/2/sparkOutput_worker_application_1508545462036_0233_2.txt
+Reading lines: 3248 to 3822
+delta heap: 1.65991512E8, coll: 1.434345284E10, storage: 2.585586467E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/3/sparkOutput_worker_application_1508545462036_0233_3.txt
+Reading lines: 3220 to 3766
+delta heap: -1.30476488E8, coll: 9.847067968E9, storage: 2.404537606E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/4/sparkOutput_worker_application_1508545462036_0233_4.txt
+Reading lines: 3247 to 3809
+delta heap: -1.38764144E8, coll: 1.1084394072E10, storage: 2.520474807E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/5/sparkOutput_worker_application_1508545462036_0233_5.txt
+Reading lines: 3238 to 3805
+delta heap: -2.11446152E8, coll: 1.6852124656E10, storage: 2.513054908E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/6/sparkOutput_worker_application_1508545462036_0233_6.txt
+Reading lines: 3270 to 3810
+delta heap: -1.92120232E8, coll: 8.8781024E9, storage: 2.324442461E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/7/sparkOutput_worker_application_1508545462036_0233_7.txt
+Reading lines: 3253 to 3774
+delta heap: 4.02564344E8, coll: 1.1675473368E10, storage: 2.217134051E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/8/sparkOutput_worker_application_1508545462036_0233_8.txt
+Reading lines: 3230 to 3763
+delta heap: 3.03678136E8, coll: 8.771311056E9, storage: 2.375500252E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/9/sparkOutput_worker_application_1508545462036_0233_9.txt
+Reading lines: 3234 to 3801
+delta heap: -1.96933672E8, coll: 1.0998046824E10, storage: 2.618317928E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/1/sparkOutput_worker_application_1508545462036_0233_1.txt
+Reading lines: 4382 to 4988
+delta heap: -1.71337488E8, coll: 2.2045694928E10, storage: 2.298477185E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/10/sparkOutput_worker_application_1508545462036_0233_10.txt
+Reading lines: 4342 to 4899
+delta heap: 3.25315032E8, coll: 2.2768299768E10, storage: 1.995432967E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/2/sparkOutput_worker_application_1508545462036_0233_2.txt
+Reading lines: 4415 to 5100
+delta heap: -8.43954E8, coll: 2.6683428688E10, storage: 2.635951188E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/3/sparkOutput_worker_application_1508545462036_0233_3.txt
+Reading lines: 4378 to 5043
+delta heap: -7.27978816E8, coll: 2.4831413032E10, storage: 2.542386613E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/4/sparkOutput_worker_application_1508545462036_0233_4.txt
+Reading lines: 4415 to 5042
+delta heap: -1.98072832E8, coll: 2.2608813376E10, storage: 2.330627646E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/5/sparkOutput_worker_application_1508545462036_0233_5.txt
+Reading lines: 4402 to 5053
+delta heap: -5.62789464E8, coll: 2.49199566E10, storage: 2.407706036E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/6/sparkOutput_worker_application_1508545462036_0233_6.txt
+Reading lines: 4445 to 5116
+delta heap: -64376.0, coll: 2.5436863E10, storage: 2.538787773E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/7/sparkOutput_worker_application_1508545462036_0233_7.txt
+Reading lines: 4422 to 4975
+delta heap: -2.7445564E8, coll: 2.1433390264E10, storage: 2.01939948E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/8/sparkOutput_worker_application_1508545462036_0233_8.txt
+Reading lines: 4392 to 5046
+delta heap: 6.34765056E8, coll: 2.6105607816E10, storage: 2.544326087E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/9/sparkOutput_worker_application_1508545462036_0233_9.txt
+Reading lines: 4398 to 5051
+delta heap: -6.69244624E8, coll: 2.384670508E10, storage: 2.532917E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/1/sparkOutput_worker_application_1508545462036_0233_1.txt
+Reading lines: 5793 to 6502
+delta heap: 1.1521872E9, coll: 1.665963476E10, storage: 2.309488991E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/10/sparkOutput_worker_application_1508545462036_0233_10.txt
+Reading lines: 5740 to 6478
+delta heap: -1.7475676E8, coll: 1.6256213696E10, storage: 2.419724321E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/2/sparkOutput_worker_application_1508545462036_0233_2.txt
+Reading lines: 5837 to 6545
+delta heap: -1.3340144E8, coll: 1.5939671944E10, storage: 2.310357271E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/3/sparkOutput_worker_application_1508545462036_0233_3.txt
+Reading lines: 5787 to 6513
+delta heap: -1.40050864E8, coll: 1.7011675472E10, storage: 2.322972329E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/4/sparkOutput_worker_application_1508545462036_0233_4.txt
+Reading lines: 5837 to 6547
+delta heap: -1.80844024E8, coll: 1.6588551488E10, storage: 2.322543814E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/5/sparkOutput_worker_application_1508545462036_0233_5.txt
+Reading lines: 5820 to 6535
+delta heap: -3.18382904E8, coll: 1.595447276E10, storage: 2.315009925E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/6/sparkOutput_worker_application_1508545462036_0233_6.txt
+Reading lines: 5877 to 6647
+delta heap: -6.43472192E8, coll: 1.6736904264E10, storage: 2.56785797E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/7/sparkOutput_worker_application_1508545462036_0233_7.txt
+Reading lines: 5847 to 6601
+delta heap: -5.23413584E8, coll: 1.6757004472E10, storage: 2.453800005E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/8/sparkOutput_worker_application_1508545462036_0233_8.txt
+Reading lines: 5806 to 6513
+delta heap: -2.1789828E8, coll: 1.6862830856E10, storage: 2.296094745E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0233/9/sparkOutput_worker_application_1508545462036_0233_9.txt
+Reading lines: 5814 to 6525
+delta heap: -5.9660472E7, coll: 1.7616798288E10, storage: 2.302249057E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/1/sparkOutput_worker_application_1508545462036_0234_1.txt
+Reading lines: 1646 to 2110
+delta heap: 4.08684056E8, coll: 2.1229467776E10, storage: 2.751566472E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/10/sparkOutput_worker_application_1508545462036_0234_10.txt
+Reading lines: 1639 to 2094
+delta heap: -6.2883392E7, coll: 1.9354074504E10, storage: 2.550492345E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/2/sparkOutput_worker_application_1508545462036_0234_2.txt
+Reading lines: 1663 to 2134
+delta heap: 5.9152192E7, coll: 2.3011942136E10, storage: 2.699993476E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/3/sparkOutput_worker_application_1508545462036_0234_3.txt
+Reading lines: 1676 to 2157
+delta heap: 3.47156808E8, coll: 1.9798810648E10, storage: 2.810223116E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/4/sparkOutput_worker_application_1508545462036_0234_4.txt
+Reading lines: 1658 to 2088
+delta heap: -2.33297272E8, coll: 2.086891088E10, storage: 2.582687827E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/5/sparkOutput_worker_application_1508545462036_0234_5.txt
+Reading lines: 1628 to 2082
+delta heap: 4.05074048E8, coll: 1.8774004912E10, storage: 2.717042503E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/6/sparkOutput_worker_application_1508545462036_0234_6.txt
+Reading lines: 1660 to 2162
+delta heap: -2.22944552E8, coll: 2.2545623008E10, storage: 2.97703167E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/7/sparkOutput_worker_application_1508545462036_0234_7.txt
+Reading lines: 1658 to 2115
+delta heap: 1.88700624E8, coll: 2.0138375296E10, storage: 2.686606969E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/8/sparkOutput_worker_application_1508545462036_0234_8.txt
+Reading lines: 1646 to 2109
+delta heap: -1.29095672E8, coll: 1.9191326416E10, storage: 2.68177004E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/9/sparkOutput_worker_application_1508545462036_0234_9.txt
+Reading lines: 1644 to 2106
+delta heap: 1.9592432E7, coll: 2.1823205544E10, storage: 2.690189076E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/1/sparkOutput_worker_application_1508545462036_0234_1.txt
+Reading lines: 2550 to 3108
+delta heap: 1.07227072E8, coll: 1.5597149728E10, storage: 2.745070257E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/10/sparkOutput_worker_application_1508545462036_0234_10.txt
+Reading lines: 2540 to 3136
+delta heap: -1.5375072E8, coll: 1.6092124568E10, storage: 3.083691174E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/2/sparkOutput_worker_application_1508545462036_0234_2.txt
+Reading lines: 2576 to 3160
+delta heap: 4.08449808E8, coll: 1.4158190784E10, storage: 2.878976332E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/3/sparkOutput_worker_application_1508545462036_0234_3.txt
+Reading lines: 2596 to 3176
+delta heap: 1.54546336E8, coll: 2.0507314552E10, storage: 2.80662042E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/4/sparkOutput_worker_application_1508545462036_0234_4.txt
+Reading lines: 2569 to 3104
+delta heap: 2.4647328E8, coll: 1.3548442952E10, storage: 2.626487386E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/5/sparkOutput_worker_application_1508545462036_0234_5.txt
+Reading lines: 2523 to 3088
+delta heap: 1.39661552E8, coll: 1.3694002344E10, storage: 2.625585613E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/6/sparkOutput_worker_application_1508545462036_0234_6.txt
+Reading lines: 2571 to 3153
+delta heap: 1.46376072E8, coll: 1.4822744584E10, storage: 2.903847799E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/7/sparkOutput_worker_application_1508545462036_0234_7.txt
+Reading lines: 2568 to 3138
+delta heap: 4.20233472E8, coll: 1.5227823224E10, storage: 2.874830928E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/8/sparkOutput_worker_application_1508545462036_0234_8.txt
+Reading lines: 2550 to 3117
+delta heap: 4.4176264E7, coll: 1.1821317992E10, storage: 2.752170113E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0234/9/sparkOutput_worker_application_1508545462036_0234_9.txt
+Reading lines: 2547 to 3129
+delta heap: 2.06629968E8, coll: 1.4168988176E10, storage: 2.889396184E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0235/1/sparkOutput_worker_application_1508545462036_0235_1.txt
+Reading lines: 5007 to 5668
+delta heap: 1.12978528E8, coll: 3.1092293936E10, storage: 2.373737674E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0235/10/sparkOutput_worker_application_1508545462036_0235_10.txt
+Reading lines: 5032 to 5691
+delta heap: 9.3608064E7, coll: 3.1921226336E10, storage: 2.539690205E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0235/2/sparkOutput_worker_application_1508545462036_0235_2.txt
+Reading lines: 5060 to 5665
+delta heap: -3.43893136E8, coll: 2.6997860752E10, storage: 2.078195986E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0235/3/sparkOutput_worker_application_1508545462036_0235_3.txt
+Reading lines: 5065 to 5667
+delta heap: 5.6749256E8, coll: 2.8582599776E10, storage: 2.207469896E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0235/4/sparkOutput_worker_application_1508545462036_0235_4.txt
+Reading lines: 5018 to 5681
+delta heap: -4.4109768E7, coll: 3.1708011224E10, storage: 2.611619255E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0235/5/sparkOutput_worker_application_1508545462036_0235_5.txt
+Reading lines: 5007 to 5627
+delta heap: 3.47083472E8, coll: 2.910033644E10, storage: 2.199282348E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0235/6/sparkOutput_worker_application_1508545462036_0235_6.txt
+Reading lines: 5000 to 5666
+delta heap: 7.88816096E8, coll: 3.2268090136E10, storage: 2.481935729E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0235/7/sparkOutput_worker_application_1508545462036_0235_7.txt
+Reading lines: 4944 to 5639
+delta heap: -3.71106048E8, coll: 3.1057159472E10, storage: 2.765661907E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0235/8/sparkOutput_worker_application_1508545462036_0235_8.txt
+Reading lines: 5005 to 5692
+delta heap: -2.4757856E8, coll: 3.3601272992E10, storage: 2.597018691E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0235/9/sparkOutput_worker_application_1508545462036_0235_9.txt
+Reading lines: 5008 to 5689
+delta heap: 4.40827608E8, coll: 3.4602242056E10, storage: 2.607360142E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0238/1/sparkOutput_worker_application_1508545462036_0238_1.txt
+Reading lines: 2759 to 3411
+delta heap: -2.072134E8, coll: 3.0218622328E10, storage: 3.20101731E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0238/10/sparkOutput_worker_application_1508545462036_0238_10.txt
+Reading lines: 2735 to 3303
+delta heap: -1.23593264E8, coll: 1.3151031416E10, storage: 2.424747919E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0238/2/sparkOutput_worker_application_1508545462036_0238_2.txt
+Reading lines: 2758 to 3343
+delta heap: -1.56258256E8, coll: 1.652498324E10, storage: 2.947102495E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0238/3/sparkOutput_worker_application_1508545462036_0238_3.txt
+Reading lines: 2781 to 3352
+delta heap: 1.25434688E8, coll: 1.7521591656E10, storage: 2.793746307E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0238/4/sparkOutput_worker_application_1508545462036_0238_4.txt
+Reading lines: 2748 to 3370
+delta heap: 4.7363248E7, coll: 1.550091288E10, storage: 3.163769632E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0238/5/sparkOutput_worker_application_1508545462036_0238_5.txt
+Reading lines: 2758 to 3372
+delta heap: 1.0007704E8, coll: 1.3969134592E10, storage: 2.614848677E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0238/6/sparkOutput_worker_application_1508545462036_0238_6.txt
+Reading lines: 2624 to 3231
+delta heap: -3.15316448E8, coll: 1.163036632E10, storage: 2.761277227E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0238/7/sparkOutput_worker_application_1508545462036_0238_7.txt
+Reading lines: 2746 to 3326
+delta heap: -1.49696864E8, coll: 1.4653832768E10, storage: 2.816200855E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0238/8/sparkOutput_worker_application_1508545462036_0238_8.txt
+Reading lines: 2763 to 3412
+delta heap: 2891528.0, coll: 1.7101585928E10, storage: 3.21036369E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0238/9/sparkOutput_worker_application_1508545462036_0238_9.txt
+Reading lines: 2698 to 3354
+delta heap: 4.2061256E7, coll: 2.5851483472E10, storage: 3.449900065E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/1/sparkOutput_worker_application_1508545462036_0241_1.txt
+Reading lines: 3460 to 4012
+delta heap: -3.74574104E8, coll: 1.5943745288E10, storage: 2.547501062E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/10/sparkOutput_worker_application_1508545462036_0241_10.txt
+Reading lines: 3476 to 4051
+delta heap: 1.34697256E8, coll: 1.4223808424E10, storage: 2.535606112E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/2/sparkOutput_worker_application_1508545462036_0241_2.txt
+Reading lines: 3481 to 4073
+delta heap: -3.40817512E8, coll: 1.6213285968E10, storage: 2.622516649E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/3/sparkOutput_worker_application_1508545462036_0241_3.txt
+Reading lines: 3383 to 3913
+delta heap: -8.9828624E7, coll: 1.3273045344E10, storage: 2.429901884E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/4/sparkOutput_worker_application_1508545462036_0241_4.txt
+Reading lines: 3473 to 4059
+delta heap: 7632736.0, coll: 1.415389752E10, storage: 2.753547968E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/5/sparkOutput_worker_application_1508545462036_0241_5.txt
+Reading lines: 3489 to 4075
+delta heap: 5.02667288E8, coll: 1.3840067824E10, storage: 2.659051051E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/6/sparkOutput_worker_application_1508545462036_0241_6.txt
+Reading lines: 3502 to 4097
+delta heap: 2.02286E8, coll: 1.6419629544E10, storage: 2.688901638E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/7/sparkOutput_worker_application_1508545462036_0241_7.txt
+Reading lines: 3501 to 4046
+delta heap: 1.97877536E8, coll: 1.5090750408E10, storage: 2.516802941E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/8/sparkOutput_worker_application_1508545462036_0241_8.txt
+Reading lines: 3492 to 4048
+delta heap: -2.35156424E8, coll: 1.6899096912E10, storage: 2.523387707E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/9/sparkOutput_worker_application_1508545462036_0241_9.txt
+Reading lines: 3468 to 4059
+delta heap: 1.01705376E8, coll: 1.7007202632E10, storage: 2.687943246E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/1/sparkOutput_worker_application_1508545462036_0241_1.txt
+Reading lines: 4625 to 5209
+delta heap: -3.88435416E8, coll: 1.361061276E10, storage: 2.50670854E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/10/sparkOutput_worker_application_1508545462036_0241_10.txt
+Reading lines: 4646 to 5278
+delta heap: -3.77988232E8, coll: 1.3624193064E10, storage: 2.631790959E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/2/sparkOutput_worker_application_1508545462036_0241_2.txt
+Reading lines: 4654 to 5286
+delta heap: -4.7417616E7, coll: 1.3580059184E10, storage: 2.693599242E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/3/sparkOutput_worker_application_1508545462036_0241_3.txt
+Reading lines: 4522 to 5089
+delta heap: -8332768.0, coll: 1.2635064936E10, storage: 2.353889946E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/4/sparkOutput_worker_application_1508545462036_0241_4.txt
+Reading lines: 4643 to 5233
+delta heap: -3.35607024E8, coll: 1.4005838768E10, storage: 2.511763312E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/5/sparkOutput_worker_application_1508545462036_0241_5.txt
+Reading lines: 4664 to 5293
+delta heap: 1.2399056E8, coll: 1.4879133672E10, storage: 2.695533325E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/6/sparkOutput_worker_application_1508545462036_0241_6.txt
+Reading lines: 4681 to 5316
+delta heap: -2.5213664E8, coll: 1.457638072E10, storage: 2.826240793E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/7/sparkOutput_worker_application_1508545462036_0241_7.txt
+Reading lines: 4680 to 5252
+delta heap: -3.927726E8, coll: 1.4511692624E10, storage: 2.468261707E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/8/sparkOutput_worker_application_1508545462036_0241_8.txt
+Reading lines: 4667 to 5272
+delta heap: 1.47993768E8, coll: 1.314175772E10, storage: 2.624817704E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0241/9/sparkOutput_worker_application_1508545462036_0241_9.txt
+Reading lines: 4636 to 5262
+delta heap: 1.34780104E8, coll: 1.528484592E10, storage: 2.847785497E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/1/sparkOutput_worker_application_1508545462036_0242_1.txt
+Reading lines: 5735 to 6419
+delta heap: 7.35855416E8, coll: 3.1718638696E10, storage: 2.136299503E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/10/sparkOutput_worker_application_1508545462036_0242_10.txt
+Reading lines: 5723 to 6488
+delta heap: 4.73869352E8, coll: 3.2487151008E10, storage: 2.55575646E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/2/sparkOutput_worker_application_1508545462036_0242_2.txt
+Reading lines: 5728 to 6447
+delta heap: -8.35610104E8, coll: 3.5277975216E10, storage: 2.290178693E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/3/sparkOutput_worker_application_1508545462036_0242_3.txt
+Reading lines: 5700 to 6419
+delta heap: -1.048642936E9, coll: 3.6686387744E10, storage: 2.474718627E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/4/sparkOutput_worker_application_1508545462036_0242_4.txt
+Reading lines: 5695 to 6404
+delta heap: 8.24509464E8, coll: 3.01398196E10, storage: 2.314617526E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/5/sparkOutput_worker_application_1508545462036_0242_5.txt
+Reading lines: 5735 to 6472
+delta heap: -1.290119528E9, coll: 3.345005364E10, storage: 2.408733552E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/6/sparkOutput_worker_application_1508545462036_0242_6.txt
+Reading lines: 5760 to 6523
+delta heap: 7.69341248E8, coll: 3.6466596288E10, storage: 2.561753622E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/7/sparkOutput_worker_application_1508545462036_0242_7.txt
+Reading lines: 5747 to 6413
+delta heap: -7.55833504E8, coll: 3.0953977688E10, storage: 1.985739033E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/8/sparkOutput_worker_application_1508545462036_0242_8.txt
+Reading lines: 5722 to 6446
+delta heap: -1.110572336E9, coll: 3.5009109968E10, storage: 2.534491643E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/9/sparkOutput_worker_application_1508545462036_0242_9.txt
+Reading lines: 5611 to 6316
+delta heap: 7.48241632E8, coll: 3.2832551904E10, storage: 2.308806532E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/1/sparkOutput_worker_application_1508545462036_0242_1.txt
+Reading lines: 7690 to 8447
+delta heap: -3.62206032E8, coll: 4.7967583064E10, storage: 2.293785362E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/10/sparkOutput_worker_application_1508545462036_0242_10.txt
+Reading lines: 7674 to 8474
+delta heap: 8.98797936E8, coll: 5.135197032E10, storage: 2.261228798E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/2/sparkOutput_worker_application_1508545462036_0242_2.txt
+Reading lines: 7681 to 8501
+delta heap: 1.049723008E9, coll: 5.2390570128E10, storage: 2.547316938E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/3/sparkOutput_worker_application_1508545462036_0242_3.txt
+Reading lines: 7643 to 8459
+delta heap: 7.94414672E8, coll: 5.302866448E10, storage: 2.611649876E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/4/sparkOutput_worker_application_1508545462036_0242_4.txt
+Reading lines: 7637 to 8439
+delta heap: 1.439396304E9, coll: 5.0376007016E10, storage: 2.375240721E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/5/sparkOutput_worker_application_1508545462036_0242_5.txt
+Reading lines: 7690 to 8467
+delta heap: 1.504071968E9, coll: 4.7189654152E10, storage: 2.034089115E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/6/sparkOutput_worker_application_1508545462036_0242_6.txt
+Reading lines: 7724 to 8520
+delta heap: -3.03392352E8, coll: 4.9094787808E10, storage: 2.442999024E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/7/sparkOutput_worker_application_1508545462036_0242_7.txt
+Reading lines: 7706 to 8510
+delta heap: -1.137509632E9, coll: 5.2500287208E10, storage: 2.404669225E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/8/sparkOutput_worker_application_1508545462036_0242_8.txt
+Reading lines: 7673 to 8499
+delta heap: 2.1774976E8, coll: 5.3591395368E10, storage: 2.622605059E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0242/9/sparkOutput_worker_application_1508545462036_0242_9.txt
+Reading lines: 7524 to 8307
+delta heap: 8.94244496E8, coll: 5.0457613568E10, storage: 2.405613267E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/1/sparkOutput_worker_application_1508545462036_0243_1.txt
+Reading lines: 3038 to 3629
+delta heap: -5.11348584E8, coll: 1.749829232E10, storage: 2.162524883E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/10/sparkOutput_worker_application_1508545462036_0243_10.txt
+Reading lines: 3084 to 3642
+delta heap: -2.83360944E8, coll: 1.481268548E10, storage: 2.087677135E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/2/sparkOutput_worker_application_1508545462036_0243_2.txt
+Reading lines: 3060 to 3638
+delta heap: 3.9912072E8, coll: 2.03544196E10, storage: 2.165532554E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/3/sparkOutput_worker_application_1508545462036_0243_3.txt
+Reading lines: 3080 to 3659
+delta heap: -3.90388824E8, coll: 1.79466232E10, storage: 2.147667114E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/4/sparkOutput_worker_application_1508545462036_0243_4.txt
+Reading lines: 3075 to 3642
+delta heap: -1.0773928E7, coll: 1.72133684E10, storage: 2.161296832E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/5/sparkOutput_worker_application_1508545462036_0243_5.txt
+Reading lines: 3076 to 3645
+delta heap: -5.89598888E8, coll: 1.6207992016E10, storage: 2.153558816E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/6/sparkOutput_worker_application_1508545462036_0243_6.txt
+Reading lines: 3080 to 3658
+delta heap: -5.05610912E8, coll: 1.501120892E10, storage: 2.227778897E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/7/sparkOutput_worker_application_1508545462036_0243_7.txt
+Reading lines: 3073 to 3634
+delta heap: -1.93926968E8, coll: 1.7861045904E10, storage: 2.225675419E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/8/sparkOutput_worker_application_1508545462036_0243_8.txt
+Reading lines: 3082 to 3647
+delta heap: 5.63233992E8, coll: 1.6361422168E10, storage: 2.207928033E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/9/sparkOutput_worker_application_1508545462036_0243_9.txt
+Reading lines: 3083 to 3690
+delta heap: 1.00920072E8, coll: 1.9686935488E10, storage: 2.217988225E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/1/sparkOutput_worker_application_1508545462036_0243_1.txt
+Reading lines: 4237 to 4942
+delta heap: -2.31801016E8, coll: 3.7408211536E10, storage: 2.304163342E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/10/sparkOutput_worker_application_1508545462036_0243_10.txt
+Reading lines: 4301 to 4968
+delta heap: -4.9602216E7, coll: 3.6205263936E10, storage: 2.202740404E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/2/sparkOutput_worker_application_1508545462036_0243_2.txt
+Reading lines: 4267 to 4979
+delta heap: -2.1914072E8, coll: 3.7331945472E10, storage: 2.296776406E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/3/sparkOutput_worker_application_1508545462036_0243_3.txt
+Reading lines: 4296 to 4979
+delta heap: -2.39142048E8, coll: 3.6366871152E10, storage: 2.210894447E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/4/sparkOutput_worker_application_1508545462036_0243_4.txt
+Reading lines: 4288 to 4966
+delta heap: -2.65557408E8, coll: 3.6177528888E10, storage: 2.232273565E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/5/sparkOutput_worker_application_1508545462036_0243_5.txt
+Reading lines: 4289 to 4973
+delta heap: -7.4195624E7, coll: 3.5160451624E10, storage: 2.223322302E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/6/sparkOutput_worker_application_1508545462036_0243_6.txt
+Reading lines: 4295 to 4990
+delta heap: -1.84976216E8, coll: 3.671206496E10, storage: 2.219900441E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/7/sparkOutput_worker_application_1508545462036_0243_7.txt
+Reading lines: 4285 to 4966
+delta heap: -2.32124504E8, coll: 3.6212292336E10, storage: 2.225251468E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/8/sparkOutput_worker_application_1508545462036_0243_8.txt
+Reading lines: 4298 to 4990
+delta heap: -1.037735808E9, coll: 4.0041602976E10, storage: 2.236929359E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/9/sparkOutput_worker_application_1508545462036_0243_9.txt
+Reading lines: 4300 to 5016
+delta heap: 7.5636624E7, coll: 3.7041379056E10, storage: 2.310663647E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/1/sparkOutput_worker_application_1508545462036_0243_1.txt
+Reading lines: 4943 to 5637
+delta heap: 7.40863384E8, coll: 3.4933064552E10, storage: 2.211156778E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/10/sparkOutput_worker_application_1508545462036_0243_10.txt
+Reading lines: 5018 to 5692
+delta heap: 5.11661328E8, coll: 3.6865500488E10, storage: 2.143997828E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/2/sparkOutput_worker_application_1508545462036_0243_2.txt
+Reading lines: 4979 to 5679
+delta heap: 2.28094E8, coll: 3.8365950008E10, storage: 2.191488847E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/3/sparkOutput_worker_application_1508545462036_0243_3.txt
+Reading lines: 5012 to 5700
+delta heap: 9.1540144E7, coll: 3.7553467816E10, storage: 2.161257716E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/4/sparkOutput_worker_application_1508545462036_0243_4.txt
+Reading lines: 5003 to 5682
+delta heap: 5.83778048E8, coll: 3.6893339192E10, storage: 2.176017042E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/5/sparkOutput_worker_application_1508545462036_0243_5.txt
+Reading lines: 5005 to 5696
+delta heap: 3.80680392E8, coll: 3.6721497648E10, storage: 2.167250816E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/6/sparkOutput_worker_application_1508545462036_0243_6.txt
+Reading lines: 5012 to 5715
+delta heap: 3.75277936E8, coll: 3.9181166544E10, storage: 2.162628559E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/7/sparkOutput_worker_application_1508545462036_0243_7.txt
+Reading lines: 5000 to 5691
+delta heap: 3.6600352E8, coll: 3.7246366152E10, storage: 2.160737399E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/8/sparkOutput_worker_application_1508545462036_0243_8.txt
+Reading lines: 5015 to 5712
+delta heap: 2.12016672E8, coll: 3.9603335048E10, storage: 2.153190419E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/9/sparkOutput_worker_application_1508545462036_0243_9.txt
+Reading lines: 5017 to 5701
+delta heap: 3.10389352E8, coll: 3.7081712768E10, storage: 2.127943072E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/1/sparkOutput_worker_application_1508545462036_0243_1.txt
+Reading lines: 5639 to 6463
+delta heap: 4.75808928E8, coll: 3.9145596608E10, storage: 2.246999051E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/10/sparkOutput_worker_application_1508545462036_0243_10.txt
+Reading lines: 5724 to 6498
+delta heap: -7.95921904E8, coll: 3.997206028E10, storage: 2.203866109E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/2/sparkOutput_worker_application_1508545462036_0243_2.txt
+Reading lines: 5680 to 6510
+delta heap: 2.64966824E8, coll: 4.3065379472E10, storage: 2.233565187E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/3/sparkOutput_worker_application_1508545462036_0243_3.txt
+Reading lines: 5717 to 6517
+delta heap: 3.73523216E8, coll: 4.3167025824E10, storage: 2.223847286E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/4/sparkOutput_worker_application_1508545462036_0243_4.txt
+Reading lines: 5707 to 6517
+delta heap: 2.88203824E8, coll: 4.2717531976E10, storage: 2.222485699E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/5/sparkOutput_worker_application_1508545462036_0243_5.txt
+Reading lines: 5709 to 6498
+delta heap: -1.114641912E9, coll: 4.1006096664E10, storage: 2.209135197E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/6/sparkOutput_worker_application_1508545462036_0243_6.txt
+Reading lines: 5717 to 6527
+delta heap: 2.44345304E8, coll: 4.2417234352E10, storage: 2.213875013E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/7/sparkOutput_worker_application_1508545462036_0243_7.txt
+Reading lines: 5704 to 6512
+delta heap: 4.93751728E8, coll: 4.1249632192E10, storage: 2.21018711E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/8/sparkOutput_worker_application_1508545462036_0243_8.txt
+Reading lines: 5721 to 6535
+delta heap: 3.9580168E8, coll: 4.15865778E10, storage: 2.231423338E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0243/9/sparkOutput_worker_application_1508545462036_0243_9.txt
+Reading lines: 5723 to 6559
+delta heap: 3.60323072E8, coll: 4.3185686136E10, storage: 2.310570301E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0246/1/sparkOutput_worker_application_1508545462036_0246_1.txt
+Reading lines: 4765 to 5347
+delta heap: 5.2799936E8, coll: 3.7250381112E10, storage: 2.37919894E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0246/10/sparkOutput_worker_application_1508545462036_0246_10.txt
+Reading lines: 4724 to 5350
+delta heap: 3.3043744E8, coll: 3.867840568E10, storage: 2.578056344E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0246/2/sparkOutput_worker_application_1508545462036_0246_2.txt
+Reading lines: 4762 to 5401
+delta heap: 2.65789224E8, coll: 3.9193480784E10, storage: 2.646738991E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0246/3/sparkOutput_worker_application_1508545462036_0246_3.txt
+Reading lines: 4720 to 5375
+delta heap: -2.5347436E8, coll: 4.3431332576E10, storage: 2.947821839E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0246/4/sparkOutput_worker_application_1508545462036_0246_4.txt
+Reading lines: 4703 to 5295
+delta heap: -1.69096024E8, coll: 3.9808818944E10, storage: 2.495314567E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0246/5/sparkOutput_worker_application_1508545462036_0246_5.txt
+Reading lines: 4716 to 5324
+delta heap: 3.8317508E8, coll: 4.0477745608E10, storage: 2.582013231E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0246/6/sparkOutput_worker_application_1508545462036_0246_6.txt
+Reading lines: 4590 to 5197
+delta heap: -7.79075784E8, coll: 3.5158156936E10, storage: 2.516522857E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0246/7/sparkOutput_worker_application_1508545462036_0246_7.txt
+Reading lines: 4759 to 5375
+delta heap: -6364608.0, coll: 3.7843038712E10, storage: 2.532278569E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0246/8/sparkOutput_worker_application_1508545462036_0246_8.txt
+Reading lines: 4724 to 5350
+delta heap: 7.11829688E8, coll: 4.075880876E10, storage: 2.638209488E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0246/9/sparkOutput_worker_application_1508545462036_0246_9.txt
+Reading lines: 4748 to 5393
+delta heap: -2.01948776E8, coll: 4.033361756E10, storage: 2.661700022E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0247/1/sparkOutput_worker_application_1508545462036_0247_1.txt
+Reading lines: 5051 to 5698
+delta heap: -6.67184072E8, coll: 3.8933446976E10, storage: 2.436691746E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0247/10/sparkOutput_worker_application_1508545462036_0247_10.txt
+Reading lines: 5045 to 5685
+delta heap: -4.67896664E8, coll: 3.9201047568E10, storage: 2.422561032E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0247/2/sparkOutput_worker_application_1508545462036_0247_2.txt
+Reading lines: 5059 to 5700
+delta heap: -6.9876488E8, coll: 3.8549581432E10, storage: 2.427550844E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0247/3/sparkOutput_worker_application_1508545462036_0247_3.txt
+Reading lines: 5036 to 5686
+delta heap: -4.64656384E8, coll: 3.4887362704E10, storage: 2.456888555E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0247/4/sparkOutput_worker_application_1508545462036_0247_4.txt
+Reading lines: 5037 to 5684
+delta heap: -2.94432816E8, coll: 3.6733016744E10, storage: 2.434652012E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0247/5/sparkOutput_worker_application_1508545462036_0247_5.txt
+Reading lines: 5074 to 5748
+delta heap: -7.5735248E8, coll: 3.9235161576E10, storage: 2.672887E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0247/6/sparkOutput_worker_application_1508545462036_0247_6.txt
+Reading lines: 5036 to 5711
+delta heap: 5.9273788E8, coll: 3.9590645088E10, storage: 2.612623429E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0247/7/sparkOutput_worker_application_1508545462036_0247_7.txt
+Reading lines: 4660 to 5325
+delta heap: -1.08087456E8, coll: 3.7778434696E10, storage: 2.608706371E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0247/8/sparkOutput_worker_application_1508545462036_0247_8.txt
+Reading lines: 5040 to 5679
+delta heap: -6.82205888E8, coll: 3.4936599056E10, storage: 2.312992184E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0247/9/sparkOutput_worker_application_1508545462036_0247_9.txt
+Reading lines: 5050 to 5679
+delta heap: -2.26818608E8, coll: 3.33333738E10, storage: 2.407766023E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/1/sparkOutput_worker_application_1508545462036_0248_1.txt
+Reading lines: 1853 to 2296
+delta heap: -1.95708696E8, coll: 2.054627892E10, storage: 2.563225746E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/10/sparkOutput_worker_application_1508545462036_0248_10.txt
+Reading lines: 1839 to 2313
+delta heap: 2.89872144E8, coll: 2.0893282712E10, storage: 2.687126124E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/2/sparkOutput_worker_application_1508545462036_0248_2.txt
+Reading lines: 1843 to 2338
+delta heap: 1.38733216E8, coll: 1.9955519832E10, storage: 2.865539426E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/3/sparkOutput_worker_application_1508545462036_0248_3.txt
+Reading lines: 1847 to 2353
+delta heap: -1.84757288E8, coll: 2.1478763832E10, storage: 2.928435086E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/4/sparkOutput_worker_application_1508545462036_0248_4.txt
+Reading lines: 1750 to 2180
+delta heap: 3.7331072E7, coll: 1.6485562416E10, storage: 2.432078116E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/5/sparkOutput_worker_application_1508545462036_0248_5.txt
+Reading lines: 1851 to 2351
+delta heap: -5.448282E8, coll: 2.074600928E10, storage: 2.857664986E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/6/sparkOutput_worker_application_1508545462036_0248_6.txt
+Reading lines: 1847 to 2315
+delta heap: -2.62233E8, coll: 1.8339172672E10, storage: 2.613135074E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/7/sparkOutput_worker_application_1508545462036_0248_7.txt
+Reading lines: 1843 to 2341
+delta heap: -1.80804832E8, coll: 2.1495136528E10, storage: 2.952337307E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/8/sparkOutput_worker_application_1508545462036_0248_8.txt
+Reading lines: 1845 to 2346
+delta heap: -2.8245004E8, coll: 2.0486833624E10, storage: 2.954937818E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/9/sparkOutput_worker_application_1508545462036_0248_9.txt
+Reading lines: 1850 to 2336
+delta heap: -1.54804192E8, coll: 2.3825755304E10, storage: 2.911215941E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/1/sparkOutput_worker_application_1508545462036_0248_1.txt
+Reading lines: 2771 to 3267
+delta heap: -3954608.0, coll: 1.0979141728E10, storage: 2.50379537E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/10/sparkOutput_worker_application_1508545462036_0248_10.txt
+Reading lines: 2750 to 3320
+delta heap: -3.249104E7, coll: 1.4209748536E10, storage: 3.079148273E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/2/sparkOutput_worker_application_1508545462036_0248_2.txt
+Reading lines: 2755 to 3289
+delta heap: -5.1299072E8, coll: 1.7702517424E10, storage: 2.62267016E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/3/sparkOutput_worker_application_1508545462036_0248_3.txt
+Reading lines: 2761 to 3325
+delta heap: -7.13692328E8, coll: 1.3687597128E10, storage: 2.846761575E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/4/sparkOutput_worker_application_1508545462036_0248_4.txt
+Reading lines: 2617 to 3134
+delta heap: 3.20472232E8, coll: 1.253236808E10, storage: 2.670544804E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/5/sparkOutput_worker_application_1508545462036_0248_5.txt
+Reading lines: 2768 to 3334
+delta heap: -9.53027176E8, coll: 1.405079708E10, storage: 2.961543164E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/6/sparkOutput_worker_application_1508545462036_0248_6.txt
+Reading lines: 2762 to 3296
+delta heap: -2.33481464E8, coll: 1.3225033744E10, storage: 2.713375687E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/7/sparkOutput_worker_application_1508545462036_0248_7.txt
+Reading lines: 2755 to 3308
+delta heap: 1.25738736E8, coll: 1.2187472544E10, storage: 2.918015595E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/8/sparkOutput_worker_application_1508545462036_0248_8.txt
+Reading lines: 2759 to 3298
+delta heap: 3.20481024E8, coll: 1.2373672952E10, storage: 2.829592423E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0248/9/sparkOutput_worker_application_1508545462036_0248_9.txt
+Reading lines: 2766 to 3296
+delta heap: -5.85685384E8, coll: 1.3330395264E10, storage: 2.79685942E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/1/sparkOutput_worker_application_1508545462036_0249_1.txt
+Reading lines: 1980 to 2480
+delta heap: -1.7986992E7, coll: 1.7465190608E10, storage: 2.836777377E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/10/sparkOutput_worker_application_1508545462036_0249_10.txt
+Reading lines: 1963 to 2422
+delta heap: -8.9449032E7, coll: 1.6949866496E10, storage: 2.629591488E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/2/sparkOutput_worker_application_1508545462036_0249_2.txt
+Reading lines: 1981 to 2465
+delta heap: 2.38847656E8, coll: 1.7887674616E10, storage: 2.788688654E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/3/sparkOutput_worker_application_1508545462036_0249_3.txt
+Reading lines: 1990 to 2477
+delta heap: -7.2612364E8, coll: 1.7718723288E10, storage: 2.701944095E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/4/sparkOutput_worker_application_1508545462036_0249_4.txt
+Reading lines: 1975 to 2444
+delta heap: 3.26063944E8, coll: 1.7310899544E10, storage: 2.677879406E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/5/sparkOutput_worker_application_1508545462036_0249_5.txt
+Reading lines: 1983 to 2379
+delta heap: -3.03350968E8, coll: 1.3954053088E10, storage: 2.043955428E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/6/sparkOutput_worker_application_1508545462036_0249_6.txt
+Reading lines: 1971 to 2480
+delta heap: -1.42001768E8, coll: 1.8281833112E10, storage: 3.002311943E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/7/sparkOutput_worker_application_1508545462036_0249_7.txt
+Reading lines: 1971 to 2484
+delta heap: -2.89233328E8, coll: 2.0966980776E10, storage: 2.934229768E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/8/sparkOutput_worker_application_1508545462036_0249_8.txt
+Reading lines: 1988 to 2408
+delta heap: -8.715532E7, coll: 1.654146244E10, storage: 2.319794973E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/9/sparkOutput_worker_application_1508545462036_0249_9.txt
+Reading lines: 1975 to 2437
+delta heap: 4.457776E7, coll: 1.7852558208E10, storage: 2.542680364E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/1/sparkOutput_worker_application_1508545462036_0249_1.txt
+Reading lines: 2901 to 3500
+delta heap: -5.65994104E8, coll: 1.1316696816E10, storage: 2.748627101E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/10/sparkOutput_worker_application_1508545462036_0249_10.txt
+Reading lines: 2877 to 3472
+delta heap: -5.25379032E8, coll: 1.1429419344E10, storage: 2.681936949E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/2/sparkOutput_worker_application_1508545462036_0249_2.txt
+Reading lines: 2903 to 3507
+delta heap: -4.72573728E8, coll: 1.3949064504E10, storage: 2.822448387E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/3/sparkOutput_worker_application_1508545462036_0249_3.txt
+Reading lines: 2917 to 3517
+delta heap: -6.40164664E8, coll: 1.37043938E10, storage: 2.671501795E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/4/sparkOutput_worker_application_1508545462036_0249_4.txt
+Reading lines: 2895 to 3524
+delta heap: 1.56387032E8, coll: 1.3896094592E10, storage: 2.915344277E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/5/sparkOutput_worker_application_1508545462036_0249_5.txt
+Reading lines: 2906 to 3551
+delta heap: -2.9710616E7, coll: 1.671891268E10, storage: 2.865806433E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/6/sparkOutput_worker_application_1508545462036_0249_6.txt
+Reading lines: 2889 to 3534
+delta heap: 2.5614768E7, coll: 1.60252002E10, storage: 3.014176767E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/7/sparkOutput_worker_application_1508545462036_0249_7.txt
+Reading lines: 2889 to 3487
+delta heap: -3.30491832E8, coll: 1.352560396E10, storage: 2.738879737E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/8/sparkOutput_worker_application_1508545462036_0249_8.txt
+Reading lines: 2913 to 3540
+delta heap: -4.51468112E8, coll: 1.514865516E10, storage: 2.663222559E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0249/9/sparkOutput_worker_application_1508545462036_0249_9.txt
+Reading lines: 2895 to 3484
+delta heap: 6.36103176E8, coll: 1.4049072136E10, storage: 2.726764966E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0251/1/sparkOutput_worker_application_1508545462036_0251_1.txt
+Reading lines: 4197 to 4799
+delta heap: 6.3009344E7, coll: 2.6886555064E10, storage: 2.988817143E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0251/10/sparkOutput_worker_application_1508545462036_0251_10.txt
+Reading lines: 4112 to 4681
+delta heap: 2.55584032E8, coll: 2.7051489504E10, storage: 2.84921594E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0251/2/sparkOutput_worker_application_1508545462036_0251_2.txt
+Reading lines: 4245 to 4802
+delta heap: 2.12212624E8, coll: 3.0477987016E10, storage: 2.728861062E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0251/3/sparkOutput_worker_application_1508545462036_0251_3.txt
+Reading lines: 4270 to 4849
+delta heap: -8.40859344E8, coll: 2.6459178944E10, storage: 2.819470473E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0251/4/sparkOutput_worker_application_1508545462036_0251_4.txt
+Reading lines: 4216 to 4822
+delta heap: -4.59093464E8, coll: 2.8019500728E10, storage: 2.751229226E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0251/5/sparkOutput_worker_application_1508545462036_0251_5.txt
+Reading lines: 4262 to 4837
+delta heap: -5.44569344E8, coll: 3.0912378728E10, storage: 2.69377302E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0251/6/sparkOutput_worker_application_1508545462036_0251_6.txt
+Reading lines: 4248 to 4739
+delta heap: -1.8825476E8, coll: 2.9691261688E10, storage: 2.503967545E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0251/7/sparkOutput_worker_application_1508545462036_0251_7.txt
+Reading lines: 4295 to 4800
+delta heap: -3.61713424E8, coll: 2.726543932E10, storage: 2.460793791E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0251/8/sparkOutput_worker_application_1508545462036_0251_8.txt
+Reading lines: 4211 to 4817
+delta heap: -9.7384624E7, coll: 3.4850503664E10, storage: 2.989673308E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0251/9/sparkOutput_worker_application_1508545462036_0251_9.txt
+Reading lines: 4203 to 4769
+delta heap: 1.60904328E8, coll: 2.8789329264E10, storage: 2.766562006E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/1/sparkOutput_worker_application_1508545462036_0253_1.txt
+Reading lines: 3257 to 3824
+delta heap: -9.70393976E8, coll: 1.6430769024E10, storage: 2.962246224E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/10/sparkOutput_worker_application_1508545462036_0253_10.txt
+Reading lines: 3270 to 3851
+delta heap: 1.72645232E8, coll: 1.6478803776E10, storage: 3.159953304E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/2/sparkOutput_worker_application_1508545462036_0253_2.txt
+Reading lines: 3249 to 3769
+delta heap: 6.21988832E8, coll: 1.5034826872E10, storage: 2.722028041E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/3/sparkOutput_worker_application_1508545462036_0253_3.txt
+Reading lines: 3287 to 3816
+delta heap: 3.44271064E8, coll: 1.458669476E10, storage: 2.844449346E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/4/sparkOutput_worker_application_1508545462036_0253_4.txt
+Reading lines: 3271 to 3809
+delta heap: -3.2067968E8, coll: 1.5948264256E10, storage: 2.59138782E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/5/sparkOutput_worker_application_1508545462036_0253_5.txt
+Reading lines: 3254 to 3800
+delta heap: -8.28867712E8, coll: 1.6694123032E10, storage: 2.873764186E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/6/sparkOutput_worker_application_1508545462036_0253_6.txt
+Reading lines: 3242 to 3820
+delta heap: -9.67158024E8, coll: 1.6665571584E10, storage: 3.169379483E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/7/sparkOutput_worker_application_1508545462036_0253_7.txt
+Reading lines: 3275 to 3820
+delta heap: 4.88593448E8, coll: 1.7346151152E10, storage: 2.97276604E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/8/sparkOutput_worker_application_1508545462036_0253_8.txt
+Reading lines: 3238 to 3770
+delta heap: -5.26887672E8, coll: 1.7424978552E10, storage: 2.799342871E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/9/sparkOutput_worker_application_1508545462036_0253_9.txt
+Reading lines: 3256 to 3788
+delta heap: 4.72823264E8, coll: 1.5390120072E10, storage: 2.735583043E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/1/sparkOutput_worker_application_1508545462036_0253_1.txt
+Reading lines: 4253 to 4891
+delta heap: 5.07407832E8, coll: 2.2491880768E10, storage: 2.859689888E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/10/sparkOutput_worker_application_1508545462036_0253_10.txt
+Reading lines: 4269 to 4903
+delta heap: 7.0253608E8, coll: 2.3183137024E10, storage: 2.863332909E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/2/sparkOutput_worker_application_1508545462036_0253_2.txt
+Reading lines: 4243 to 4878
+delta heap: -5.41474776E8, coll: 2.032762212E10, storage: 2.850252993E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/3/sparkOutput_worker_application_1508545462036_0253_3.txt
+Reading lines: 4292 to 4939
+delta heap: -6.0236492E8, coll: 2.056339796E10, storage: 2.796263147E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/4/sparkOutput_worker_application_1508545462036_0253_4.txt
+Reading lines: 4271 to 4945
+delta heap: -3.82783536E8, coll: 2.2515997256E10, storage: 2.827824587E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/5/sparkOutput_worker_application_1508545462036_0253_5.txt
+Reading lines: 4249 to 4913
+delta heap: -6.31816272E8, coll: 2.4229888416E10, storage: 2.978919631E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/6/sparkOutput_worker_application_1508545462036_0253_6.txt
+Reading lines: 4233 to 4861
+delta heap: 7.32789768E8, coll: 2.078856592E10, storage: 2.867953217E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/7/sparkOutput_worker_application_1508545462036_0253_7.txt
+Reading lines: 4276 to 4944
+delta heap: -7.6719624E8, coll: 2.2636875744E10, storage: 2.918090397E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/8/sparkOutput_worker_application_1508545462036_0253_8.txt
+Reading lines: 4227 to 4844
+delta heap: 1.200729248E9, coll: 2.2412932072E10, storage: 2.629660948E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0253/9/sparkOutput_worker_application_1508545462036_0253_9.txt
+Reading lines: 4251 to 4917
+delta heap: -6.0505916E8, coll: 2.3799219096E10, storage: 2.920880508E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/1/sparkOutput_worker_application_1508545462036_0254_1.txt
+Reading lines: 2184 to 2748
+delta heap: 1.69551352E8, coll: 1.8485156464E10, storage: 3.735864653E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/10/sparkOutput_worker_application_1508545462036_0254_10.txt
+Reading lines: 2275 to 2850
+delta heap: -3.36099888E8, coll: 2.2290242984E10, storage: 3.674973809E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/2/sparkOutput_worker_application_1508545462036_0254_2.txt
+Reading lines: 2232 to 2784
+delta heap: 3.9864584E7, coll: 2.4098758152E10, storage: 3.421203924E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/3/sparkOutput_worker_application_1508545462036_0254_3.txt
+Reading lines: 2261 to 2843
+delta heap: 1.24200432E8, coll: 2.2838077576E10, storage: 3.674485642E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/4/sparkOutput_worker_application_1508545462036_0254_4.txt
+Reading lines: 2247 to 2822
+delta heap: -1.20663112E8, coll: 1.8268545072E10, storage: 3.459706481E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/5/sparkOutput_worker_application_1508545462036_0254_5.txt
+Reading lines: 2281 to 2866
+delta heap: 4.2120264E8, coll: 2.4763786856E10, storage: 3.76106775E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/6/sparkOutput_worker_application_1508545462036_0254_6.txt
+Reading lines: 2354 to 2914
+delta heap: 2.73451328E8, coll: 2.6614873208E10, storage: 3.730640714E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/7/sparkOutput_worker_application_1508545462036_0254_7.txt
+Reading lines: 2341 to 2950
+delta heap: 5.8179224E7, coll: 2.5552976368E10, storage: 3.848167228E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/8/sparkOutput_worker_application_1508545462036_0254_8.txt
+Reading lines: 2145 to 2702
+delta heap: 7.7720304E7, coll: 2.494101464E10, storage: 3.849309807E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/9/sparkOutput_worker_application_1508545462036_0254_9.txt
+Reading lines: 2338 to 2877
+delta heap: 2.98992992E8, coll: 2.1869707664E10, storage: 3.443608264E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/1/sparkOutput_worker_application_1508545462036_0254_1.txt
+Reading lines: 3021 to 3619
+delta heap: -1.32550912E8, coll: 2.0978077536E10, storage: 3.383080476E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/10/sparkOutput_worker_application_1508545462036_0254_10.txt
+Reading lines: 3147 to 3712
+delta heap: 2.31098648E8, coll: 2.0996209512E10, storage: 3.346513816E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/2/sparkOutput_worker_application_1508545462036_0254_2.txt
+Reading lines: 3088 to 3652
+delta heap: 1.28079848E8, coll: 9.8554272E9, storage: 3.246742496E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/3/sparkOutput_worker_application_1508545462036_0254_3.txt
+Reading lines: 3128 to 3775
+delta heap: -6.4033984E7, coll: 2.166442492E10, storage: 3.85125807E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/4/sparkOutput_worker_application_1508545462036_0254_4.txt
+Reading lines: 3108 to 3633
+delta heap: 2.7613504E8, coll: 1.4273953992E10, storage: 2.932729967E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/5/sparkOutput_worker_application_1508545462036_0254_5.txt
+Reading lines: 3155 to 3759
+delta heap: 1.5260632E7, coll: 2.1117821992E10, storage: 3.589144486E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/6/sparkOutput_worker_application_1508545462036_0254_6.txt
+Reading lines: 3256 to 3882
+delta heap: 1.7863392E8, coll: 2.04560992E10, storage: 3.623271638E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/7/sparkOutput_worker_application_1508545462036_0254_7.txt
+Reading lines: 3238 to 3885
+delta heap: 2.92480048E8, coll: 1.2064412832E10, storage: 3.626876309E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/8/sparkOutput_worker_application_1508545462036_0254_8.txt
+Reading lines: 2968 to 3530
+delta heap: -2.5091116E8, coll: 1.7563027192E10, storage: 3.574535518E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0254/9/sparkOutput_worker_application_1508545462036_0254_9.txt
+Reading lines: 3234 to 3873
+delta heap: 2.26362272E8, coll: 2.2133958832E10, storage: 3.809339301E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/1/sparkOutput_worker_application_1508545462036_0255_1.txt
+Reading lines: 1501 to 2018
+delta heap: -2.01733104E8, coll: 2.1817274416E10, storage: 3.801500074E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/10/sparkOutput_worker_application_1508545462036_0255_10.txt
+Reading lines: 1488 to 2001
+delta heap: -2.89215224E8, coll: 1.6589614992E10, storage: 3.757926631E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/2/sparkOutput_worker_application_1508545462036_0255_2.txt
+Reading lines: 1518 to 2024
+delta heap: 2.36895536E8, coll: 2.2133771248E10, storage: 4.010292595E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/3/sparkOutput_worker_application_1508545462036_0255_3.txt
+Reading lines: 1518 to 2098
+delta heap: -3.9754232E7, coll: 2.6521050688E10, storage: 4.043624865E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/4/sparkOutput_worker_application_1508545462036_0255_4.txt
+Reading lines: 1484 to 1940
+delta heap: 3.15321544E8, coll: 1.69723138E10, storage: 3.479394492E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/5/sparkOutput_worker_application_1508545462036_0255_5.txt
+Reading lines: 1505 to 2052
+delta heap: -8.7448072E7, coll: 2.2143967224E10, storage: 3.951311195E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/6/sparkOutput_worker_application_1508545462036_0255_6.txt
+Reading lines: 1487 to 2013
+delta heap: 5.6081368E7, coll: 1.7381762456E10, storage: 3.684636753E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/7/sparkOutput_worker_application_1508545462036_0255_7.txt
+Reading lines: 1458 to 2013
+delta heap: 1.2591248E7, coll: 2.1773041912E10, storage: 4.091219889E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/8/sparkOutput_worker_application_1508545462036_0255_8.txt
+Reading lines: 1512 to 2062
+delta heap: -2.69403064E8, coll: 2.2494390096E10, storage: 3.795867588E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/9/sparkOutput_worker_application_1508545462036_0255_9.txt
+Reading lines: 1479 to 1987
+delta heap: 2.32186512E8, coll: 1.7082682248E10, storage: 3.756896441E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/1/sparkOutput_worker_application_1508545462036_0255_1.txt
+Reading lines: 2267 to 2931
+delta heap: -1.2345148E8, coll: 2.7731723488E10, storage: 4.083935788E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/10/sparkOutput_worker_application_1508545462036_0255_10.txt
+Reading lines: 2247 to 2862
+delta heap: -3.90682104E8, coll: 2.4093155072E10, storage: 3.575584553E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/2/sparkOutput_worker_application_1508545462036_0255_2.txt
+Reading lines: 2292 to 2940
+delta heap: 6.73096E7, coll: 2.735276108E10, storage: 4.082535636E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/3/sparkOutput_worker_application_1508545462036_0255_3.txt
+Reading lines: 2291 to 2961
+delta heap: -4.93911352E8, coll: 2.8427235584E10, storage: 3.995984922E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/4/sparkOutput_worker_application_1508545462036_0255_4.txt
+Reading lines: 2241 to 2903
+delta heap: -1.98388968E8, coll: 2.3678633784E10, storage: 3.951272568E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/5/sparkOutput_worker_application_1508545462036_0255_5.txt
+Reading lines: 2272 to 2895
+delta heap: 4.8321912E7, coll: 2.746798736E10, storage: 3.683562514E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/6/sparkOutput_worker_application_1508545462036_0255_6.txt
+Reading lines: 2245 to 2875
+delta heap: -8.6313104E7, coll: 2.4431330536E10, storage: 3.508184108E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/7/sparkOutput_worker_application_1508545462036_0255_7.txt
+Reading lines: 2201 to 2827
+delta heap: 2.76715448E8, coll: 2.6537554848E10, storage: 3.714940315E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/8/sparkOutput_worker_application_1508545462036_0255_8.txt
+Reading lines: 2283 to 2947
+delta heap: 1.94567296E8, coll: 2.9323126128E10, storage: 3.87058928E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/9/sparkOutput_worker_application_1508545462036_0255_9.txt
+Reading lines: 2233 to 2903
+delta heap: 1.29788808E8, coll: 2.6534693208E10, storage: 3.662466679E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/1/sparkOutput_worker_application_1508545462036_0255_1.txt
+Reading lines: 3189 to 3899
+delta heap: 4.56123232E8, coll: 1.5222039416E10, storage: 3.920911344E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/10/sparkOutput_worker_application_1508545462036_0255_10.txt
+Reading lines: 3160 to 3813
+delta heap: 3.4057848E7, coll: 9.76686976E9, storage: 3.533699853E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/2/sparkOutput_worker_application_1508545462036_0255_2.txt
+Reading lines: 3225 to 3939
+delta heap: -2.17183872E8, coll: 1.7452996448E10, storage: 3.964272269E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/3/sparkOutput_worker_application_1508545462036_0255_3.txt
+Reading lines: 3224 to 3970
+delta heap: 3.39478368E8, coll: 1.7883034744E10, storage: 3.857471658E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/4/sparkOutput_worker_application_1508545462036_0255_4.txt
+Reading lines: 3153 to 3892
+delta heap: -1.29839784E8, coll: 1.3095795488E10, storage: 3.926399502E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/5/sparkOutput_worker_application_1508545462036_0255_5.txt
+Reading lines: 3197 to 3813
+delta heap: -1.09191616E8, coll: 1.2290307296E10, storage: 3.534287323E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/6/sparkOutput_worker_application_1508545462036_0255_6.txt
+Reading lines: 3158 to 3819
+delta heap: 5.72009344E8, coll: 9.296856984E9, storage: 3.578284406E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/7/sparkOutput_worker_application_1508545462036_0255_7.txt
+Reading lines: 3096 to 3795
+delta heap: 1.0494288E7, coll: 1.6796507792E10, storage: 3.746756542E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/8/sparkOutput_worker_application_1508545462036_0255_8.txt
+Reading lines: 3212 to 3933
+delta heap: -2.67589448E8, coll: 1.4731273104E10, storage: 3.870331449E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0255/9/sparkOutput_worker_application_1508545462036_0255_9.txt
+Reading lines: 3142 to 3851
+delta heap: 8.3002872E7, coll: 1.0070247488E10, storage: 3.749947395E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/1/sparkOutput_worker_application_1508545462036_0256_1.txt
+Reading lines: 2264 to 2823
+delta heap: -8.808664E7, coll: 2.2936150672E10, storage: 3.57913903E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/10/sparkOutput_worker_application_1508545462036_0256_10.txt
+Reading lines: 2218 to 2821
+delta heap: 4.2537104E8, coll: 2.43657988E10, storage: 3.769679764E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/2/sparkOutput_worker_application_1508545462036_0256_2.txt
+Reading lines: 2286 to 2829
+delta heap: -5.32405296E8, coll: 2.2690189144E10, storage: 3.876716877E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/3/sparkOutput_worker_application_1508545462036_0256_3.txt
+Reading lines: 2250 to 2846
+delta heap: -2.4842488E7, coll: 1.9922985416E10, storage: 3.932177375E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/4/sparkOutput_worker_application_1508545462036_0256_4.txt
+Reading lines: 2249 to 2835
+delta heap: 5.5668672E8, coll: 2.0995922512E10, storage: 3.824813541E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/5/sparkOutput_worker_application_1508545462036_0256_5.txt
+Reading lines: 1592 to 2013
+delta heap: 1.20217528E8, coll: 1.5489124256E10, storage: 3.351527786E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/6/sparkOutput_worker_application_1508545462036_0256_6.txt
+Reading lines: 2260 to 2755
+delta heap: -4.8156024E8, coll: 2.221191332E10, storage: 3.408537222E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/7/sparkOutput_worker_application_1508545462036_0256_7.txt
+Reading lines: 2267 to 2904
+delta heap: -3.9364432E8, coll: 1.8535476816E10, storage: 4.199498153E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/8/sparkOutput_worker_application_1508545462036_0256_8.txt
+Reading lines: 2274 to 2840
+delta heap: 8.1664488E7, coll: 2.3489141608E10, storage: 3.826105969E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/9/sparkOutput_worker_application_1508545462036_0256_9.txt
+Reading lines: 2288 to 2794
+delta heap: -2.91417448E8, coll: 2.3291185144E10, storage: 3.587606036E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/1/sparkOutput_worker_application_1508545462036_0256_1.txt
+Reading lines: 3155 to 3796
+delta heap: -2.37437344E8, coll: 6.845824776E9, storage: 3.598901195E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/10/sparkOutput_worker_application_1508545462036_0256_10.txt
+Reading lines: 3091 to 3750
+delta heap: -1.98053664E8, coll: 6.877424088E9, storage: 3.552239108E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/2/sparkOutput_worker_application_1508545462036_0256_2.txt
+Reading lines: 3185 to 3871
+delta heap: 2.4541604E8, coll: 1.0907347032E10, storage: 3.764029204E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/3/sparkOutput_worker_application_1508545462036_0256_3.txt
+Reading lines: 3136 to 4153
+delta heap: 2.44662648E8, coll: 1.875899456E10, storage: 4.205496449E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/4/sparkOutput_worker_application_1508545462036_0256_4.txt
+Reading lines: 3134 to 3768
+delta heap: -4.6731E7, coll: 6.58235988E9, storage: 3.459675909E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/5/sparkOutput_worker_application_1508545462036_0256_5.txt
+Reading lines: 2219 to 2697
+delta heap: -4.0814912E8, coll: 4.982731744E9, storage: 3.311603229E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/6/sparkOutput_worker_application_1508545462036_0256_6.txt
+Reading lines: 3149 to 3786
+delta heap: -2.85331768E8, coll: 7.984984496E9, storage: 3.574656689E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/7/sparkOutput_worker_application_1508545462036_0256_7.txt
+Reading lines: 3160 to 4146
+delta heap: 6.8445136E7, coll: 1.9341784896E10, storage: 4.102883652E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/8/sparkOutput_worker_application_1508545462036_0256_8.txt
+Reading lines: 3169 to 3809
+delta heap: -3.34135616E8, coll: 9.780641656E9, storage: 3.646766817E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0256/9/sparkOutput_worker_application_1508545462036_0256_9.txt
+Reading lines: 3188 to 3854
+delta heap: 4.3233672E7, coll: 1.15342902E10, storage: 3.72870256E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/1/sparkOutput_worker_application_1508545462036_0257_1.txt
+Reading lines: 1974 to 2499
+delta heap: -2.3508404E8, coll: 2.0116044096E10, storage: 3.647441801E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/10/sparkOutput_worker_application_1508545462036_0257_10.txt
+Reading lines: 1962 to 2501
+delta heap: -4.3338632E7, coll: 1.6298371184E10, storage: 3.572766501E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/2/sparkOutput_worker_application_1508545462036_0257_2.txt
+Reading lines: 1995 to 2496
+delta heap: 2.24153784E8, coll: 1.8821963104E10, storage: 3.639876305E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/3/sparkOutput_worker_application_1508545462036_0257_3.txt
+Reading lines: 2001 to 2555
+delta heap: 1.32605496E8, coll: 1.8587147032E10, storage: 3.830671247E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/4/sparkOutput_worker_application_1508545462036_0257_4.txt
+Reading lines: 1915 to 2459
+delta heap: -2.93442416E8, coll: 1.9271037E10, storage: 3.844935561E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/5/sparkOutput_worker_application_1508545462036_0257_5.txt
+Reading lines: 1953 to 2490
+delta heap: -6.6579328E7, coll: 1.6775956096E10, storage: 3.654915079E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/6/sparkOutput_worker_application_1508545462036_0257_6.txt
+Reading lines: 1977 to 2518
+delta heap: 1.4335504E7, coll: 1.8055141928E10, storage: 3.571587379E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/7/sparkOutput_worker_application_1508545462036_0257_7.txt
+Reading lines: 1996 to 2542
+delta heap: -1.64038728E8, coll: 2.118348376E10, storage: 3.961978036E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/8/sparkOutput_worker_application_1508545462036_0257_8.txt
+Reading lines: 2011 to 2544
+delta heap: -5.8973032E7, coll: 2.0844525872E10, storage: 3.728180657E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/9/sparkOutput_worker_application_1508545462036_0257_9.txt
+Reading lines: 1953 to 2524
+delta heap: -2.1017296E7, coll: 1.7711607584E10, storage: 3.666254656E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/1/sparkOutput_worker_application_1508545462036_0257_1.txt
+Reading lines: 2790 to 3416
+delta heap: 2.40640584E8, coll: 9.414488576E9, storage: 3.658144444E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/10/sparkOutput_worker_application_1508545462036_0257_10.txt
+Reading lines: 2772 to 3375
+delta heap: 4.320376E7, coll: 6.57107784E9, storage: 3.604051983E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/2/sparkOutput_worker_application_1508545462036_0257_2.txt
+Reading lines: 2819 to 3449
+delta heap: -4.9979412E8, coll: 9.923944056E9, storage: 3.837436292E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/3/sparkOutput_worker_application_1508545462036_0257_3.txt
+Reading lines: 2828 to 3448
+delta heap: -3.29519984E8, coll: 6.704607296E9, storage: 3.723382163E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/4/sparkOutput_worker_application_1508545462036_0257_4.txt
+Reading lines: 2706 to 3330
+delta heap: -3.19097856E8, coll: 1.0468193432E10, storage: 3.803354443E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/5/sparkOutput_worker_application_1508545462036_0257_5.txt
+Reading lines: 2759 to 3360
+delta heap: -9.532372E7, coll: 6.052380016E9, storage: 3.73619064E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/6/sparkOutput_worker_application_1508545462036_0257_6.txt
+Reading lines: 2793 to 3442
+delta heap: -3.79543808E8, coll: 7.948415312E9, storage: 3.861811305E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/7/sparkOutput_worker_application_1508545462036_0257_7.txt
+Reading lines: 2820 to 3469
+delta heap: 2.72121152E8, coll: 1.0576926848E10, storage: 3.886898613E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/8/sparkOutput_worker_application_1508545462036_0257_8.txt
+Reading lines: 2841 to 3468
+delta heap: -3.00312008E8, coll: 1.2160171352E10, storage: 3.781736153E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0257/9/sparkOutput_worker_application_1508545462036_0257_9.txt
+Reading lines: 2761 to 3365
+delta heap: -8.0454808E7, coll: 5.844887368E9, storage: 3.571818106E9, exec: 0.0
+Beta bars: [2.4812445359770816, 5.195855038858078]
+Beta std dev: [0.05622882922333673, 0.44125936169042246]
+Degree freedom: 588.0
+Beta covariance: [[0.0031616812358271668, -0.010925641420567482], [-0.010925641420567482, 0.1947098242794391]]
+Variables used: [0, 3]
+sum of squares: 5.830608063643359E22
+java.lang.ArrayIndexOutOfBoundsException: 0
+	at flanagan.math.Matrix.<init>(Matrix.java:134)
+	at flanagan.analysis.Regression.generalLinear(Regression.java:2961)
+	at flanagan.analysis.Regression.linearMono(Regression.java:1867)
+	at flanagan.analysis.Regression.linear(Regression.java:1838)
+	at edu.duke.globallog.sparklogprocessor.ParamLearner.runRegression(ParamLearner.java:298)
+	at edu.duke.globallog.sparklogprocessor.ParamLearner.main(ParamLearner.java:430)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+Beta bars: [1.2032117920393588]
+Beta std dev: [0.10686819749222291]
+Degree freedom: 589.0
+Beta covariance: [[0.011420811635236758]]
+Variables used: 9
+sum of squares: 3.57345593623693E21
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 26:15 min
+[INFO] Finished at: 2018-08-29T19:41:13-04:00
+[INFO] Final Memory: 17M/361M
+[INFO] ------------------------------------------------------------------------

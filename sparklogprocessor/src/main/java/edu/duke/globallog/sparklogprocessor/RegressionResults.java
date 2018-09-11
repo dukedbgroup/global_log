@@ -8,6 +8,8 @@ import cern.colt.matrix.tint.*;
 
 public class RegressionResults implements Serializable {
 
+  private static final long serialVersionUID = 2087368867376448459L;
+
   int DegFree;
   int numVariables;
   IntMatrix1D varNumbers;
@@ -54,10 +56,10 @@ public class RegressionResults implements Serializable {
       coVar = a.getCoVar();
       return;
     }
-    if(a.getDegFree() != b.getDegFree()) {
-      throw new IllegalArgumentException("Degrees of Freedom do not match");
-    }
-    DegFree = a.getDegFree();
+    //if(a.getDegFree() != b.getDegFree()) {
+    //  throw new IllegalArgumentException("Degrees of Freedom do not match");
+    //}
+    DegFree = Math.min(a.getDegFree(), b.getDegFree());
     numVariables = a.getNumVariables() + b.getNumVariables();
     varNumbers = IntFactory1D.dense.append(a.getVarNumbers(), b.getVarNumbers());
     means = DoubleFactory1D.dense.append(a.getMeans(), b.getMeans());

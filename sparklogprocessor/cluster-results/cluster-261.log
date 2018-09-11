@@ -1,0 +1,121 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building sparklogprocessor 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- exec-maven-plugin:1.4.0:java (default-cli) @ sparklogprocessor ---
+Running for cluster: 261
+Adding: application_1508545462036_0213, 7, 1
+Adding: application_1508545462036_0213, 7, 10
+Adding: application_1508545462036_0213, 7, 2
+Adding: application_1508545462036_0213, 7, 3
+Adding: application_1508545462036_0213, 7, 4
+Adding: application_1508545462036_0213, 7, 5
+Adding: application_1508545462036_0213, 7, 6
+Adding: application_1508545462036_0213, 7, 7
+Adding: application_1508545462036_0213, 7, 8
+Adding: application_1508545462036_0213, 7, 9
+Adding: application_1508545462036_0213, 9, 1
+Adding: application_1508545462036_0213, 9, 10
+Adding: application_1508545462036_0213, 9, 2
+Adding: application_1508545462036_0213, 9, 3
+Adding: application_1508545462036_0213, 9, 4
+Adding: application_1508545462036_0213, 9, 5
+Adding: application_1508545462036_0213, 9, 6
+Adding: application_1508545462036_0213, 9, 7
+Adding: application_1508545462036_0213, 9, 8
+Adding: application_1508545462036_0213, 9, 9
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/1/sparkOutput_worker_application_1508545462036_0213_1.txt
+Reading lines: 5212 to 6521
+delta heap: -1.4168488E8, coll: 1.8951947544E10, storage: 2.349503164E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/10/sparkOutput_worker_application_1508545462036_0213_10.txt
+Reading lines: 5210 to 6514
+delta heap: -2.23926232E8, coll: 2.084163936E10, storage: 2.347399614E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/2/sparkOutput_worker_application_1508545462036_0213_2.txt
+Reading lines: 5184 to 6393
+delta heap: -6.5173408E7, coll: 1.9996086624E10, storage: 2.063444876E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/3/sparkOutput_worker_application_1508545462036_0213_3.txt
+Reading lines: 5201 to 6505
+delta heap: -5.5396712E7, coll: 2.1140633776E10, storage: 2.412191472E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/4/sparkOutput_worker_application_1508545462036_0213_4.txt
+Reading lines: 5188 to 6359
+delta heap: -1.781524E7, coll: 1.7864153096E10, storage: 1.910724694E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/5/sparkOutput_worker_application_1508545462036_0213_5.txt
+Reading lines: 5186 to 6365
+delta heap: 2.27190256E8, coll: 1.9262274456E10, storage: 1.899757737E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/6/sparkOutput_worker_application_1508545462036_0213_6.txt
+Reading lines: 5177 to 6387
+delta heap: -1.54439864E8, coll: 1.826476648E10, storage: 2.038085791E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/7/sparkOutput_worker_application_1508545462036_0213_7.txt
+Reading lines: 5193 to 6420
+delta heap: -1.38149944E8, coll: 1.8838510856E10, storage: 2.043825693E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/8/sparkOutput_worker_application_1508545462036_0213_8.txt
+Reading lines: 5197 to 6400
+delta heap: -2.1990928E8, coll: 1.833480052E10, storage: 2.037709893E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/9/sparkOutput_worker_application_1508545462036_0213_9.txt
+Reading lines: 5189 to 6402
+delta heap: -6.9806736E7, coll: 1.8514001176E10, storage: 2.046761947E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/1/sparkOutput_worker_application_1508545462036_0213_1.txt
+Reading lines: 8029 to 9522
+delta heap: 2.546668E7, coll: 1.9491645304E10, storage: 2.048128382E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/10/sparkOutput_worker_application_1508545462036_0213_10.txt
+Reading lines: 8025 to 9652
+delta heap: 1.38121328E8, coll: 1.794475772E10, storage: 2.343592021E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/2/sparkOutput_worker_application_1508545462036_0213_2.txt
+Reading lines: 7986 to 9607
+delta heap: 1.07247512E8, coll: 1.7465303152E10, storage: 2.386454527E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/3/sparkOutput_worker_application_1508545462036_0213_3.txt
+Reading lines: 8011 to 9487
+delta heap: 6.2364496E7, coll: 1.6004830384E10, storage: 2.048296889E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/4/sparkOutput_worker_application_1508545462036_0213_4.txt
+Reading lines: 7991 to 9512
+delta heap: -1.401172E8, coll: 1.867775328E10, storage: 2.033447379E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/5/sparkOutput_worker_application_1508545462036_0213_5.txt
+Reading lines: 7988 to 9478
+delta heap: 1.85113744E8, coll: 1.90934856E10, storage: 1.895320945E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/6/sparkOutput_worker_application_1508545462036_0213_6.txt
+Reading lines: 7975 to 9461
+delta heap: 7.5239624E7, coll: 1.8485372848E10, storage: 1.854011672E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/7/sparkOutput_worker_application_1508545462036_0213_7.txt
+Reading lines: 7998 to 9508
+delta heap: -8.5148304E7, coll: 1.9184716576E10, storage: 2.038682875E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/8/sparkOutput_worker_application_1508545462036_0213_8.txt
+Reading lines: 8006 to 9518
+delta heap: -3.68638904E8, coll: 1.8541683456E10, storage: 2.034696609E9, exec: 0.0
+Reading file: /home/mayuresh/heap-logs/application_1508545462036_0213/9/sparkOutput_worker_application_1508545462036_0213_9.txt
+Reading lines: 7993 to 9462
+delta heap: 7.3575264E7, coll: 1.6605080584E10, storage: 2.024069789E9, exec: 0.0
+Beta bars: [1.4061079944881782, 17.73779324883572]
+Beta std dev: [0.05730194375401083, 6.724175875979419]
+Degree freedom: 18.0
+Beta covariance: [[0.0032835127579878207, -0.22282621949730316], [-0.22282621949730316, 45.21454121110358]]
+Variables used: [0, 3]
+sum of squares: 9.466249381839777E19
+java.lang.ArrayIndexOutOfBoundsException: 0
+	at flanagan.math.Matrix.<init>(Matrix.java:134)
+	at flanagan.analysis.Regression.generalLinear(Regression.java:2961)
+	at flanagan.analysis.Regression.linearMono(Regression.java:1867)
+	at flanagan.analysis.Regression.linear(Regression.java:1838)
+	at edu.duke.globallog.sparklogprocessor.ParamLearner.runRegression(ParamLearner.java:298)
+	at edu.duke.globallog.sparklogprocessor.ParamLearner.main(ParamLearner.java:430)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+Beta bars: [114.71384456179776]
+Beta std dev: [27.786979954753814]
+Degree freedom: 19.0
+Beta covariance: [[772.1162550058903]]
+Variables used: 9
+sum of squares: 4.6481089704852595E19
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 55.481 s
+[INFO] Finished at: 2018-08-29T20:52:16-04:00
+[INFO] Final Memory: 21M/516M
+[INFO] ------------------------------------------------------------------------
