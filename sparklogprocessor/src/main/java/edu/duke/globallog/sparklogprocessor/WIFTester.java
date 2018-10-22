@@ -77,9 +77,47 @@ System.out.println("Extracted model: " + model);
                        (1 - (1 / survivorRatio / (newRatio + 1)));
 System.out.println("Pool sizes: old->" + oldGenSize + " young->" + youngGenSize + " spark->" + sparkMemPoolSize);
 
-    storageReq = cacheBytesRead * numTasks / numExecs;
-    execReq = 0d;
+    storageReq = (cacheBytesRead + 11000) * numTasks / numExecs / 2; // HACK: dividing by 2 for micro workload only
+
+    double waveExecReq = shBytesRead * maxCores; // TODO: study size requirements
+    double waveInputReq = 0d;
+    double storageGranted = storageReq;
+    double executionGranted = waveExecReq;
+    if(storageReq + waveExecReq > sparkMemPoolSize) {
+      if(waveExecReq > (1 - sparkStorageFraction) * sparkMemPoolSize) {
+        executionGranted = (1 - sparkStorageFraction) * sparkMemPoolSize;
+      }
+    }
+    if(storageReq + executionGranted > sparkMemPoolSize) {
+      storageGranted = sparkMemPoolSize - executionGranted;
+    }
+
+    double pLocalRatio = storageGranted / storageReq;
+    double tempRatio = 1.0;
+    int cnt = 0;
+    while(cnt < maxCores && pLocalRatio < tempRatio) {
+      waveInputReq += ipBytes;
+      tempRatio -= numExecs / numTasks;
+      cnt++;
+    }
+    if(shBytesRead > 0) { // shuffle fetch 48MB requests
+      waveInputReq += 48*1024*1024 * maxCores; 
+    }
+    
+    double waveOutputReq = 0d;
+    // HACK: assuming result size of 2500 bytes for result stages
+    // Using 4MB chunk size for serializing data
+    waveOutputReq += maxCores * Math.min(4*1024*1024d, Math.max(Math.max(2500d, opBytes), shBytesWritten));
+
+    double networkFetchReq = 0d;
+    // We notice chunkedByreBuffer.toNetty() calls for remote block request
+    // It's hard to request when locality level will go down to rack_local or below, so keeping it 0
+
+    double codeObjectsReq = 5*1024*1024d; // randome number as a safety
+    
 System.out.println("Storage req->" + storageReq + " Exec req->" + execReq);
+System.out.println("P local ratio: " + pLocalRatio);
+System.out.println("Short term req: input-> " + waveInputReq + ", execution-> " + executionGranted + ", output-> " + waveOutputReq + ", other-> " + (networkFetchReq + codeObjectsReq));
 
     evaluateModels();
   }

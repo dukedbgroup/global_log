@@ -43,6 +43,8 @@ public class HeapUsageCPUPlotter extends ApplicationFrame {
 	private static Long MAX_PHYSICAL = 5*1024*1024*1024L;
 
 	private static Boolean SPARK_POOLS = false;
+
+        private static Integer EXECS_PER_NODE = 1;
 	
 	public static void main(String args[]) {
 		
@@ -322,7 +324,7 @@ catch (Exception e)
                                                   UsedHeap.add(index, Long.valueOf(tokens[0]) + Long.valueOf(tokens[1]) + Long.valueOf(tokens[2]) + Long.valueOf(tokens[3]) + Long.valueOf(tokens[4]) + Long.valueOf(tokens[5])); }
 						else {
 						  UsedHeap.add(index, Long.valueOf(tokens[0]) + Long.valueOf(tokens[1]) + Long.valueOf(tokens[2]) + Long.valueOf(tokens[3]) + Long.valueOf(tokens[4])); }
-						MaxPhysical.add(index, maxHeap + 1024*1024*1024); // MaxPhysical.add(index, MAX_PHYSICAL);
+						MaxPhysical.add(index, Math.max((maxHeap + 1024*1024*1024/EXECS_PER_NODE),1024*1024*1024)); // MaxPhysical.add(index, MAX_PHYSICAL);
 						if(java8) {
 						  Storage.add(index, Long.valueOf(tokens[20]));
 						  Execution.add(index, Long.valueOf(tokens[21]));
