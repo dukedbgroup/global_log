@@ -1,10 +1,8 @@
-Usage: spark-glog <drvier | executor> eventlog_file btracelog_file
+**THOTH**
 
+Library of tools to profile data analytics applications
 
-Example:
+**RELM**
 
-# Combine the Spark eventlog and driver's btracelog to see combined driver information.
-$ bin/spark-glog driver sample_input/master/eventlog sample_input/master/btracelog
+Algorithm to auto-tune container and JVM configurations for memory-based analytics applications.
 
-# Combine the Spark eventlog and executor's btracelog to see combined executor information.
-$ bin/spark-glog executor sample_input/master/eventlog sample_input/slave1/btracelog
