@@ -1,17 +1,18 @@
 #APPNO=$1
 DRI='4404m'
-MEM=$2
-#'4404m'
+MEM='4404'
 YARN=$(expr 1024 \* $MEM / 4404)
 SUFF='m'
 MEM="$MEM$SUFF"
-YARN="$YARN$SUFF" 
-#'1024m'
-FRAC=$5
-RATIO=$6
-CORES=$3
-EXECS=$4
+YARN="$YARN$SUFF"
+FRAC=0.6
+RATIO=2
+CORES=2
+EXECS=7
 PARALL=$(expr $EXECS \* $CORES)
+# new options
+PART=$2
+CACHE=$3
 appprefix="application_1536892175528_"
 appsuffix=""
 
@@ -30,7 +31,7 @@ appsuffix=""
 --conf spark.dynamicAllocation.enabled=false \
 --conf "spark.executor.extraJavaOptions=-XX:NewRatio=$RATIO -XX:ReservedCodeCacheSize=100M -XX:MaxMetaspaceSize=256m -XX:CompressedClassSpaceSize=256m -XX:+PrintFlagsFinal -XX:+PrintReferenceGC -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintAdaptiveSizePolicy -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark" \
 /home/mayuresh/spark-2.0.1/examples/target/scala-2.11/jars/spark-examples_2.11-2.0.1.jar "hdfs://xeno-62:9000/Wordcount/Input" 1.2 2 
-
+C1
 
 #pagerank
 ~/spark-2.0.1/bin/spark-submit \
@@ -45,9 +46,9 @@ appsuffix=""
 --conf spark.driver.maxResultSize=2g \
 --conf spark.dynamicAllocation.enabled=false \
 --conf "spark.executor.extraJavaOptions=-XX:NewRatio=$RATIO -XX:ReservedCodeCacheSize=100M -XX:MaxMetaspaceSize=256m -XX:CompressedClassSpaceSize=256m -XX:+PrintFlagsFinal -XX:+PrintReferenceGC -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintAdaptiveSizePolicy -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark" \
-/home/mayuresh/spark-2.0.1/examples/target/scala-2.11/jars/spark-examples_2.11-2.0.1.jar "hdfs://xeno-62:9000/Pagerank/Input/edges" --numEPart=120 --numIter=2 --storageLevel="MEMORY_ONLY"
+/home/mayuresh/spark-2.0.1/examples/target/scala-2.11/jars/spark-examples_2.11-2.0.1.jar "hdfs://xeno-62:9000/Pagerank/Input/edges" --numEPart=$PART --numIter=2 --storageLevel=$CACHE
 
-
+<<C
 # K-means
 ~/spark-2.0.1/bin/spark-submit \
 --class org.apache.spark.examples.mllib.DenseKMeans \
@@ -82,7 +83,7 @@ hadoop dfs -rmr /output
 --conf spark.driver.maxResultSize=2g \
 --conf spark.dynamicAllocation.enabled=false \
 --conf "spark.executor.extraJavaOptions=-XX:NewRatio=$RATIO -XX:ReservedCodeCacheSize=100M -XX:MaxMetaspaceSize=256m -XX:CompressedClassSpaceSize=256m -XX:+PrintFlagsFinal -XX:+PrintReferenceGC -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintAdaptiveSizePolicy -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark" \
-/home/mayuresh/spark-2.0.1/examples/target/scala-2.11/jars/spark-examples_2.11-2.0.1.jar "hdfs://xeno-62:9000/Sort/Input" "hdfs://xeno-62:9000/output"
+/home/mayuresh/spark-2.0.1/examples/target/scala-2.11/jars/spark-examples_2.11-2.0.1.jar "hdfs://xeno-62:9000/Sort/Input-512/Input" "hdfs://xeno-62:9000/output"
 
 <<C
 #wordcount
@@ -99,7 +100,7 @@ hadoop dfs -rmr /output
 --conf spark.driver.maxResultSize=2g \
 --conf spark.dynamicAllocation.enabled=false \
 --conf "spark.executor.extraJavaOptions=-XX:NewRatio=$RATIO -XX:ReservedCodeCacheSize=100M -XX:MaxMetaspaceSize=256m -XX:CompressedClassSpaceSize=256m -XX:+PrintFlagsFinal -XX:+PrintReferenceGC -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintAdaptiveSizePolicy -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark" \
-/home/mayuresh/spark-2.0.1/examples/target/scala-2.11/jars/spark-examples_2.11-2.0.1.jar "hdfs://xeno-62:9000/Wordcount/Input" "hdfs://xeno-62:9000/output"
+/home/mayuresh/spark-2.0.1/examples/target/scala-2.11/jars/spark-examples_2.11-2.0.1.jar "hdfs://xeno-62:9000/Wordcount-50/Input" "hdfs://xeno-62:9000/output"
 C1
 
 #SVM

@@ -12,10 +12,10 @@ else
   last=$2
 fi
 
-appprefix="application_1486400460556_"
+appprefix="application_1542628163302_"
 appsuffix=""
 
 for appNo in $(seq -f "%04g" $first $last)
 do
-   mvn exec:java -e -Dexec.mainClass="edu.duke.globallog.sparklogprocessor.FlattenTaskMetrics" -Dexec.args="hdfs://xeno-62:9000/sparkEventLog/$appprefix$appNo$appsuffix"
+   mvn exec:java -e -Dexec.mainClass="edu.duke.globallog.sparklogprocessor.FlattenTaskMetrics" -Dexec.args="hdfs://xeno-62:9000/sparkEventLog/$appprefix$appNo$appsuffix" -Dexec.cleanupDaemonThreads=false
 done

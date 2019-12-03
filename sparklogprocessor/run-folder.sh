@@ -2,9 +2,10 @@
 
 prefix="/home/mayuresh/global_log/sparklogprocessor/"
 folder="shuffle-fraction"
-repeat=5
+repeat=2
 
-for program in "kmeans.sh";
+for program in "wordcount.sh";
+
 do
 	for i in `seq 1 $repeat`;
 	do

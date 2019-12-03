@@ -28,8 +28,8 @@ do
 	while read -r one two three four five six seven 
 	do
 		#echo "$two"
-		if (($two+$three < $young)); then
-			((diff=young-two+three))
+		if (($three+$four < $young)); then
+			((diff=young-three-four))
 			((diff=diff/1024/1024))
 			((totalYoung=totalYoung+diff))
 			if (($diff > $maxYoung)); then
@@ -37,8 +37,8 @@ do
 			fi
 			((youngGC=youngGC+1))
 		fi
-		if (($four < $old)); then
-			((diff=old-four))
+		if (($five < $old)); then
+			((diff=old-five))
 			((diff=diff/1024/1024))
 			((totalOld=totalOld+diff))
 			if (($diff > $maxOld)); then
@@ -46,8 +46,8 @@ do
 			fi
 			((oldGC=oldGC+1))
 		fi
-		((young=two+three))
-		((old=four))
+		((young=three+four))
+		((old=five))
 	done < "$file"
 done
 	echo "# young GC : $youngGC, #old GC: $oldGC"

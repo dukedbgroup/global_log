@@ -12,7 +12,7 @@ else
   last=$2
 fi
 
-appprefix="application_1535007510432_"
+appprefix="application_1536892175528_"
 appsuffix=""
 
 appName="micro"

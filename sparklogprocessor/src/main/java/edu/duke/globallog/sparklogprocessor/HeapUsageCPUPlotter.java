@@ -8,11 +8,7 @@ import com.itextpdf.text.pdf.*;
 import com.itextpdf.awt.DefaultFontMapper;
 import java.awt.geom.Rectangle2D;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -127,6 +123,24 @@ System.out.println("Base dir: " + basedir);
 			xydataset = xydatasets.get(index);
 			xyplot.setDataset(index, xydataset);
 			// xyplot.mapDatasetToRangeAxis(1, 1);
+			if("Max Heap".equals(xydataset.getSeriesKey(0))) {
+if(xydataset.getSeriesCount() >= 2) {
+    XYDifferenceRenderer rend = new XYDifferenceRenderer(Color.GREEN, Color.DARK_GRAY, false);
+    java.awt.image.BufferedImage bi = new java.awt.image.BufferedImage(5, 5, java.awt.image.BufferedImage.TYPE_INT_RGB);
+    Graphics2D big = bi.createGraphics();
+    big.setColor(new Color(0x26A2D6));
+    big.fillRect(0, 0, 5, 5);
+    big.setColor(Color.GRAY);
+    big.drawLine(0, 0, 5, 5);
+    java.awt.Rectangle r = new java.awt.Rectangle(0, 0, 5, 5);
+    big.dispose();
+    TexturePaint texturePaint = new TexturePaint(bi, r);
+    rend.setNegativePaint(texturePaint);
+    rend.setSeriesShape(1, new java.awt.geom.Area());
+				xyplot.setRenderer(index, rend);
+				continue;
+}
+			}
                   if(!"Used CPU".equals(xydataset.getSeriesKey(0))) {
 			XYItemRenderer xyitemrenderer; 
 			xyitemrenderer = new StandardXYItemRenderer();
@@ -208,7 +222,7 @@ catch (Exception e)
 	{
 		try {
 	        SVGGraphics2D g2 = new SVGGraphics2D(width, height);
-	        Rectangle r = new Rectangle(0, 0, width, height);
+	        java.awt.Rectangle r = new java.awt.Rectangle(0, 0, width, height);
 	        chart.draw(g2, r);
         	SVGUtils.writeToSVG(file, g2.getSVGElement());
 		}
@@ -286,6 +300,7 @@ catch (Exception e)
 			XYSeries MaxHeap = new XYSeries("Max Heap",false,false);
 			// XYSeries UsedOffHeap = new XYSeries("Used OffHeap");
 			XYSeries MaxPhysical = new XYSeries("Max Physical",false,false);
+			XYSeries YarnOverhead = new XYSeries("Max OS Overhead", false, false);
 			XYSeries UsedCPU = new XYSeries("Used CPU",false,false);
                         XYSeries TotalMem = new XYSeries("Resident Set Size",false,false);
 
@@ -324,7 +339,9 @@ catch (Exception e)
                                                   UsedHeap.add(index, Long.valueOf(tokens[0]) + Long.valueOf(tokens[1]) + Long.valueOf(tokens[2]) + Long.valueOf(tokens[3]) + Long.valueOf(tokens[4]) + Long.valueOf(tokens[5])); }
 						else {
 						  UsedHeap.add(index, Long.valueOf(tokens[0]) + Long.valueOf(tokens[1]) + Long.valueOf(tokens[2]) + Long.valueOf(tokens[3]) + Long.valueOf(tokens[4])); }
-						MaxPhysical.add(index, Math.max((maxHeap + 1024*1024*1024/EXECS_PER_NODE),1024*1024*1024)); // MaxPhysical.add(index, MAX_PHYSICAL);
+						MaxPhysical.add(index, Math.max((maxHeap + 1024*1024*1024/EXECS_PER_NODE),1024*1024*1024)); 
+// MaxPhysical.add(index, MAX_PHYSICAL);
+						YarnOverhead.add(index, 1024*1024*1024/EXECS_PER_NODE);
 						if(java8) {
 						  Storage.add(index, Long.valueOf(tokens[20]));
 						  Execution.add(index, Long.valueOf(tokens[21]));
@@ -357,24 +374,28 @@ catch (Exception e)
 			td.addSeries(PSOldGen);
 			td.addSeries(PSYoungGen);
 			td.addSeries(PermGen);
-			td.addSeries(OffHeap);
+//			td.addSeries(OffHeap);
 			xyDatasets.add(td);
 
-			td = new DefaultTableXYDataset();
-			td.addSeries(UsedCPU);
-			xyDatasets.add(td);
+//			td = new DefaultTableXYDataset();
+//			td.addSeries(UsedCPU);
+//			xyDatasets.add(td);
                         // sc = new XYSeriesCollection();
                         // sc.addSeries(UsedOffHeap);
                         // xyDatasets.add(sc);
                         td = new DefaultTableXYDataset();
-                        td.addSeries(TotalMem);
-                        xyDatasets.add(td);
-                        td = new DefaultTableXYDataset();
+			td.addSeries(MaxHeap);
                         td.addSeries(MaxPhysical);
                         xyDatasets.add(td);
- 			td = new DefaultTableXYDataset();
-			td.addSeries(MaxHeap);
-			xyDatasets.add(td);
+                        td = new DefaultTableXYDataset();
+                        td.addSeries(TotalMem);
+                        xyDatasets.add(td);
+//			td = new DefaultTableXYDataset();
+//			td.addSeries(YarnOverhead);
+//			xyDatasets.add(td);
+// 			td = new DefaultTableXYDataset();
+//			td.addSeries(MaxHeap);
+//			xyDatasets.add(td);
 		  } else {
                         DefaultTableXYDataset td = new DefaultTableXYDataset();
                         td.addSeries(Storage);
